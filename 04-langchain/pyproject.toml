@@ -1,0 +1,19 @@
+[project]
+name = "langchain-master-projects"
+version = "0.1.0"
+description = "Hands-on LangChain projects from my AI Engineering Master's program."
+readme = "README.md"
+authors = [
+    { name = "Laura" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-core>=1.6.7",
+    "langchain-ollama>=1.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.0",
+    "ruff>=0.16.10",
+]

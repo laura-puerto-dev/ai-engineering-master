@@ -11,6 +11,7 @@ This repository documents my practical work throughout the program, from model s
 | [01 - Model Selection](./01-model-selection/) | LLM selection for an e-commerce assistant | Model requirements, trade-offs, evaluation, latency and cost |
 | [02 - Prompt Engineering with OpenAI](./02-prompt-engineering-openai/) | Prompt design and iterative evaluation for an e-commerce assistant | Structured prompting, few-shot, guardrails, prompt injection, evaluation |
 | [03 - Conversational Systems Architecture](./03-conversational-systems-architecture/) | Architecture design for an AI product recommendation assistant | Functional and non-functional requirements, layered architecture, separation of concerns, ReAct |
+| [04 - LangChain Fundamentals](./04-langchain/) | LCEL pipelines and conversational tool calling with a local LLM | LCEL, Ollama, tool calling, conversational memory, external data retrieval |
 
 ## Repository Structure
 

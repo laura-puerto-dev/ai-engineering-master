@@ -9,6 +9,7 @@ This repository documents my practical work throughout the program, from model s
 | Project | Topic | Key concepts |
 |---|---|---|
 | [01 - Model Selection](./01-model-selection/) | LLM selection for an e-commerce assistant | Model requirements, trade-offs, evaluation, latency and cost |
+| [02 - Prompt Engineering with OpenAI](./02-prompt-engineering-openai/) | Prompt design and iterative evaluation for an e-commerce assistant | Structured prompting, few-shot, guardrails, prompt injection, evaluation |
 
 ## Repository Structure
 

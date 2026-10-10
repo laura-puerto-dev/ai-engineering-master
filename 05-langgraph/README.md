@@ -160,4 +160,158 @@ src/message_classifier/
 
 ### 2. Conversational Agent with Memory and Tools
 
-*Coming next.*
+A conversational agent built with LangGraph and a locally hosted LLM. The agent retrieves real weather forecasts and simulates activity bookings while maintaining conversational state. Booking operations require explicit human approval before execution.
+
+**Key concepts:**
+- Conversational state management with `add_messages`
+- Tool calling with Ollama (`llama3.1`)
+- Conditional routing between graph nodes
+- External weather data retrieval through Open-Meteo
+- Human-in-the-loop authorization with `interrupt()` and `Command(resume=...)`
+- Conversation checkpointing with `MemorySaver`
+- Separation of tool authorization and execution
+
+**Tech stack:** Python, LangGraph, LangChain, Ollama, Open-Meteo, HTTPX, pytest.
+
+#### Graph Architecture
+
+The agent uses three nodes:
+
+| Node | Responsibility |
+|---|---|
+| `assistant` | Invokes the LLM to respond or request tool calls |
+| `authorization` | Automatically allows weather queries, requests human approval for bookings, and rejects unknown tools |
+| `execution` | Runs authorized tool calls and returns denial messages for rejected calls |
+
+The main execution flow is:
+
+```text
+START → assistant → authorization → execution → assistant
+            │
+            └── END (when no tool calls are requested)
+```
+
+The `assistant` node routes directly to `END` when its response contains no tool calls. Otherwise, the graph proceeds through authorization and execution before returning to the assistant.
+
+#### Tools
+
+**Weather retrieval — `get_weather`**
+
+Retrieves weather forecasts from the Open-Meteo API. This read-only tool is automatically authorized by the workflow.
+
+**Activity booking — `book_activity`**
+
+Simulates an activity reservation and saves confirmed bookings in a local JSON file. The graph pauses before this tool can execute and asks the user to approve the specific booking arguments.
+
+This is a simulated booking system, not a connection to a real reservation provider.
+
+#### Human-in-the-Loop Authorization
+
+When the LLM requests `book_activity`, the `authorization` node calls `interrupt()` with the tool name, arguments, and tool-call ID. The user can approve or reject the operation, and execution resumes with `Command(resume=True)` or `Command(resume=False)`.
+
+Only explicitly approved booking calls reach the tool executor. Rejected calls receive a denial message, and unknown tools are rejected by default.
+
+#### Conversation Memory
+
+The graph is compiled with `MemorySaver` and uses a `thread_id` to associate checkpoints with a conversation. This enables a paused graph to resume after the user responds to an approval request.
+
+`MemorySaver` stores checkpoints in memory only: state does not persist after the Python process exits.
+
+#### Running the Agent
+
+**Prerequisites:**
+- Python 3.12
+- [uv](https://docs.astral.sh/uv/)
+- [Ollama](https://ollama.com/) running locally
+- The `llama3.1` model available locally
+
+Pull the model if needed:
+
+```bash
+ollama pull llama3.1
+```
+
+From the `05-langgraph` directory, install the dependencies:
+
+```bash
+uv sync
+```
+
+Run the conversational agent example:
+
+```bash
+uv run python -m conversational_agent.agent
+```
+
+The example requests an activity booking and asks for confirmation in the terminal. Confirmed simulated bookings are saved locally; rejected bookings are not executed.
+
+#### Example Execution — Multi-Turn Conversation
+
+This demonstration combines weather retrieval, conversational memory, and human-in-the-loop authorization in two turns.
+
+1. The user asks for the weather forecast in **Teruel** on October 11, 2026.
+2. The user then requests a hiking reservation for two people **without repeating the city**. The agent uses the previous conversation context to fill in `city="Teruel"` and pauses for explicit approval before executing `book_activity`.
+
+Run the demonstration from `05-langgraph`:
+
+```bash
+uv run python -m conversational_agent.demo
+```
+
+**Conversation and approval prompt:**
+
+![Multi-turn conversation showing weather retrieval, contextual booking request, and human approval](src/conversational_agent/screenshots/demo.png)
+
+**Persisted simulated reservation:**
+
+After approval, the booking tool saves a record in a local JSON file. The reservation ID matches the one returned to the user in the conversation.
+
+![JSON record of the approved simulated reservation](src/conversational_agent/screenshots/reservation.png)
+
+The booking is simulated; no real reservation is made.
+
+#### Testing
+
+The project includes unit tests for authorization and execution, plus an integration test that exercises LangGraph's real interruption and resumption flow for a rejected booking. External LLM and tool execution are mocked in the integration test.
+
+From the `05-langgraph` directory:
+
+```bash
+uv run pytest tests/conversational_agent/ -v
+```
+
+#### Project Structure
+
+```text
+src/conversational_agent/
+├── __init__.py
+├── agent.py
+├── demo.py
+├── tools.py
+├── py.typed
+└── screenshots/
+    ├── demo.png
+    └── reservation.png
+
+tests/conversational_agent/
+├── test_authorization.py
+└── test_integration.py
+```
+
+- `agent.py`: Graph state, nodes, routing, checkpointing, and command-line example.
+- `demo.py`: Two-turn weather-and-booking demonstration with approval handling.
+- `screenshots/`: Evidence of the multi-turn execution and saved simulated reservation.
+- `tools.py`: Weather retrieval and simulated activity booking tools.
+- `tests/conversational_agent/`: Authorization, execution, and interruption tests.
+
+#### Design Decisions
+
+**Deterministic authorization:** Tool permissions are enforced in Python rather than delegated to the LLM.
+
+**Human approval for side effects:** Booking requests require explicit approval, while the read-only weather tool can run automatically.
+
+**Separation of concerns:** Authorization and execution are separate nodes, making the policy explicit and testable.
+
+**Local-first development:** Ollama and `MemorySaver` support experimentation without a hosted LLM or persistent checkpoint database.
+
+**Simulated bookings:** Local JSON persistence keeps the example self-contained and suitable for learning.

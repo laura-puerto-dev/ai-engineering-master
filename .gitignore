@@ -218,3 +218,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+05-langgraph/src/conversational_agent/reservations.json

@@ -13,6 +13,7 @@ This repository documents my practical work throughout the program, from model s
 | [03 - Conversational Systems Architecture](./03-conversational-systems-architecture/) | Architecture design for an AI product recommendation assistant | Functional and non-functional requirements, layered architecture, separation of concerns, ReAct |
 | [04 - LangChain Fundamentals](./04-langchain/) | LCEL pipelines and conversational tool calling with a local LLM | LCEL, Ollama, tool calling, conversational memory, external data retrieval |
 | [05 - LangGraph Fundamentals](./05-langgraph/) | Stateful workflows and conversational agents with a local LLM | State management, conditional routing, retry loops, error handling, tool calling, conversation memory, human-in-the-loop authorization, checkpointing |
+| [06 - Langfuse & LangSmith](./06-langfuse-langsmith/) | LLM observability and evaluation for a LangGraph workflow | End-to-end tracing, Langfuse, LangSmith, token usage, latency analysis, retry inspection |
 
 
 ## Repository Structure

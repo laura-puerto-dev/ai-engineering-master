@@ -1,0 +1,18 @@
+[project]
+name = "langfuse-langsmith-master-project"
+version = "0.1.0"
+description = "Hands-on observability, prompt management, and evaluation with Langfuse and LangSmith."
+authors = [
+    { name = "Laura" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=1.4.4",
+    "langchain-core>=1.6.9",
+    "langchain-ollama>=1.1.0",
+    "langfuse>=4.17.0",
+    "langgraph>=1.2.14",
+    "langsmith>=0.14.7",
+    "pydantic>=2.14.0",
+    "python-dotenv>=1.2.4",
+]

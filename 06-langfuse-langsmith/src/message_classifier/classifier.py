@@ -2,7 +2,9 @@ from enum import Enum
 from typing import TypedDict
 
 from dotenv import load_dotenv
+from langchain_core.prompts import PromptTemplate
 from langchain_ollama import ChatOllama
+from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, Field
@@ -16,7 +18,6 @@ from message_classifier.config import (
     TRACE_NAME,
 )
 from message_classifier.prompts import (
-    build_classification_prompt,
     build_complaint_prompt,
     build_question_prompt,
     build_retry_instructions,
@@ -56,8 +57,16 @@ llm_classifier = llm.with_structured_output(Classification)
 def classify(state: State):
     instructions = state.get("retry_instructions") or ""
 
-    prompt = build_classification_prompt(
-        retry_instructions=instructions, message=state["message"]
+    langfuse = get_client()
+
+    classification_prompt = langfuse.get_prompt(
+        "novashop-classification",
+        label="production",
+    )
+
+    prompt_template = PromptTemplate.from_template(
+        classification_prompt.get_langchain_prompt(),
+        metadata={"langfuse_prompt": classification_prompt},
     )
 
     try:
@@ -65,7 +74,12 @@ def classify(state: State):
         if state["classification_attempts"] < SIMULATED_FAILURES:
             raise ValueError("Fallo simulado: el modelo devolvió 'consulta'")
 
-        result = llm_classifier.invoke(prompt)
+        result = (prompt_template | llm_classifier).invoke(
+            {
+                "retry_instructions": instructions,
+                "message": state["message"],
+            }
+        )
         if not isinstance(result, Classification):
             raise TypeError(f"Salida inesperada del clasificador: {result!r}")
         return {

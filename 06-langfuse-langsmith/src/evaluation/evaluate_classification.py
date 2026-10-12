@@ -1,6 +1,10 @@
+import argparse
+import hashlib
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv
+from langfuse import get_client
 from message_classifier.classifier import State, classify
 from message_classifier.config import MODEL_NAME, MODEL_TEMPERATURE
 
@@ -14,8 +18,45 @@ def load_dataset() -> list[dict]:
         return [json.loads(line) for line in file if line.strip()]
 
 
-def evaluate_classification() -> None:
+def evaluate_classification(prompt_version: int) -> None:
+    load_dotenv()
+    langfuse = get_client()
+
+    existing_prompts = langfuse.api.prompts.list(name="novashop-classification")
+
+    existing_prompt = next(
+        (
+            item
+            for item in existing_prompts.data
+            if item.name == "novashop-classification"
+        ),
+        None,
+    )
+
+    if existing_prompt is None:
+        raise ValueError("Prompt 'novashop-classification' does not exist.")
+
+    if prompt_version not in existing_prompt.versions:
+        raise ValueError(
+            f"Version {prompt_version} does not exist for "
+            f"'novashop-classification'. "
+            f"Available versions: {existing_prompt.versions}"
+        )
+
+    experiment_name = f"classification_v{prompt_version}"
+
+    output_path = (
+        Path(__file__).resolve().parents[2] / "results" / f"{experiment_name}.json"
+    )
+
+    if output_path.exists():
+        raise FileExistsError(
+            f"Evaluation results already exist: {output_path}. "
+            "Rename or archive the existing file before running again."
+        )
+
     dataset = load_dataset()
+    dataset_hash = hashlib.sha256(DATASET_PATH.read_bytes()).hexdigest()
     correct = 0
     results = []
 
@@ -29,7 +70,7 @@ def evaluate_classification() -> None:
             "retry_instructions": None,
         }
 
-        result = classify(state)
+        result = classify(state, prompt_version=prompt_version)
 
         predicted = result["category"]
         predicted_category = predicted.value if predicted is not None else None
@@ -64,24 +105,19 @@ def evaluate_classification() -> None:
     print(f"Incorrect: {len(dataset) - correct}")
     print(f"Accuracy: {accuracy:.2%}")
 
-    output_path = (
-        Path(__file__).resolve().parents[2]
-        / "results"
-        / "classification_baseline_v1.json"
-    )
-
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with output_path.open("w", encoding="utf-8") as file:
         json.dump(
             {
-                "experiment": "classification_baseline_v1",
+                "experiment": experiment_name,
                 "configuration": {
                     "model": MODEL_NAME,
                     "temperature": MODEL_TEMPERATURE,
-                    "classification_prompt_version": "v1",
+                    "classification_prompt_version": prompt_version,
                     "dataset": "message_classification.jsonl",
                     "dataset_size": len(dataset),
+                    "dataset_sha256": dataset_hash,
                 },
                 "total_cases": len(dataset),
                 "correct": correct,
@@ -97,4 +133,17 @@ def evaluate_classification() -> None:
 
 
 if __name__ == "__main__":
-    evaluate_classification()
+    parser = argparse.ArgumentParser(
+        description="Evaluate a specific NovaShop classification prompt version."
+    )
+
+    parser.add_argument(
+        "--prompt-version",
+        type=int,
+        required=True,
+        help="Langfuse prompt version to evaluate.",
+    )
+
+    args = parser.parse_args()
+
+    evaluate_classification(prompt_version=args.prompt_version)

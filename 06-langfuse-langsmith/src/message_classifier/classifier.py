@@ -54,15 +54,21 @@ llm = ChatOllama(
 llm_classifier = llm.with_structured_output(Classification)
 
 
-def classify(state: State):
+def classify(state: State, prompt_version: int | None = None):
     instructions = state.get("retry_instructions") or ""
 
     langfuse = get_client()
 
-    classification_prompt = langfuse.get_prompt(
-        "novashop-classification",
-        label="production",
-    )
+    if prompt_version is None:
+        classification_prompt = langfuse.get_prompt(
+            "novashop-classification",
+            label="production",
+        )
+    else:
+        classification_prompt = langfuse.get_prompt(
+            "novashop-classification",
+            version=prompt_version,
+        )
 
     prompt_template = PromptTemplate.from_template(
         classification_prompt.get_langchain_prompt(),

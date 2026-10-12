@@ -1,4 +1,4 @@
-from config import COMPANY_CONTEXT
+from message_classifier.config import COMPANY_CONTEXT
 
 
 def build_classification_prompt(

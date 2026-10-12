@@ -1,0 +1,21 @@
+
+{"id":"001","input":"¿Cuánto tarda normalmente un envío nacional?","expected_category":"pregunta","case_type":"clear"}
+{"id":"002","input":"¿Realizáis envíos internacionales?","expected_category":"pregunta","case_type":"clear"}
+{"id":"003","input":"¿Cuál es el plazo para devolver un producto?","expected_category":"pregunta","case_type":"clear"}
+{"id":"004","input":"¿Desde cuándo empieza a contar el plazo de entrega?","expected_category":"pregunta","case_type":"clear"}
+{"id":"005","input":"¿Cómo puedo contactar con soporte?","expected_category":"pregunta","case_type":"clear"}
+{"id":"006","input":"Mi pedido lleva una semana de retraso y nadie me da una solución.","expected_category":"queja","case_type":"clear"}
+{"id":"007","input":"He recibido un producto dañado y estoy muy descontento.","expected_category":"queja","case_type":"clear"}
+{"id":"008","input":"Es la segunda vez que recibo un artículo equivocado.","expected_category":"queja","case_type":"clear"}
+{"id":"009","input":"Llevo días esperando una respuesta de atención al cliente.","expected_category":"queja","case_type":"clear"}
+{"id":"010","input":"El paquete ha llegado en malas condiciones.","expected_category":"queja","case_type":"clear"}
+{"id":"011","input":"¿Qué ocurre si mi pedido no llega dentro del plazo previsto?","expected_category":"pregunta","case_type":"tricky"}
+{"id":"012","input":"¿Puedo devolver un producto si no me gusta?","expected_category":"pregunta","case_type":"tricky"}
+{"id":"013","input":"¿Qué debo hacer si no recibo la confirmación del pedido?","expected_category":"pregunta","case_type":"tricky"}
+{"id":"014","input":"¿Cómo es posible que mi pedido siga sin llegar después de dos semanas?","expected_category":"queja","case_type":"tricky"}
+{"id":"015","input":"¿Por qué nadie me responde después de haber contactado tres veces?","expected_category":"queja","case_type":"tricky"}
+{"id":"016","input":"¿Os parece normal que me hayáis enviado el producto equivocado otra vez?","expected_category":"queja","case_type":"tricky"}
+{"id":"017","input":"He leído opiniones sobre retrasos en los envíos. ¿Cuáles son vuestros plazos habituales?","expected_category":"pregunta","case_type":"mixed"}
+{"id":"018","input":"En otra tienda tuve problemas con una devolución. ¿Cuál es vuestra política?","expected_category":"pregunta","case_type":"mixed"}
+{"id":"019","input":"Quiero saber cómo solicitar una devolución porque el producto que recibí llegó roto.","expected_category":"queja","case_type":"mixed"}
+{"id":"020","input":"Mi paquete aparece como entregado, pero no lo he recibido. ¿Qué puedo hacer?","expected_category":"queja","case_type":"mixed"}

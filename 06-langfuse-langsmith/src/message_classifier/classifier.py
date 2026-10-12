@@ -1,18 +1,26 @@
 from enum import Enum
 from typing import TypedDict
 
-from config import MAX_ATTEMPTS, SIMULATED_FAILURES, TEST_MESSAGE, TRACE_NAME
 from dotenv import load_dotenv
 from langchain_ollama import ChatOllama
 from langfuse.langchain import CallbackHandler
 from langgraph.graph import END, START, StateGraph
-from prompts import (
+from pydantic import BaseModel, Field
+
+from message_classifier.config import (
+    MAX_ATTEMPTS,
+    MODEL_NAME,
+    MODEL_TEMPERATURE,
+    SIMULATED_FAILURES,
+    TEST_MESSAGE,
+    TRACE_NAME,
+)
+from message_classifier.prompts import (
     build_classification_prompt,
     build_complaint_prompt,
     build_question_prompt,
     build_retry_instructions,
 )
-from pydantic import BaseModel, Field
 
 load_dotenv()
 
@@ -38,8 +46,8 @@ class State(TypedDict):
 
 
 llm = ChatOllama(
-    model="llama3.1",
-    temperature=0,
+    model=MODEL_NAME,
+    temperature=MODEL_TEMPERATURE,
 )
 
 llm_classifier = llm.with_structured_output(Classification)

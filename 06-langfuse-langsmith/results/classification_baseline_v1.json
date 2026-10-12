@@ -1,0 +1,155 @@
+{
+  "experiment": "classification_baseline_v1",
+  "configuration": {
+    "model": "llama3.1",
+    "temperature": 0,
+    "classification_prompt_version": "v1",
+    "dataset": "message_classification.jsonl",
+    "dataset_size": 20
+  },
+  "total_cases": 20,
+  "correct": 19,
+  "accuracy": 0.95,
+  "results": [
+    {
+      "id": "001",
+      "case_type": "clear",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "002",
+      "case_type": "clear",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "003",
+      "case_type": "clear",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "004",
+      "case_type": "clear",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "005",
+      "case_type": "clear",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "006",
+      "case_type": "clear",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "007",
+      "case_type": "clear",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "008",
+      "case_type": "clear",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "009",
+      "case_type": "clear",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "010",
+      "case_type": "clear",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "011",
+      "case_type": "tricky",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "012",
+      "case_type": "tricky",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "013",
+      "case_type": "tricky",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "014",
+      "case_type": "tricky",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "015",
+      "case_type": "tricky",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "016",
+      "case_type": "tricky",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "017",
+      "case_type": "mixed",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "correct": true
+    },
+    {
+      "id": "018",
+      "case_type": "mixed",
+      "expected_category": "pregunta",
+      "predicted_category": "queja",
+      "correct": false
+    },
+    {
+      "id": "019",
+      "case_type": "mixed",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    },
+    {
+      "id": "020",
+      "case_type": "mixed",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "correct": true
+    }
+  ]
+}

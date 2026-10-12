@@ -1,13 +1,20 @@
+# LLM configuration
+MODEL_NAME = "llama3.1"
+MODEL_TEMPERATURE = 0
+
+# Classification and retry configuration
 MAX_ATTEMPTS = 3
 SIMULATED_FAILURES = 0
 
-COMPLAINT_MESSAGE = "Mi pedido lleva una semana de retraso y nadie me da una solución."
+# Test messages
 QUESTION_MESSAGE = "¿Cuánto tarda normalmente un envío?"
-
+COMPLAINT_MESSAGE = "Mi pedido lleva una semana de retraso y nadie me da una solución."
 TEST_MESSAGE = COMPLAINT_MESSAGE
 
+# Observability
 TRACE_NAME = "novashop-complaint"
 
+# Business context
 COMPANY_CONTEXT = """
 Empresa ficticia: NovaShop, tienda de comercio electrónico.
 

@@ -5,6 +5,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from langfuse import get_client
+
 from message_classifier.classifier import State, classify
 from message_classifier.config import MODEL_NAME, MODEL_TEMPERATURE
 

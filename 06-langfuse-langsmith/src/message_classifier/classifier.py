@@ -3,6 +3,7 @@ from typing import TypedDict
 
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableConfig
 from langchain_ollama import ChatOllama
 from langfuse import get_client
 from langfuse.langchain import CallbackHandler
@@ -54,7 +55,15 @@ llm = ChatOllama(
 llm_classifier = llm.with_structured_output(Classification)
 
 
-def classify(state: State, prompt_version: int | None = None):
+def classify(
+    state: State,
+    config: RunnableConfig | None = None,
+    prompt_version: int | None = None,
+):
+    if prompt_version is None and config is not None:
+        prompt_version = config.get("configurable", {}).get(
+            "classification_prompt_version"
+        )
     instructions = state.get("retry_instructions") or ""
 
     langfuse = get_client()

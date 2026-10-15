@@ -2,6 +2,10 @@
 MODEL_NAME = "llama3.1"
 MODEL_TEMPERATURE = 0
 
+# Judge configuration
+JUDGE_MODEL_NAME = "gpt-4.1-mini"
+JUDGE_MODEL_TEMPERATURE = 0
+
 # Classification and retry configuration
 MAX_ATTEMPTS = 3
 SIMULATED_FAILURES = 0

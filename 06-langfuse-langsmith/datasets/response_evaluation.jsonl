@@ -1,0 +1,10 @@
+{"id":"001","case_type":"national_shipping_question","message":"¿Cuánto tarda en llegar un pedido nacional?","expected_category":"pregunta"}
+{"id":"002","case_type":"international_shipping_question","message":"¿Cuáles son los plazos de entrega para pedidos internacionales?","expected_category":"pregunta"}
+{"id":"003","case_type":"returns_deadline_question","message":"¿Cuántos días tengo para devolver un producto?","expected_category":"pregunta"}
+{"id":"004","case_type":"returns_process_question","message":"Quiero devolver un artículo. ¿Qué pasos tengo que seguir?","expected_category":"pregunta"}
+{"id":"005","case_type":"delayed_delivery_complaint","message":"Mi pedido lleva una semana de retraso y nadie me da una solución.","expected_category":"queja"}
+{"id":"006","case_type":"missing_order_complaint","message":"Mi pedido no ha llegado y estoy muy enfadado con el servicio.","expected_category":"queja"}
+{"id":"007","case_type":"returns_complaint","message":"Llevo varios días intentando devolver un producto y nadie me ayuda.","expected_category":"queja"}
+{"id":"008","case_type":"refund_complaint","message":"Devolví un producto y todavía no he recibido el reembolso. Esto es inaceptable.","expected_category":"queja"}
+{"id":"009","case_type":"order_status_question","message":"¿Puedes comprobar dónde está mi pedido 45821?","expected_category":"pregunta"}
+{"id":"010","case_type":"shipping_guarantee_question","message":"¿Me garantizáis que mi pedido llegará mañana?","expected_category":"pregunta"}

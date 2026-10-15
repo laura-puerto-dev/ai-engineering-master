@@ -38,10 +38,36 @@ GROUNDEDNESS
 5: All factual claims about NovaShop are supported by the context,
    or the response appropriately acknowledges missing information.
 
-Evaluate groundedness against the supplied company context.
+Evaluate groundedness by checking every factual claim
+about NovaShop against the provided company context.
+
+The response does not need to include all information
+from the company context. Omitting information is not
+a groundedness failure.
+
+However, every factual claim about NovaShop included
+in the response must be supported by the company context.
+
+A response may contain only one relevant policy detail
+and still receive a groundedness score of 5, provided
+that all its factual claims are supported.
+
+If the response includes unsupported policies, exceptions,
+procedures, capabilities, or promises, lower the
+groundedness score accordingly.
+
+Do not assume that plausible claims are supported.
 Do not use external knowledge to infer NovaShop policies.
-Do not penalize ordinary conversational language that makes
-no factual claims about NovaShop.
+Do not penalize ordinary conversational language that
+makes no factual claims about NovaShop.
+
+In the groundedness justification, identify the specific
+unsupported claims, if any, and explain why they are
+not supported by the company context.
+
+Do not penalize a response for being incomplete,
+irrelevant, or rude under groundedness. Evaluate those
+issues using the appropriate criteria.
 
 Evaluate each criterion independently.
 
@@ -52,11 +78,6 @@ accuracy separately under GROUNDEDNESS.
 EMPATHY AND TONE measures communication style and consideration.
 Do not reward fabricated promises, guarantees, or claims of actions
 taken as evidence of empathy.
-
-GROUNDEDNESS must consider every factual claim about NovaShop.
-Check shipping times, refunds, guarantees, and claimed actions
-against the supplied company context. Unsupported promises or
-guarantees are grounding failures, even if they sound helpful.
 
 Do not let a high score in one criterion compensate for another.
 

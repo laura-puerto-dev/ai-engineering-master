@@ -1,11 +1,11 @@
-from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
 from evaluation.judge_prompts import JUDGE_PROMPT
 from message_classifier.config import (
     COMPANY_CONTEXT,
-    MODEL_NAME,
-    MODEL_TEMPERATURE,
+    JUDGE_MODEL_NAME,
+    JUDGE_MODEL_TEMPERATURE,
 )
 
 
@@ -31,9 +31,9 @@ def evaluate_response(
     category: str,
     answer: str,
 ) -> ResponseEvaluation:
-    llm = ChatOllama(
-        model=MODEL_NAME,
-        temperature=MODEL_TEMPERATURE,
+    llm = ChatOpenAI(
+        model=JUDGE_MODEL_NAME,
+        temperature=JUDGE_MODEL_TEMPERATURE,
     )
 
     structured_llm = llm.with_structured_output(ResponseEvaluation)

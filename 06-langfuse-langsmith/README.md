@@ -110,3 +110,102 @@ src/message_classifier/
 **Deterministic failure simulation:** Simulated failures allow retry paths to be inspected without depending on unpredictable LLM errors.
 
 **Local inference:** Ollama provides local model execution without per-request API charges.
+
+
+### 2. LangSmith and LLM Evaluation
+
+This project extends the NovaShop LangGraph workflow with prompt versioning, classification evaluation, and LLM-as-Judge assessment.
+
+**Key concepts:**
+- Langfuse prompt management and production labels
+- LangSmith execution tracing
+- Reproducible evaluation datasets
+- Classification accuracy and prompt version comparison
+- LLM-as-Judge evaluation of generated responses
+- Judge calibration and analysis of evaluation limitations
+
+#### Prompt Management
+
+Two versions of the `novashop-classification` prompt were published in Langfuse.
+
+The second version addresses an ambiguous message about a previous return experience at another store, improving classification accuracy without introducing regressions in the evaluation dataset.
+
+The workflow retrieves the prompt using the `production` label by default, allowing the active version to change without modifying application code. Evaluation scripts can also select a specific prompt version for reproducible experiments.
+
+#### Classification Evaluation
+
+A dataset of 20 labeled customer messages was used to compare the two prompt versions under the same model configuration.
+
+| Metric | Prompt v1 | Prompt v2 |
+|---|---:|---:|
+| Correct classifications | 19/20 | 20/20 |
+| Accuracy | 95% | 100% |
+
+The evaluation records individual predictions, aggregate accuracy, model configuration, and a dataset SHA-256 hash to support reproducibility.
+
+#### Response Evaluation with LLM-as-Judge
+
+A separate dataset of 10 customer messages was used to evaluate the complete LangGraph workflow.
+
+The assistant uses Llama 3.1 through Ollama to classify messages and generate responses. An independent LLM judge evaluates each response using three criteria, scored from 1 to 5:
+
+- **Relevance:** How well the response addresses the customer's request.
+- **Empathy and tone:** Whether the communication is appropriate and considerate.
+- **Groundedness:** Whether factual claims about NovaShop are supported by the provided company context.
+
+The evaluation also verifies classification accuracy and records the assistant model, judge model, prompt version, and dataset hash.
+
+#### Judge Calibration and Findings
+
+The initial judge used Llama 3.1. Its evaluation rubric was subsequently refined to distinguish factual grounding from relevance and tone.
+
+Calibration tests revealed inconsistent judgments, particularly when responses combined valid company policies with unsupported claims.
+
+GPT-4.1 mini was then evaluated using the refined rubric and demonstrated more consistent behavior across five controlled calibration cases.
+
+The complete response evaluation was repeated with GPT-4.1 mini, preserving the earlier Llama 3.1 results for comparison.
+
+All 10 messages were classified correctly. However, manual inspection showed that GPT-4.1 mini still assigned maximum groundedness scores to some responses containing unsupported claims, such as invented customer support contact channels or possible exceptions to the return policy.
+
+**Key finding:** Successful judge calibration does not guarantee reliable evaluation of real application outputs. LLM-as-Judge scores should be interpreted alongside targeted test cases and manual review.
+
+#### Running the Evaluations
+
+Evaluate both classification prompt versions:
+
+```bash
+uv run python src/evaluation/evaluate_classification.py --prompt-version 1
+uv run python src/evaluation/evaluate_classification.py --prompt-version 2
+```
+
+Compare classification results:
+
+```bash
+uv run python src/evaluation/compare_classification.py --baseline results/classification_v1.json --candidate results/classification_v2.json
+```
+
+Calibrate the LLM judge:
+
+```bash
+uv run python scripts/calibrate_judge.py
+```
+
+Evaluate the complete workflow:
+
+```bash
+uv run python scripts/run_response_evaluation.py --prompt-version 2
+```
+
+The response evaluation requires an OpenAI API key when using GPT-4.1 mini as the judge. Configure the required credentials in `.env` using `.env.example` as a reference.
+
+#### Design Decisions
+
+**Independent evaluation model:** Response generation and evaluation use different models to reduce reliance on self-evaluation.
+
+**Version-controlled experiments:** Classification prompt versions can be selected explicitly, independently of the active production label.
+
+**Reproducible datasets:** Evaluation results include dataset hashes and model configuration.
+
+**Separate evaluation criteria:** Relevance, empathy, and groundedness are scored independently to avoid conflating factual correctness with communication quality.
+
+**Transparent limitations:** Earlier judge results are preserved, and known evaluation failures are documented rather than hidden.

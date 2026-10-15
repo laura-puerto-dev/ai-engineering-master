@@ -46,6 +46,21 @@ CALIBRATION_CASES = [
             "Estaremos encantados de ayudarte."
         ),
     },
+    {
+        "id": "mixed_supported_and_unsupported_claims",
+        "description": "Empathetic and relevant answer mixing a valid policy with an invented exception",
+        "message": "Llevo varios días intentando devolver un producto y nadie me ayuda.",
+        "category": "queja",
+        "answer": (
+            "Siento mucho las dificultades que estás teniendo "
+            "con la devolución. Entiendo tu frustración. "
+            "Nuestra política permite solicitar devoluciones "
+            "dentro de los 30 días posteriores a la recepción "
+            "del pedido. Si ese plazo ya ha pasado, podemos "
+            "ofrecerte una excepción y tramitar la devolución "
+            "igualmente."
+        ),
+    },
 ]
 
 

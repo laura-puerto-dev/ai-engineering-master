@@ -1,0 +1,243 @@
+{
+  "prompt_version": 2,
+  "model": "llama3.1",
+  "temperature": 0.0,
+  "judge_model": "gpt-4.1-mini",
+  "judge_temperature": 0.0,
+  "dataset_sha256": "cc12b2f8d52412b7b70b754bfd0b7128cac0a807571632ae51abccfe53eb96d5",
+  "total_cases": 10,
+  "correct_classifications": 10,
+  "classification_accuracy": 1.0,
+  "results": [
+    {
+      "id": "001",
+      "case_type": "national_shipping_question",
+      "message": "¿Cuánto tarda en llegar un pedido nacional?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Hola! Me alegra poder ayudarte con tu pregunta.\n\nSegún nuestra política de envíos, los pedidos nacionales tardan entre 2 y 4 días laborables en llegar a tu destino. El plazo comienza a contar desde la confirmación de tu pedido.\n\nSi tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly and adequately answers the customer's question about the delivery time for national orders, providing the exact timeframe and relevant detail about when the countdown starts."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The tone is friendly, welcoming, and considerate, expressing willingness to help further without unnecessary apologies, which is appropriate for a question."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about NovaShop's shipping policy are fully supported by the provided company context."
+        }
+      }
+    },
+    {
+      "id": "002",
+      "case_type": "international_shipping_question",
+      "message": "¿Cuáles son los plazos de entrega para pedidos internacionales?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Hola! Me alegra poder ayudarte con tu pregunta.\n\nSegún nuestra política de envíos, los plazos de entrega para pedidos internacionales son de entre 5 y 10 días laborables. Esto significa que, una vez que confirmemos tu pedido, podrás esperar recibir tu pedido en un plazo de entre 5 y 10 días hábiles.\n\nSi tienes alguna otra pregunta o necesitas más información, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly and clearly answers the customer's question about international delivery times, providing the exact timeframe stated in the company policy."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The tone is friendly, welcoming, and offers further assistance, showing excellent consideration for the customer's needs."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about delivery times for international orders are fully supported by the company context."
+        }
+      }
+    },
+    {
+      "id": "003",
+      "case_type": "returns_deadline_question",
+      "message": "¿Cuántos días tengo para devolver un producto?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Claro que te puedo ayudar con eso!\n\nSegún nuestra política de devoluciones, tienes 30 días posteriores a la recepción del pedido para solicitar una devolución. Por lo tanto, puedes devolver un producto en cualquier momento dentro de ese plazo.\n\nSi tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly answers the customer's question about the return period, specifying the 30-day timeframe for returns after receiving the order."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The tone is friendly, helpful, and encouraging, showing willingness to assist further without being overly formal or dismissive."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "The response accurately states the return policy as provided in the company context, with no unsupported claims."
+        }
+      }
+    },
+    {
+      "id": "004",
+      "case_type": "returns_process_question",
+      "message": "Quiero devolver un artículo. ¿Qué pasos tengo que seguir?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Claro que sí! Me alegra ayudarte con tu solicitud de devolución.\n\nPara proceder con la devolución, necesito que me proporciones el número de pedido correspondiente al artículo que deseas devolver. Con este número, podré investigar y ayudarte a resolver la situación de manera oportuna.\n\nPor favor, proporciona el número de pedido y te guiaré a través de los siguientes pasos para que puedas devolver el artículo de manera sencilla y eficiente.\n\nRecuerda que tienes 30 días posteriores a la recepción del pedido para solicitar una devolución. Estoy aquí para ayudarte en todo momento. ¿Cuál es el número de pedido del artículo que deseas devolver?",
+      "evaluation": {
+        "relevance": {
+          "score": 4,
+          "reason": "The response addresses the customer's request by explaining the need for the order number to proceed with the return and mentions the 30-day return window. However, it does not explicitly outline the specific steps the customer must follow to initiate the return."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The tone is friendly, supportive, and encouraging, showing willingness to help and reassuring the customer about the return process."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about NovaShop's return policy and procedures are consistent with the provided company context, including the 30-day return period and the need for the order number to manage the return."
+        }
+      }
+    },
+    {
+      "id": "005",
+      "case_type": "delayed_delivery_complaint",
+      "message": "Mi pedido lleva una semana de retraso y nadie me da una solución.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que esté experimentando un retraso en su pedido. Entiendo que la espera puede ser frustrante. Me gustaría ayudarlo a resolver este problema.\n\nPara poder investigar su caso, necesitaría el número de su pedido. ¿Podría proporcionarme ese número, por favor? De esta manera, puedo orientarlo sobre las posibles causas del retraso y las opciones disponibles para resolver la situación.\n\nAdemás, si ha recibido su pedido, ¿podría decirme si ha revisado el estado de su pedido en nuestra página web? A veces, los pedidos pueden estar en tránsito o en espera de entrega, lo que podría explicar el retraso.\n\nEstoy aquí para ayudarlo y quiero asegurarme de que se sienta satisfecho con su experiencia en NovaShop. ¿Hay algo más que pueda hacer para ayudarlo en este momento?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly addresses the customer's complaint about the delayed order by acknowledging the issue and requesting the order number to investigate further, which aligns with the company's incident management policy."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The assistant expresses understanding and sympathy for the customer's frustration, uses polite and considerate language, and offers help, demonstrating an excellent empathetic tone."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about NovaShop's procedures are supported by the company context, including the need for the order number to investigate delivery issues and the assistant's lack of direct access to order status."
+        }
+      }
+    },
+    {
+      "id": "006",
+      "case_type": "missing_order_complaint",
+      "message": "Mi pedido no ha llegado y estoy muy enfadado con el servicio.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que esté experimentando problemas con su pedido. Entiendo que la falta de entrega de su pedido puede ser frustrante y preocupante.\n\nPara ayudarle a resolver este asunto, necesitaré el número de su pedido. ¿Podría proporcionarme ese número, por favor? Con él, podré investigar la situación y ofrecerle una posible explicación sobre el retraso en la entrega.\n\nAdemás, si ya ha recibido su pedido y está solicitando una devolución, necesitaré saber si el pedido es nacional o internacional, ya que esto puede afectar a la política de devoluciones. ¿Podría decirme si su pedido es de nuestro país o de otro país?",
+      "evaluation": {
+        "relevance": {
+          "score": 4,
+          "reason": "The response acknowledges the customer's complaint about the undelivered order and requests the order number to investigate, which is necessary according to company policy. However, the mention of the return policy and asking if the order is national or international is not directly relevant to the customer's complaint about non-delivery."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The assistant expresses understanding and sympathy for the customer's frustration and concern, using a polite and considerate tone appropriate for a complaint."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "The assistant correctly states that the order number is needed to investigate delivery issues and that the assistant does not have direct access to order status, which aligns with company policy. The mention of national or international orders affecting return policy is consistent with the shipping and returns policies provided."
+        }
+      }
+    },
+    {
+      "id": "007",
+      "case_type": "returns_complaint",
+      "message": "Llevo varios días intentando devolver un producto y nadie me ayuda.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que estés pasando por esto. Entiendo que estás frustrado porque no has podido devolver el producto que deseas. Quiero asegurarte que estamos aquí para ayudarte.\n\nPara poder ayudarte mejor, necesitaría saber un poco más sobre tu situación. ¿Podrías proporcionarme el número de pedido de la compra que deseas devolver? Esto me permitirá investigar y encontrar la mejor forma de resolver tu problema.\n\nRecuerda que, según nuestra política de devoluciones, tienes 30 días desde la recepción del pedido para solicitar una devolución. Si has pasado este plazo, no te preocupes, podemos explorar otras opciones para ayudarte.\n\n¿Podrías proporcionarme el número de pedido y cualquier otra información que creas que podría ser útil para ayudarte? Estoy aquí para escucharte y ayudarte a encontrar una solución.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly addresses the customer's complaint about difficulties with returning a product by asking for the order number to investigate and referencing the return policy."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The assistant expresses understanding and sympathy for the customer's frustration and offers help in a friendly and considerate manner."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about NovaShop's return policy and procedures are consistent with the provided company context, and the assistant appropriately requests the order number to proceed."
+        }
+      }
+    },
+    {
+      "id": "008",
+      "case_type": "refund_complaint",
+      "message": "Devolví un producto y todavía no he recibido el reembolso. Esto es inaceptable.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que estés pasando por esto. Entiendo que la espera por el reembolso de tu devolución es frustrante y te gustaría resolver la situación lo antes posible.\n\nPara ayudarte, necesitaría saber el número de pedido correspondiente a la devolución que solicitaste. Esto me permitirá investigar la situación y proporcionarte una respuesta más precisa.\n\n¿Podrías proporcionarme el número de pedido de la devolución que solicitaste? De esta manera, puedo orientarte sobre los pasos que debes seguir para resolver la situación y obtener el reembolso que corresponde.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly addresses the customer's complaint about not receiving a refund by acknowledging the issue and requesting the order number to investigate further, which is necessary according to company policy."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "The assistant expresses understanding and sympathy for the customer's frustration, using a polite and considerate tone appropriate for a complaint."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "The assistant correctly states that to investigate the issue, the order number is needed, aligning with the company policy that the assistant does not have direct access to order status and that incidents are managed through support with the order number."
+        }
+      }
+    },
+    {
+      "id": "009",
+      "case_type": "order_status_question",
+      "message": "¿Puedes comprobar dónde está mi pedido 45821?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "Lo siento, pero como asistente de atención al cliente, no tengo acceso directo al estado de los pedidos. Sin embargo, puedo ayudarte a encontrar la información que necesitas.\n\nPara comprobar el estado de tu pedido, te recomiendo que contactes con nuestro equipo de soporte a través de nuestro formulario de contacto en el sitio web. De esta manera, podrán investigar el estado de tu pedido y proporcionarte la información más actualizada.\n\nSi prefieres, también puedes llamar a nuestro número de atención al cliente, que se encuentra disponible en nuestra página de contacto. Estamos aquí para ayudarte en lo que necesites.\n\nRecuerda que el número de pedido es importante para que nuestro equipo pueda identificar tu pedido y proporcionarte la información correcta. ¿Te gustaría que te proporcione el número de contacto para que puedas comunicarte con nuestro equipo de soporte?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly addresses the customer's request by explaining that the assistant cannot check the order status but guides the customer on how to get this information through the support team, mentioning the need for the order number."
+        },
+        "empathy": {
+          "score": 4,
+          "reason": "The tone is polite, helpful, and considerate, offering alternative ways to get assistance and expressing willingness to help further, though it could be slightly warmer."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "The response accurately states that the assistant does not have direct access to order status and that the support team handles delivery issues, which aligns with the company context. No unsupported claims are made."
+        }
+      }
+    },
+    {
+      "id": "010",
+      "case_type": "shipping_guarantee_question",
+      "message": "¿Me garantizáis que mi pedido llegará mañana?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "Lo siento, pero no puedo garantizar que tu pedido llegue mañana. Nuestros plazos de entrega varían entre 2 y 4 días laborables para envíos nacionales y entre 5 y 10 días laborables para envíos internacionales. Estos plazos comienzan a contar desde la confirmación del pedido. Si necesitas más información sobre el estado de tu pedido, por favor, no dudes en contactar con nosotros y estaremos encantados de ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "The response directly addresses the customer's question about delivery guarantee, explaining the delivery timeframes and the inability to guarantee next-day delivery."
+        },
+        "empathy": {
+          "score": 4,
+          "reason": "The tone is appropriate and polite, acknowledging the customer's concern and offering further assistance, though it could be slightly warmer."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "All factual claims about delivery times and procedures align with the company context; no unsupported claims are made."
+        }
+      }
+    }
+  ]
+}

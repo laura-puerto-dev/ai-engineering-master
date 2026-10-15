@@ -1,0 +1,241 @@
+{
+  "prompt_version": 2,
+  "model": "llama3.1",
+  "temperature": 0.0,
+  "dataset_sha256": "cc12b2f8d52412b7b70b754bfd0b7128cac0a807571632ae51abccfe53eb96d5",
+  "total_cases": 10,
+  "correct_classifications": 10,
+  "classification_accuracy": 1.0,
+  "results": [
+    {
+      "id": "001",
+      "case_type": "national_shipping_question",
+      "message": "¿Cuánto tarda en llegar un pedido nacional?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Hola! Me alegra poder ayudarte con tu pregunta.\n\nSegún nuestra política de envíos, los pedidos nacionales tardan entre 2 y 4 días laborables en llegar a tu destino. El plazo comienza a contar desde la confirmación de tu pedido.\n\nSi tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la pregunta del cliente sobre el tiempo de entrega de pedidos nacionales."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente tiene un tono amable y considerado, utilizando un saludo y una frase de cierre para mostrar apoyo al cliente."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de envíos de NovaShop, que se proporciona en el contexto de la empresa, y no contiene afirmaciones no respaldadas."
+        }
+      }
+    },
+    {
+      "id": "002",
+      "case_type": "international_shipping_question",
+      "message": "¿Cuáles son los plazos de entrega para pedidos internacionales?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Hola! Me alegra poder ayudarte con tu pregunta.\n\nSegún nuestra política de envíos, los plazos de entrega para pedidos internacionales son de entre 5 y 10 días laborables. Esto significa que, una vez que confirmemos tu pedido, podrás esperar recibir tu pedido en un plazo de entre 5 y 10 días hábiles.\n\nSi tienes alguna otra pregunta o necesitas más información, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la pregunta del cliente sobre los plazos de entrega para pedidos internacionales."
+        },
+        "empathy": {
+          "score": 4,
+          "reason": "La respuesta del asistente es amable y considerada, pero no es excesivamente personalizada o adaptada a la situación del cliente."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de envíos de NovaShop, que se proporciona en el contexto de la empresa, y no contiene afirmaciones no respaldadas."
+        }
+      }
+    },
+    {
+      "id": "003",
+      "case_type": "returns_deadline_question",
+      "message": "¿Cuántos días tengo para devolver un producto?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Claro que te puedo ayudar con eso!\n\nSegún nuestra política de devoluciones, tienes 30 días posteriores a la recepción del pedido para solicitar una devolución. Por lo tanto, puedes devolver un producto en cualquier momento dentro de ese plazo.\n\nSi tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en preguntar. Estoy aquí para ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la pregunta del cliente sobre el plazo para devolver un producto."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente tiene un tono amable y considerado, adaptado a la situación del cliente."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de devoluciones de NovaShop, que se proporciona en el contexto de la empresa."
+        }
+      }
+    },
+    {
+      "id": "004",
+      "case_type": "returns_process_question",
+      "message": "Quiero devolver un artículo. ¿Qué pasos tengo que seguir?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "¡Claro que sí! Me alegra ayudarte con tu solicitud de devolución.\n\nPara proceder con la devolución, necesito que me proporciones el número de pedido correspondiente al artículo que deseas devolver. Con este número, podré investigar y ayudarte a resolver la situación de manera oportuna.\n\nPor favor, proporciona el número de pedido y te guiaré a través de los siguientes pasos para que puedas devolver el artículo de manera sencilla y eficiente.\n\nRecuerda que tienes 30 días posteriores a la recepción del pedido para solicitar una devolución. Estoy aquí para ayudarte en todo momento. ¿Cuál es el número de pedido del artículo que deseas devolver?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la solicitud del cliente de devolver un artículo, proporcionando los pasos necesarios para proceder con la devolución."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente muestra una consideración y amabilidad hacia el cliente, utilizando un tono agradable y profesional."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de devoluciones de NovaShop, específicamente en el plazo de 30 días posteriores a la recepción del pedido para solicitar una devolución."
+        }
+      }
+    },
+    {
+      "id": "005",
+      "case_type": "delayed_delivery_complaint",
+      "message": "Mi pedido lleva una semana de retraso y nadie me da una solución.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que esté experimentando un retraso en su pedido. Entiendo que la espera puede ser frustrante. Me gustaría ayudarlo a resolver este problema.\n\nPara poder investigar su caso, necesitaría el número de su pedido. ¿Podría proporcionarme ese número, por favor? De esta manera, puedo orientarlo sobre las posibles causas del retraso y las opciones disponibles para resolver la situación.\n\nAdemás, si ha recibido su pedido, ¿podría decirme si ha revisado el estado de su pedido en nuestra página web? A veces, los pedidos pueden estar en tránsito o en espera de entrega, lo que podría explicar el retraso.\n\nEstoy aquí para ayudarlo y quiero asegurarme de que se sienta satisfecho con su experiencia en NovaShop. ¿Hay algo más que pueda hacer para ayudarlo en este momento?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la queja del cliente sobre el retraso en el pedido y ofrece una solución para investigar el caso y resolver la situación."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente muestra una consideración y empatía hacia la situación del cliente, lo que se refleja en el lenguaje utilizado y la oferta de ayuda."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de envíos de NovaShop y ofrece una solución factible para resolver el problema del retraso en el pedido."
+        }
+      }
+    },
+    {
+      "id": "006",
+      "case_type": "missing_order_complaint",
+      "message": "Mi pedido no ha llegado y estoy muy enfadado con el servicio.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que esté experimentando problemas con su pedido. Entiendo que la falta de entrega de su pedido puede ser frustrante y preocupante.\n\nPara ayudarle a resolver este asunto, necesitaré el número de su pedido. ¿Podría proporcionarme ese número, por favor? Con él, podré investigar la situación y ofrecerle una posible explicación sobre el retraso en la entrega.\n\nAdemás, si ya ha recibido su pedido y está solicitando una devolución, necesitaré saber si el pedido es nacional o internacional, ya que esto puede afectar a la política de devoluciones. ¿Podría decirme si su pedido es de nuestro país o de otro país?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la queja del cliente, solicitando el número de pedido para investigar la situación y ofrecer una posible explicación sobre el retraso en la entrega."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente muestra una consideración y empatía hacia la situación del cliente, utilizando un tono amable y profesional."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de envíos de NovaShop, solicitando el número de pedido para investigar la situación y ofreciendo una posible explicación sobre el retraso en la entrega, lo que es consistente con la política de gestión de incidencias de la empresa."
+        }
+      }
+    },
+    {
+      "id": "007",
+      "case_type": "returns_complaint",
+      "message": "Llevo varios días intentando devolver un producto y nadie me ayuda.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que estés pasando por esto. Entiendo que estás frustrado porque no has podido devolver el producto que deseas. Quiero asegurarte que estamos aquí para ayudarte.\n\nPara poder ayudarte mejor, necesitaría saber un poco más sobre tu situación. ¿Podrías proporcionarme el número de pedido de la compra que deseas devolver? Esto me permitirá investigar y encontrar la mejor forma de resolver tu problema.\n\nRecuerda que, según nuestra política de devoluciones, tienes 30 días desde la recepción del pedido para solicitar una devolución. Si has pasado este plazo, no te preocupes, podemos explorar otras opciones para ayudarte.\n\n¿Podrías proporcionarme el número de pedido y cualquier otra información que creas que podría ser útil para ayudarte? Estoy aquí para escucharte y ayudarte a encontrar una solución.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la queja del cliente, solicitando información necesaria para investigar y resolver el problema."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "La respuesta del asistente muestra una consideración y empatía hacia la situación del cliente, reconociendo su frustración y ofreciendo apoyo."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de devoluciones de NovaShop, citando el plazo de 30 días para solicitar una devolución y ofreciendo una solución alternativa si el plazo ha pasado."
+        }
+      }
+    },
+    {
+      "id": "008",
+      "case_type": "refund_complaint",
+      "message": "Devolví un producto y todavía no he recibido el reembolso. Esto es inaceptable.",
+      "expected_category": "queja",
+      "predicted_category": "queja",
+      "classification_correct": true,
+      "answer": "Lo siento mucho que estés pasando por esto. Entiendo que la espera por el reembolso de tu devolución es frustrante y te gustaría resolver la situación lo antes posible.\n\nPara ayudarte, necesitaría saber el número de pedido correspondiente a la devolución que solicitaste. Esto me permitirá investigar la situación y proporcionarte una respuesta más precisa.\n\n¿Podrías proporcionarme el número de pedido de la devolución que solicitaste? De esta manera, puedo orientarte sobre los pasos que debes seguir para resolver la situación y obtener el reembolso que corresponde.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la queja del cliente, solicitando la información necesaria para investigar la situación y resolver el problema."
+        },
+        "empathy": {
+          "score": 5,
+          "reason": "El asistente muestra una actitud considerada y profesional, expresando comprensión por la frustración del cliente y comprometiéndose a resolver la situación lo antes posible."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de devoluciones de NovaShop, solicitando la información necesaria para investigar la situación y proporcionar una respuesta precisa."
+        }
+      }
+    },
+    {
+      "id": "009",
+      "case_type": "order_status_question",
+      "message": "¿Puedes comprobar dónde está mi pedido 45821?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "Lo siento, pero como asistente de atención al cliente, no tengo acceso directo al estado de los pedidos. Sin embargo, puedo ayudarte a encontrar la información que necesitas.\n\nPara comprobar el estado de tu pedido, te recomiendo que contactes con nuestro equipo de soporte a través de nuestro formulario de contacto en el sitio web. De esta manera, podrán investigar el estado de tu pedido y proporcionarte la información más actualizada.\n\nSi prefieres, también puedes llamar a nuestro número de atención al cliente, que se encuentra disponible en nuestra página de contacto. Estamos aquí para ayudarte en lo que necesites.\n\nRecuerda que el número de pedido es importante para que nuestro equipo pueda identificar tu pedido y proporcionarte la información correcta. ¿Te gustaría que te proporcione el número de contacto para que puedas comunicarte con nuestro equipo de soporte?",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la pregunta del cliente, proporcionando una solución clara y concisa para encontrar la información necesaria sobre el estado del pedido."
+        },
+        "empathy": {
+          "score": 4,
+          "reason": "La respuesta del asistente muestra consideración por la situación del cliente, ofreciendo una solución amable y profesional, aunque no es perfectamente adaptada a la situación del cliente."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente está respaldada por la política de la empresa, específicamente la gestión de incidencias, y no contiene afirmaciones no respaldadas."
+        }
+      }
+    },
+    {
+      "id": "010",
+      "case_type": "shipping_guarantee_question",
+      "message": "¿Me garantizáis que mi pedido llegará mañana?",
+      "expected_category": "pregunta",
+      "predicted_category": "pregunta",
+      "classification_correct": true,
+      "answer": "Lo siento, pero no puedo garantizar que tu pedido llegue mañana. Nuestros plazos de entrega varían entre 2 y 4 días laborables para envíos nacionales y entre 5 y 10 días laborables para envíos internacionales. Estos plazos comienzan a contar desde la confirmación del pedido. Si necesitas más información sobre el estado de tu pedido, por favor, no dudes en contactar con nosotros y estaremos encantados de ayudarte.",
+      "evaluation": {
+        "relevance": {
+          "score": 5,
+          "reason": "La respuesta del asistente directamente y adecuadamente aborda la pregunta del cliente sobre la garantía de entrega del pedido."
+        },
+        "empathy": {
+          "score": 4,
+          "reason": "La respuesta del asistente es considerada y profesional, pero no muestra una gran empatía hacia la situación del cliente."
+        },
+        "groundedness": {
+          "score": 5,
+          "reason": "La respuesta del asistente se basa en la política de envíos de NovaShop y proporciona información precisa sobre los plazos de entrega."
+        }
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import warnings
 from pathlib import Path
 
 from langchain_core.chat_history import InMemoryChatMessageHistory
-from langchain_core.messages import BaseMessage, ToolMessage
+from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnableConfig, RunnableLambda
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -99,6 +99,16 @@ def run_turn(inputs: dict) -> list[BaseMessage]:
             new_messages.append(
                 ToolMessage(content=str(result), tool_call_id=tool_call["id"])
             )
+    else:
+        print("WARNING: Se ha alcanzado el límite de iteraciones.")
+        new_messages.append(
+            AIMessage(
+                content=(
+                    "No he podido completar la consulta dentro del límite "
+                    "de operaciones permitido. Inténtalo de nuevo."
+                )
+            )
+        )
 
     return new_messages
 

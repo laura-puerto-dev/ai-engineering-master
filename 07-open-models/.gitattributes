@@ -1,0 +1,12 @@
+# config/experimento-congelado.json guarda hashes de los bytes exactos de datos y prompts.
+# Git para Windows convierte por defecto los saltos de línea LF en CRLF al descargar;
+# eso cambiaría esos bytes y assert_frozen detendría la práctica. eol=lf conserva LF
+# en todos los sistemas para cualquier archivo de texto del repositorio.
+* text=auto eol=lf
+
+# Pesos y binarios: Git nunca debe tocar su contenido.
+*.safetensors binary
+*.gguf binary
+*.png binary
+*.jpg binary
+*.pdf binary

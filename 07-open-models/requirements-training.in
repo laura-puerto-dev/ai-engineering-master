@@ -1,0 +1,16 @@
+# Añade el entorno de entrenamiento a las dependencias comunes de contratos/API.
+-r requirements.in
+# Tensores, dispositivos y gradientes que actualizan el adaptador.
+torch==2.14.1
+# Carga Qwen/tokenizer y genera respuestas del modelo causal.
+transformers==5.19.0
+# Dataset de ejemplos tokenizados que recibe SFTTrainer.
+datasets==5.1.0
+# Bucle de supervised fine-tuning: pérdida, batches, épocas y evaluación.
+trl==1.14.0
+# Adaptación eficiente: añade y guarda las matrices LoRA sobre la base congelada.
+peft==0.21.2
+# Soporte de ejecución por dispositivos utilizado por Transformers/TRL.
+accelerate==1.15.0
+# Kernel para ejecutar los notebooks con este mismo entorno Python.
+ipykernel==6.30.1

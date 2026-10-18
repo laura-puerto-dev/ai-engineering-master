@@ -1,0 +1,67 @@
+{
+  "qwen_base": {
+    "casos": 30,
+    "modelos": [
+      "Qwen/Qwen3-0.6B"
+    ],
+    "rutas": [],
+    "json_valido": 30,
+    "esquema_valido": 30,
+    "categoria_correcta": 14,
+    "prioridad_correcta": 6,
+    "ambas_correctas": 3,
+    "errores": 0,
+    "latencia_mediana_s": 1.5147464999754447,
+    "coste_usd": null
+  },
+  "qwen_fewshot": {
+    "casos": 30,
+    "modelos": [
+      "Qwen/Qwen3-0.6B"
+    ],
+    "rutas": [],
+    "json_valido": 30,
+    "esquema_valido": 27,
+    "categoria_correcta": 15,
+    "prioridad_correcta": 20,
+    "ambas_correctas": 11,
+    "errores": 0,
+    "latencia_mediana_s": 1.320253700017929,
+    "coste_usd": null
+  },
+  "qwen_lora": {
+    "casos": 30,
+    "modelos": [
+      "Qwen/Qwen3-0.6B"
+    ],
+    "rutas": [],
+    "json_valido": 30,
+    "esquema_valido": 30,
+    "categoria_correcta": 28,
+    "prioridad_correcta": 29,
+    "ambas_correctas": 28,
+    "errores": 0,
+    "latencia_mediana_s": 2.3502741499978583,
+    "coste_usd": null
+  },
+  "gemini_base": {
+    "casos": 0,
+    "estado": "PENDIENTE; no hay ejecución"
+  },
+  "gemini_ajustado": {
+    "casos": 0,
+    "estado": "PENDIENTE; no hay ejecución"
+  },
+  "claude_prompt": {
+    "casos": 0,
+    "estado": "PENDIENTE; no hay ejecución"
+  },
+  "remoto_basico": {
+    "casos": 0,
+    "estado": "PENDIENTE; no hay ejecución"
+  },
+  "gemini_openrouter_demo": {
+    "casos": 0,
+    "estado": "PENDIENTE; no hay ejecución"
+  }
+}

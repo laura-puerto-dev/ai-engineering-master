@@ -1,0 +1,4682 @@
+[
+  {
+    "id": "TE-01",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Mi enlace de activación abre una página que dice token inválido; no puedo entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:49Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El token inválido impide la autenticación. Por favor, verifique su enlace de activación o contacte a su administrador.\"\n}",
+    "latencia_s": 1.9949483000091277,
+    "tokens_entrada": 269,
+    "tokens_salida": 55,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-02",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Después de cambiar de móvil, el segundo factor me impide acceder al campus.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:51Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El problema se ha solucionado. No hay impacto colectivo explícito o exposición de datos privados.\"\n}",
+    "latencia_s": 1.6924586999812163,
+    "tokens_entrada": 268,
+    "tokens_salida": 51,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-03",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "El campus dice que mi cuenta está suspendida y me bloquea las lecciones.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:53Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El sistema está bloqueando tu cuenta por posibles fallos en la plataforma educativa. Pide ayuda al administrador para resolver el problema.\"\n}",
+    "latencia_s": 2.0449059999664314,
+    "tokens_entrada": 267,
+    "tokens_salida": 54,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-04",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "A todo el grupo nos aparece usuario inexistente al intentar entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:55Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El usuario no se encuentra en la base de datos. Pide aclaración breve.\"\n}",
+    "latencia_s": 1.5055529000237584,
+    "tokens_entrada": 266,
+    "tokens_salida": 43,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-05",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "En mi perfil autenticado puedo ver el teléfono privado de otra alumna.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:56Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"No hay datos disponibles para identificar el teléfono privado de otra alumna.\"\n}",
+    "latencia_s": 1.3653833999997005,
+    "tokens_entrada": 267,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-06",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Sigo entrando correctamente. ¿Cómo cambio el correo asociado a mi usuario?",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:57Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"Pregunta al administrador por el correo asociado a tu usuario\"\n}",
+    "latencia_s": 1.4017267999588512,
+    "tokens_entrada": 267,
+    "tokens_salida": 37,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-07",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Urgente: ¿puedo configurar un método de acceso adicional? No estoy bloqueado.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:20:59Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"Sí, pero por favor proporciona detalles sobre el método de acceso y la configuración necesaria.\"\n}",
+    "latencia_s": 1.5184025999624282,
+    "tokens_entrada": 272,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-08",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "La autenticación me devuelve un bucle de redirecciones y no puedo iniciar sesión.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:21:00Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"La autenticación no ha funcionado. Pide ayuda al soporte de la plataforma educativa.\"\n}",
+    "latencia_s": 1.5110903999884613,
+    "tokens_entrada": 269,
+    "tokens_salida": 46,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-09",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Me han cobrado una mensualidad que no figura en mi contrato de matrícula.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:02Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El cobro no se encuentra en tu contrato de matrícula. Pide a tu administrador para confirmar la situación.\"\n}",
+    "latencia_s": 1.715725999965798,
+    "tokens_entrada": 270,
+    "tokens_salida": 52,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-10",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "La factura está a nombre de una entidad incorrecta y necesito corregirla.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:04Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"facturacion\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"La factura está a nombre de una entidad incorrecta. Corrija el nombre de la entidad para que el cobro sea correcto.\"\n}",
+    "latencia_s": 1.7115923999808729,
+    "tokens_entrada": 268,
+    "tokens_salida": 52,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-11",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Mi cupón se anuncia vigente pero el checkout lo rechaza y no puedo pagar.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:06Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"El checkout rechazó el cupón por no haber sido validado. Por favor verifica la información del cupón o contacte a su administrador.\"\n}",
+    "latencia_s": 1.7964084999985062,
+    "tokens_entrada": 270,
+    "tokens_salida": 56,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-12",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Todos los usuarios de nuestra empresa han recibido cargos no reconocidos.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:07Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"acceso\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"Los cargos no reconocidos afectan el acceso a las funciones de los usuarios. Pide aclaración breve para resolver el problema.\"\n}",
+    "latencia_s": 1.7124852000270039,
+    "tokens_entrada": 265,
+    "tokens_salida": 52,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-13",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "El listado de recibos muestra números de cuenta privados de otros clientes.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:09Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"facturacion\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El listado de recibos muestra números de cuenta privados de otros clientes. Se requiere verificar si estos números son válidos para la plataforma.\"\n}",
+    "latencia_s": 1.8532516999985091,
+    "tokens_entrada": 266,
+    "tokens_salida": 54,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-14",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "¿Qué diferencia de precio hay entre las modalidades de matrícula?",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:11Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"No hay diferencia de precio entre las modalidades de matrícula.\"\n}",
+    "latencia_s": 1.3690346000366844,
+    "tokens_entrada": 266,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-15",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Urgente: ¿las tarifas publicadas incluyen los impuestos? Solo estoy consultando.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:21:12Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"Las tarifas incluyen impuestos, pero no se especifican en el mensaje consultado.\"\n}",
+    "latencia_s": 1.4283536999719217,
+    "tokens_entrada": 272,
+    "tokens_salida": 43,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-16",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "La entrega se queda al 99 por ciento y no puedo enviar el proyecto.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:14Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"La entrega no se pudo completar debido a un error en la plataforma. Pide ayuda para resolverlo.\"\n}",
+    "latencia_s": 1.578264899959322,
+    "tokens_entrada": 268,
+    "tokens_salida": 47,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-17",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "El reproductor muestra error de códec y me impide abrir el vídeo.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:15Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El error de códec impide abrir el vídeo. Pide ayuda al soporte técnico.\"\n}",
+    "latencia_s": 1.4847096999874339,
+    "tokens_entrada": 267,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-18",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "El formulario de examen no acepta ninguna respuesta y no puedo terminar.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:16Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"baja\",\n  \"respuesta\": \"No puedo terminar el formulario de examen por el momento.\"\n}",
+    "latencia_s": 1.2371126000070944,
+    "tokens_entrada": 266,
+    "tokens_salida": 37,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-19",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Para todos los usuarios el botón de abrir el directo devuelve error 503.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:18Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"El botón de abrir el directo no funciona para todos los usuarios, indicando un error de 503. Pide ayuda al administrador.\"\n}",
+    "latencia_s": 1.8324020000291057,
+    "tokens_entrada": 269,
+    "tokens_salida": 57,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-20",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "La búsqueda del campus devuelve notas privadas de otros estudiantes.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:20Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"La búsqueda del campus reveló notas privadas de otros estudiantes. No hay impacto colectivo explícito.\"\n}",
+    "latencia_s": 1.5053534000180662,
+    "tokens_entrada": 262,
+    "tokens_salida": 47,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-21",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "El color del icono del tema es incorrecto, aunque puedo utilizar la plataforma.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:21Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"tecnico\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"El color del icono del tema no es correcto. Pide que revise el tema en la plataforma.\"\n}",
+    "latencia_s": 1.4965187000343576,
+    "tokens_entrada": 267,
+    "tokens_salida": 47,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-22",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Urgente: la barra de progreso está desalineada; no bloquea ninguna función.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:21:23Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"La barra de progreso está desalineada, pero no bloquea ninguna función.\"\n}",
+    "latencia_s": 1.3610589999589138,
+    "tokens_entrada": 272,
+    "tokens_salida": 42,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-23",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "¿Puedo cursar este módulo antes que el anterior?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:24Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"No, no puedes cursar este módulo antes que el anterior. Pide una aclaración breve.\"\n}",
+    "latencia_s": 1.5000050999806263,
+    "tokens_entrada": 265,
+    "tokens_salida": 46,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-24",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "¿Cuál es la fecha límite orientativa del proyecto final?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:26Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"La fecha límite orientativa del proyecto final es el 31 de octubre del año actual.\"\n}",
+    "latencia_s": 1.3967348000151105,
+    "tokens_entrada": 264,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-25",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "¿Los directos se quedan grabados durante todo el programa?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:27Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"No, los directos no se quedan grabados durante todo el programa.\"\n}",
+    "latencia_s": 1.2344058000016958,
+    "tokens_entrada": 264,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-26",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "¿Hay grupos de estudio voluntarios para practicar?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:28Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"No hay grupos de estudio voluntarios para practicar en esta plataforma educativa ficticia.\"\n}",
+    "latencia_s": 1.3717753000091761,
+    "tokens_entrada": 262,
+    "tokens_salida": 42,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-27",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "He terminado las lecciones. ¿Qué pasos siguen para el certificado?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:30Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"El certificado se genera automáticamente tras finalizar las lecciones. No hay impacto colectivo explícito, por lo que la prioridad es media.\"\n}",
+    "latencia_s": 1.9671837000059895,
+    "tokens_entrada": 268,
+    "tokens_salida": 56,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-28",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Ayuda por favor, algo va mal y no puedo concretarlo todavía.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:32Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"baja\",\n  \"respuesta\": \"Pide detalles específicos sobre lo que no puede concretarse para ayudarte.\"\n}",
+    "latencia_s": 1.5780475999927148,
+    "tokens_entrada": 266,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-29",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Urgente: ¿qué herramientas se presentan en el siguiente bloque?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:34Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"alta\",\n  \"respuesta\": \"Herramientas presentes en el bloque: login, contraseña, permisos, cobros, facturas, pagos.\"\n}",
+    "latencia_s": 1.9228192000300623,
+    "tokens_entrada": 266,
+    "tokens_salida": 49,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-30",
+    "condicion": "qwen_base",
+    "split": "test",
+    "incidencia": "Sugiero publicar un glosario de términos junto al temario.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:21:36Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\n  \"categoria\": \"consulta\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"Sugiero que publique el glosario de términos junto al temario para facilitar su comprensión\"\n}",
+    "latencia_s": 1.9201880000182427,
+    "tokens_entrada": 268,
+    "tokens_salida": 49,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-01",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Mi enlace de activación abre una página que dice token inválido; no puedo entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:44Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el mensaje de error y el enlace para revisar la incidencia de tecnico.\"}",
+    "latencia_s": 1.545947399979923,
+    "tokens_entrada": 505,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-02",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Después de cambiar de móvil, el segundo factor me impide acceder al campus.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:46Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el tipo de error y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 1.2968770999577828,
+    "tokens_entrada": 504,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-03",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "El campus dice que mi cuenta está suspendida y me bloquea las lecciones.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:47Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el mensaje de error y el paso en que aparece para revisar el problema.\"}",
+    "latencia_s": 1.324494800006505,
+    "tokens_entrada": 503,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-04",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "A todo el grupo nos aparece usuario inexistente al intentar entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:48Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 1.3725011999486014,
+    "tokens_entrada": 502,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-05",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "En mi perfil autenticado puedo ver el teléfono privado de otra alumna.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:50Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el teléfono privado y el mensaje de error para revisar la incidencia de tecnico.\"}",
+    "latencia_s": 1.3621811000048183,
+    "tokens_entrada": 503,
+    "tokens_salida": 42,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-06",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Sigo entrando correctamente. ¿Cómo cambio el correo asociado a mi usuario?",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:51Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el correo que deseas cambiar y el paso a seguir para hacerlo.\"}",
+    "latencia_s": 1.2308216000092216,
+    "tokens_entrada": 503,
+    "tokens_salida": 37,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-07",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Urgente: ¿puedo configurar un método de acceso adicional? No estoy bloqueado.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:52Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"urgente\", \"respuesta\": \"Indica el método de acceso y la fecha de inicio de la clase para revisar la incidencia.\"}",
+    "latencia_s": 1.3817536000278778,
+    "tokens_entrada": 508,
+    "tokens_salida": 43,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": false,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-08",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "La autenticación me devuelve un bucle de redirecciones y no puedo iniciar sesión.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:22:54Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el mensaje de error y el ciclo de redirecciones para revisar el problema.\"}",
+    "latencia_s": 1.3037383000482805,
+    "tokens_entrada": 505,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-09",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Me han cobrado una mensualidad que no figura en mi contrato de matrícula.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:22:55Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el motivo del cobro y la fecha de pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 1.4698115999926813,
+    "tokens_entrada": 506,
+    "tokens_salida": 43,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-10",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "La factura está a nombre de una entidad incorrecta y necesito corregirla.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:22:57Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el nombre de la entidad y el motivo de la incorrecta para revisar la incidencia de facturación.\"}",
+    "latencia_s": 1.5750882999855094,
+    "tokens_entrada": 504,
+    "tokens_salida": 45,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-11",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Mi cupón se anuncia vigente pero el checkout lo rechaza y no puedo pagar.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:22:58Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el motivo del rechazo y la forma en que se realiza el pago para revisar el problema.\"}",
+    "latencia_s": 1.503088099998422,
+    "tokens_entrada": 506,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-12",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Todos los usuarios de nuestra empresa han recibido cargos no reconocidos.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:22:59Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 1.2438554000109434,
+    "tokens_entrada": 501,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-13",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "El listado de recibos muestra números de cuenta privados de otros clientes.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:23:01Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el número de cuenta privada y el mensaje de error para revisar la incidencia de facturación.\"}",
+    "latencia_s": 1.4819864999735728,
+    "tokens_entrada": 502,
+    "tokens_salida": 45,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-14",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "¿Qué diferencia de precio hay entre las modalidades de matrícula?",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:23:02Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica la diferencia de precio entre las modalidades de matrícula y su explicación.\"}",
+    "latencia_s": 1.3176316000171937,
+    "tokens_entrada": 502,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-15",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Urgente: ¿las tarifas publicadas incluyen los impuestos? Solo estoy consultando.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:23:04Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica que la tarifa incluye los impuestos y que no hay problema con la consulta.\"}",
+    "latencia_s": 1.3228758000186644,
+    "tokens_entrada": 508,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-16",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "La entrega se queda al 99 por ciento y no puedo enviar el proyecto.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:05Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la causa de la entrega y el estado de la entrega para revisar el problema.\"}",
+    "latencia_s": 1.3156750000198372,
+    "tokens_entrada": 504,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-17",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "El reproductor muestra error de códec y me impide abrir el vídeo.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:06Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de códec y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 1.2763061000150628,
+    "tokens_entrada": 503,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-18",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "El formulario de examen no acepta ninguna respuesta y no puedo terminar.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:08Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica que no se puede completar el examen y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 1.4345924999797717,
+    "tokens_entrada": 502,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-19",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Para todos los usuarios el botón de abrir el directo devuelve error 503.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:09Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error y el motivo del error para revisar el problema.\"}",
+    "latencia_s": 1.171838200010825,
+    "tokens_entrada": 505,
+    "tokens_salida": 36,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-20",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "La búsqueda del campus devuelve notas privadas de otros estudiantes.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:10Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica que la búsqueda del campus revela notas privadas de otros estudiantes, lo cual puede ser un problema de datos.\"}",
+    "latencia_s": 1.470084400032647,
+    "tokens_entrada": 498,
+    "tokens_salida": 45,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-21",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "El color del icono del tema es incorrecto, aunque puedo utilizar la plataforma.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:12Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica el color del icono del tema y el mensaje de error para revisar la incidencia de tecnico.\"}",
+    "latencia_s": 1.511033100017812,
+    "tokens_entrada": 503,
+    "tokens_salida": 45,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-22",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Urgente: la barra de progreso está desalineada; no bloquea ninguna función.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:23:13Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"urgente\", \"respuesta\": \"Indica el mensaje de error y la función afectada para revisar el problema.\"}",
+    "latencia_s": 1.2660291999927722,
+    "tokens_entrada": 508,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": false,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-23",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "¿Puedo cursar este módulo antes que el anterior?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:14Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica si hay un error en el módulo o si es una modificación que no se ha actualizado.\"}",
+    "latencia_s": 1.432540700014215,
+    "tokens_entrada": 501,
+    "tokens_salida": 44,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-24",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "¿Cuál es la fecha límite orientativa del proyecto final?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:16Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica la fecha límite orientativa del proyecto final.\"}",
+    "latencia_s": 1.051040800055489,
+    "tokens_entrada": 500,
+    "tokens_salida": 32,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-25",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "¿Los directos se quedan grabados durante todo el programa?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:17Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 1.2624219999997877,
+    "tokens_entrada": 500,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-26",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "¿Hay grupos de estudio voluntarios para practicar?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:18Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica si hay grupos de estudio voluntarios y su función.\"}",
+    "latencia_s": 1.0749549999600276,
+    "tokens_entrada": 498,
+    "tokens_salida": 33,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-27",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "He terminado las lecciones. ¿Qué pasos siguen para el certificado?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:19Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el paso a seguir para obtener el certificado.\"}",
+    "latencia_s": 1.0577920000068843,
+    "tokens_entrada": 504,
+    "tokens_salida": 32,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-28",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Ayuda por favor, algo va mal y no puedo concretarlo todavía.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:20Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 1.2841557000065222,
+    "tokens_entrada": 502,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-29",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Urgente: ¿qué herramientas se presentan en el siguiente bloque?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:21Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"urgente\", \"respuesta\": \"Indica el nombre de la herramienta y su función para revisar la incidencia.\"}",
+    "latencia_s": 1.2548888000310399,
+    "tokens_entrada": 502,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": false,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-30",
+    "condicion": "qwen_fewshot",
+    "split": "test",
+    "incidencia": "Sugiero publicar un glosario de términos junto al temario.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:23:23Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": null,
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Sugiere que el glosario de términos se publique junto al temario para facilitar su comprensión.\"}",
+    "latencia_s": 1.540485000004992,
+    "tokens_entrada": 504,
+    "tokens_salida": 47,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-01",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Mi enlace de activación abre una página que dice token inválido; no puedo entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:40Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.581221700005699,
+    "tokens_entrada": 269,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-02",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Después de cambiar de móvil, el segundo factor me impide acceder al campus.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:43Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.652064000023529,
+    "tokens_entrada": 268,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-03",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "El campus dice que mi cuenta está suspendida y me bloquea las lecciones.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:45Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.329057000053581,
+    "tokens_entrada": 267,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-04",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "A todo el grupo nos aparece usuario inexistente al intentar entrar.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:48Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.2711255000322126,
+    "tokens_entrada": 266,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-05",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "En mi perfil autenticado puedo ver el teléfono privado de otra alumna.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "alta",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:50Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.2413607999915257,
+    "tokens_entrada": 267,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-06",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Sigo entrando correctamente. ¿Cómo cambio el correo asociado a mi usuario?",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:52Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.3783201000187546,
+    "tokens_entrada": 267,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-07",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Urgente: ¿puedo configurar un método de acceso adicional? No estoy bloqueado.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "baja",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:55Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.3469366999925114,
+    "tokens_entrada": 272,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-08",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "La autenticación me devuelve un bucle de redirecciones y no puedo iniciar sesión.",
+    "objetivo": {
+      "categoria": "acceso",
+      "prioridad": "media",
+      "respuesta": "Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña."
+    },
+    "fecha": "2026-10-18T16:24:57Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.4318891000002623,
+    "tokens_entrada": 269,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-09",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Me han cobrado una mensualidad que no figura en mi contrato de matrícula.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:00Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.4604454000364058,
+    "tokens_entrada": 270,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-10",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "La factura está a nombre de una entidad incorrecta y necesito corregirla.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:02Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.488679100002628,
+    "tokens_entrada": 268,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-11",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Mi cupón se anuncia vigente pero el checkout lo rechaza y no puedo pagar.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "media",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:05Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.475203200010583,
+    "tokens_entrada": 270,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-12",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Todos los usuarios de nuestra empresa han recibido cargos no reconocidos.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:07Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.725969500024803,
+    "tokens_entrada": 265,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-13",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "El listado de recibos muestra números de cuenta privados de otros clientes.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "alta",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:10Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"alta\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.506332900025882,
+    "tokens_entrada": 266,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-14",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "¿Qué diferencia de precio hay entre las modalidades de matrícula?",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:12Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.4329941000323743,
+    "tokens_entrada": 266,
+    "tokens_salida": 42,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-15",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Urgente: ¿las tarifas publicadas incluyen los impuestos? Solo estoy consultando.",
+    "objetivo": {
+      "categoria": "facturacion",
+      "prioridad": "baja",
+      "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+    },
+    "fecha": "2026-10-18T16:25:15Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.480525300023146,
+    "tokens_entrada": 272,
+    "tokens_salida": 42,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-16",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "La entrega se queda al 99 por ciento y no puedo enviar el proyecto.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:17Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.2010389999486506,
+    "tokens_entrada": 268,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-17",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "El reproductor muestra error de códec y me impide abrir el vídeo.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:19Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.300437600002624,
+    "tokens_entrada": 267,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-18",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "El formulario de examen no acepta ninguna respuesta y no puedo terminar.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "media",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:22Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.390584500040859,
+    "tokens_entrada": 266,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-19",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Para todos los usuarios el botón de abrir el directo devuelve error 503.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:24Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"alta\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.2867510999785736,
+    "tokens_entrada": 269,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-20",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "La búsqueda del campus devuelve notas privadas de otros estudiantes.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "alta",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:26Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"alta\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.3536116000032052,
+    "tokens_entrada": 262,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-21",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "El color del icono del tema es incorrecto, aunque puedo utilizar la plataforma.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:29Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"acceso\", \"prioridad\": \"baja\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.\"}",
+    "latencia_s": 2.4354648999869823,
+    "tokens_entrada": 267,
+    "tokens_salida": 40,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": true,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-22",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Urgente: la barra de progreso está desalineada; no bloquea ninguna función.",
+    "objetivo": {
+      "categoria": "tecnico",
+      "prioridad": "baja",
+      "respuesta": "Indica la función afectada y el mensaje de error para revisar el problema."
+    },
+    "fecha": "2026-10-18T16:25:31Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"baja\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.5565540000097826,
+    "tokens_entrada": 272,
+    "tokens_salida": 39,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-23",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "¿Puedo cursar este módulo antes que el anterior?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:33Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 2.098185500013642,
+    "tokens_entrada": 265,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-24",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "¿Cuál es la fecha límite orientativa del proyecto final?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:35Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 2.0908056999905966,
+    "tokens_entrada": 264,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-25",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "¿Los directos se quedan grabados durante todo el programa?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:38Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"tecnico\", \"prioridad\": \"media\", \"respuesta\": \"Indica la función afectada y el mensaje de error para revisar el problema.\"}",
+    "latencia_s": 2.2087329999776557,
+    "tokens_entrada": 264,
+    "tokens_salida": 38,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": false,
+      "prioridad_correcta": false,
+      "ambas_correctas": false,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-26",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "¿Hay grupos de estudio voluntarios para practicar?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:40Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 2.0195765000535175,
+    "tokens_entrada": 262,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-27",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "He terminado las lecciones. ¿Qué pasos siguen para el certificado?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:42Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 1.9461074999999255,
+    "tokens_entrada": 268,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-28",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Ayuda por favor, algo va mal y no puedo concretarlo todavía.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:44Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 1.9558826999855228,
+    "tokens_entrada": 266,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-29",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Urgente: ¿qué herramientas se presentan en el siguiente bloque?",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:46Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 2.001529600005597,
+    "tokens_entrada": 266,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  },
+  {
+    "id": "TE-30",
+    "condicion": "qwen_lora",
+    "split": "test",
+    "incidencia": "Sugiero publicar un glosario de términos junto al temario.",
+    "objetivo": {
+      "categoria": "consulta",
+      "prioridad": "baja",
+      "respuesta": "Indica qué información necesitas para poder ayudarte con la consulta."
+    },
+    "fecha": "2026-10-18T16:25:48Z",
+    "experimento": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "generation": {
+        "do_sample": false,
+        "max_new_tokens": 180
+      },
+      "enable_thinking": false,
+      "files": {
+        "datos/train.jsonl": "a7b4d36c89b85c71dbf01060a1cddbba9ad580f55786ecee88d8905e49ef0be0",
+        "datos/validacion.jsonl": "f39fb6ec85c0c6ca014a5b86342a60a0f15aab45d3a554525b4cc7c5261b3b57",
+        "datos/test.jsonl": "6a818622a659d5d8d87b2d1a7f57ada55048816716861bfedc7cc1b00636cf72",
+        "prompts/basico.txt": "2fcf082aecc6db36204cb6a2b4fed46cdee053317dd29d15470663c00e2aea96",
+        "prompts/fewshot-ids.json": "a26f20e5a923e70bb8e942acc3b95dab89ddb8f62db5756774d009adc0f42232"
+      }
+    },
+    "adaptador": "modelos/lora-soporte",
+    "respuesta_original": "{\"categoria\": \"consulta\", \"prioridad\": \"baja\", \"respuesta\": \"Indica qué información necesitas para poder ayudarte con la consulta.\"}",
+    "latencia_s": 1.971677900000941,
+    "tokens_entrada": 268,
+    "tokens_salida": 34,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false,
+    "error": null,
+    "valoracion": {
+      "json_valido": true,
+      "categoria_correcta": true,
+      "prioridad_correcta": true,
+      "ambas_correctas": true,
+      "esquema_valido": true,
+      "motivo": null
+    }
+  }
+]

@@ -6,7 +6,6 @@
 __pycache__/
 *.pyc
 modelos/
-material/
 .DS_Store
 .obsidian/
 *.log

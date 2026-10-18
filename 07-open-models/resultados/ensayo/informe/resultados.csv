@@ -1,0 +1,211 @@
+id,condicion,model,provider,ruta,latencia_s,tokens_entrada,tokens_salida,coste_usd,error,respuesta_original,json_valido,esquema_valido,categoria_correcta,prioridad_correcta,ambas_correctas
+TE-01,qwen_base,Qwen/Qwen3-0.6B,,,1.9949483000091277,269,55,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El token inválido impide la autenticación. Por favor, verifique su enlace de activación o contacte a su administrador.""
+}",True,True,False,False,False
+TE-02,qwen_base,Qwen/Qwen3-0.6B,,,1.6924586999812163,268,51,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El problema se ha solucionado. No hay impacto colectivo explícito o exposición de datos privados.""
+}",True,True,False,False,False
+TE-03,qwen_base,Qwen/Qwen3-0.6B,,,2.0449059999664314,267,54,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El sistema está bloqueando tu cuenta por posibles fallos en la plataforma educativa. Pide ayuda al administrador para resolver el problema.""
+}",True,True,False,False,False
+TE-04,qwen_base,Qwen/Qwen3-0.6B,,,1.5055529000237584,266,43,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El usuario no se encuentra en la base de datos. Pide aclaración breve.""
+}",True,True,False,True,False
+TE-05,qwen_base,Qwen/Qwen3-0.6B,,,1.3653833999997005,267,39,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""No hay datos disponibles para identificar el teléfono privado de otra alumna.""
+}",True,True,False,False,False
+TE-06,qwen_base,Qwen/Qwen3-0.6B,,,1.4017267999588512,267,37,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""Pregunta al administrador por el correo asociado a tu usuario""
+}",True,True,False,False,False
+TE-07,qwen_base,Qwen/Qwen3-0.6B,,,1.5184025999624282,272,44,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""Sí, pero por favor proporciona detalles sobre el método de acceso y la configuración necesaria.""
+}",True,True,False,False,False
+TE-08,qwen_base,Qwen/Qwen3-0.6B,,,1.5110903999884613,269,46,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""La autenticación no ha funcionado. Pide ayuda al soporte de la plataforma educativa.""
+}",True,True,False,False,False
+TE-09,qwen_base,Qwen/Qwen3-0.6B,,,1.715725999965798,270,52,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El cobro no se encuentra en tu contrato de matrícula. Pide a tu administrador para confirmar la situación.""
+}",True,True,False,False,False
+TE-10,qwen_base,Qwen/Qwen3-0.6B,,,1.7115923999808729,268,52,,,"{
+  ""categoria"": ""facturacion"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""La factura está a nombre de una entidad incorrecta. Corrija el nombre de la entidad para que el cobro sea correcto.""
+}",True,True,True,False,False
+TE-11,qwen_base,Qwen/Qwen3-0.6B,,,1.7964084999985062,270,56,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""El checkout rechazó el cupón por no haber sido validado. Por favor verifica la información del cupón o contacte a su administrador.""
+}",True,True,False,True,False
+TE-12,qwen_base,Qwen/Qwen3-0.6B,,,1.7124852000270039,265,52,,,"{
+  ""categoria"": ""acceso"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""Los cargos no reconocidos afectan el acceso a las funciones de los usuarios. Pide aclaración breve para resolver el problema.""
+}",True,True,False,True,False
+TE-13,qwen_base,Qwen/Qwen3-0.6B,,,1.8532516999985091,266,54,,,"{
+  ""categoria"": ""facturacion"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El listado de recibos muestra números de cuenta privados de otros clientes. Se requiere verificar si estos números son válidos para la plataforma.""
+}",True,True,True,True,True
+TE-14,qwen_base,Qwen/Qwen3-0.6B,,,1.3690346000366844,266,38,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""No hay diferencia de precio entre las modalidades de matrícula.""
+}",True,True,False,False,False
+TE-15,qwen_base,Qwen/Qwen3-0.6B,,,1.4283536999719217,272,43,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""Las tarifas incluyen impuestos, pero no se especifican en el mensaje consultado.""
+}",True,True,False,False,False
+TE-16,qwen_base,Qwen/Qwen3-0.6B,,,1.578264899959322,268,47,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""La entrega no se pudo completar debido a un error en la plataforma. Pide ayuda para resolverlo.""
+}",True,True,True,False,False
+TE-17,qwen_base,Qwen/Qwen3-0.6B,,,1.4847096999874339,267,44,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El error de códec impide abrir el vídeo. Pide ayuda al soporte técnico.""
+}",True,True,True,False,False
+TE-18,qwen_base,Qwen/Qwen3-0.6B,,,1.2371126000070944,266,37,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""baja"",
+  ""respuesta"": ""No puedo terminar el formulario de examen por el momento.""
+}",True,True,False,False,False
+TE-19,qwen_base,Qwen/Qwen3-0.6B,,,1.8324020000291057,269,57,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""El botón de abrir el directo no funciona para todos los usuarios, indicando un error de 503. Pide ayuda al administrador.""
+}",True,True,True,True,True
+TE-20,qwen_base,Qwen/Qwen3-0.6B,,,1.5053534000180662,262,47,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""La búsqueda del campus reveló notas privadas de otros estudiantes. No hay impacto colectivo explícito.""
+}",True,True,False,False,False
+TE-21,qwen_base,Qwen/Qwen3-0.6B,,,1.4965187000343576,267,47,,,"{
+  ""categoria"": ""tecnico"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""El color del icono del tema no es correcto. Pide que revise el tema en la plataforma.""
+}",True,True,True,False,False
+TE-22,qwen_base,Qwen/Qwen3-0.6B,,,1.3610589999589138,272,42,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""La barra de progreso está desalineada, pero no bloquea ninguna función.""
+}",True,True,False,False,False
+TE-23,qwen_base,Qwen/Qwen3-0.6B,,,1.5000050999806263,265,46,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""No, no puedes cursar este módulo antes que el anterior. Pide una aclaración breve.""
+}",True,True,True,False,False
+TE-24,qwen_base,Qwen/Qwen3-0.6B,,,1.3967348000151105,264,44,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""La fecha límite orientativa del proyecto final es el 31 de octubre del año actual.""
+}",True,True,True,False,False
+TE-25,qwen_base,Qwen/Qwen3-0.6B,,,1.2344058000016958,264,39,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""No, los directos no se quedan grabados durante todo el programa.""
+}",True,True,True,False,False
+TE-26,qwen_base,Qwen/Qwen3-0.6B,,,1.3717753000091761,262,42,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""No hay grupos de estudio voluntarios para practicar en esta plataforma educativa ficticia.""
+}",True,True,True,False,False
+TE-27,qwen_base,Qwen/Qwen3-0.6B,,,1.9671837000059895,268,56,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""El certificado se genera automáticamente tras finalizar las lecciones. No hay impacto colectivo explícito, por lo que la prioridad es media.""
+}",True,True,True,False,False
+TE-28,qwen_base,Qwen/Qwen3-0.6B,,,1.5780475999927148,266,41,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""baja"",
+  ""respuesta"": ""Pide detalles específicos sobre lo que no puede concretarse para ayudarte.""
+}",True,True,True,True,True
+TE-29,qwen_base,Qwen/Qwen3-0.6B,,,1.9228192000300623,266,49,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""alta"",
+  ""respuesta"": ""Herramientas presentes en el bloque: login, contraseña, permisos, cobros, facturas, pagos.""
+}",True,True,True,False,False
+TE-30,qwen_base,Qwen/Qwen3-0.6B,,,1.9201880000182427,268,49,,,"{
+  ""categoria"": ""consulta"",
+  ""prioridad"": ""media"",
+  ""respuesta"": ""Sugiero que publique el glosario de términos junto al temario para facilitar su comprensión""
+}",True,True,True,False,False
+TE-01,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.545947399979923,505,41,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el mensaje de error y el enlace para revisar la incidencia de tecnico.""}",True,True,False,True,False
+TE-02,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2968770999577828,504,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el tipo de error y el mensaje de error para revisar el problema.""}",True,True,False,True,False
+TE-03,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.324494800006505,503,40,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el mensaje de error y el paso en que aparece para revisar el problema.""}",True,True,False,True,False
+TE-04,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3725011999486014,502,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-05,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3621811000048183,503,42,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el teléfono privado y el mensaje de error para revisar la incidencia de tecnico.""}",True,True,False,False,False
+TE-06,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2308216000092216,503,37,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el correo que deseas cambiar y el paso a seguir para hacerlo.""}",True,True,False,True,False
+TE-07,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3817536000278778,508,43,,,"{""categoria"": ""tecnico"", ""prioridad"": ""urgente"", ""respuesta"": ""Indica el método de acceso y la fecha de inicio de la clase para revisar la incidencia.""}",True,False,False,False,False
+TE-08,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3037383000482805,505,40,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el mensaje de error y el ciclo de redirecciones para revisar el problema.""}",True,True,False,True,False
+TE-09,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.4698115999926813,506,43,,,"{""categoria"": ""facturacion"", ""prioridad"": ""media"", ""respuesta"": ""Indica el motivo del cobro y la fecha de pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-10,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.5750882999855094,504,45,,,"{""categoria"": ""facturacion"", ""prioridad"": ""media"", ""respuesta"": ""Indica el nombre de la entidad y el motivo de la incorrecta para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-11,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.503088099998422,506,44,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el motivo del rechazo y la forma en que se realiza el pago para revisar el problema.""}",True,True,False,True,False
+TE-12,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2438554000109434,501,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,False,True,False
+TE-13,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.4819864999735728,502,45,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el número de cuenta privada y el mensaje de error para revisar la incidencia de facturación.""}",True,True,False,False,False
+TE-14,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3176316000171937,502,40,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica la diferencia de precio entre las modalidades de matrícula y su explicación.""}",True,True,False,True,False
+TE-15,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3228758000186644,508,40,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica que la tarifa incluye los impuestos y que no hay problema con la consulta.""}",True,True,False,True,False
+TE-16,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.3156750000198372,504,40,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la causa de la entrega y el estado de la entrega para revisar el problema.""}",True,True,True,True,True
+TE-17,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2763061000150628,503,39,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error de códec y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-18,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.4345924999797717,502,44,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica que no se puede completar el examen y el paso en que aparece, sin compartir tu contraseña.""}",True,True,False,False,False
+TE-19,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.171838200010825,505,36,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error y el motivo del error para revisar el problema.""}",True,True,True,False,False
+TE-20,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.470084400032647,498,45,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica que la búsqueda del campus revela notas privadas de otros estudiantes, lo cual puede ser un problema de datos.""}",True,True,False,False,False
+TE-21,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.511033100017812,503,45,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica el color del icono del tema y el mensaje de error para revisar la incidencia de tecnico.""}",True,True,True,False,False
+TE-22,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2660291999927722,508,39,,,"{""categoria"": ""tecnico"", ""prioridad"": ""urgente"", ""respuesta"": ""Indica el mensaje de error y la función afectada para revisar el problema.""}",True,False,True,False,False
+TE-23,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.432540700014215,501,44,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica si hay un error en el módulo o si es una modificación que no se ha actualizado.""}",True,True,True,True,True
+TE-24,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.051040800055489,500,32,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica la fecha límite orientativa del proyecto final.""}",True,True,True,True,True
+TE-25,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2624219999997877,500,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,False,False,False
+TE-26,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.0749549999600276,498,33,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica si hay grupos de estudio voluntarios y su función.""}",True,True,True,True,True
+TE-27,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.0577920000068843,504,32,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el paso a seguir para obtener el certificado.""}",True,True,True,True,True
+TE-28,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2841557000065222,502,39,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-29,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.2548888000310399,502,38,,,"{""categoria"": ""consulta"", ""prioridad"": ""urgente"", ""respuesta"": ""Indica el nombre de la herramienta y su función para revisar la incidencia.""}",True,False,True,False,False
+TE-30,qwen_fewshot,Qwen/Qwen3-0.6B,,,1.540485000004992,504,47,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Sugiere que el glosario de términos se publique junto al temario para facilitar su comprensión.""}",True,True,True,True,True
+TE-01,qwen_lora,Qwen/Qwen3-0.6B,,,2.581221700005699,269,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-02,qwen_lora,Qwen/Qwen3-0.6B,,,2.652064000023529,268,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-03,qwen_lora,Qwen/Qwen3-0.6B,,,2.329057000053581,267,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-04,qwen_lora,Qwen/Qwen3-0.6B,,,2.2711255000322126,266,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-05,qwen_lora,Qwen/Qwen3-0.6B,,,2.2413607999915257,267,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-06,qwen_lora,Qwen/Qwen3-0.6B,,,2.3783201000187546,267,40,,,"{""categoria"": ""acceso"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-07,qwen_lora,Qwen/Qwen3-0.6B,,,2.3469366999925114,272,40,,,"{""categoria"": ""acceso"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-08,qwen_lora,Qwen/Qwen3-0.6B,,,2.4318891000002623,269,39,,,"{""categoria"": ""acceso"", ""prioridad"": ""media"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,True,True,True
+TE-09,qwen_lora,Qwen/Qwen3-0.6B,,,2.4604454000364058,270,41,,,"{""categoria"": ""facturacion"", ""prioridad"": ""media"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-10,qwen_lora,Qwen/Qwen3-0.6B,,,2.488679100002628,268,41,,,"{""categoria"": ""facturacion"", ""prioridad"": ""media"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-11,qwen_lora,Qwen/Qwen3-0.6B,,,2.475203200010583,270,41,,,"{""categoria"": ""facturacion"", ""prioridad"": ""media"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-12,qwen_lora,Qwen/Qwen3-0.6B,,,2.725969500024803,265,41,,,"{""categoria"": ""facturacion"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-13,qwen_lora,Qwen/Qwen3-0.6B,,,2.506332900025882,266,41,,,"{""categoria"": ""facturacion"", ""prioridad"": ""alta"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-14,qwen_lora,Qwen/Qwen3-0.6B,,,2.4329941000323743,266,42,,,"{""categoria"": ""facturacion"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-15,qwen_lora,Qwen/Qwen3-0.6B,,,2.480525300023146,272,42,,,"{""categoria"": ""facturacion"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el concepto y la fecha del pago para revisar la incidencia de facturación.""}",True,True,True,True,True
+TE-16,qwen_lora,Qwen/Qwen3-0.6B,,,2.2010389999486506,268,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-17,qwen_lora,Qwen/Qwen3-0.6B,,,2.300437600002624,267,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-18,qwen_lora,Qwen/Qwen3-0.6B,,,2.390584500040859,266,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-19,qwen_lora,Qwen/Qwen3-0.6B,,,2.2867510999785736,269,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""alta"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-20,qwen_lora,Qwen/Qwen3-0.6B,,,2.3536116000032052,262,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""alta"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-21,qwen_lora,Qwen/Qwen3-0.6B,,,2.4354648999869823,267,40,,,"{""categoria"": ""acceso"", ""prioridad"": ""baja"", ""respuesta"": ""Indica el error de acceso y el paso en que aparece, sin compartir tu contraseña.""}",True,True,False,True,False
+TE-22,qwen_lora,Qwen/Qwen3-0.6B,,,2.5565540000097826,272,39,,,"{""categoria"": ""tecnico"", ""prioridad"": ""baja"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,True,True,True
+TE-23,qwen_lora,Qwen/Qwen3-0.6B,,,2.098185500013642,265,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-24,qwen_lora,Qwen/Qwen3-0.6B,,,2.0908056999905966,264,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-25,qwen_lora,Qwen/Qwen3-0.6B,,,2.2087329999776557,264,38,,,"{""categoria"": ""tecnico"", ""prioridad"": ""media"", ""respuesta"": ""Indica la función afectada y el mensaje de error para revisar el problema.""}",True,True,False,False,False
+TE-26,qwen_lora,Qwen/Qwen3-0.6B,,,2.0195765000535175,262,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-27,qwen_lora,Qwen/Qwen3-0.6B,,,1.9461074999999255,268,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-28,qwen_lora,Qwen/Qwen3-0.6B,,,1.9558826999855228,266,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-29,qwen_lora,Qwen/Qwen3-0.6B,,,2.001529600005597,266,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True
+TE-30,qwen_lora,Qwen/Qwen3-0.6B,,,1.971677900000941,268,34,,,"{""categoria"": ""consulta"", ""prioridad"": ""baja"", ""respuesta"": ""Indica qué información necesitas para poder ayudarte con la consulta.""}",True,True,True,True,True

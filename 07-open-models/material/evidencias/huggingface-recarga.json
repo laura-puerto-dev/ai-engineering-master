@@ -1,0 +1,21 @@
+{
+  "repo": "LauraPuerto/qwen3-0.6b-support-lora",
+  "revision": "a4c63662d92ce6558a12c3805fb126281b5ca629",
+  "private": true,
+  "recarga": {
+    "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el concepto y la fecha del pago para revisar la incidencia de facturación.\"}",
+    "latencia_s": 2.659891899966169,
+    "tokens_entrada": 263,
+    "tokens_salida": 41,
+    "coste_usd": null,
+    "coste_metodo": "Sin tarifa API; hardware/energía no medidos",
+    "hardware": "cuda",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "parametros": {
+      "do_sample": false,
+      "max_new_tokens": 180
+    },
+    "enable_thinking": false
+  }
+}

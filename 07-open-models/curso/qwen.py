@@ -11,7 +11,7 @@
 import time
 
 # Modelo, revisión, parámetros de generación y constructor de mensajes compartidos.
-from .common import MODEL_ID, REVISION, GENERATION, messages
+from .common import GENERATION, MODEL_ID, REVISION, messages
 
 
 # Carga tokenizer y modelo base en el dispositivo disponible.
@@ -22,7 +22,7 @@ def load_qwen(adapter=None):
     import torch
 
     # Carga modelos/tokenizers y aporta generación y utilidades de entrenamiento.
-    from transformers import AutoTokenizer, AutoModelForCausalLM
+    from transformers import AutoModelForCausalLM, AutoTokenizer
 
     # Prefiere CUDA; si no existe, MPS del Mac; como última opción utiliza CPU.
     device = (
@@ -48,7 +48,7 @@ def load_qwen(adapter=None):
         token=False,
         trust_remote_code=False,
         use_safetensors=True,
-    ).to(device)
+    ).to(device)  # pyright: ignore[reportArgumentType]  # tipo de retorno dinámico de AutoModelForCausalLM
     # Solo aplica PEFT si se ha solicitado un adaptador; la base sola es la condición original.
     if adapter:
         # Añade/recarga adaptadores LoRA manteniendo el modelo base separado.

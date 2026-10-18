@@ -7,10 +7,10 @@
 """Descargar únicamente el checkpoint público fijado para la práctica local."""
 
 # Hace visible la raíz del proyecto al ejecutar un archivo desde scripts/.
-import _bootstrap  # noqa: F401
-
 # Convierte entre texto JSON y diccionarios/listas Python, manteniendo respuestas como evidencia.
 import json
+
+import _bootstrap  # noqa: F401
 
 # Reutiliza funciones del núcleo compartido para mantener el mismo protocolo entre scripts.
 from curso.common import MODEL_ID, REVISION, assert_frozen

@@ -5,20 +5,22 @@
 # El CSV neutraliza fórmulas; el JSON conserva exactamente el texto original.
 
 # Hace visible la raíz del proyecto al ejecutar un archivo desde scripts/.
-import _bootstrap  # noqa: F401
-
 # Permite leer opciones de la terminal y generar ayuda del comando.
 # Escribe/lee tablas CSV con comillas y separadores correctos.
 # Convierte entre texto JSON y diccionarios/listas Python, manteniendo respuestas como evidencia.
 # Calcula medianas de tiempos conocidos sin convertir ausencias en cero.
-import argparse, csv, json, statistics
+import argparse
+import csv
+import json
+import statistics
 
 # Path permite construir rutas, comprobar archivos y leer/escribir sin concatenar separadores a mano.
 from pathlib import Path
 
+import _bootstrap  # noqa: F401
+
 # Reutiliza funciones del núcleo compartido para mantener el mismo protocolo entre scripts.
 from curso.common import ROOT, read_jsonl
-
 
 # Seis condiciones del ejercicio; las adicionales se informan aparte.
 CONDITIONS = (
@@ -228,7 +230,9 @@ def main():
             or "-"
         )
         # Función auxiliar de presentación: muestra desconocidos como No disponible en la tabla.
-        fmt = lambda k: str(r[k]) if r[k] is not None else "No disponible"
+        # Se crea y se usa dentro de esta misma iteración (no se guarda para después),
+        # así que capturar "r" por closure es seguro aquí.
+        fmt = lambda k: str(r[k]) if r[k] is not None else "No disponible"  # noqa: B023
         # Construye la fila visible con conteos, mediana y coste disponible de la condición.
         lines.append(
             "| "

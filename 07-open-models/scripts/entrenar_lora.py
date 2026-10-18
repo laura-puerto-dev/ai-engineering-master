@@ -9,8 +9,6 @@
 """Configuración LoRA fija. No lee el test ni busca hiperparámetros."""
 
 # Hace visible la raíz del proyecto al ejecutar un archivo desde scripts/.
-import _bootstrap  # noqa: F401
-
 # Permite leer opciones de la terminal y generar ayuda del comando.
 import argparse
 
@@ -23,21 +21,23 @@ import json
 # Lee configuración del entorno y ajusta opciones del proceso.
 import os
 
-# Mide duración y prepara fechas; perf_counter/monotonic sirven para intervalos, no fechas del calendario.
-import time
-
 # Identifica versión de Python y entorno de ejecución para el registro.
 import platform
 
+# Mide duración y prepara fechas; perf_counter/monotonic sirven para intervalos, no fechas del calendario.
+import time
+
 # Path permite construir rutas, comprobar archivos y leer/escribir sin concatenar separadores a mano.
 from pathlib import Path
+
+import _bootstrap  # noqa: F401
 
 # Desactiva telemetría del Hub salvo que el proceso ya haya configurado este valor.
 os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
 # Evita paralelismo interno del tokenizer en esta receta local.
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 # Reutiliza funciones del núcleo compartido para mantener el mismo protocolo entre scripts.
-from curso.common import ROOT, assert_frozen, read_jsonl, basic_prompt
+from curso.common import ROOT, assert_frozen, basic_prompt, read_jsonl
 
 
 # Resuelve la ruta del adaptador nuevo y rechaza una salida no vacía.
@@ -69,19 +69,18 @@ def main():
     # Verifica hashes y protocolo antes de cargar pesos; conserva el manifiesto para el registro.
     frozen = assert_frozen()
     # Dataset guarda los ejemplos preparados en el formato que utiliza el entrenador.
+    # Misma carga de modelo y misma plantilla de chat que en inferencia.
+    from curso.qwen import load_qwen, render
     from datasets import Dataset
 
     # LoraConfig describe qué capas reciben matrices LoRA y con qué rango.
     from peft import LoraConfig
 
-    # SFTConfig configura y SFTTrainer ejecuta el entrenamiento supervisado del modelo.
-    from trl import SFTTrainer, SFTConfig
-
     # Utilidad de Transformers para fijar las semillas aleatorias.
     from transformers import set_seed
 
-    # Misma carga de modelo y misma plantilla de chat que en inferencia.
-    from curso.qwen import load_qwen, render
+    # SFTConfig configura y SFTTrainer ejecuta el entrenamiento supervisado del modelo.
+    from trl import SFTConfig, SFTTrainer  # pyright: ignore[reportPrivateImportUsage]
 
     # Fija aleatoriedad de Python/NumPy/PyTorch a través de Transformers para repetir la receta.
     set_seed(42)

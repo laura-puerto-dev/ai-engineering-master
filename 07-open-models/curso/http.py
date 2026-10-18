@@ -107,7 +107,9 @@ def bounded_json(response, max_bytes=MAX_RESPONSE_BYTES, max_seconds=120):
         # Las APIs del curso responden con un objeto {...}; una lista o un número indica otro formato.
         if not isinstance(data, dict):
             # Detiene la lectura: el formato raíz no es el esperado.
-            raise ValueError("Respuesta HTTP: se esperaba un objeto JSON")
+            # ValueError (no TypeError) a propósito: scripts/demo.py captura ValueError
+            # alrededor de esta ruta; cambiarlo rompería ese manejo de errores.
+            raise ValueError("Respuesta HTTP: se esperaba un objeto JSON")  # noqa: TRY004
         # Diccionario Python con el cuerpo JSON ya validado.
         return data
     finally:
@@ -165,11 +167,16 @@ def joined_text(parts, key):
     # Obtiene el texto de cada bloque validado antes de comprobar la suma de tamaños.
     texts = [model_text(part.get(key, "")) for part in objects(parts)]
     # Un bloque sin texto o una suma de bloques mayor que 1 MiB invalida la respuesta.
-    if any(text is None for text in texts) or sum(map(len, texts)) > MAX_RESPONSE_BYTES:
+    # Pylance no sigue el cortocircuito de `or`: si hay un None, sum(map(len, texts))
+    # ni se evalúa, así que aquí abajo ningún texto puede ser None. Falso positivo.
+    if (
+        any(text is None for text in texts)
+        or sum(map(len, texts)) > MAX_RESPONSE_BYTES  # pyright: ignore[reportArgumentType]
+    ):
         # Detiene el proceso: la respuesta no es aceptable.
         raise ValueError("Texto del modelo mal formado o demasiado largo")
     # Une los bloques en orden, sin separadores ni cambios.
-    return "".join(texts)
+    return "".join(texts)  # pyright: ignore[reportArgumentType, reportCallIssue]
 
 
 # Devuelve la primera alternativa con un message válido de una respuesta compatible.

@@ -5,8 +5,6 @@
 # El archivo se actualiza tras cada caso para conservar lo ya completado.
 
 # Hace visible la raíz del proyecto al ejecutar un archivo desde scripts/.
-import _bootstrap  # noqa: F401
-
 # Permite leer opciones de la terminal y generar ayuda del comando.
 import argparse
 
@@ -15,6 +13,8 @@ import time
 
 # Path permite construir rutas, comprobar archivos y leer/escribir sin concatenar separadores a mano.
 from pathlib import Path
+
+import _bootstrap  # noqa: F401
 
 # Reutiliza funciones del núcleo compartido para mantener el mismo protocolo entre scripts.
 from curso.common import ROOT, assert_frozen, read_jsonl, validate_answer, write_jsonl
@@ -58,7 +58,7 @@ def main():
             f"No hay adaptador en {args.adaptador}; entrénalo con scripts/entrenar_lora.py"
         )
     # Importa Qwen tras validar los argumentos: un error de opciones no espera a cargar torch.
-    from curso.qwen import load_qwen, generate
+    from curso.qwen import generate, load_qwen
 
     # Carga el adaptador solo para qwen_lora; las otras dos condiciones mantienen la base original.
     model, tokenizer, device = load_qwen(
@@ -81,7 +81,7 @@ def main():
             # Tipo de fallo del caso; None indica que la petición/generación terminó sin esa excepción.
             error = None
         # Exception captura cualquier error del caso (memoria, tokenizer…); Ctrl+C sí detiene el lote.
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             # Cualquier fallo queda registrado sin respuesta, tiempo ni coste inventados.
             output = {"respuesta_original": None, "latencia_s": None, "coste_usd": None}
             # Nombre de la excepción (por ejemplo, RuntimeError); el caso sigue en el denominador.

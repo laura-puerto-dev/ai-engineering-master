@@ -20,24 +20,23 @@ import os
 import time
 
 # lru_cache recuerda el resultado de una función para no repetir una descarga con los mismos argumentos.
-from functools import lru_cache
+from functools import cache
 
 # Codifica el ID del modelo dentro de una URL y analiza URLs base configuradas en .env.
 from urllib.parse import quote, urlsplit
 
 # Constantes y utilidades compartidas del curso: raíz, límite de salida y constructor de mensajes.
-from .common import ROOT, MAX_NEW_TOKENS, messages
+from .common import MAX_NEW_TOKENS, ROOT, messages
 
 # Lectura acotada y validada de respuestas HTTP (ver curso/http.py).
 from .http import (
     bounded_json,
-    objects,
+    first_choice,
+    joined_text,
     model_ids,
     model_text,
-    joined_text,
-    first_choice,
+    objects,
 )
-
 
 # Rutas que admite chat(); la clave es el valor de LLM_PROVIDER o de --proveedor.
 PROVEEDORES = {
@@ -169,7 +168,7 @@ def route_settings(provider):
     # Validación previa: debe ser un objeto JSON y no puede reemplazar modelo ni mensajes.
     if not isinstance(extra, dict):
         # Detiene la ejecución: una lista o un número no son campos con nombre.
-        raise ValueError("LLM_EXTRA_BODY debe ser un objeto JSON")
+        raise ValueError("LLM_EXTRA_BODY debe ser un objeto JSON")  # noqa: TRY004
     # Intersección de conjuntos: campos de LLM_EXTRA_BODY que intentarían pisar campos protegidos.
     blocked = CAMPOS_PROTEGIDOS & set(extra)
     # Algún campo protegido aparece en LLM_EXTRA_BODY: se rechaza.
@@ -533,8 +532,9 @@ def chat_openai(incident, model, fewshot=False):
         key=key,
         # OpenAI llama así al límite de salida.
         token_field="max_completion_tokens",
-        # None: no envía temperatura.
-        temperature=None,
+        # None: no envía temperatura. chat_completions no anota el tipo del parámetro
+        # (se infiere "int" de su valor por defecto); None es un valor válido y documentado.
+        temperature=None,  # pyright: ignore[reportArgumentType]
     )
 
 
@@ -548,7 +548,7 @@ MAX_CATALOGO_BYTES = 8 * 1024 * 1024
 # Busca un modelo en el catálogo de OpenRouter y devuelve su ficha (un diccionario).
 # Es una lectura gratuita, sin clave ni inferencia. lru_cache guarda el resultado por
 # modelo: un lote de 30 casos descarga el catálogo una sola vez.
-@lru_cache(maxsize=None)
+@cache
 def openrouter_model(model):
     # Cliente HTTP; las peticiones se realizan al llamarlo, no por el simple import.
     import requests
@@ -576,7 +576,7 @@ def openrouter_model(model):
     # El catálogo debe traer una lista en el campo data.
     if not isinstance(entries, list):
         # Detiene el proceso: formato inesperado.
-        raise ValueError("Catálogo de OpenRouter mal formado")
+        raise ValueError("Catálogo de OpenRouter mal formado")  # noqa: TRY004
     # Diccionario id → ficha, ignorando entradas sin un id de texto.
     catalog = {
         entry["id"]: entry
@@ -659,7 +659,9 @@ def chat_openrouter(incident, model, fewshot=False):
     # Solo los modelos con razonamiento configurable reciben el campo reasoning.
     if reasoning is not None:
         # Desactivado, mínimo o el nivel más bajo admitido, según openrouter_settings.
-        defaults["reasoning"] = reasoning
+        # defaults no está anotado; Pylance infiere sus valores como dict[str, bool] por el
+        # literal inicial, más estrecho que los valores reales que puede tomar reasoning.
+        defaults["reasoning"] = reasoning  # pyright: ignore[reportArgumentType]
     # Delega en el cliente Chat Completions común con los ajustes de OpenRouter.
     return chat_completions(
         incident,
@@ -672,7 +674,7 @@ def chat_openrouter(incident, model, fewshot=False):
         # max_tokens o max_completion_tokens, según el catálogo.
         token_field=token_field,
         # 0, o None (no se envía) si el modelo no la admite; LLM_TEMPERATURE puede cambiarla.
-        temperature=temperature,
+        temperature=temperature,  # pyright: ignore[reportArgumentType]
         # usage, provider y reasoning definidos arriba; LLM_EXTRA_BODY puede sustituirlos.
         defaults=defaults,
         # X-Title identifica la aplicación en el panel de OpenRouter.
@@ -715,7 +717,7 @@ def gemini_reply(data):
     # content debe ser un objeto con la lista parts.
     if not isinstance(content, dict):
         # Detiene el proceso: formato inesperado.
-        raise ValueError("Contenido Google mal formado")
+        raise ValueError("Contenido Google mal formado")  # noqa: TRY004
     # Bloques de contenido que se recorren para reconstruir la respuesta.
     parts = objects(content.get("parts", []))
     # Registro parcial; cada ruta Google añade tiempo, coste y modelo.

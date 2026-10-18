@@ -5,14 +5,15 @@
 # Esta acción escribe en Hugging Face; no contrata un endpoint de inferencia.
 
 # Hace visible la raíz del proyecto al ejecutar un archivo desde scripts/.
-import _bootstrap  # noqa: F401
-
 # Permite leer opciones de la terminal y generar ayuda del comando.
 # Convierte entre texto JSON y diccionarios/listas Python, manteniendo respuestas como evidencia.
-import argparse, json
+import argparse
+import json
 
 # Path permite construir rutas, comprobar archivos y leer/escribir sin concatenar separadores a mano.
 from pathlib import Path
+
+import _bootstrap  # noqa: F401
 
 # Reutiliza funciones del núcleo compartido para mantener el mismo protocolo entre scripts.
 from curso.common import ROOT
@@ -89,7 +90,7 @@ def main():
         allow_patterns=["adapter_config.json", "adapter_model.safetensors"],
     )
     # Carga Qwen solo después de publicar: la comprobación usa los archivos bajados del Hub.
-    from curso.qwen import load_qwen, generate
+    from curso.qwen import generate, load_qwen
 
     # Recarga la base original con los archivos descargados del commit recién publicado.
     model, tok, device = load_qwen(local)

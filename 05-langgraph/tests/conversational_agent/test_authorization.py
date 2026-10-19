@@ -175,7 +175,7 @@ def test_booking_requires_human_approval(approved: bool) -> None:
             "tool": "book_activity",
             "arguments": booking_call["args"],
             "tool_call_id": booking_call["id"],
-            "message": "Do you approve this booking?",
+            "message": "Do you approve this tool execution?",
         }
     )
 

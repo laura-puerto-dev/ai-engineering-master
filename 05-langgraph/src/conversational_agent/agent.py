@@ -11,6 +11,9 @@ from langgraph.types import Command, interrupt
 
 from conversational_agent.tools import book_activity, get_weather
 
+AUTO_APPROVED_TOOLS = frozenset({"get_weather"})
+APPROVAL_REQUIRED_TOOLS = frozenset({"book_activity"})
+
 
 class AgentState(TypedDict):
     messages: Annotated[list, add_messages]
@@ -43,16 +46,16 @@ def authorization(state: AgentState):
     rejected_calls: list[ToolCall] = []
 
     for tool_call in last_message.tool_calls:
-        if tool_call["name"] == "get_weather":
+        if tool_call["name"] in AUTO_APPROVED_TOOLS:
             authorized_calls.append(tool_call)
 
-        elif tool_call["name"] == "book_activity":
+        elif tool_call["name"] in APPROVAL_REQUIRED_TOOLS:
             approved = interrupt(
                 {
                     "tool": tool_call["name"],
                     "arguments": tool_call["args"],
                     "tool_call_id": tool_call["id"],
-                    "message": "Do you approve this booking?",
+                    "message": "Do you approve this tool execution?",
                 }
             )
 

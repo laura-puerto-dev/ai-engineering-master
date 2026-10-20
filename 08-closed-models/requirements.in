@@ -1,0 +1,19 @@
+# Dependencias declaradas. Los .lock incluyen versiones transitivas y hashes;
+# instalar desde el lock conserva el entorno, en lugar de resolverlo de nuevo.
+
+# Cliente HTTP para OpenRouter y API local: límites y cierre están en curso/http.py.
+requests==2.34.2
+# SDK oficial de Anthropic: Claude se consulta por su Messages API nativa.
+anthropic==1.13.0
+# Carga configuración .env sin incluir claves en el código.
+python-dotenv==1.2.4
+# Descarga checkpoints y publica/recarga adaptadores del Hub.
+huggingface-hub==1.33.0
+# Cliente Google para preparar, crear y consultar trabajos de tuning.
+google-genai==1.42.0
+# Subida de JSONL a un bucket existente del laboratorio.
+google-cloud-storage==3.4.0
+# Lectura/validación del formato de los notebooks; no ejecuta sus celdas.
+nbformat==5.10.4
+# Abstracción de acceso a archivos utilizada por librerías de datos.
+fsspec==2026.7.0

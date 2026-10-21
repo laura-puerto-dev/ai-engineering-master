@@ -1,10 +1,14 @@
+import json
+from pathlib import Path
 from unittest.mock import patch
 
-from langchain_core.messages import AIMessage, ToolCall
+import pytest
+from langchain_core.messages import AIMessage, ToolCall, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 
+import conversational_agent.tools as agent_tools
 from conversational_agent.agent import builder
 
 test_app = builder.compile(checkpointer=MemorySaver())
@@ -67,3 +71,87 @@ def test_rejected_booking_is_not_executed() -> None:
     # The graph must finish without another interruption.
     assert "__interrupt__" not in result
     assert result["messages"][-1].content == "The booking was not completed."
+
+    rejection_messages = [
+        message
+        for message in result["messages"]
+        if isinstance(message, ToolMessage)
+        and message.tool_call_id == booking_call["id"]
+    ]
+
+    assert len(rejection_messages) == 1
+
+
+def test_rejected_booking_does_not_modify_reservations(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    reservations_file = tmp_path / "reservations.json"
+
+    initial_reservations = [
+        {
+            "id": "RES-EXISTING",
+            "activity": "Cycling",
+            "city": "Teruel",
+            "date": "2026-11-15",
+            "people": 2,
+        }
+    ]
+
+    reservations_file.write_text(
+        json.dumps(initial_reservations),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        agent_tools,
+        "RESERVATIONS_FILE",
+        reservations_file,
+    )
+
+    booking_call: ToolCall = {
+        "name": "book_activity",
+        "args": {
+            "activity": "Hiking",
+            "city": "Teruel",
+            "booking_date": "2026-11-15",
+            "people": 2,
+        },
+        "id": "booking-persistence-test",
+        "type": "tool_call",
+    }
+
+    llm_responses = [
+        AIMessage(content="", tool_calls=[booking_call]),
+        AIMessage(content="The booking was not completed."),
+    ]
+
+    test_app = builder.compile(checkpointer=MemorySaver())
+    config: RunnableConfig = {
+        "configurable": {"thread_id": "rejected-booking-persistence-test"}
+    }
+
+    with patch("conversational_agent.agent.llm_with_tools") as mock_llm:
+        mock_llm.invoke.side_effect = llm_responses
+
+        # Request the booking and wait for human approval.
+        result = test_app.invoke(
+            {"messages": [("user", "Book a hiking activity in Teruel.")]},
+            config=config,
+        )
+
+        assert "__interrupt__" in result
+
+        # Reject the booking and resume the workflow.
+        result = test_app.invoke(
+            Command(resume=False),
+            config=config,
+        )
+
+    # The workflow must finish without another interruption.
+    assert "__interrupt__" not in result
+
+    # Rejected bookings must not change persisted reservations.
+    persisted_reservations = json.loads(reservations_file.read_text(encoding="utf-8"))
+
+    assert persisted_reservations == initial_reservations

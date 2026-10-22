@@ -1,0 +1,53 @@
+{
+  "sdk_http_response": {
+    "headers": {
+      "content-type": "application/json; charset=UTF-8",
+      "vary": "Origin, X-Origin, Referer",
+      "content-encoding": "gzip",
+      "date": "Thu, 22 Oct 2026 15:19:15 GMT",
+      "server": "ESF",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "transfer-encoding": "chunked"
+    },
+    "body": null
+  },
+  "name": "projects/183729570563/locations/europe-west4/tuningJobs/2510795343885500416",
+  "state": "JOB_STATE_PENDING",
+  "create_time": "2026-10-22T15:19:15.638568Z",
+  "start_time": null,
+  "end_time": null,
+  "update_time": "2026-10-22T15:19:15.638568Z",
+  "error": null,
+  "description": null,
+  "base_model": "gemini-3.1-flash-lite",
+  "tuned_model": null,
+  "pre_tuned_model": null,
+  "supervised_tuning_spec": {
+    "export_last_checkpoint_only": null,
+    "hyper_parameters": {
+      "adapter_size": "ADAPTER_SIZE_EIGHT",
+      "batch_size": null,
+      "epoch_count": 2,
+      "learning_rate": null,
+      "learning_rate_multiplier": null
+    },
+    "training_dataset_uri": "gs://thepower-s8-gemini-512218-tuning/thepower-s7-s8/train.jsonl",
+    "tuning_mode": null,
+    "validation_dataset_uri": "gs://thepower-s8-gemini-512218-tuning/thepower-s7-s8/validacion.jsonl"
+  },
+  "tuning_data_stats": null,
+  "encryption_spec": null,
+  "partner_model_tuning_spec": null,
+  "evaluation_config": null,
+  "custom_base_model": null,
+  "experiment": null,
+  "labels": null,
+  "output_uri": null,
+  "pipeline_job": null,
+  "service_account": null,
+  "tuned_model_display_name": "thepower-soporte-s8",
+  "veo_tuning_spec": null
+}

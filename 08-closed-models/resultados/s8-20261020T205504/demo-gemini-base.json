@@ -1,0 +1,35 @@
+{
+  "id": "DE-04",
+  "incidencia": "Tengo un cobro repetido en mi matrícula.",
+  "objetivo": {
+    "categoria": "facturacion",
+    "prioridad": "media",
+    "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+  },
+  "fecha": "2026-10-22T18:44:38Z",
+  "respuesta_original": "{\n  \"categoria\": \"facturacion\",\n  \"prioridad\": \"media\",\n  \"respuesta\": \"Lamentamos el inconveniente con su pago. Por favor, facilítenos el número de referencia de la transacción para poder revisar su caso.\"\n}",
+  "tokens_entrada": 221,
+  "tokens_salida": 58,
+  "finish_reason": "STOP",
+  "latencia_s": 1.7440816999878734,
+  "coste_usd": null,
+  "coste_metodo": "La API no devuelve importe; consultar facturación/tarifa por separado",
+  "model": "projects/thepower-s8-gemini-512218/locations/eu/publishers/google/models/gemini-3.1-flash-lite",
+  "provider": "Google Cloud",
+  "ruta": "google",
+  "parametros_solicitados": {
+    "temperature": 0,
+    "maxOutputTokens": 180,
+    "thinkingConfig": {
+      "thinkingLevel": "MINIMAL"
+    }
+  },
+  "valoracion": {
+    "json_valido": true,
+    "categoria_correcta": true,
+    "prioridad_correcta": true,
+    "ambas_correctas": true,
+    "esquema_valido": true,
+    "motivo": null
+  }
+}

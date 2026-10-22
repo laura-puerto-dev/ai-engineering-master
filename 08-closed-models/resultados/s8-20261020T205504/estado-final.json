@@ -1,0 +1,279 @@
+﻿{
+  "sdk_http_response": {
+    "headers": {
+      "content-type": "application/json; charset=UTF-8",
+      "vary": "Origin, X-Origin, Referer",
+      "content-encoding": "gzip",
+      "date": "Thu, 22 Oct 2026 16:28:54 GMT",
+      "server": "ESF",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "transfer-encoding": "chunked"
+    },
+    "body": null
+  },
+  "name": "projects/183729570563/locations/europe-west4/tuningJobs/2510795343885500416",
+  "state": "JOB_STATE_SUCCEEDED",
+  "create_time": "2026-10-22T15:19:15.638568Z",
+  "start_time": "2026-10-22T15:20:36.341603Z",
+  "end_time": "2026-10-22T15:56:07.821720Z",
+  "update_time": "2026-10-22T15:56:07.821720Z",
+  "error": null,
+  "description": null,
+  "base_model": "gemini-3.1-flash-lite",
+  "tuned_model": {
+    "model": "projects/183729570563/locations/eu/models/1952591913441820672@1",
+    "endpoint": "projects/183729570563/locations/eu/endpoints/4602397344195936256",
+    "checkpoints": [
+      {
+        "checkpoint_id": "1",
+        "epoch": 1,
+        "step": 9,
+        "endpoint": "projects/183729570563/locations/eu/endpoints/1801158375971487744"
+      },
+      {
+        "checkpoint_id": "2",
+        "epoch": 2,
+        "step": 18,
+        "endpoint": "projects/183729570563/locations/eu/endpoints/233905705646555136"
+      },
+      {
+        "checkpoint_id": "3",
+        "epoch": 2,
+        "step": 19,
+        "endpoint": "projects/183729570563/locations/eu/endpoints/4602397344195936256"
+      }
+    ]
+  },
+  "pre_tuned_model": null,
+  "supervised_tuning_spec": {
+    "export_last_checkpoint_only": null,
+    "hyper_parameters": {
+      "adapter_size": "ADAPTER_SIZE_EIGHT",
+      "batch_size": null,
+      "epoch_count": 2,
+      "learning_rate": null,
+      "learning_rate_multiplier": 2.0
+    },
+    "training_dataset_uri": "gs://thepower-s8-gemini-512218-tuning/thepower-s7-s8/train.jsonl",
+    "tuning_mode": null,
+    "validation_dataset_uri": "gs://thepower-s8-gemini-512218-tuning/thepower-s7-s8/validacion.jsonl"
+  },
+  "tuning_data_stats": {
+    "distillation_data_stats": null,
+    "preference_optimization_data_stats": null,
+    "supervised_tuning_data_stats": {
+      "dropped_example_reasons": null,
+      "total_billable_character_count": null,
+      "total_billable_token_count": 60286,
+      "total_truncated_example_count": null,
+      "total_tuning_character_count": null,
+      "truncated_example_indices": null,
+      "tuning_dataset_example_count": 240,
+      "tuning_step_count": null,
+      "user_dataset_examples": [
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "No puedo iniciar sesi¾n con mi cuenta del curso."
+            }
+          ],
+          "role": "user"
+        },
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contrase±a.\"}"
+            }
+          ],
+          "role": "model"
+        },
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "Os escribo por lo siguiente: No puedo iniciar sesi¾n con mi cuenta del curso."
+            }
+          ],
+          "role": "user"
+        },
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contrase±a.\"}"
+            }
+          ],
+          "role": "model"
+        },
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "QuerÝa comunicar esto: No puedo iniciar sesi¾n con mi cuenta del curso."
+            }
+          ],
+          "role": "user"
+        },
+        {
+          "parts": [
+            {
+              "video_metadata": null,
+              "thought": null,
+              "inline_data": null,
+              "file_data": null,
+              "thought_signature": null,
+              "function_call": null,
+              "code_execution_result": null,
+              "executable_code": null,
+              "function_response": null,
+              "text": "{\"categoria\": \"acceso\", \"prioridad\": \"media\", \"respuesta\": \"Indica el error de acceso y el paso en que aparece, sin compartir tu contrase±a.\"}"
+            }
+          ],
+          "role": "model"
+        }
+      ],
+      "user_input_token_distribution": {
+        "billable_sum": null,
+        "buckets": [
+          {
+            "count": 5.0,
+            "left": 208.0,
+            "right": 210.0
+          },
+          {
+            "count": 28.0,
+            "left": 211.0,
+            "right": 213.0
+          },
+          {
+            "count": 32.0,
+            "left": 214.0,
+            "right": 215.0
+          },
+          {
+            "count": 88.0,
+            "left": 216.0,
+            "right": 218.0
+          },
+          {
+            "count": 69.0,
+            "left": 219.0,
+            "right": 221.0
+          },
+          {
+            "count": 18.0,
+            "left": 222.0,
+            "right": 223.0
+          }
+        ],
+        "max": 223.0,
+        "mean": 217.19166666666666,
+        "median": 218.0,
+        "min": 208.0,
+        "p5": 211.0,
+        "p95": 222.0,
+        "sum": 52126
+      },
+      "user_message_per_example_distribution": {
+        "billable_sum": null,
+        "buckets": [
+          {
+            "count": 240.0,
+            "left": 2.0,
+            "right": 2.0
+          }
+        ],
+        "max": 2.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 2.0,
+        "p5": 2.0,
+        "p95": 2.0,
+        "sum": 480
+      },
+      "user_output_token_distribution": {
+        "billable_sum": null,
+        "buckets": [
+          {
+            "count": 60.0,
+            "left": 30.0,
+            "right": 31.0
+          },
+          {
+            "count": 60.0,
+            "left": 34.0,
+            "right": 34.0
+          },
+          {
+            "count": 120.0,
+            "left": 36.0,
+            "right": 36.0
+          }
+        ],
+        "max": 36.0,
+        "mean": 34.0,
+        "median": 34.0,
+        "min": 30.0,
+        "p5": 30.0,
+        "p95": 36.0,
+        "sum": 8160
+      }
+    }
+  },
+  "encryption_spec": null,
+  "partner_model_tuning_spec": null,
+  "evaluation_config": null,
+  "custom_base_model": null,
+  "experiment": "projects/183729570563/locations/europe-west4/metadataStores/default/contexts/tuning-experiment-20261022082351363212",
+  "labels": null,
+  "output_uri": null,
+  "pipeline_job": null,
+  "service_account": null,
+  "tuned_model_display_name": "thepower-soporte-s8",
+  "veo_tuning_spec": null
+}

@@ -1,0 +1,35 @@
+{
+  "id": "DE-04",
+  "incidencia": "Tengo un cobro repetido en mi matrícula.",
+  "objetivo": {
+    "categoria": "facturacion",
+    "prioridad": "media",
+    "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+  },
+  "fecha": "2026-10-22T18:45:03Z",
+  "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"He recibido su reporte sobre el cobro duplicado.\"}",
+  "tokens_entrada": 221,
+  "tokens_salida": 31,
+  "finish_reason": "STOP",
+  "latencia_s": 3.983485299977474,
+  "coste_usd": null,
+  "coste_metodo": "La API no devuelve importe; consultar facturación/tarifa por separado",
+  "model": "projects/183729570563/locations/eu/endpoints/4602397344195936256",
+  "provider": "Google Cloud",
+  "ruta": "google",
+  "parametros_solicitados": {
+    "temperature": 0,
+    "maxOutputTokens": 180,
+    "thinkingConfig": {
+      "thinkingLevel": "MINIMAL"
+    }
+  },
+  "valoracion": {
+    "json_valido": true,
+    "categoria_correcta": true,
+    "prioridad_correcta": true,
+    "ambas_correctas": true,
+    "esquema_valido": true,
+    "motivo": null
+  }
+}

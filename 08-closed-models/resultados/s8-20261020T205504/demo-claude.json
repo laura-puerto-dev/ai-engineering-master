@@ -1,0 +1,37 @@
+{
+  "id": "DE-04",
+  "incidencia": "Tengo un cobro repetido en mi matrícula.",
+  "objetivo": {
+    "categoria": "facturacion",
+    "prioridad": "media",
+    "respuesta": "Indica el concepto y la fecha del pago para revisar la incidencia de facturación."
+  },
+  "fecha": "2026-10-22T18:45:21Z",
+  "respuesta_original": "{\"categoria\": \"facturacion\", \"prioridad\": \"media\", \"respuesta\": \"Indica el importe y la fecha de los cobros duplicados para revisar la incidencia de facturación.\"}",
+  "latencia_s": 1.1343388999812305,
+  "tokens_entrada": 733,
+  "tokens_salida": 65,
+  "coste_usd": 0.0001058,
+  "coste_metodo": "tokens × tarifa de .env (LLM_PRECIO_*); verificar el precio vigente",
+  "model": "claude-haiku-5-5",
+  "provider": "Anthropic",
+  "ruta": "anthropic",
+  "request_id": "req_011CgHmgdLuH638RwapvtrPb",
+  "message_id": "msg_011CgHmgeNuVj9yBr5kcYeAm",
+  "parametros_solicitados": {
+    "model": "claude-haiku-5-5",
+    "max_tokens": 180,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "finish_reason": "end_turn",
+  "valoracion": {
+    "json_valido": true,
+    "categoria_correcta": true,
+    "prioridad_correcta": true,
+    "ambas_correctas": true,
+    "esquema_valido": true,
+    "motivo": null
+  }
+}

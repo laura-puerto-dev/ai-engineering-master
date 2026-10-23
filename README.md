@@ -15,6 +15,7 @@ This repository documents my practical work throughout the program, from model s
 | [05 - LangGraph Fundamentals](./05-langgraph/) | Stateful workflows and conversational agents with a local LLM | State management, conditional routing, retry loops, error handling, tool calling, conversation memory, human-in-the-loop authorization, checkpointing |
 | [06 - Langfuse & LangSmith](./06-langfuse-langsmith/) | LLM observability and evaluation for a LangGraph workflow | End-to-end tracing, Langfuse, LangSmith, token usage, latency analysis, retry inspection |
 | [07 - Open Models](./07-open-models/) | LoRA fine-tuning of Qwen3-0.6B for a support ticket classifier | Supervised fine-tuning, LoRA adapters, prompting vs. few-shot vs. fine-tuning, frozen train/val/test protocol, Hugging Face Hub publishing |
+| [08 - Closed Models](./08-closed-models/) | Gemini fine-tuning on Vertex AI vs. Claude, compared against S7's open models | Closed-model supervised tuning, tuned-model endpoints, cross-provider evaluation, cost/quality/control trade-offs |
 
 
 ## Repository Structure

@@ -1,0 +1,3 @@
+# SQLite checkpoint database
+/checkpoints.sqlite
+/checkpoints.sqlite-*

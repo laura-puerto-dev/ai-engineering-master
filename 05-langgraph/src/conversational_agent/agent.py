@@ -1,9 +1,11 @@
+import sqlite3
+from pathlib import Path
 from typing import Annotated, NotRequired, TypedDict
 
 from langchain_core.messages import AIMessage, ToolCall, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_ollama import ChatOllama
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
@@ -13,6 +15,9 @@ from conversational_agent.tools import book_activity, get_weather
 
 AUTO_APPROVED_TOOLS = frozenset({"get_weather"})
 APPROVAL_REQUIRED_TOOLS = frozenset({"book_activity"})
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+CHECKPOINT_DB = PROJECT_ROOT / "checkpoints.sqlite"
 
 
 class AgentState(TypedDict):
@@ -136,8 +141,13 @@ builder.add_conditional_edges(
 builder.add_edge("authorization", "execution")
 builder.add_edge("execution", "assistant")
 
-memory = MemorySaver()
-app = builder.compile(checkpointer=memory)
+connection = sqlite3.connect(
+    CHECKPOINT_DB,
+    check_same_thread=False,
+)
+
+checkpointer = SqliteSaver(connection)
+app = builder.compile(checkpointer=checkpointer)
 
 
 if __name__ == "__main__":

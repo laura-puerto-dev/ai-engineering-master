@@ -168,10 +168,11 @@ A conversational agent built with LangGraph and a locally hosted LLM. The agent 
 - Conditional routing between graph nodes
 - External weather data retrieval through Open-Meteo
 - Human-in-the-loop authorization with `interrupt()` and `Command(resume=...)`
-- Conversation checkpointing with `MemorySaver`
+- Persistent conversation checkpointing with SQLite (`SqliteSaver`)
+- Workflow recovery across Python process restarts
 - Separation of tool authorization and execution
 
-**Tech stack:** Python, LangGraph, LangChain, Ollama, Open-Meteo, HTTPX, pytest.
+**Tech stack:** Python, LangGraph, LangChain, Ollama, SQLite, Open-Meteo, HTTPX, pytest.
 
 #### Graph Architecture
 
@@ -211,11 +212,23 @@ When the LLM requests `book_activity`, the `authorization` node calls `interrupt
 
 Only explicitly approved booking calls reach the tool executor. Rejected calls receive a denial message, and unknown tools are rejected by default.
 
-#### Conversation Memory
+#### Persistent Checkpointing and Workflow Recovery
 
-The graph is compiled with `MemorySaver` and uses a `thread_id` to associate checkpoints with a conversation. This enables a paused graph to resume after the user responds to an approval request.
+The conversational agent uses LangGraph's `SqliteSaver` to persist workflow checkpoints in a local SQLite database (`checkpoints.sqlite`).
 
-`MemorySaver` stores checkpoints in memory only: state does not persist after the Python process exits.
+Each conversation is identified by a `thread_id`, allowing LangGraph to retrieve its saved state and resume an interrupted workflow, even after the original Python process has exited.
+
+When a booking requires human approval:
+
+1. The `authorization` node calls `interrupt()` before the booking tool executes.
+2. LangGraph persists the workflow state in SQLite.
+3. The Python process can terminate while the approval remains pending.
+4. A new process can recover the interrupted workflow using the same `thread_id`.
+5. `Command(resume=True)` or `Command(resume=False)` resumes execution with the user's decision.
+
+On resumption, LangGraph re-executes the interrupted node from its beginning. For this reason, authorization and tool execution are implemented in separate nodes: the `authorization` node evaluates permissions, while the `execution` node performs authorized operations.
+
+SQLite provides persistent checkpoints for this local project. It does not, by itself, guarantee that external operations will execute exactly once if failures or retries occur after a side effect.
 
 #### Running the Agent
 
@@ -245,6 +258,28 @@ uv run python -m conversational_agent.agent
 
 The example requests an activity booking and asks for confirmation in the terminal. Confirmed simulated bookings are saved locally; rejected bookings are not executed.
 
+#### Checkpoint Recovery Across Process Restarts
+
+The following demonstration shows how an interrupted booking workflow can be recovered after the original Python process has terminated.
+
+From the `05-langgraph` directory, first run:
+
+```bash
+uv run python -m conversational_agent.checkpoint_pause_demo
+```
+
+The agent requests a booking, reaches `interrupt()`, and persists its checkpoint in `checkpoints.sqlite`. The process then exits without executing the booking.
+
+Next, start a separate Python process:
+
+```bash
+uv run python -m conversational_agent.checkpoint_resume_demo
+```
+
+The second process loads the saved state using the same `thread_id` and resumes the workflow with `Command(resume=True)`. Once approved, the simulated booking is executed.
+
+Both scripts use the same persistent SQLite checkpoint database. This demonstrates that the interrupted workflow can survive a Python process restart without losing its pending approval state.
+
 #### Example Execution — Multi-Turn Conversation
 
 This demonstration combines weather retrieval, conversational memory, and human-in-the-loop authorization in two turns.
@@ -272,13 +307,30 @@ The booking is simulated; no real reservation is made.
 
 #### Testing
 
-The project includes unit tests for authorization and execution, plus an integration test that exercises LangGraph's real interruption and resumption flow for a rejected booking. External LLM and tool execution are mocked in the integration test.
+The project includes unit and integration tests covering tool authorization, execution, and human-in-the-loop interruption and resumption.
 
-From the `05-langgraph` directory:
+It also includes a checkpoint persistence test that verifies workflow recovery across two independent Python processes:
+
+1. The first process starts a booking workflow, reaches `interrupt()`, and persists its state in a temporary SQLite database.
+2. The process exits without executing the booking.
+3. A second process loads the checkpoint using the same `thread_id` and resumes the workflow with `Command(resume=True)`.
+4. The test verifies that the workflow completes and exactly one simulated reservation is created.
+
+The test uses mocked LLM responses and temporary files, so it does not require Ollama or external API calls.
+
+Run the conversational agent tests from the `05-langgraph` directory:
 
 ```bash
 uv run pytest tests/conversational_agent/ -v
 ```
+
+Run the complete module test suite:
+
+```bash
+uv run pytest -q
+```
+
+The checkpoint persistence test verifies successful recovery and a single booking in this scenario. It does not establish exactly-once execution guarantees under arbitrary failures or retries.
 
 #### Project Structure
 
@@ -286,6 +338,8 @@ uv run pytest tests/conversational_agent/ -v
 src/conversational_agent/
 ├── __init__.py
 ├── agent.py
+├── checkpoint_pause_demo.py
+├── checkpoint_resume_demo.py
 ├── demo.py
 ├── tools.py
 ├── py.typed
@@ -294,15 +348,22 @@ src/conversational_agent/
     └── reservation.png
 
 tests/conversational_agent/
+├── helpers/
+│   ├── checkpoint_pause.py
+│   └── checkpoint_resume.py
 ├── test_authorization.py
+├── test_checkpoint_persistence.py
 └── test_integration.py
 ```
 
-- `agent.py`: Graph state, nodes, routing, checkpointing, and command-line example.
+- `agent.py`: Graph state, nodes, routing, SQLite checkpointing, and command-line example.
+- `checkpoint_pause_demo.py`: Demonstrates interrupting a booking workflow and persisting its checkpoint.
+- `checkpoint_resume_demo.py`: Recovers and resumes the interrupted workflow in a separate Python process.
 - `demo.py`: Two-turn weather-and-booking demonstration with approval handling.
 - `screenshots/`: Evidence of the multi-turn execution and saved simulated reservation.
 - `tools.py`: Weather retrieval and simulated activity booking tools.
-- `tests/conversational_agent/`: Authorization, execution, and interruption tests.
+- `tests/conversational_agent/`: Authorization, execution, interruption, and checkpoint persistence tests.
+- `tests/conversational_agent/helpers/`: Separate-process scripts used by the checkpoint recovery test.
 
 #### Design Decisions
 
@@ -312,6 +373,6 @@ tests/conversational_agent/
 
 **Separation of concerns:** Authorization and execution are separate nodes, making the policy explicit and testable.
 
-**Local-first development:** Ollama and `MemorySaver` support experimentation without a hosted LLM or persistent checkpoint database.
+**Local-first development:** Ollama enables local LLM execution, while SQLite provides persistent workflow checkpoints without requiring an external database service.
 
 **Simulated bookings:** Local JSON persistence keeps the example self-contained and suitable for learning.

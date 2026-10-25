@@ -171,6 +171,7 @@ A conversational agent built with LangGraph and a locally hosted LLM. The agent 
 - Persistent conversation checkpointing with SQLite (`SqliteSaver`)
 - Workflow recovery across Python process restarts
 - Separation of tool authorization and execution
+- Idempotent tool execution using `ToolRuntime`-derived keys to prevent duplicate bookings on retries
 
 **Tech stack:** Python, LangGraph, LangChain, Ollama, SQLite, Open-Meteo, HTTPX, pytest.
 
@@ -202,7 +203,7 @@ Retrieves weather forecasts from the Open-Meteo API. This read-only tool is auto
 
 **Activity booking — `book_activity`**
 
-Simulates an activity reservation and saves confirmed bookings in a local JSON file. The graph pauses before this tool can execute and asks the user to approve the specific booking arguments.
+Simulates an activity reservation and saves confirmed bookings in a local JSON file. The graph pauses before this tool can execute and asks the user to approve the specific booking arguments. The booking is idempotent: repeating the same tool call (for example, after a workflow retry or checkpoint recovery) returns the existing reservation instead of creating a duplicate.
 
 This is a simulated booking system, not a connection to a real reservation provider.
 
@@ -229,6 +230,34 @@ When a booking requires human approval:
 On resumption, LangGraph re-executes the interrupted node from its beginning. For this reason, authorization and tool execution are implemented in separate nodes: the `authorization` node evaluates permissions, while the `execution` node performs authorized operations.
 
 SQLite provides persistent checkpoints for this local project. It does not, by itself, guarantee that external operations will execute exactly once if failures or retries occur after a side effect.
+
+#### Idempotent Tool Execution
+
+In certain failure or retry scenarios, a booking operation may be attempted again after its side effect has already completed. To prevent duplicate reservations, `book_activity` uses an idempotency key derived from the conversation's `thread_id` and the tool's `tool_call_id`.
+
+For sequential calls with the same key and arguments, the tool returns the existing reservation rather than creating a new one. Combining `thread_id` with `tool_call_id` means the same `tool_call_id` reused across different conversations does not collide.
+
+The tool computes this key itself from LangGraph's `ToolRuntime`, which `ToolNode` populates automatically with the current `config` and `tool_call_id`:
+
+```python
+@tool
+def book_activity(
+    activity: str,
+    city: str,
+    booking_date: str,
+    people: int,
+    runtime: ToolRuntime,
+) -> dict:
+    thread_id = runtime.config.get("configurable", {}).get("thread_id")
+    idempotency_key = build_idempotency_key(thread_id, runtime.tool_call_id)
+    return create_reservation(activity, city, booking_date, people, idempotency_key)
+```
+
+An earlier implementation generated the idempotency key in the `execution` node and passed it through `ToolCall.args`. However, `ToolNode` removes caller-supplied values for injected arguments, including those marked with `InjectedToolArg`.
+
+Using `ToolRuntime` allows the booking tool to obtain the execution context directly, without manually injecting internal arguments into the tool call. This keeps the integration compatible with LangGraph's built-in tool execution mechanism.
+
+The deduplication check itself is a plain read-then-write over a local JSON file, with no file locking or database transaction behind it. It prevents duplicates across sequential retries of the same key, which is what checkpoint recovery and the test suite exercise, but it is not a concurrency-safe, transactional guarantee: two truly simultaneous calls with the same key could still race on the read-modify-write and are not protected the way a database-level unique constraint would protect them.
 
 #### Running the Agent
 
@@ -307,7 +336,14 @@ The booking is simulated; no real reservation is made.
 
 #### Testing
 
-The project includes unit and integration tests covering tool authorization, execution, and human-in-the-loop interruption and resumption.
+The project includes unit and integration tests covering tool authorization, execution, human-in-the-loop interruption and resumption, and idempotent booking.
+
+The idempotency tests cover two levels:
+
+- `test_idempotency.py` tests the booking deduplication logic directly, independent of LangGraph: the same key returns the existing reservation, the same key with conflicting arguments is rejected, and different keys create separate reservations.
+- `test_integration.py` drives the compiled graph through `ToolNode` to confirm the key reaches `book_activity` correctly in practice: the same `tool_call_id` on the same thread books only once, and the same `tool_call_id` on different threads does not collide. This is a regression test for the `ToolNode`/`ToolRuntime` behavior described in "Idempotent Tool Execution" above.
+
+All of these exercise sequential, repeated calls with the same key. None of them exercise two concurrent calls racing on the same key, which the local JSON store does not protect against (see "Idempotent Tool Execution" above).
 
 It also includes a checkpoint persistence test that verifies workflow recovery across two independent Python processes:
 
@@ -353,6 +389,7 @@ tests/conversational_agent/
 │   └── checkpoint_resume.py
 ├── test_authorization.py
 ├── test_checkpoint_persistence.py
+├── test_idempotency.py
 └── test_integration.py
 ```
 
@@ -361,8 +398,8 @@ tests/conversational_agent/
 - `checkpoint_resume_demo.py`: Recovers and resumes the interrupted workflow in a separate Python process.
 - `demo.py`: Two-turn weather-and-booking demonstration with approval handling.
 - `screenshots/`: Evidence of the multi-turn execution and saved simulated reservation.
-- `tools.py`: Weather retrieval and simulated activity booking tools.
-- `tests/conversational_agent/`: Authorization, execution, interruption, and checkpoint persistence tests.
+- `tools.py`: Weather retrieval and idempotent activity booking tools.
+- `tests/conversational_agent/`: Authorization, execution, interruption, idempotency, and checkpoint persistence tests.
 - `tests/conversational_agent/helpers/`: Separate-process scripts used by the checkpoint recovery test.
 
 #### Design Decisions
@@ -372,6 +409,8 @@ tests/conversational_agent/
 **Human approval for side effects:** Booking requests require explicit approval, while the read-only weather tool can run automatically.
 
 **Separation of concerns:** Authorization and execution are separate nodes, making the policy explicit and testable.
+
+**Idempotency owned by the tool, not the graph:** The booking tool derives its own deduplication key from `ToolRuntime` instead of the graph computing it and injecting it into the tool call. This keeps retry-safety against sequential replays a property of the tool itself, and avoids relying on `ToolNode` internals that only refill specific injection types. It is a simple, local-first mechanism, not a transactional guarantee.
 
 **Local-first development:** Ollama enables local LLM execution, while SQLite provides persistent workflow checkpoints without requiring an external database service.
 

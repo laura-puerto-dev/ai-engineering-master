@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 from langchain_core.messages import AIMessage, ToolCall, ToolMessage
+from langchain_core.runnables import RunnableConfig
 
 from conversational_agent.agent import AgentState, authorization, execution
 
@@ -26,7 +27,10 @@ def test_rejected_booking_is_not_executed() -> None:
     }
 
     with patch("conversational_agent.agent.tool_executor") as mock_executor:
-        result = execution(state)
+        result = execution(
+            state,
+            config={"configurable": {"thread_id": "authorization-test"}},
+        )
 
         mock_executor.invoke.assert_not_called()
 
@@ -59,10 +63,12 @@ def test_authorized_booking_is_executed() -> None:
         tool_call_id="booking-456",
     )
 
+    call_config: RunnableConfig = {"configurable": {"thread_id": "authorization-test"}}
+
     with patch("conversational_agent.agent.tool_executor") as mock_executor:
         mock_executor.invoke.return_value = {"messages": [tool_response]}
 
-        result = execution(state)
+        result = execution(state, config=call_config)
 
         mock_executor.invoke.assert_called_once()
 
@@ -70,6 +76,7 @@ def test_authorized_booking_is_executed() -> None:
         executed_calls = invocation["messages"][0].tool_calls
 
         assert executed_calls == [authorized_call]
+        assert mock_executor.invoke.call_args.kwargs["config"] is call_config
         assert result["messages"] == [tool_response]
 
 
@@ -110,7 +117,10 @@ def test_only_authorized_calls_are_executed() -> None:
     with patch("conversational_agent.agent.tool_executor") as mock_executor:
         mock_executor.invoke.return_value = {"messages": [weather_response]}
 
-        result = execution(state)
+        result = execution(
+            state,
+            config={"configurable": {"thread_id": "authorization-test"}},
+        )
 
         mock_executor.invoke.assert_called_once()
 

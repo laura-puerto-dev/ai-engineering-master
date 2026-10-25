@@ -81,7 +81,7 @@ def authorization(state: AgentState):
 tool_executor = ToolNode([get_weather, book_activity])
 
 
-def execution(state: AgentState):
+def execution(state: AgentState, config: RunnableConfig):
     authorized_calls = state.get("authorized_calls", [])
     rejected_calls = state.get("rejected_calls", [])
 
@@ -92,9 +92,10 @@ def execution(state: AgentState):
             content="",
             tool_calls=authorized_calls,
         )
-
-        tool_result = tool_executor.invoke({"messages": [authorized_message]})
-
+        tool_result = tool_executor.invoke(
+            {"messages": [authorized_message]},
+            config=config,
+        )
         results.extend(tool_result["messages"])
 
     for tool_call in rejected_calls:

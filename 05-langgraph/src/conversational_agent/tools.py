@@ -5,6 +5,7 @@ from uuid import uuid4
 
 import httpx2
 from langchain_core.tools import tool
+from langgraph.prebuilt import ToolRuntime
 
 WEATHER_DESCRIPTIONS = {
     0: "Clear sky",
@@ -102,14 +103,22 @@ def get_weather(city: str, forecast_date: str) -> dict:
 RESERVATIONS_FILE = Path(__file__).resolve().parent / "reservations.json"
 
 
-@tool
-def book_activity(
+def build_idempotency_key(thread_id: str | None, tool_call_id: str | None) -> str:
+    """Build a stable idempotency key for a tool call within a conversation."""
+    if not thread_id or not tool_call_id:
+        raise ValueError("thread_id and tool_call_id are required.")
+
+    return f"{thread_id}:{tool_call_id}"
+
+
+def create_reservation(
     activity: str,
     city: str,
     booking_date: str,
     people: int,
+    idempotency_key: str,
 ) -> dict:
-    """Book an outdoor activity for a given city, date, and number of people."""
+    """Create a booking, or return the existing one for a repeated idempotency key."""
 
     try:
         requested_date = date.fromisoformat(booking_date)
@@ -131,8 +140,31 @@ def book_activity(
     else:
         reservations = []
 
+    if not idempotency_key.strip():
+        return {"error": "Idempotency key is required."}
+
+    for existing_reservation in reservations:
+        if existing_reservation.get("idempotency_key") == idempotency_key:
+            same_request = (
+                existing_reservation["activity"] == activity
+                and existing_reservation["city"] == city
+                and existing_reservation["date"] == requested_date.isoformat()
+                and existing_reservation["people"] == people
+            )
+
+            if not same_request:
+                return {
+                    "error": "Idempotency key already used for a different booking."
+                }
+
+            return {
+                "status": "confirmed",
+                "reservation": existing_reservation,
+            }
+
     reservation = {
         "id": f"RES-{uuid4().hex[:8].upper()}",
+        "idempotency_key": idempotency_key,
         "activity": activity,
         "city": city,
         "date": requested_date.isoformat(),
@@ -150,21 +182,37 @@ def book_activity(
     }
 
 
+@tool
+def book_activity(
+    activity: str,
+    city: str,
+    booking_date: str,
+    people: int,
+    runtime: ToolRuntime,
+) -> dict:
+    """Book an outdoor activity. Repeated calls for the same booking are deduplicated."""
+
+    thread_id = runtime.config.get("configurable", {}).get("thread_id")
+    idempotency_key = build_idempotency_key(thread_id, runtime.tool_call_id)
+
+    result = create_reservation(activity, city, booking_date, people, idempotency_key)
+
+    # idempotency_key is an internal dedup detail; don't let the model repeat it to the user.
+    if "reservation" in result:
+        result["reservation"] = {
+            key: value
+            for key, value in result["reservation"].items()
+            if key != "idempotency_key"
+        }
+
+    return result
+
+
 if __name__ == "__main__":
     result = get_weather.invoke(
         {
             "city": "Teruel",
             "forecast_date": "2026-10-11",
-        }
-    )
-    print(result)
-
-    result = book_activity.invoke(
-        {
-            "activity": "Hiking",
-            "city": "Teruel",
-            "booking_date": "2026-10-11",
-            "people": 3,
         }
     )
     print(result)

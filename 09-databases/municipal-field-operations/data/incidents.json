@@ -1,0 +1,142 @@
+[
+  {
+    "id": "E01",
+    "department": "electricity",
+    "area": "Plaza del Torico",
+    "description": "Una farola se apaga y vuelve a encenderse de forma intermitente durante la noche.",
+    "status": "pending"
+  },
+  {
+    "id": "E02",
+    "department": "electricity",
+    "area": "Plaza de San Juan",
+    "description": "El alumbrado público parpadea continuamente y deja la calle a oscuras por momentos.",
+    "status": "pending"
+  },
+  {
+    "id": "E03",
+    "department": "electricity",
+    "area": "Ensanche",
+    "description": "Un cuadro eléctrico presenta un zumbido anormal y desprende olor a quemado.",
+    "status": "pending"
+  },
+  {
+    "id": "E04",
+    "department": "electricity",
+    "area": "Parque de los Fueros",
+    "description": "Varias luminarias del paseo permanecen apagadas desde hace varios días.",
+    "status": "pending"
+  },
+  {
+    "id": "E05",
+    "department": "electricity",
+    "area": "San León",
+    "description": "Un semáforo no cambia correctamente de fase y provoca problemas en el tráfico.",
+    "status": "pending"
+  },
+  {
+    "id": "J01",
+    "department": "gardening",
+    "area": "Parque de los Fueros",
+    "description": "Una rama de gran tamaño está parcialmente desprendida y amenaza con caer sobre el paseo.",
+    "status": "pending"
+  },
+  {
+    "id": "J02",
+    "department": "gardening",
+    "area": "Parque de la Fuenfresca",
+    "description": "Un árbol presenta varias ramas secas que podrían desprenderse sobre los peatones.",
+    "status": "pending"
+  },
+  {
+    "id": "J03",
+    "department": "gardening",
+    "area": "Ensanche",
+    "description": "El sistema de riego automático permanece activado y está inundando una zona ajardinada.",
+    "status": "pending"
+  },
+  {
+    "id": "J04",
+    "department": "gardening",
+    "area": "Los Planos",
+    "description": "Varias zonas de césped se están secando porque los aspersores no funcionan correctamente.",
+    "status": "pending"
+  },
+  {
+    "id": "J05",
+    "department": "gardening",
+    "area": "San León",
+    "description": "Los setos han crecido demasiado y dificultan el paso por la acera.",
+    "status": "pending"
+  },
+  {
+    "id": "L01",
+    "department": "cleaning",
+    "area": "Plaza del Torico",
+    "description": "Hay bolsas de basura acumuladas junto a un contenedor que está completamente lleno.",
+    "status": "pending"
+  },
+  {
+    "id": "L02",
+    "department": "cleaning",
+    "area": "Plaza de San Juan",
+    "description": "Los contenedores están desbordados y los residuos se están extendiendo por la calle.",
+    "status": "pending"
+  },
+  {
+    "id": "L03",
+    "department": "cleaning",
+    "area": "Ensanche",
+    "description": "Se ha detectado un vertido de aceite sobre la calzada que necesita limpieza especializada.",
+    "status": "pending"
+  },
+  {
+    "id": "L04",
+    "department": "cleaning",
+    "area": "San León",
+    "description": "Han aparecido muebles y electrodomésticos abandonados junto a los contenedores.",
+    "status": "pending"
+  },
+  {
+    "id": "L05",
+    "department": "cleaning",
+    "area": "Fuenfresca",
+    "description": "La acumulación de hojas y residuos está obstruyendo varios sumideros de la vía pública.",
+    "status": "pending"
+  },
+  {
+    "id": "V01",
+    "department": "public_works",
+    "area": "Ensanche",
+    "description": "Un bache profundo en la calzada está provocando daños en los vehículos que circulan por la zona.",
+    "status": "pending"
+  },
+  {
+    "id": "V02",
+    "department": "public_works",
+    "area": "San León",
+    "description": "El asfalto presenta un socavón que dificulta el paso de los coches.",
+    "status": "pending"
+  },
+  {
+    "id": "V03",
+    "department": "public_works",
+    "area": "Plaza de San Juan",
+    "description": "Varias baldosas de la acera están levantadas y representan un riesgo de tropiezo.",
+    "status": "pending"
+  },
+  {
+    "id": "V04",
+    "department": "public_works",
+    "area": "Fuenfresca",
+    "description": "Un paso de peatones tiene la pintura prácticamente borrada y necesita nueva señalización horizontal.",
+    "status": "pending"
+  },
+  {
+    "id": "V05",
+    "department": "public_works",
+    "area": "Los Planos",
+    "description": "Una señal de tráfico está torcida y parcialmente desprendida de su soporte.",
+    "status": "pending"
+  }
+]

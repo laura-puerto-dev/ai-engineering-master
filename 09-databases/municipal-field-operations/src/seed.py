@@ -7,6 +7,11 @@ DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "incidents.json"
 
 
 def seed_database():
+    """Load departments and incidents from JSON into PostgreSQL.
+
+    Existing departments are reused, and incidents are inserted or updated
+    based on their IDs to avoid duplicates when the script is rerun.
+    """
     incidents = json.loads(DATA_FILE.read_text(encoding="utf-8"))
 
     with get_connection() as conn, conn.cursor() as cur:
@@ -53,7 +58,7 @@ def seed_database():
                 ),
             )
 
-    print(f"Dataset processed: {len(incidents)} incidents")
+    print(f"Incidencias procesadas: {len(incidents)}")
 
 
 if __name__ == "__main__":

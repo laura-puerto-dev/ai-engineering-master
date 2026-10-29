@@ -1,4 +1,3 @@
-
 import os
 
 import psycopg
@@ -8,6 +7,7 @@ load_dotenv()
 
 
 def get_connection():
+    """Create a PostgreSQL connection using environment variables."""
     return psycopg.connect(
         host=os.environ["DATABASE_HOST"],
         port=os.environ["DATABASE_PORT"],

@@ -9,6 +9,7 @@ GRANT USAGE ON SCHEMA public TO municipal_app;
 
 -- Allow reading incidents without modifying them
 GRANT SELECT ON TABLE incidents TO municipal_app;
+GRANT SELECT ON TABLE departments TO municipal_app;
 
 -- Enable row-level security for incidents
 ALTER TABLE incidents ENABLE ROW LEVEL SECURITY;

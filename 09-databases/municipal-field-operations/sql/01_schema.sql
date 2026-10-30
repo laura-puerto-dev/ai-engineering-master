@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS incidents (
     department_id INTEGER NOT NULL REFERENCES departments(id),
     area VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
+    -- other states (e.g. 'resolved') are supported but not seeded in this demo
     status VARCHAR(20) NOT NULL DEFAULT 'pending',
     location GEOGRAPHY(Point, 4326),
     embedding VECTOR(384)

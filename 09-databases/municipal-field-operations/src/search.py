@@ -1,4 +1,4 @@
-from src.db import get_connection
+from src.db import get_app_connection, get_connection
 from src.embeddings import embed
 
 
@@ -32,6 +32,7 @@ def search_nearby_incidents(
     query: str,
     latitude: float,
     longitude: float,
+    department_id: int,
     radius_meters: int = 1000,
     limit: int = 2,
     status: str = "pending",
@@ -44,7 +45,11 @@ def search_nearby_incidents(
     """
     query_embedding = embed(query).tolist()
 
-    with get_connection() as conn, conn.cursor() as cur:
+    with get_app_connection() as conn, conn.cursor() as cur:
+        cur.execute(
+            "SELECT set_config('app.department_id', %s, true)",
+            (str(department_id),),
+        )
         cur.execute(
             """
                 SELECT
@@ -90,15 +95,17 @@ def search_nearby_incidents(
 
 
 if __name__ == "__main__":
-    query = "Las luces de la calle fallan y se apagan a ratos"
+    query = "Hay ramas que dificultan el paso por la acera"
     latitude = 40.34281
     longitude = -1.10704
     radius_meters = 1000
+    department_id = 3  # Gardening
 
     results = search_nearby_incidents(
         query=query,
         latitude=latitude,
         longitude=longitude,
+        department_id=department_id,
         radius_meters=radius_meters,
     )
 

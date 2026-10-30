@@ -15,3 +15,14 @@ def get_connection():
         user=os.environ["POSTGRES_USER"],
         password=os.environ["POSTGRES_PASSWORD"],
     )
+
+
+def get_app_connection():
+    """Create a PostgreSQL connection using the restricted application role."""
+    return psycopg.connect(
+        host=os.environ["DATABASE_HOST"],
+        port=os.environ["DATABASE_PORT"],
+        dbname=os.environ["POSTGRES_DB"],
+        user=os.environ["APP_DATABASE_USER"],
+        password=os.environ["APP_DATABASE_PASSWORD"],
+    )

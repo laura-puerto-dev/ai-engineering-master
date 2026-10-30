@@ -29,11 +29,11 @@
   {
     "id": "E04",
     "department": "electricity",
-    "area": "Parque de los Fueros",
-    "description": "Varias luminarias del paseo permanecen apagadas desde hace varios días.",
+    "area": "Plaza del Torico",
+    "description": "Las ramas de un árbol están rozando una farola y dificultan la iluminación de la acera.",
     "status": "pending",
-    "latitude": 40.33441,
-    "longitude": -1.10546
+    "latitude": 40.34281,
+    "longitude": -1.10704
   },
   {
     "id": "E05",
@@ -84,7 +84,7 @@
     "id": "J05",
     "department": "gardening",
     "area": "San León",
-    "description": "Los setos han crecido demasiado y dificultan el paso por la acera.",
+    "description": "Las ramas de varios árboles invaden la acera y dificultan el paso de los peatones.",
     "status": "pending",
     "latitude": 40.34722,
     "longitude": -1.11049
@@ -128,11 +128,11 @@
   {
     "id": "L05",
     "department": "cleaning",
-    "area": "Fuenfresca",
-    "description": "La acumulación de hojas y residuos está obstruyendo varios sumideros de la vía pública.",
+    "area": "Plaza de San Juan",
+    "description": "Hay ramas y hojas acumuladas en la acera que dificultan el paso de los peatones y requieren su retirada.",
     "status": "pending",
-    "latitude": 40.33234,
-    "longitude": -1.08971
+    "latitude": 40.3408,
+    "longitude": -1.10692
   },
   {
     "id": "V01",
@@ -156,7 +156,7 @@
     "id": "V03",
     "department": "public_works",
     "area": "Plaza de San Juan",
-    "description": "Varias baldosas de la acera están levantadas y representan un riesgo de tropiezo.",
+    "description": "Las raíces de varios árboles han levantado las baldosas de la acera y dificultan el paso de los peatones.",
     "status": "pending",
     "latitude": 40.3408,
     "longitude": -1.10692

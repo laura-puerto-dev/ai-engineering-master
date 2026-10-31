@@ -8,9 +8,10 @@ The project explores how Retrieval-Augmented Generation (RAG) and Corrective RAG
 
 **Phase 1 — Policy corpus completed**
 
-- 12 fictional corporate policy documents.
+- 12 fictional corporate policy documents, plus one superseded version retained for document-versioning test cases.
 - Country-specific and global policies in Spanish and English.
 - Different access levels for employees, managers, and HR.
+- Structured corpus manifest (`config/corpus-manifest.yaml`) with automated validation (`scripts/validate_manifest.py`).
 
 ## Planned Features
 
@@ -22,8 +23,23 @@ The project explores how Retrieval-Augmented Generation (RAG) and Corrective RAG
 
 ## Project Structure
 
-- `data/corpus/` — Corporate policy documents.
+- `data/corpus/` — Corporate policy documents (current versions).
+- `data/archive/` — Superseded document versions, retained for versioning test cases.
+- `config/` — Structured corpus manifest (scope, access roles, versioning metadata).
+- `scripts/` — Corpus maintenance and validation tooling.
 - `docs/` — Company background and corpus design documentation.
+
+## Validate the Corpus
+
+```bash
+uv sync
+uv run python scripts/validate_manifest.py
+uv run python -m pytest -q
+```
+
+Checks that every document in the manifest resolves to a real file and that its country, role, and version metadata are internally consistent.
+
+Run the pytest suite to verify the manifest validation rules, including access roles, lifecycle dates, and document versioning.
 
 ## Disclaimer
 

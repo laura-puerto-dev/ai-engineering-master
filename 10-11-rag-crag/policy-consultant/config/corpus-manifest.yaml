@@ -1,0 +1,140 @@
+# Structured metadata catalog for the Policy Consultant corpus: the single
+# source of truth for retrieval scope (country, allowed_roles) and document
+# lifecycle (version, effective_from, effective_to, status). Validated by
+# scripts/validate_manifest.py; the versioning/access model it encodes is
+# defined in docs/corpus-inventory.md.
+documents:
+  # Spain
+  - document_id: ES-001
+    path: data/corpus/spain/ES-001-vacaciones-y-dias-libres.md
+    country: spain
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-002
+    path: data/corpus/spain/ES-002-permisos-y-ausencias.md
+    country: spain
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-003
+    path: data/corpus/spain/ES-003-teletrabajo-y-flexibilidad.md
+    country: spain
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-004
+    path: data/corpus/spain/ES-004-beneficios-y-formacion.md
+    country: spain
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-005
+    path: data/corpus/spain/ES-005-viajes-y-gastos.md
+    country: spain
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-006
+    path: data/corpus/spain/ES-006-gestion-de-ausencias-responsables.md
+    country: spain
+    language: es
+    allowed_roles: [manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: ES-007
+    path: data/corpus/spain/ES-007-procedimientos-internos-rrhh.md
+    country: spain
+    language: es
+    allowed_roles: [hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  # Mexico
+  - document_id: MX-001
+    path: data/corpus/mexico/MX-001-vacaciones-y-permisos.md
+    country: mexico
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.1"
+    effective_from: 2026-10-31
+    effective_to: null
+    status: current
+
+  - document_id: MX-002
+    path: data/corpus/mexico/MX-002-teletrabajo-y-flexibilidad.md
+    country: mexico
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  # England
+  - document_id: EN-001
+    path: data/corpus/england/EN-001-annual-leave-and-time-off.md
+    country: england
+    language: en
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  # Global
+  - document_id: GLB-001
+    path: data/corpus/global/GLB-001-code-of-conduct.md
+    country: global
+    language: en
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  - document_id: GLB-002
+    path: data/corpus/global/GLB-002-information-security-policy.md
+    country: global
+    language: en
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: null
+    status: current
+
+  # Historical version — excluded from ordinary retrieval
+  - document_id: MX-001
+    path: data/archive/MX-001-vacaciones-y-permisos.md
+    country: mexico
+    language: es
+    allowed_roles: [employee, manager, hr]
+    version: "1.0"
+    effective_from: 2026-01-01
+    effective_to: 2026-10-31
+    status: superseded

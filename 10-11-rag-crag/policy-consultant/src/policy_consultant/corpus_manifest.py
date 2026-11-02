@@ -1,10 +1,17 @@
 """Validation rules for config/corpus-manifest.yaml, derived from the
 versioning and access-control model in docs/corpus-inventory.md: every
-document must resolve to a real file, declare a valid country/role scope,
+document must resolve to a real file, declare a country/role/language
+scope allowed by the deployment's AccessModel (config/access-model.yaml),
 and carry an effective_from/effective_to/status combination consistent
 with the corpus's versioning rules (a current document has no end date,
 a superseded one must have one, and every policy has exactly one current
 version).
+
+The set of valid countries/languages/roles is deployment configuration,
+not a code constant: adding a new value to an existing dimension means
+editing config/access-model.yaml, not this module. Adding a new access
+dimension entirely (e.g. department) is still a schema change to
+PolicyDocument and to validate_fields, by design.
 """
 
 from __future__ import annotations
@@ -15,11 +22,8 @@ from typing import cast
 
 import yaml
 
-from policy_consultant.models import PolicyDocument
+from policy_consultant.models import AccessModel, PolicyDocument
 
-VALID_COUNTRIES = {"spain", "mexico", "england", "global"}
-VALID_LANGUAGES = {"es", "en"}
-VALID_ROLES = {"employee", "manager", "hr"}
 VALID_STATUSES = {"current", "superseded"}
 
 
@@ -41,20 +45,56 @@ def load_documents(manifest_path: Path) -> list[PolicyDocument]:
     return cast("list[PolicyDocument]", documents)
 
 
-def validate_fields(document: PolicyDocument, project_root: Path) -> None:
+def load_access_model(path: Path) -> AccessModel:
+    with path.open(encoding="utf-8") as file:
+        data: object = yaml.safe_load(file)
+
+    if not isinstance(data, dict):
+        raise TypeError("Access model must be a mapping")
+
+    return AccessModel(
+        countries=_load_string_set(data, "countries"),
+        languages=_load_string_set(data, "languages"),
+        roles=_load_string_set(data, "roles"),
+    )
+
+
+def _load_string_set(data: dict[object, object], key: str) -> set[str]:
+    value = data.get(key)
+
+    if not isinstance(value, list) or not value:
+        raise TypeError(f"Access model '{key}' must be a non-empty list")
+
+    if not all(isinstance(item, str) for item in value):
+        raise TypeError(f"Access model '{key}' must contain only strings")
+
+    if any(not item.strip() for item in value):
+        raise ValueError(f"Access model '{key}' must not contain empty or blank values")
+
+    if len(value) != len(set(value)):
+        raise ValueError(f"Access model '{key}' contains duplicate values")
+
+    return set(value)
+
+
+def validate_fields(
+    document: PolicyDocument,
+    project_root: Path,
+    access_model: AccessModel,
+) -> None:
     document_id = document["document_id"]
 
     if not (project_root / document["path"]).is_file():
         raise FileNotFoundError(f"Document not found: {document['path']}")
 
-    if document["country"] not in VALID_COUNTRIES:
+    if document["country"] not in access_model["countries"]:
         raise ValueError(f"Invalid country in {document_id}")
 
-    if document["language"] not in VALID_LANGUAGES:
+    if document["language"] not in access_model["languages"]:
         raise ValueError(f"Invalid language in {document_id}")
 
     roles = document["allowed_roles"]
-    if not isinstance(roles, list) or not roles or not set(roles) <= VALID_ROLES:
+    if not isinstance(roles, list) or not roles or not set(roles) <= access_model["roles"]:
         raise ValueError(f"Invalid allowed_roles in {document_id}")
 
     if document["status"] not in VALID_STATUSES:
@@ -124,12 +164,16 @@ def validate_version_history(documents: list[PolicyDocument]) -> None:
                 )
 
 
-def validate_manifest(documents: list[PolicyDocument], project_root: Path) -> str:
+def validate_manifest(
+    documents: list[PolicyDocument],
+    project_root: Path,
+    access_model: AccessModel,
+) -> str:
     """Run every check against the loaded documents and return a human-readable
     summary. Raises on the first violation found.
     """
     for document in documents:
-        validate_fields(document, project_root)
+        validate_fields(document, project_root, access_model)
         validate_lifecycle_dates(document)
 
     validate_no_duplicate_versions(documents)

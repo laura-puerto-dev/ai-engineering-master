@@ -1,0 +1,20 @@
+# Deployment-specific access-control vocabulary for Northfern Technologies.
+# Adding a country, language, or role here does not require any Python
+# change — corpus_manifest.py validates against whatever this file
+# declares. See src/policy_consultant/models.py (AccessModel) and
+# docs/corpus-inventory.md for the model this supports.
+
+countries:
+  - spain
+  - mexico
+  - england
+  - global
+
+languages:
+  - es
+  - en
+
+roles:
+  - employee
+  - manager
+  - hr

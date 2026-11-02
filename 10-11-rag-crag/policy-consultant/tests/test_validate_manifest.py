@@ -2,14 +2,16 @@ from datetime import date
 from pathlib import Path
 
 import pytest
+import yaml
 
 from policy_consultant.corpus_manifest import (
+    load_access_model,
     validate_fields,
     validate_lifecycle_dates,
     validate_no_duplicate_versions,
     validate_version_history,
 )
-from policy_consultant.models import PolicyDocument
+from policy_consultant.models import AccessModel, PolicyDocument
 
 
 @pytest.fixture
@@ -27,6 +29,15 @@ def sample_document() -> PolicyDocument:
     )
 
 
+@pytest.fixture
+def access_model() -> AccessModel:
+    return AccessModel(
+        countries={"spain", "mexico", "england", "global"},
+        languages={"es", "en"},
+        roles={"employee", "manager", "hr"},
+    )
+
+
 def test_rejects_duplicate_document_versions(
     sample_document: PolicyDocument,
 ) -> None:
@@ -38,6 +49,7 @@ def test_rejects_duplicate_document_versions(
 
 def test_rejects_invalid_roles(
     sample_document: PolicyDocument,
+    access_model: AccessModel,
     tmp_path: Path,
 ) -> None:
     document = sample_document.copy()
@@ -48,7 +60,7 @@ def test_rejects_invalid_roles(
     document_path.touch()
 
     with pytest.raises(ValueError, match="Invalid allowed_roles"):
-        validate_fields(document, tmp_path)
+        validate_fields(document, tmp_path, access_model)
 
 
 def test_rejects_current_document_with_end_date(
@@ -87,6 +99,7 @@ def test_rejects_overlapping_policy_versions(
 )
 def test_rejects_invalid_metadata(
     sample_document: PolicyDocument,
+    access_model: AccessModel,
     tmp_path: Path,
     field: str,
     invalid_value: str,
@@ -106,7 +119,7 @@ def test_rejects_invalid_metadata(
     document_path.touch()
 
     with pytest.raises(ValueError, match=expected_error):
-        validate_fields(document, tmp_path)
+        validate_fields(document, tmp_path, access_model)
 
 
 @pytest.mark.parametrize("current_count", [0, 2])
@@ -131,3 +144,107 @@ def test_requires_exactly_one_current_version(
         match="must have exactly one current version",
     ):
         validate_version_history(documents)
+
+
+def test_new_country_language_and_role_validate_via_config_alone(
+    sample_document: PolicyDocument,
+    tmp_path: Path,
+) -> None:
+    """A deployment can extend its access model with a country, language,
+    and role this codebase has never seen, purely through AccessModel data
+    — no change to corpus_manifest.py is needed.
+    """
+    document = sample_document.copy()
+    document["country"] = "germany"
+    document["language"] = "de"
+    document["allowed_roles"] = ["finance_admin"]
+    document["status"] = "current"
+    document["effective_to"] = None
+
+    document_path = tmp_path / document["path"]
+    document_path.parent.mkdir(parents=True)
+    document_path.touch()
+
+    extended_access_model = AccessModel(
+        countries={"germany"},
+        languages={"de"},
+        roles={"finance_admin"},
+    )
+
+    validate_fields(document, tmp_path, extended_access_model)
+
+
+def test_load_access_model_reads_yaml(tmp_path: Path) -> None:
+    path = tmp_path / "access-model.yaml"
+    path.write_text(
+        yaml.safe_dump(
+            {
+                "countries": ["spain", "germany"],
+                "languages": ["es", "de"],
+                "roles": ["employee", "finance_admin"],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    access_model = load_access_model(path)
+
+    assert access_model["countries"] == {"spain", "germany"}
+    assert access_model["languages"] == {"es", "de"}
+    assert access_model["roles"] == {"employee", "finance_admin"}
+
+
+def test_load_access_model_rejects_non_mapping(tmp_path: Path) -> None:
+    path = tmp_path / "access-model.yaml"
+    path.write_text(yaml.safe_dump(["just", "a", "list"]), encoding="utf-8")
+
+    with pytest.raises(TypeError, match="Access model must be a mapping"):
+        load_access_model(path)
+
+
+@pytest.mark.parametrize("key", ["countries", "languages", "roles"])
+def test_load_access_model_rejects_empty_dimension(tmp_path: Path, key: str) -> None:
+    content = {
+        "countries": ["spain"],
+        "languages": ["es"],
+        "roles": ["employee"],
+    }
+    content[key] = []
+
+    path = tmp_path / "access-model.yaml"
+    path.write_text(yaml.safe_dump(content), encoding="utf-8")
+
+    with pytest.raises(TypeError, match=f"Access model '{key}'"):
+        load_access_model(path)
+
+
+@pytest.mark.parametrize("key", ["countries", "languages", "roles"])
+def test_load_access_model_rejects_blank_value(tmp_path: Path, key: str) -> None:
+    content = {
+        "countries": ["spain"],
+        "languages": ["es"],
+        "roles": ["employee"],
+    }
+    content[key] = [*content[key], "   "]
+
+    path = tmp_path / "access-model.yaml"
+    path.write_text(yaml.safe_dump(content), encoding="utf-8")
+
+    with pytest.raises(ValueError, match=f"Access model '{key}' must not contain"):
+        load_access_model(path)
+
+
+@pytest.mark.parametrize("key", ["countries", "languages", "roles"])
+def test_load_access_model_rejects_duplicate_value(tmp_path: Path, key: str) -> None:
+    content = {
+        "countries": ["spain"],
+        "languages": ["es"],
+        "roles": ["employee"],
+    }
+    content[key] = [*content[key], content[key][0]]
+
+    path = tmp_path / "access-model.yaml"
+    path.write_text(yaml.safe_dump(content), encoding="utf-8")
+
+    with pytest.raises(ValueError, match=f"Access model '{key}' contains duplicate"):
+        load_access_model(path)

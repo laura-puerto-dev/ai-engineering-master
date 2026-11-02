@@ -19,6 +19,20 @@ class IngestedDocument(TypedDict):
     content: str
 
 
+class AccessModel(TypedDict):
+    """A deployment's access-control vocabulary: which countries, languages,
+    and roles its documents may declare. Loaded from config/access-model.yaml
+    so a new value in an existing dimension (e.g. a country) is a
+    configuration change, not a code change. Adding a new *dimension*
+    (e.g. department) is still a schema change to PolicyDocument and to
+    validate_fields, by design — this only covers values, not shape.
+    """
+
+    countries: set[str]
+    languages: set[str]
+    roles: set[str]
+
+
 class DocumentChunk(TypedDict):
     """A chunk produced by the chunker from an IngestedDocument's content.
 

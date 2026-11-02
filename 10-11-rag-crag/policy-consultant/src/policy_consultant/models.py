@@ -49,3 +49,18 @@ class DocumentChunk(TypedDict):
     ordinal: int
     section_path: list[str]
     text: str
+
+
+class IndexableChunk(TypedDict):
+    """One chunk paired with its originating document's full metadata, as
+    produced by indexing_prep.prepare_indexable_chunks.
+
+    A flat record rather than a per-document grouping: document and chunk
+    carry everything needed to batch across document boundaries (e.g. for
+    embeddings) or to regroup by document["document_id"] later (e.g. with
+    itertools.groupby, for an atomic per-document persistence transaction)
+    without this type favoring one over the other.
+    """
+
+    document: PolicyDocument
+    chunk: DocumentChunk

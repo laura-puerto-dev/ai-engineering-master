@@ -64,3 +64,19 @@ class IndexableChunk(TypedDict):
 
     document: PolicyDocument
     chunk: DocumentChunk
+
+
+class EmbeddedChunk(IndexableChunk):
+    """An IndexableChunk paired with its embedding vector.
+
+    model_id is a simple descriptive string (e.g. "BAAI/bge-m3") and does
+    not by itself guarantee exact reproducibility: the model's weight
+    revision, normalization setting, and other inference parameters can
+    all change the resulting vector without changing this string. A
+    future persistence layer must record those details explicitly as
+    indexing metadata — this field alone is not enough to tell two
+    embedding configurations apart.
+    """
+
+    embedding: list[float]
+    model_id: str

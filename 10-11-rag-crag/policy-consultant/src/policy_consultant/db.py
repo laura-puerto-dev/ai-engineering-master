@@ -10,7 +10,7 @@ and closed within a single `with` block.
 from __future__ import annotations
 
 import os
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 
 import psycopg
@@ -49,7 +49,7 @@ def _connect(
 @contextmanager
 def admin_connection(
     *, dbname: str | None = None, connect_timeout: int | None = None
-) -> Iterator[psycopg.Connection]:
+) -> Generator[psycopg.Connection, None, None]:
     """An autocommit connection authenticated as policy_consultant_admin.
 
     Unrestricted: bypasses row-level security entirely (see
@@ -94,7 +94,7 @@ def app_connection(
     role: str,
     access_model: AccessModel,
     dbname: str | None = None,
-) -> Iterator[psycopg.Connection]:
+) -> Generator[psycopg.Connection, None, None]:
     """A single connection, single transaction, authenticated as
     policy_app.
 

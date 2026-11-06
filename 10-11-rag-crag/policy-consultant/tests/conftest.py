@@ -22,6 +22,7 @@ import pytest
 from dotenv import load_dotenv
 from psycopg import sql
 
+from policy_consultant.db import admin_connection
 from policy_consultant.migrations import apply_migrations
 
 load_dotenv()
@@ -54,6 +55,13 @@ def _connect(
     user: str | None = None,
     password: str | None = None,
 ) -> psycopg.Connection:
+    """Only for the two fixtures below that need a connection shape
+    admin_connection()/app_connection() deliberately don't offer: a
+    non-autocommit admin connection, and a policy_app connection whose
+    context isn't pre-validated or pre-set. Everything else in this
+    file goes through policy_consultant.db instead of building its own
+    connections.
+    """
     params = _connection_params()
     return psycopg.connect(
         host=params["host"],
@@ -73,15 +81,13 @@ def _test_database_ready() -> None:
     PostgreSQL isn't reachable, rather than failing.
     """
     try:
-        conn = _connect("postgres", autocommit=True, connect_timeout=3)
+        with (
+            admin_connection(dbname="postgres", connect_timeout=3) as conn,
+            contextlib.suppress(psycopg.errors.DuplicateDatabase),
+        ):
+            conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(TEST_DATABASE_NAME)))
     except psycopg.OperationalError as exc:
         pytest.skip(f"PostgreSQL is not reachable: {exc}")
-
-    try:
-        with contextlib.suppress(psycopg.errors.DuplicateDatabase):
-            conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(TEST_DATABASE_NAME)))
-    finally:
-        conn.close()
 
 
 @pytest.fixture
@@ -89,25 +95,20 @@ def pg_connection(_test_database_ready: None) -> Iterator[psycopg.Connection]:
     """An autocommit connection to the dedicated test database, reset to
     a blank 'public' schema before the test runs.
     """
-    conn = _connect(TEST_DATABASE_NAME, autocommit=True)
+    with admin_connection(dbname=TEST_DATABASE_NAME) as conn:
+        row = conn.execute("SELECT current_database()").fetchone()
+        assert row is not None
+        actual_database = row[0]
+        if actual_database != TEST_DATABASE_NAME:
+            raise RuntimeError(
+                f"Refusing to reset database {actual_database!r}: expected the "
+                f"dedicated test database {TEST_DATABASE_NAME!r}."
+            )
 
-    row = conn.execute("SELECT current_database()").fetchone()
-    assert row is not None
-    actual_database = row[0]
-    if actual_database != TEST_DATABASE_NAME:
-        conn.close()
-        raise RuntimeError(
-            f"Refusing to reset database {actual_database!r}: expected the "
-            f"dedicated test database {TEST_DATABASE_NAME!r}."
-        )
+        conn.execute("DROP SCHEMA public CASCADE")
+        conn.execute("CREATE SCHEMA public")
 
-    conn.execute("DROP SCHEMA public CASCADE")
-    conn.execute("CREATE SCHEMA public")
-
-    try:
         yield conn
-    finally:
-        conn.close()
 
 
 @pytest.fixture
@@ -116,17 +117,16 @@ def second_pg_connection(_test_database_ready: None) -> Iterator[psycopg.Connect
     test database — for asserting that changes made via pg_connection are
     genuinely durable, not merely visible within one session.
     """
-    conn = _connect(TEST_DATABASE_NAME, autocommit=True)
-    try:
+    with admin_connection(dbname=TEST_DATABASE_NAME) as conn:
         yield conn
-    finally:
-        conn.close()
 
 
 @pytest.fixture
 def non_autocommit_pg_connection(_test_database_ready: None) -> Iterator[psycopg.Connection]:
     """A connection to the dedicated test database in the default
     (non-autocommit) mode, for testing that apply_migrations rejects it.
+    admin_connection() is always autocommit, by design, so this fixture
+    keeps its own direct connection rather than using it.
     """
     conn = _connect(TEST_DATABASE_NAME)
     try:

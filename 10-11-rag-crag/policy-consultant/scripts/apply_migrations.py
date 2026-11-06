@@ -1,17 +1,13 @@
 """CLI entry point: apply pending SQL migrations in migrations/ against
 the configured PostgreSQL database.
-
-Connection handling here is intentionally minimal — a single autocommit
-connection built directly from environment variables. The reusable
-admin/app connection module is introduced in a later persistence stage.
 """
 
 import os
 from pathlib import Path
 
-import psycopg
 from dotenv import load_dotenv
 
+from policy_consultant.db import admin_connection
 from policy_consultant.migrations import apply_migrations
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -28,16 +24,7 @@ def main() -> None:
     if not policy_app_password:
         raise ValueError("POLICY_APP_PASSWORD must be set to a non-empty value")
 
-    conn = psycopg.connect(
-        host=os.environ["DATABASE_HOST"],
-        port=os.environ["DATABASE_PORT"],
-        dbname=os.environ["POSTGRES_DB"],
-        user=os.environ["POSTGRES_USER"],
-        password=os.environ["POSTGRES_PASSWORD"],
-        autocommit=True,
-    )
-
-    try:
+    with admin_connection() as conn:
         # Only read by 002_security.sql, and only inside its IF NOT EXISTS
         # guard — this never changes an already-created policy_app's
         # password, including on every subsequent run of this script.
@@ -46,8 +33,6 @@ def main() -> None:
             (policy_app_password,),
         )
         applied = apply_migrations(MIGRATIONS_DIR, conn)
-    finally:
-        conn.close()
 
     print("Applied: " + ", ".join(applied) if applied else "Nothing to apply.")
 

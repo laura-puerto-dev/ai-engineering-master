@@ -21,6 +21,13 @@ MIGRATIONS_DIR = PROJECT_ROOT / "migrations"
 def main() -> None:
     load_dotenv()
 
+    # Validated here, before it ever reaches SQL, so a missing or blank
+    # value fails with a clear message instead of a less obvious error
+    # from inside 002_security.sql. Never interpolated into any message.
+    policy_app_password = os.environ.get("POLICY_APP_PASSWORD", "")
+    if not policy_app_password:
+        raise ValueError("POLICY_APP_PASSWORD must be set to a non-empty value")
+
     conn = psycopg.connect(
         host=os.environ["DATABASE_HOST"],
         port=os.environ["DATABASE_PORT"],
@@ -31,6 +38,13 @@ def main() -> None:
     )
 
     try:
+        # Only read by 002_security.sql, and only inside its IF NOT EXISTS
+        # guard — this never changes an already-created policy_app's
+        # password, including on every subsequent run of this script.
+        conn.execute(
+            "SELECT set_config('app.policy_app_bootstrap_password', %s, false)",
+            (policy_app_password,),
+        )
         applied = apply_migrations(MIGRATIONS_DIR, conn)
     finally:
         conn.close()

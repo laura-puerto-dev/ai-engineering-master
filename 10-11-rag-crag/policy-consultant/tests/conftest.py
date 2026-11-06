@@ -14,6 +14,7 @@ from __future__ import annotations
 import contextlib
 import os
 from collections.abc import Iterator
+from pathlib import Path
 from typing import TypedDict
 
 import psycopg
@@ -21,9 +22,12 @@ import pytest
 from dotenv import load_dotenv
 from psycopg import sql
 
+from policy_consultant.migrations import apply_migrations
+
 load_dotenv()
 
 TEST_DATABASE_NAME = "policy_consultant_test"
+REAL_MIGRATIONS_DIR = Path(__file__).resolve().parent.parent / "migrations"
 
 
 class _ConnectionParams(TypedDict):
@@ -43,14 +47,19 @@ def _connection_params() -> _ConnectionParams:
 
 
 def _connect(
-    dbname: str, *, autocommit: bool = False, connect_timeout: int | None = None
+    dbname: str,
+    *,
+    autocommit: bool = False,
+    connect_timeout: int | None = None,
+    user: str | None = None,
+    password: str | None = None,
 ) -> psycopg.Connection:
     params = _connection_params()
     return psycopg.connect(
         host=params["host"],
         port=params["port"],
-        user=params["user"],
-        password=params["password"],
+        user=user if user is not None else params["user"],
+        password=password if password is not None else params["password"],
         dbname=dbname,
         autocommit=autocommit,
         connect_timeout=connect_timeout,
@@ -120,6 +129,48 @@ def non_autocommit_pg_connection(_test_database_ready: None) -> Iterator[psycopg
     (non-autocommit) mode, for testing that apply_migrations rejects it.
     """
     conn = _connect(TEST_DATABASE_NAME)
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+
+@pytest.fixture
+def policy_app_ready(pg_connection: psycopg.Connection) -> psycopg.Connection:
+    """Applies the real migrations (through 002_security.sql) against the
+    freshly reset test database. policy_app's password is bootstrapped
+    from POLICY_APP_PASSWORD only the first time the role is ever created
+    cluster-wide; since the role outlives the schema reset between tests,
+    later test runs leave an already-set password untouched.
+
+    Returns the admin connection (pg_connection), for seeding test data.
+    """
+    # Validated here, before it ever reaches SQL — never interpolated
+    # into any message.
+    policy_app_password = os.environ.get("POLICY_APP_PASSWORD", "")
+    if not policy_app_password:
+        raise ValueError("POLICY_APP_PASSWORD must be set to a non-empty value")
+
+    pg_connection.execute(
+        "SELECT set_config('app.policy_app_bootstrap_password', %s, false)",
+        (policy_app_password,),
+    )
+    apply_migrations(REAL_MIGRATIONS_DIR, pg_connection)
+    return pg_connection
+
+
+@pytest.fixture
+def policy_app_connection(policy_app_ready: psycopg.Connection) -> Iterator[psycopg.Connection]:
+    """A connection to the dedicated test database authenticated as
+    policy_app, in the default (non-autocommit) mode — matching how a
+    real backend would wrap set_config(..., true) and a query in one
+    explicit transaction.
+    """
+    conn = _connect(
+        TEST_DATABASE_NAME,
+        user="policy_app",
+        password=os.environ["POLICY_APP_PASSWORD"],
+    )
     try:
         yield conn
     finally:

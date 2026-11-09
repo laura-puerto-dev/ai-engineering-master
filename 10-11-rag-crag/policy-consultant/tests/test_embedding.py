@@ -1,15 +1,21 @@
-"""Tests for embed_indexable_chunks against a fake EmbeddingModel.
+"""Tests for embed_indexable_chunks against a fake EmbeddingModel, plus one
+deterministic constructor-wiring test for LocalBgeM3EmbeddingModel.
 
-Never imports sentence-transformers or torch: LocalBgeM3EmbeddingModel is
-exercised separately by scripts/smoke_test_embedding.py, run manually.
+Never imports the real sentence-transformers or torch: that one
+LocalBgeM3EmbeddingModel test injects fake stand-in modules via
+sys.modules instead, so it never touches the network or real weights.
+Actual inference against the real model is exercised separately by
+scripts/smoke_test_embedding.py, run manually.
 """
 
+import sys
+import types
 from collections.abc import Callable
 from datetime import date
 
 import pytest
 
-from policy_consultant.embedding import embed_indexable_chunks
+from policy_consultant.embedding import LocalBgeM3EmbeddingModel, embed_indexable_chunks
 from policy_consultant.models import DocumentChunk, IndexableChunk, PolicyDocument
 
 
@@ -206,3 +212,34 @@ def test_rejects_non_positive_batch_size(
 
     with pytest.raises(ValueError, match="batch_size must be greater than 0"):
         embed_indexable_chunks(iter(items), model, batch_size=batch_size)
+
+
+def test_local_bge_m3_pins_the_configured_revision_when_loading_sentence_transformer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """LocalBgeM3EmbeddingModel must load a pinned, reproducible commit —
+    not whatever "main" resolves to. This never touches the real
+    sentence-transformers/torch packages or the network: both are
+    replaced with bare fake modules via sys.modules for the duration of
+    this test.
+    """
+    captured: dict[str, object] = {}
+
+    class _FakeSentenceTransformer:
+        def __init__(self, model_name: str, **kwargs: object) -> None:
+            captured["model_name"] = model_name
+            captured.update(kwargs)
+
+        def get_embedding_dimension(self) -> int:
+            return 1024
+
+    fake_sentence_transformers = types.ModuleType("sentence_transformers")
+    fake_sentence_transformers.SentenceTransformer = _FakeSentenceTransformer  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, "sentence_transformers", fake_sentence_transformers)
+    monkeypatch.setitem(sys.modules, "torch", types.ModuleType("torch"))
+
+    LocalBgeM3EmbeddingModel(device="cpu")
+
+    assert captured["model_name"] == "BAAI/bge-m3"
+    assert captured["device"] == "cpu"
+    assert captured["revision"] == LocalBgeM3EmbeddingModel._MODEL_REVISION

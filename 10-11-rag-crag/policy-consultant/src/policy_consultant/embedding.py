@@ -114,6 +114,11 @@ class LocalBgeM3EmbeddingModel:
     """
 
     _MODEL_NAME = "BAAI/bge-m3"
+    # Pinned to a specific Hugging Face commit so the exact weights loaded
+    # are reproducible and identifiable in index_metadata, rather than
+    # silently floating to whatever "main" resolves to at download time.
+    # Verified against https://huggingface.co/BAAI/bge-m3 on 2026-11-09.
+    _MODEL_REVISION = "5617a9f61b028005a4858fdac845db406aefb181"
 
     def __init__(self, device: str) -> None:
         try:
@@ -133,7 +138,9 @@ class LocalBgeM3EmbeddingModel:
             )
 
         try:
-            self._model = SentenceTransformer(self._MODEL_NAME, device=device)
+            self._model = SentenceTransformer(
+                self._MODEL_NAME, device=device, revision=self._MODEL_REVISION
+            )
         except Exception as exc:
             raise RuntimeError(
                 f"Failed to load embedding model '{self._MODEL_NAME}' on device '{device}'"
@@ -153,6 +160,10 @@ class LocalBgeM3EmbeddingModel:
     @property
     def dimensions(self) -> int:
         return self._dimensions
+
+    @property
+    def revision(self) -> str:
+        return self._MODEL_REVISION
 
     def embed_batch(self, texts: list[str]) -> list[list[float]]:
         # encode() has its own internal batch_size (default 32) that would

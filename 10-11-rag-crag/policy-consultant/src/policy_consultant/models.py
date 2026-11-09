@@ -80,3 +80,42 @@ class EmbeddedChunk(IndexableChunk):
 
     embedding: list[float]
     model_id: str
+
+
+class SyncPlan(TypedDict):
+    """The pure decision output of sync._plan_sync: what to do with each
+    manifest/stored document_id, before anything touches PostgreSQL.
+
+    to_insert/to_update/to_update_metadata carry full PolicyDocument
+    records (everything the next step needs); the other categories only
+    need the document_id, since nothing further is done with them this
+    stage. See sync.sync_corpus for how each category is executed.
+    """
+
+    to_insert: list[PolicyDocument]
+    to_update: list[PolicyDocument]
+    to_update_metadata: list[PolicyDocument]
+    unchanged: list[str]
+    rejected_stale: list[str]
+    metadata_conflict: list[str]
+    missing_from_manifest: list[str]
+
+
+class SyncReport(TypedDict):
+    """What sync.sync_corpus actually did, returned after execution.
+
+    Categories mirror SyncPlan's, except to_insert/to_update/
+    to_update_metadata become inserted/updated/updated_metadata (past
+    tense: these succeeded). failed collects every document whose
+    attempted operation raised, regardless of which planned category it
+    came from.
+    """
+
+    inserted: list[str]
+    updated: list[str]
+    updated_metadata: list[str]
+    unchanged: list[str]
+    rejected_stale: list[str]
+    metadata_conflict: list[str]
+    missing_from_manifest: list[str]
+    failed: list[tuple[str, str]]

@@ -119,3 +119,27 @@ class SyncReport(TypedDict):
     metadata_conflict: list[str]
     missing_from_manifest: list[str]
     failed: list[tuple[str, str]]
+
+
+class RetrievedChunk(TypedDict):
+    """One chunk returned by retrieval.retrieve_relevant_chunks, carrying
+    everything a future citation needs to point back to its exact source:
+    which document, which version, which section, and the chunk itself.
+
+    version comes from a join against documents (chunks doesn't store it
+    — see migrations/001_schema.sql), so it always reflects the document's
+    current row, never a stale value baked in at embedding time.
+
+    distance is pgvector's raw cosine distance (<=>) for this chunk
+    against the query embedding: 0 is identical, 2 is opposite, lower is
+    more relevant. Not stored as a "similarity" score to avoid a second,
+    derived field that could drift from this one — a caller that wants
+    similarity computes 1 - distance.
+    """
+
+    chunk_id: str
+    document_id: str
+    version: str
+    section_path: list[str]
+    text: str
+    distance: float

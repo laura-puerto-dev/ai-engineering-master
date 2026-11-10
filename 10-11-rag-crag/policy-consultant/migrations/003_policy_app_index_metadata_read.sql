@@ -1,0 +1,16 @@
+-- index_metadata is a singleton (id is a boolean PRIMARY KEY fixed to
+-- true) describing which embedding configuration built the live index —
+-- operational metadata, not policy content, and with no per-country/role
+-- dimension to protect with RLS. Granting read access doesn't touch the
+-- documents/chunks policies at all.
+--
+-- Unlike schema USAGE or function EXECUTE (see 002_security.sql), table
+-- privileges are not granted to PUBLIC by default in PostgreSQL, so no
+-- accompanying REVOKE is needed here.
+--
+-- policy_app gets SELECT only: it can read which model/revision built
+-- the index (e.g. a retrieval service verifying its own embedding model
+-- is compatible before serving queries), but writing index_metadata
+-- stays exclusive to persist_document()/sync_corpus() via the admin
+-- connection.
+GRANT SELECT ON index_metadata TO policy_app;

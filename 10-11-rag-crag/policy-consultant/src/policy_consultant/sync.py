@@ -34,7 +34,7 @@ from policy_consultant.corpus_manifest import validate_manifest
 from policy_consultant.embedding import EmbeddingModel, embed_indexable_chunks
 from policy_consultant.indexing_prep import prepare_indexable_chunks
 from policy_consultant.models import AccessModel, PolicyDocument, SyncPlan, SyncReport
-from policy_consultant.persistence import persist_document
+from policy_consultant.persistence import persist_document, verify_embedding_model_compatibility
 
 
 class _StoredDocument(NamedTuple):
@@ -80,7 +80,7 @@ def sync_corpus(
     run.
     """
     validate_manifest(manifest_documents, project_root, access_model)
-    _check_global_embedding_model_compatibility(
+    verify_embedding_model_compatibility(
         conn,
         model_id=embedding_model.model_id,
         revision=embedding_model_revision,
@@ -247,45 +247,6 @@ def _read_stored_documents(conn: psycopg.Connection) -> dict[str, _StoredDocumen
         )
         for row in rows
     }
-
-
-def _check_global_embedding_model_compatibility(
-    conn: psycopg.Connection,
-    *,
-    model_id: str,
-    revision: str,
-    dimensions: int,
-    normalized: bool,
-) -> None:
-    """Read-only pre-check: abort the whole run early if index_metadata
-    already disagrees with the model this run is configured to use,
-    instead of discovering that the hard way after embedding every
-    document only to have persist_document reject each one individually.
-
-    Deliberately not shared with persistence._check_or_register_embedding_
-    model: that function also performs the bootstrap INSERT, which this
-    read-only pre-check must not do (bootstrapping stays persist_document's
-    job on the first real write).
-    """
-    row = conn.execute(
-        """
-        SELECT embedding_model_id, embedding_model_revision, embedding_dimensions,
-               embeddings_normalized
-        FROM index_metadata
-        """
-    ).fetchone()
-    if row is None:
-        return
-
-    stored = tuple(row)
-    requested = (model_id, revision, dimensions, normalized)
-    if stored != requested:
-        raise ValueError(
-            "Embedding model mismatch: index_metadata is registered as "
-            f"model_id={stored[0]!r} revision={stored[1]!r} dimensions={stored[2]} "
-            f"normalized={stored[3]}, but this sync run uses model_id={model_id!r} "
-            f"revision={revision!r} dimensions={dimensions} normalized={normalized}"
-        )
 
 
 def _embed_and_persist(

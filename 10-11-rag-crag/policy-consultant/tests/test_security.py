@@ -223,11 +223,16 @@ def test_policy_app_cannot_write_documents_or_chunks(
     policy_app_connection.rollback()
 
 
-def test_policy_app_cannot_access_index_metadata_or_schema_migrations(
+def test_policy_app_can_read_but_not_modify_index_metadata(
     seeded_documents: psycopg.Connection, policy_app_connection: psycopg.Connection
 ) -> None:
-    with pytest.raises(psycopg.errors.InsufficientPrivilege):
-        policy_app_connection.execute("SELECT * FROM index_metadata")
+    """migrations/003_policy_app_index_metadata_read.sql grants SELECT
+    only: policy_app can check embedding-model compatibility (see
+    persistence.verify_embedding_model_compatibility) but still can't
+    write index_metadata — that stays exclusive to the admin connection.
+    """
+    rows = policy_app_connection.execute("SELECT * FROM index_metadata").fetchall()
+    assert rows == []  # no document has been persisted on this connection's path
     policy_app_connection.rollback()
 
     with pytest.raises(psycopg.errors.InsufficientPrivilege):
@@ -239,6 +244,10 @@ def test_policy_app_cannot_access_index_metadata_or_schema_migrations(
         )
     policy_app_connection.rollback()
 
+
+def test_policy_app_cannot_access_schema_migrations(
+    seeded_documents: psycopg.Connection, policy_app_connection: psycopg.Connection
+) -> None:
     with pytest.raises(psycopg.errors.InsufficientPrivilege):
         policy_app_connection.execute("SELECT * FROM schema_migrations")
     policy_app_connection.rollback()

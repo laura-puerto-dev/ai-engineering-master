@@ -205,7 +205,63 @@ def _check_or_register_embedding_model(
     ).fetchone()
     assert row is not None  # the INSERT above guarantees exactly one row exists
 
-    stored = tuple(row)
+    _raise_if_incompatible(
+        tuple(row),
+        model_id=model_id,
+        revision=revision,
+        dimensions=dimensions,
+        normalized=normalized,
+    )
+
+
+def verify_embedding_model_compatibility(
+    conn: psycopg.Connection,
+    *,
+    model_id: str,
+    revision: str,
+    dimensions: int,
+    normalized: bool,
+) -> None:
+    """Read-only check: raise if index_metadata already has a registered
+    embedding configuration that disagrees with this one. A no-op if
+    index_metadata has no row yet (nothing to disagree with).
+
+    Unlike _check_or_register_embedding_model, this never writes anything
+    — it only reads — so it works equally well with either
+    db.admin_connection() or db.app_connection(): as of
+    migrations/003_policy_app_index_metadata_read.sql, policy_app has
+    SELECT (and only SELECT) on index_metadata, so an app_connection no
+    longer needs to fail here with a permissions error. Intended to be
+    called once, e.g. when a long-lived retrieval-serving process starts
+    up — not on every single query.
+    """
+    row = conn.execute(
+        """
+        SELECT embedding_model_id, embedding_model_revision,
+               embedding_dimensions, embeddings_normalized
+        FROM index_metadata
+        """
+    ).fetchone()
+    if row is None:
+        return
+
+    _raise_if_incompatible(
+        tuple(row),
+        model_id=model_id,
+        revision=revision,
+        dimensions=dimensions,
+        normalized=normalized,
+    )
+
+
+def _raise_if_incompatible(
+    stored: tuple[object, ...],
+    *,
+    model_id: str,
+    revision: str,
+    dimensions: int,
+    normalized: bool,
+) -> None:
     requested = (model_id, revision, dimensions, normalized)
     if stored != requested:
         stored_model_id, stored_revision, stored_dimensions, stored_normalized = stored

@@ -11,16 +11,27 @@ persist_document requires.
 from __future__ import annotations
 
 from datetime import date
+from pathlib import Path
 
 import psycopg
 import pytest
 
-from policy_consultant.models import DocumentChunk, EmbeddedChunk, PolicyDocument
-from policy_consultant.persistence import persist_document
+from policy_consultant.corpus_manifest import load_access_model
+from policy_consultant.db import app_connection
+from policy_consultant.models import AccessModel, DocumentChunk, EmbeddedChunk, PolicyDocument
+from policy_consultant.persistence import persist_document, verify_embedding_model_compatibility
 
 pytestmark = pytest.mark.integration
 
 REAL_DIMENSIONS = 1024
+TEST_DATABASE_NAME = "policy_consultant_test"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+ACCESS_MODEL_PATH = PROJECT_ROOT / "config" / "access-model.yaml"
+
+
+@pytest.fixture
+def access_model() -> AccessModel:
+    return load_access_model(ACCESS_MODEL_PATH)
 
 
 def _make_document(
@@ -375,3 +386,82 @@ def test_persist_document_preserves_previous_version_when_update_is_rejected(
         ("ES-001:1.0:0", 0, "Text 0", ["1. Section"]),
         ("ES-001:1.0:1", 1, "Text 1", ["2. Section"]),
     ]
+
+
+# --- verify_embedding_model_compatibility --------------------------------
+
+
+def test_verify_embedding_model_compatibility_is_a_noop_when_nothing_is_registered(
+    policy_app_ready: psycopg.Connection,
+) -> None:
+    verify_embedding_model_compatibility(
+        policy_app_ready, model_id="fake-model", revision="rev-1", dimensions=1024, normalized=True
+    )  # must not raise
+
+
+def test_verify_embedding_model_compatibility_accepts_a_matching_configuration(
+    policy_app_ready: psycopg.Connection,
+) -> None:
+    document = _make_document()
+    persist_document(
+        policy_app_ready,
+        document,
+        _make_chunks(document, 1),
+        embedding_model_revision="rev-1",
+        embeddings_normalized=True,
+    )
+
+    verify_embedding_model_compatibility(
+        policy_app_ready, model_id="fake-model", revision="rev-1", dimensions=1024, normalized=True
+    )  # must not raise
+
+
+def test_verify_embedding_model_compatibility_rejects_a_mismatched_configuration(
+    policy_app_ready: psycopg.Connection,
+) -> None:
+    document = _make_document()
+    persist_document(
+        policy_app_ready,
+        document,
+        _make_chunks(document, 1),
+        embedding_model_revision="rev-1",
+        embeddings_normalized=True,
+    )
+
+    with pytest.raises(ValueError, match="Embedding model mismatch"):
+        verify_embedding_model_compatibility(
+            policy_app_ready,
+            model_id="fake-model",
+            revision="rev-2",
+            dimensions=1024,
+            normalized=True,
+        )
+
+
+def test_verify_embedding_model_compatibility_works_through_app_connection(
+    policy_app_ready: psycopg.Connection, access_model: AccessModel
+) -> None:
+    """policy_app has SELECT (and only SELECT) on index_metadata as of
+    migrations/003_policy_app_index_metadata_read.sql — this function
+    must work identically whether given an admin or an app connection.
+    """
+    document = _make_document()
+    persist_document(
+        policy_app_ready,
+        document,
+        _make_chunks(document, 1),
+        embedding_model_revision="rev-1",
+        embeddings_normalized=True,
+    )
+
+    with app_connection(
+        country="spain", role="employee", access_model=access_model, dbname=TEST_DATABASE_NAME
+    ) as conn:
+        verify_embedding_model_compatibility(
+            conn, model_id="fake-model", revision="rev-1", dimensions=1024, normalized=True
+        )  # must not raise
+
+        with pytest.raises(ValueError, match="Embedding model mismatch"):
+            verify_embedding_model_compatibility(
+                conn, model_id="fake-model", revision="rev-2", dimensions=1024, normalized=True
+            )

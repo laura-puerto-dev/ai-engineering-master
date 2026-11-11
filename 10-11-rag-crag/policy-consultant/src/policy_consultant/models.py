@@ -143,3 +143,32 @@ class RetrievedChunk(TypedDict):
     section_path: list[str]
     text: str
     distance: float
+
+
+class Citation(TypedDict):
+    """One chunk the answer generator actually used, resolved from the
+    caller's own chunk list by index — never built from free text the
+    model wrote. See generation.py's module docstring for why: the model
+    may only pick a position from a fixed, already-authorized list, so it
+    cannot cite a document/section it was never given.
+    """
+
+    document_id: str
+    version: str
+    section_path: list[str]
+    chunk_id: str
+
+
+class GeneratedAnswer(TypedDict):
+    """The result of generation.AnswerGenerator.generate_answer (or
+    rag.answer_question short-circuiting before calling it).
+
+    citations is always [] when abstained is True — an abstention never
+    carries a grounding claim, even if the model tried to attach one. A
+    non-empty answer with abstained=False always has at least one
+    citation; see generation.py for how that invariant is enforced.
+    """
+
+    answer: str
+    citations: list[Citation]
+    abstained: bool

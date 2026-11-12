@@ -41,9 +41,20 @@ persistence = [
 generation = [
     "anthropic>=2.8.0",
 ]
+# FastAPI demo web app (web/). A consumer of policy_consultant, never
+# the reverse — see web/app.py. Depends on this package's own
+# persistence/embeddings/generation extras because web/app.py composes
+# all three (PostgreSQL access, local BGE-M3, Claude generation), so
+# `uv sync --extra web` alone is enough to run it.
+web = [
+    "policy-consultant[persistence,embeddings,generation]",
+    "fastapi>=0.162.5",
+    "uvicorn>=0.54.0",
+]
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "mypy>=2.4.1",
     "pytest>=9.2.0",
     "ruff>=0.17.3",
@@ -90,6 +101,11 @@ testpaths = ["tests"]
 markers = [
     "integration: requires a running PostgreSQL instance (see compose.yaml)",
 ]
+# web/ lives outside src/policy_consultant (deliberately — see
+# web/app.py) and is therefore not installed into the environment the
+# way policy_consultant is. This makes it importable from tests
+# regardless of how pytest itself is invoked.
+pythonpath = ["."]
 
 [build-system]
 requires = ["hatchling"]

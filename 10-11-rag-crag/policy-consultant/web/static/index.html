@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Policy Consultant: a RAG-powered HR policy assistant demo for a fictional multinational company, answering questions with grounded, citable answers." />
+    <title>Policy Consultant</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <h1>Policy Consultant</h1>
+        <p class="subtitle">
+          An HR policy assistant for a fictional multinational company, answering
+          questions with grounded, citable answers from its internal policy
+          documents.
+        </p>
+        <p class="mode-badge">Mode: RAG (Corrective RAG not implemented yet)</p>
+      </header>
+
+      <main class="page-main">
+        <section class="profile-panel" aria-labelledby="profile-heading">
+          <h2 id="profile-heading">Demo profile</h2>
+          <p class="panel-hint">
+            Choose a country and role. This selects which policies you are
+            authorized to see — it does not represent a real login.
+          </p>
+          <label for="profile-select">Profile</label>
+          <select id="profile-select" disabled>
+            <option value="">Loading profiles…</option>
+          </select>
+        </section>
+
+        <section class="chat-panel" aria-labelledby="chat-heading">
+          <h2 id="chat-heading">Conversation</h2>
+
+          <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
+
+          <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+
+          <div class="example-questions">
+            <span class="example-questions-label">Try asking:</span>
+            <button type="button" class="example-question-button" data-question="How many vacation days do I get per year?">
+              How many vacation days do I get per year?
+            </button>
+            <button type="button" class="example-question-button" data-question="What is the remote work policy?">
+              What is the remote work policy?
+            </button>
+            <button type="button" class="example-question-button" data-question="What is my annual leave entitlement?">
+              What is my annual leave entitlement?
+            </button>
+          </div>
+
+          <form id="ask-form" class="ask-form">
+            <label for="question-input">Your question</label>
+            <div class="ask-form-row">
+              <input
+                type="text"
+                id="question-input"
+                name="question"
+                placeholder="Ask about vacation, remote work, benefits…"
+                autocomplete="off"
+                required
+              />
+              <button type="submit" id="send-button">Send</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <p>
+          Northfern Technologies and all associated policies and employee data
+          are entirely fictional, used for portfolio and learning purposes only.
+        </p>
+      </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

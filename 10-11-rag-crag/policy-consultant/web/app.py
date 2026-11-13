@@ -15,7 +15,9 @@ resolved to (country, role) entirely server-side, from the fixed
 DEMO_PROFILES list below — the browser never sends country/role
 directly, and nothing here treats profile_id as a verified identity.
 
-Does not implement HTML/CSS/JS yet.
+The UI itself (web/static/index.html, style.css, app.js) is plain
+HTML/CSS/JS served as static files from this same app — no separate
+frontend server, no build step, no CORS configuration needed.
 """
 
 from __future__ import annotations
@@ -30,6 +32,8 @@ from typing import TypedDict
 import psycopg
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 from policy_consultant.corpus_manifest import load_access_model
@@ -51,6 +55,7 @@ logger = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ACCESS_MODEL_PATH = PROJECT_ROOT / "config" / "access-model.yaml"
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 TOP_K = 5
 
 
@@ -130,6 +135,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
 
 
 app = FastAPI(title="Policy Consultant", lifespan=lifespan)
+
+# "static" also serves index.html itself (via /static/index.html), but
+# GET / below is the friendly entry point most visitors actually use.
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def index() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/api/profiles", response_model=list[ProfileOut])

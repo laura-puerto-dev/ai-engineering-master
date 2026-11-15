@@ -16,11 +16,33 @@ A full, working RAG pipeline is implemented, tested, and manually validated agai
 - **Corpus sync**: an idempotent reconciliation step that only re-embeds documents that actually changed.
 - **Retrieval**: pgvector cosine-distance search over an RLS-bound connection — authorization is never a Python-side filter.
 - **Generation**: Claude Sonnet 5, with structured outputs and index-based citation resolution so the model can never cite a document it wasn't given.
-- **229 automated tests** (94 of them integration tests against a real PostgreSQL instance), plus a manual smoke test against the real corpus and a real Anthropic call (see [Manual validation](#manual-validation--first-real-run) below).
+- **Web demo**: a FastAPI app (`web/app.py`) exposing `GET /api/profiles` and `POST /api/ask` over the exact same `answer_question()` pipeline, with a small HTML/CSS/JS interface (`web/static/`) served from the same app — no separate frontend process, no build step, no CORS configuration. See [Running the Web Demo](#running-the-web-demo).
+- **245 automated tests** (98 of them integration tests against a real PostgreSQL instance), plus a manual smoke test against the real corpus and a real Anthropic call (see [Manual validation](#manual-validation--first-real-run) below), and a manual end-to-end run through the web demo itself.
 
-**Not yet implemented**: a FastAPI service, a web frontend, Corrective RAG (CRAG), and automated evaluation of retrieval/groundedness quality. See [Pending work](#pending-work).
+**Not yet implemented**: Corrective RAG (CRAG), and automated evaluation of retrieval/groundedness quality. See [Pending work](#pending-work).
 
 ## Architecture
+
+### Web Request Flow
+
+The web demo's only backend code is `web/app.py`: it resolves a request's `profile_id` into `(country, role)` server-side, then calls straight into the same `answer_question()` pipeline described below — no RAG or RLS logic is duplicated in the web layer.
+
+```
+Browser (web/static/index.html, style.css, app.js)
+        │  GET /api/profiles
+        │  POST /api/ask  {profile_id, question}
+        ▼
+FastAPI (web/app.py)
+        │  profile_id → (country, role), resolved server-side —
+        │  the browser never sends country/role directly
+        ▼
+answer_question()   (see "RAG Pipeline" below)
+        │
+        ▼
+JSON {answer, abstained, citations}  ──▶  Browser
+```
+
+### RAG Pipeline
 
 ```
 config/corpus-manifest.yaml + data/corpus/*.md
@@ -60,6 +82,15 @@ sync_corpus()  ──────────────▶  PostgreSQL (docume
 | `rag.py` | `answer_question()` — the thin orchestration tying retrieval and generation together. |
 | `language.py` | A small, dependency-free Spanish/English heuristic used to localize the project's own abstention messages. |
 
+### Web demo (`web/`)
+
+A consumer of `policy_consultant`, never the reverse — nothing in `src/policy_consultant/` imports from `web/`.
+
+| File | Responsibility |
+|---|---|
+| `app.py` | FastAPI app: `DEMO_PROFILES` (fixed `profile_id → (country, role)` list), `GET /api/profiles`, `POST /api/ask`, and a `lifespan` that loads the access model, BGE-M3, and the Claude generator once at startup. |
+| `static/index.html`, `style.css`, `app.js` | The demo page itself — plain HTML/CSS/vanilla JS, no framework, no build step, served as static files by the same FastAPI app. |
+
 ## Tech Stack and Key Decisions
 
 - **Python 3.12**, managed with [`uv`](https://docs.astral.sh/uv/).
@@ -70,6 +101,7 @@ sync_corpus()  ──────────────▶  PostgreSQL (docume
 - **Anthropic Claude** (Sonnet 5) for generation, via the official `anthropic` SDK, using **structured outputs** (a Pydantic schema passed to `messages.parse()`) so the model's response is schema-validated rather than parsed out of free text.
 - **Citations are resolved by index, never by trusting the model's prose.** The model receives a fixed, numbered list of already-authorized chunks and may only report which *numbers* it used; an answer with zero valid citations is never presented as grounded.
 - **No framework for framework's sake**: no LangGraph, no generic repository/ORM layers, no connection pools, no NLP dependency for a two-language heuristic. Every abstraction introduced (e.g. the `EmbeddingModel`/`AnswerGenerator` protocols) exists specifically to make the embedding provider or the LLM provider swappable without rewriting callers.
+- **FastAPI serving plain HTML/CSS/vanilla JS** for the web demo: no React/Vue, no Node.js/npm, no build step, no separate frontend server or CORS configuration. There are no sessions, cookies, or authentication — a request's `profile_id` is resolved to `(country, role)` entirely server-side, from a fixed list, never accepted as a request field.
 
 ## Project Structure
 
@@ -81,6 +113,7 @@ docs/                     Company background and corpus design documentation
 migrations/               Ordered SQL migrations (schema, roles, RLS, grants)
 scripts/                  Runnable entry points (see "Running the Project")
 src/policy_consultant/    Application code (see "Core modules" above)
+web/                      FastAPI demo app + static HTML/CSS/JS frontend (see "Web demo" above)
 tests/                    Unit tests + integration tests (pytest, marker "integration")
 compose.yaml              PostgreSQL + pgvector service
 .env.example              All environment variables this project reads
@@ -92,8 +125,12 @@ compose.yaml              PostgreSQL + pgvector service
 # Base install (manifest validation, no DB/embeddings/LLM needed)
 uv sync
 
-# Everything needed to sync the corpus and run the full RAG pipeline
+# Everything needed to sync the corpus and run the full RAG pipeline (no web UI)
 uv sync --extra embeddings --extra persistence --extra generation
+
+# Everything needed to run the web demo too — this alone is enough,
+# it pulls in the three extras above
+uv sync --extra web
 ```
 
 | Extra | Adds | Needed for |
@@ -101,12 +138,13 @@ uv sync --extra embeddings --extra persistence --extra generation
 | `embeddings` | `sentence-transformers`, `torch` (CUDA 12.6 wheel index) | Running BGE-M3 locally |
 | `persistence` | `psycopg[binary]`, `python-dotenv` | Everything that talks to PostgreSQL |
 | `generation` | `anthropic` (pydantic comes in transitively) | `ClaudeAnswerGenerator` / `scripts/smoke_test_rag.py` |
+| `web` | `fastapi`, `uvicorn` (and `embeddings`/`persistence`/`generation`, self-referenced) | Running `web/app.py` (see [Running the Web Demo](#running-the-web-demo)) |
 
 Copy `.env.example` to `.env` and fill in the real values:
 
 - PostgreSQL connection settings (`POSTGRES_*`, `DATABASE_*`) and the bootstrap password for the restricted `policy_app` role (`POLICY_APP_PASSWORD`).
 - `EMBEDDING_DEVICE` (`cpu` by default; set to `cuda` for a GPU).
-- `ANTHROPIC_API_KEY` — only required for `generation.ClaudeAnswerGenerator`. An `ant auth login` profile also works, since `anthropic.Anthropic()` falls back to it automatically. Either way, **this project's own code never reads `.env` implicitly** — every script calls `load_dotenv()` itself, and nothing ever logs or prints the key.
+- `ANTHROPIC_API_KEY` — required for `generation.ClaudeAnswerGenerator`. **This project's own code never reads `.env` implicitly** — every script calls `load_dotenv()` itself, and nothing ever logs or prints the key.
 
 Start PostgreSQL and apply migrations:
 
@@ -176,7 +214,30 @@ uv run pytest -m integration
 uv run pytest
 ```
 
-As of this writing: **229 tests pass**, **94** of them integration tests against a real PostgreSQL instance — no skipped tests when PostgreSQL is reachable.
+As of this writing: **245 tests pass**, **98** of them integration tests against a real PostgreSQL instance — no skipped tests when PostgreSQL is reachable. The web demo's own tests (`tests/web/`) use a fake embedding model and a fake generator — never real BGE-M3 or a real Anthropic call — so the automated suite never depends on either.
+
+## Running the Web Demo
+
+Once PostgreSQL is running, migrations are applied, and the corpus is synced (see "Environment Setup" and "Corpus Sync, Embeddings, and Retrieval" above — `uv sync --extra web` covers every dependency needed for this, including `embeddings`/`persistence`/`generation`):
+
+```bash
+uv run uvicorn web.app:app --reload
+```
+
+Then open <http://127.0.0.1:8000/> in a browser:
+
+1. Pick a **demo profile** from the dropdown (e.g. "España · Empleado", "España · RR. HH."). Each profile is a fixed `(country, role)` pair defined in `web/app.py`'s `DEMO_PROFILES` — the browser only ever sends a `profile_id`; the server resolves the country/role and opens the corresponding RLS-bound `app_connection()` itself.
+2. Type a question (or click one of the example questions) and press **Send**.
+3. The answer appears in the chat, visually distinguished as a grounded answer, an abstention, or a technical error. Each answer's expandable **Sources** section shows the exact cited document id, version, section, and fragment text.
+
+**Profile selection is not authentication.** It only demonstrates PostgreSQL's Row-Level Security isolation between countries and roles — it never verifies who is actually making the request. There are no sessions, cookies, or logins anywhere in this demo; `profile_id` is resolved to `(country, role)` entirely server-side on every request.
+
+| Method & Path | Purpose |
+|---|---|
+| `GET /` | Serves the demo page (`web/static/index.html`). |
+| `GET /static/...` | Serves `style.css` and `app.js`. |
+| `GET /api/profiles` | Returns the fixed list of demo profiles (`id`, `label`). |
+| `POST /api/ask` | Body: `{"profile_id": "...", "question": "..."}`. Returns `{"answer", "abstained", "citations"}`, where each citation includes `document_id`, `version`, `section_path`, `chunk_id`, and `text`. |
 
 ## Manual Validation — First Real Run
 
@@ -189,12 +250,14 @@ Two results are worth recording explicitly, since they look like failures but ar
 - **"How many vacation days do I have in Mexico?" → abstained.** Unlike Spain and England, Mexico's policy (`MX-001`) sets entitlement by a seniority table rather than a single flat number. There is no one correct number to retrieve, so the model correctly declined to invent one rather than guessing — a correct abstention, not a retrieval gap. **Improvement opportunity**: the current design only distinguishes "grounded answer" from "abstain" — there is no middle ground for a *partial* answer when the policy's rule depends on a personal fact the system doesn't have (here, seniority). A future stage could let the model describe the rule itself (e.g. "it depends on your seniority bracket, as follows: ...") instead of abstaining outright when the missing piece is a specific personal detail, not a missing policy.
 - **"Does the company pay for a Netflix subscription?" → abstained.** Retrieval did return chunks (it always returns its `top_k` nearest neighbors, relevant or not — there is no empty-result shortcut here), about training budgets, insurance, and travel expenses. The generator recognized that none of them supported an answer about streaming subscriptions and abstained instead of answering from irrelevant context. This specifically validates the generator-level abstention path, not just the zero-evidence shortcut in `rag.answer_question()`. **Improvement opportunity**: abstention here correctly means "the corpus doesn't establish this," but the wording must keep meaning exactly that — "no evidence of X" is not the same claim as "X is false," and a future iteration of the system prompt/evaluation should explicitly guard against an abstention reading as a categorical denial.
 
+The web demo itself (`web/app.py` + `web/static/`) was also run and exercised manually end-to-end in a real browser, through a real BGE-M3 embedding, PostgreSQL/RLS retrieval, and a real Claude call: a question was submitted through the UI, and the grounded answer and its cited sources were displayed correctly.
+
 ## Pending Work
 
-- A FastAPI service exposing `answer_question()` over HTTP.
-- A web frontend.
+- Calibrating a similarity-score threshold for retrieval, using validation data, instead of always returning the top-`k` nearest chunks regardless of distance.
+- A held-out evaluation set of 20 questions (14 answerable, 6 deliberately unanswerable), with their expected supporting evidence and retrieval/groundedness metrics — not yet built or run.
 - Corrective RAG (CRAG): grading retrieved evidence before generation, rather than relying solely on the generator's own abstention judgment.
-- Automated evaluation of retrieval quality, groundedness, and a RAG-vs-CRAG comparison.
+- A RAG-vs-CRAG comparison once CRAG exists, using the evaluation set above.
 
 ## Disclaimer
 

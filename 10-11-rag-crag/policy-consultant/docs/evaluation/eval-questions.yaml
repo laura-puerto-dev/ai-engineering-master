@@ -1,0 +1,311 @@
+# Held-out evaluation set: 20 questions (14 answerable, 6 abstain),
+# reserved for the final RAG evaluation and, later, an identical CRAG run
+# over the same dataset for comparison.
+#
+# Independent from docs/evaluation/calibration-questions.yaml: no question
+# here tests the same concrete fact as a calibration question, even where
+# the same document is reused for a different fact. Calibration results
+# must never be re-derived from this file.
+#
+# pgvector's `<=>` operator is cosine DISTANCE: 0 = identical, 2 =
+# opposite, lower = more relevant (see retrieval.py, models.RetrievedChunk).
+#
+# Every document_id/chunk_id/section_path below was read directly from the
+# real indexed corpus (163 chunks, verified via a read-only SQL query
+# against the real `chunks` table) — none of it is invented. profile_id
+# values are the exact keys of web.app.DEMO_PROFILES.
+#
+# expected_outcome: "answerable" or "abstain".
+# abstain_reason (only set when expected_outcome is "abstain"), one of:
+#   - no_information          : the topic is not covered anywhere in the corpus
+#   - personal_data_unavailable: the policy explicitly says this depends on a
+#                                personal record it does not contain
+#   - insufficient_evidence   : retrieval may return topically related chunks,
+#                                but none of them actually support an answer
+#   - access_restricted       : an authorized document would answer this, but
+#                                it is not visible under this profile's RLS context
+#
+# All answers below were verified by reading the real document text, not
+# inferred from titles or summaries.
+
+questions:
+  # --- Answerable (14) ---
+
+  - id: eval-01
+    question: "¿Cuántos días laborables de vacaciones tiene un empleado en España por año completo de servicio?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "23 días laborables por año completo de servicio."
+    expected_evidence:
+      - document_id: ES-001
+        version: "1.0"
+        chunk_id: "ES-001:1.0:3"
+        section_path: ["3. Vacaciones anuales"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-02
+    question: "Según el Código de Conducta, ¿a partir de qué valor de un regalo se requiere revisión previa de un representante autorizado de la empresa antes de aceptarlo u ofrecerlo?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "A partir de EUR 50 (o el equivalente en moneda local); por debajo de ese umbral no se permite automáticamente, y los regalos en efectivo o equivalentes están prohibidos en todo caso."
+    expected_evidence:
+      - document_id: GLB-001
+        version: "1.0"
+        chunk_id: "GLB-001:1.0:4"
+        section_path: ["4. Gifts, hospitality, and business courtesies"]
+    abstain_reason: null
+    notes: "Sustituye a la pregunta original sobre preaviso de vacaciones en España (ES-001 §4): ES-001 ya quedaba cubierto por eval-01 y eval-03, así que era la menos diversa del conjunto. Perfil mexico-employee usado deliberadamente para evidenciar que un documento global es visible desde cualquier país autorizado, no solo España."
+
+  - id: eval-03
+    question: "¿Cuál es el máximo ordinario de días laborables consecutivos de vacaciones que se pueden solicitar en España?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Hasta 15 días laborables consecutivos, como regla ordinaria."
+    expected_evidence:
+      - document_id: ES-001
+        version: "1.0"
+        chunk_id: "ES-001:1.0:6"
+        section_path: ["6. Periodos consecutivos"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-04
+    question: "¿Cuántos días de teletrabajo a la semana puede hacer un empleado elegible en España?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Hasta 3 días de teletrabajo por semana, manteniendo al menos 2 días de presencia."
+    expected_evidence:
+      - document_id: ES-003
+        version: "1.0"
+        chunk_id: "ES-003:1.0:3"
+        section_path: ["3. Régimen ordinario de teletrabajo"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-05
+    question: "¿Cuál es el presupuesto anual de formación por empleado en España?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "1.200 € de referencia por año natural, no acumulable de un año a otro."
+    expected_evidence:
+      - document_id: ES-004
+        version: "1.0"
+        chunk_id: "ES-004:1.0:3"
+        section_path: ["3. Presupuesto anual de formación"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-06
+    question: "¿A partir de qué antigüedad puede un empleado en España acceder al seguro médico privado voluntario?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "A partir de los seis meses de antigüedad, cumpliendo las condiciones administrativas del programa."
+    expected_evidence:
+      - document_id: ES-004
+        version: "1.0"
+        chunk_id: "ES-004:1.0:8"
+        section_path: ["7. Seguro médico privado"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-07
+    question: "¿Cuál es el límite máximo de reembolso por noche de alojamiento en un viaje de trabajo dentro de España?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "120 € por noche dentro de España (180 € fuera de España), como límite máximo del gasto real justificado."
+    expected_evidence:
+      - document_id: ES-005
+        version: "1.0"
+        chunk_id: "ES-005:1.0:5"
+        section_path: ["5. Alojamiento"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-08
+    question: "Como manager en España, ¿qué debo hacer si un empleado solicita más de 15 días laborables consecutivos de vacaciones?"
+    profile_id: spain-manager
+    expected_outcome: answerable
+    expected_answer_summary: "El manager no puede concederlo por sí solo; debe remitir la solicitud a RR. HH. España para su valoración excepcional."
+    expected_evidence:
+      - document_id: ES-006
+        version: "1.0"
+        chunk_id: "ES-006:1.0:4"
+        section_path: ["4. Gestión de vacaciones"]
+      - document_id: ES-006
+        version: "1.0"
+        chunk_id: "ES-006:1.0:8"
+        section_path: ["8. Excepciones y escalado"]
+    abstain_reason: null
+    notes: "Respuesta repartida en dos fragmentos de ES-006 (regla + lista de escalado)."
+
+  - id: eval-09
+    question: "¿Qué debe recoger el expediente interno de RR. HH. al revisar una excepción de vacaciones de más de 15 días laborables consecutivos en España?"
+    profile_id: spain-hr
+    expected_outcome: answerable
+    expected_answer_summary: "Periodo solicitado y saldo verificado, motivo de la excepcionalidad, valoración del responsable sobre cobertura, y propuesta de resolución con la autoridad que debe decidir."
+    expected_evidence:
+      - document_id: ES-007
+        version: "1.0"
+        chunk_id: "ES-007:1.0:4"
+        section_path: ["4. Excepciones de vacaciones"]
+    abstain_reason: null
+    notes: "Mismo texto de pregunta que eval-16, solo cambia el perfil (spain-hr aquí, spain-employee allí) — par deliberado para aislar el efecto de RLS sobre una consulta idéntica."
+
+  - id: eval-10
+    question: "Para un empleado con 3 años de antigüedad cumplida en México, ¿cuántos días laborables de vacaciones le corresponden según la escala interna?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "18 días laborables, según la fila de 3 años de la escala de antigüedad."
+    expected_evidence:
+      - document_id: MX-001
+        version: "1.1"
+        chunk_id: "MX-001:1.1:3"
+        section_path: ["3. Vacaciones anuales y antigüedad"]
+      - document_id: MX-001
+        version: "1.1"
+        chunk_id: "MX-001:1.1:4"
+        section_path: ["3. Vacaciones anuales y antigüedad"]
+    abstain_reason: null
+    notes: "La antigüedad se da explícitamente en la pregunta para evitar la ambigüedad ya observada en la Etapa 8 (sin antigüedad, la pregunta no es respondible con una sola cifra)."
+
+  - id: eval-11
+    question: "¿Existe en México un límite corporativo ordinario de días laborables consecutivos de vacaciones, como el de 15 días de España?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "No; a diferencia de la política española (ES-001), MX-001 no establece ese límite corporativo ordinario."
+    expected_evidence:
+      - document_id: MX-001
+        version: "1.1"
+        chunk_id: "MX-001:1.1:9"
+        section_path: ["6. Periodos continuos y coordinación"]
+    abstain_reason: null
+    notes: "Respuesta comparativa explícita en el propio texto de MX-001."
+
+  - id: eval-12
+    question: "¿Cuántos días de teletrabajo a la semana puede hacer un empleado elegible en México?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Hasta 2 días de teletrabajo por semana, manteniendo al menos 3 días de presencia."
+    expected_evidence:
+      - document_id: MX-002
+        version: "1.0"
+        chunk_id: "MX-002:1.0:3"
+        section_path: ["3. Modalidad habitual de teletrabajo"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-13
+    question: "What is the annual leave entitlement for a full-time employee in England, and what else is it entitled to on top of it?"
+    profile_id: england-employee
+    expected_outcome: answerable
+    expected_answer_summary: "25 working days of paid annual leave per complete holiday year, plus the applicable bank/public holidays (not deducted from the 25 days)."
+    expected_evidence:
+      - document_id: EN-001
+        version: "1.0"
+        chunk_id: "EN-001:1.0:2"
+        section_path: ["2. Holiday year and annual entitlement"]
+    abstain_reason: null
+    notes: null
+
+  - id: eval-14
+    question: "How many company-paid personal days per holiday year does Northfern provide to eligible employees in England?"
+    profile_id: england-employee
+    expected_outcome: answerable
+    expected_answer_summary: "2 paid personal days per full holiday year, separate from annual leave and bank/public holidays."
+    expected_evidence:
+      - document_id: EN-001
+        version: "1.0"
+        chunk_id: "EN-001:1.0:7"
+        section_path: ["7. Company-paid personal days"]
+    abstain_reason: null
+    notes: null
+
+  # --- Abstain (6) ---
+
+  - id: eval-15
+    question: "¿Cuántos días de vacaciones me quedan a mí este año?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: personal_data_unavailable
+    notes: >
+      ES-001 §3 (ES-001:1.0:3) es casi con certeza el chunk más cercano, y
+      su propio texto dice explícitamente que esta política "no contiene
+      saldos personales" — el saldo individual se consulta en el sistema
+      de personal, no en el corpus.
+
+  - id: eval-16
+    question: "¿Qué debe recoger el expediente interno de RR. HH. al revisar una excepción de vacaciones de más de 15 días laborables consecutivos en España?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: access_restricted
+    notes: >
+      Texto idéntico a eval-09, solo cambia el perfil. La respuesta existe
+      literalmente en ES-007 §4 (ver eval-09, perfil spain-hr), pero ES-007
+      tiene allowed_roles=[hr] — invisible por RLS para un perfil employee.
+      Verificado que ningún documento visible para employee (ES-001,
+      ES-002, ES-003, ES-004, ES-005, GLB-001, GLB-002) contiene el
+      contenido del expediente interno: ES-001 §8 dice explícitamente que
+      "los criterios y pasos internos de evaluación... pueden tener un
+      acceso restringido" y que "esta política no otorga acceso a dichos
+      procedimientos" — no hay fuente alternativa autorizada que filtre la
+      respuesta.
+
+  - id: eval-17
+    question: "¿Tengo autorizada la modalidad de teletrabajo desde otro país?"
+    profile_id: mexico-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: personal_data_unavailable
+    notes: >
+      MX-002 §8 (MX-002:1.0:8) es el chunk más directamente relacionado y
+      dice explícitamente que trabajar temporalmente fuera de México
+      requiere autorización previa específica; MX-002 §4 añade que "esta
+      política no contiene autorizaciones personales" ni permite deducir
+      si un empleado concreto la tiene aprobada.
+
+  - id: eval-18
+    question: "¿La empresa paga una suscripción a Netflix como parte de los beneficios en España?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: insufficient_evidence
+    notes: >
+      Ningún documento confirma ni descarta esto. Es previsible que la
+      recuperación devuelva fragmentos de ES-004 (beneficios) y/o ES-005
+      (gastos) por cercanía temática general, sin que ninguno sustente una
+      respuesta sobre streaming. Caso ya validado manualmente en la
+      Etapa 8 (resultado: abstención correcta a nivel de generador, no de
+      recuperación vacía).
+
+  - id: eval-19
+    question: "What is the vacation entitlement table based on seniority for employees in Mexico?"
+    profile_id: england-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: access_restricted
+    notes: >
+      MX-001 respondería esto (ver eval-10), pero country='mexico' no es
+      visible para un perfil autenticado como england — RLS por país, no
+      por rol. EN-001 no contiene ninguna tabla de antigüedad de México ni
+      la menciona; no hay fuente autorizada alternativa para este perfil.
+
+  - id: eval-20
+    question: "Does Northfern offer stock options or equity compensation to employees?"
+    profile_id: mexico-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: no_information
+    notes: >
+      No document in the corpus addresses equity compensation or stock
+      options at all (ES-004/MX-001/MX-002 cover training, insurance,
+      vacation, and remote work, not equity). Expected to be a genuinely
+      high-distance case across the whole corpus, unlike eval-18.

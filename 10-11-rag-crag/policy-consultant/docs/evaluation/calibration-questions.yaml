@@ -1,0 +1,140 @@
+# Calibration set for the retrieval similarity (cosine distance) threshold.
+#
+# Independent from docs/evaluation/eval-questions.yaml: no question here
+# tests the same concrete fact as a question in that file. This set is
+# only used to study retrieval distances and propose a threshold — never
+# to report final RAG quality metrics.
+#
+# pgvector's `<=>` operator is cosine DISTANCE: 0 = identical, 2 =
+# opposite, lower = more relevant (see retrieval.py, models.RetrievedChunk).
+# "distance", never "similarity", throughout this file.
+#
+# Every document_id/chunk_id/section_path below was read directly from the
+# real indexed corpus (163 chunks, verified via a read-only SQL query
+# against the real `chunks` table) — none of it is invented. profile_id
+# values are the exact keys of web.app.DEMO_PROFILES.
+#
+# expected_outcome: "answerable" or "abstain".
+# abstain_reason (only set when expected_outcome is "abstain"), one of:
+#   - no_information          : the topic is not covered anywhere in the corpus
+#   - personal_data_unavailable: the policy explicitly says this depends on a
+#                                personal record it does not contain
+#   - insufficient_evidence   : retrieval may return topically related chunks,
+#                                but none of them actually support an answer
+#   - access_restricted       : an authorized document would answer this, but
+#                                it is not visible under this profile's RLS context
+#
+# IMPORTANT: an "abstain" question is not expected to have a high distance.
+# Several entries below are deliberately chosen because their nearest
+# retrieved chunk is expected to be CLOSE (same topic, wrong question) —
+# that is exactly the case a single distance threshold cannot resolve by
+# itself, and the "notes" field says so explicitly where it applies.
+
+questions:
+  - id: cal-01
+    question: "¿Cuántos días retribuidos por asuntos personales tengo al año en España, además de las vacaciones?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "2 días retribuidos por año natural, independientes de las vacaciones de ES-001."
+    expected_evidence:
+      - document_id: ES-002
+        version: "1.0"
+        chunk_id: "ES-002:1.0:4"
+        section_path: ["4. Permiso interno por asuntos personales"]
+    abstain_reason: null
+    notes: "Hecho distinto del usado en eval-questions.yaml (que no referencia ES-002)."
+
+  - id: cal-02
+    question: "¿A cuánto se compensa el kilometraje cuando se autoriza el uso del vehículo propio en un viaje de trabajo en España?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "0,30 € por kilómetro, solo si el uso del vehículo propio fue autorizado previamente."
+    expected_evidence:
+      - document_id: ES-005
+        version: "1.0"
+        chunk_id: "ES-005:1.0:4"
+        section_path: ["4. Transporte"]
+    abstain_reason: null
+    notes: "ES-005 también aparece en eval-questions.yaml, pero para un hecho distinto (límites de alojamiento, sección 5, no sección 4)."
+
+  - id: cal-03
+    question: "¿Es obligatorio el uso de autenticación multifactor (MFA) para acceder a los sistemas corporativos?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Sí, MFA es obligatoria siempre que el servicio corporativo la soporte."
+    expected_evidence:
+      - document_id: GLB-002
+        version: "1.0"
+        chunk_id: "GLB-002:1.0:3"
+        section_path: ["3. Accounts, authentication and access"]
+    abstain_reason: null
+    notes: "Documento global; probado con perfil de México para variar el país. GLB-002 no se usa en eval-questions.yaml."
+
+  - id: cal-04
+    question: "In England, how many unused annual leave days can be carried over into the next holiday year, and by when must they be used?"
+    profile_id: england-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Up to 5 unused working days, normally to be used by 31 March of the following year."
+    expected_evidence:
+      - document_id: EN-001
+        version: "1.0"
+        chunk_id: "EN-001:1.0:6"
+        section_path: ["6. Carry-over of unused annual leave"]
+    abstain_reason: null
+    notes: "EN-001 also appears in eval-questions.yaml, but for different facts (entitlement and personal days, not carry-over)."
+
+  - id: cal-05
+    question: "¿Cuánto presupuesto de formación me queda a mí este año?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: personal_data_unavailable
+    notes: >
+      La sección de presupuesto de formación de ES-004 (misma sección temática
+      que usa eval-questions.yaml para la cifra general de 1.200 €) es casi con
+      toda seguridad el chunk más cercano — distancia esperada BAJA — pero esa
+      misma sección (ES-004 §3/§11) dice explícitamente que el saldo
+      individual no está en la política. Caso explícito de "distancia baja,
+      pero no respondible".
+
+  - id: cal-06
+    question: "¿Ofrece Northfern algún bono económico por recomendar a un candidato que termine siendo contratado?"
+    profile_id: mexico-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: no_information
+    notes: >
+      Ningún documento del corpus trata contratación, reclutamiento ni bonos
+      de referidos. Distancia esperada ALTA frente a todos los chunks — caso
+      de "sin evidencia relevante en absoluto", para contrastar con cal-05.
+
+  - id: cal-07
+    question: "Si varias solicitudes de vacaciones coinciden y afectan a la cobertura del equipo en España, ¿cómo debe resolverlo el responsable?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: access_restricted
+    notes: >
+      La respuesta existe literalmente en ES-006 §7 ("Solicitudes coincidentes
+      y conflictos de cobertura"), pero ES-006 tiene allowed_roles=[manager,
+      hr] — invisible para un perfil employee por RLS. ES-001 §5 toca el tema
+      de forma general (planificación del equipo), así que la distancia del
+      chunk autorizado más cercano podría ser moderada/baja sin llegar a
+      contener el procedimiento real.
+
+  - id: cal-08
+    question: "What is Northfern's dress code policy?"
+    profile_id: england-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_evidence: []
+    abstain_reason: insufficient_evidence
+    notes: >
+      No document specifies a dress code. GLB-001 (Code of Conduct) is
+      broadly about workplace behavior and is the most likely nearest chunk
+      (plausibly a LOW-to-moderate distance, since it is genuinely about
+      workplace standards) without ever addressing dress code specifically —
+      a clean example of "topically close, substantively insufficient".

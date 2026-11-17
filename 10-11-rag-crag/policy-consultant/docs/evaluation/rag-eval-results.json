@@ -1,0 +1,1700 @@
+{
+  "generated_at": "2026-11-17T19:57:53.801249+00:00",
+  "variant": "rag",
+  "embedding_model": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dimensions": 1024
+  },
+  "generation_model": {
+    "model": "claude-sonnet-5",
+    "disable_thinking": true
+  },
+  "top_k": 5,
+  "questions_file": "docs\\evaluation\\eval-questions.yaml",
+  "questions_hash": "5f3c6841962703f99e752bb81949fb492c9615b5dab12279b476e475f7615449",
+  "completed_count": 20,
+  "total_count": 20,
+  "metrics": {
+    "retrieval": {
+      "answerable_with_evidence": 14,
+      "evidence_recall_at_k": 1.0,
+      "pct_all_evidence_found": 1.0,
+      "pct_any_evidence_found": 1.0
+    },
+    "abstention": {
+      "answerable_questions": 14,
+      "answerable_answered_rate": 1.0,
+      "abstain_questions": 6,
+      "abstain_correct_rate": 0.8333333333333334
+    },
+    "citations": {
+      "total_citations_checked": 19,
+      "citations_from_retrieved_rate": 1.0
+    }
+  },
+  "results": [
+    {
+      "id": "eval-01",
+      "question": "¿Cuántos días laborables de vacaciones tiene un empleado en España por año completo de servicio?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "23 días laborables por año completo de servicio.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:3",
+          "document_id": "ES-001",
+          "distance": 0.326245148554154
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.37814104557037354
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:0",
+          "document_id": "ES-001",
+          "distance": 0.4131532311439514
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.42216384410858154
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.4229133129119873
+        }
+      ],
+      "first_result_distance": 0.326245148554154,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-001:1.0:3",
+          "document_id": "ES-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.326245148554154
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Con carácter general, cada empleado en España dispone de 23 días laborables de vacaciones por año completo de servicio.",
+        "citations": [
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "3. Vacaciones anuales"
+            ],
+            "chunk_id": "ES-001:1.0:3",
+            "text": "Con carácter general, cada empleado dispone de **23 días laborables de vacaciones por año completo de servicio**.\n\nA efectos de esta política, los días laborables son los días en los que la persona tendría que trabajar según su calendario laboral. Los fines de semana, festivos y días no laborables del calendario individual no consumen saldo de vacaciones.\n\nEn las incorporaciones o finalizaciones de contrato durante el año, el derecho anual se calcula proporcionalmente al tiempo de servicio correspondiente. El saldo individual disponible se obtiene del sistema de gestión de personal, que registra el devengo, los días disfrutados y los ajustes autorizados.\n\nEsta política describe las reglas generales, pero **no contiene saldos personales**. Cada persona debe consultar su saldo actualizado en su registro individual."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Respuesta coincide literalmente con ES-001 §3 (23 días laborables); sin información inventada."
+      }
+    },
+    {
+      "id": "eval-02",
+      "question": "Según el Código de Conducta, ¿a partir de qué valor de un regalo se requiere revisión previa de un representante autorizado de la empresa antes de aceptarlo u ofrecerlo?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "A partir de EUR 50 (o el equivalente en moneda local); por debajo de ese umbral no se permite automáticamente, y los regalos en efectivo o equivalentes están prohibidos en todo caso.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "GLB-001:1.0:4",
+          "document_id": "GLB-001",
+          "distance": 0.31930778507543767
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-001:1.0:2",
+          "document_id": "GLB-001",
+          "distance": 0.5210861538545901
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:5",
+          "document_id": "MX-001",
+          "distance": 0.5267987549304929
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-001:1.1:8",
+          "document_id": "MX-001",
+          "distance": 0.5302033108351634
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-002:1.0:2",
+          "document_id": "GLB-002",
+          "distance": 0.5374712303315127
+        }
+      ],
+      "first_result_distance": 0.31930778507543767,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "GLB-001:1.0:4",
+          "document_id": "GLB-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.31930778507543767
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Según el Código de Conducta (GLB-001, sección 4), el umbral indicativo para un regalo es de 50 EUR (o el equivalente en moneda local). Los regalos que superen ese umbral requieren revisión por parte de un representante autorizado de la empresa antes de ser aceptados u ofrecidos. Cabe destacar que un regalo igual o inferior a ese umbral no está automáticamente permitido: los regalos en efectivo o equivalentes, los incentivos indebidos y los regalos que generen un conflicto de interés real o percibido están prohibidos independientemente de su valor.",
+        "citations": [
+          {
+            "document_id": "GLB-001",
+            "version": "1.0",
+            "section_path": [
+              "4. Gifts, hospitality, and business courtesies"
+            ],
+            "chunk_id": "GLB-001:1.0:4",
+            "text": "Modest business courtesies may be acceptable when they are lawful, infrequent, transparent, and cannot reasonably be perceived as influencing a business decision.\n\nFor the purposes of this fictional corporate policy, the indicative threshold for a gift is **EUR 50 (or the equivalent local-currency value)**. Gifts above this threshold require review by an authorized company representative **before acceptance or offering**. A gift at or below the threshold is not automatically permitted: cash or cash-equivalent gifts, improper inducements, and gifts that create an actual or perceived conflict of interest are prohibited regardless of value.\n\nEmployees must consult their local HR or Compliance contact if they are uncertain whether a gift or invitation is appropriate. Applicable local law and customer-specific restrictions take precedence."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Umbral de 50 EUR y prohibición de efectivo/conflictos de interés reproducidos fielmente desde GLB-001 §4."
+      }
+    },
+    {
+      "id": "eval-03",
+      "question": "¿Cuál es el máximo ordinario de días laborables consecutivos de vacaciones que se pueden solicitar en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Hasta 15 días laborables consecutivos, como regla ordinaria.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.2836879918761246
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.39930132631651494
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "distance": 0.4110586504235286
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.4304585796321275
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-005:1.0:6",
+          "document_id": "ES-005",
+          "distance": 0.4337534645942759
+        }
+      ],
+      "first_result_distance": 0.2836879918761246,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2836879918761246
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Como regla ordinaria, en España se pueden solicitar hasta 15 días laborables consecutivos de vacaciones. Los periodos superiores a ese límite requieren una autorización excepcional según el procedimiento correspondiente.",
+        "citations": [
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "6. Periodos consecutivos"
+            ],
+            "chunk_id": "ES-001:1.0:6",
+            "text": "Como regla ordinaria, pueden solicitarse **hasta 15 días laborables consecutivos** de vacaciones.\n\nLos periodos superiores requieren una autorización excepcional conforme a la sección 8. El límite ordinario no significa que todas las solicitudes de 15 días deban aprobarse: también se aplican las condiciones de planificación y cobertura de la sección 5."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Límite de 15 días consecutivos y referencia a excepciones (§8) coinciden con ES-001 §6."
+      }
+    },
+    {
+      "id": "eval-04",
+      "question": "¿Cuántos días de teletrabajo a la semana puede hacer un empleado elegible en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Hasta 3 días de teletrabajo por semana, manteniendo al menos 2 días de presencia.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-003:1.0:3",
+          "document_id": "ES-003",
+          "distance": 0.26588465971098074
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-004:1.0:9",
+          "document_id": "ES-004",
+          "distance": 0.3214654337049557
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-003:1.0:12",
+          "document_id": "ES-003",
+          "distance": 0.36888231727831355
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-003:1.0:7",
+          "document_id": "ES-003",
+          "distance": 0.37801464665023365
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-003:1.0:5",
+          "document_id": "ES-003",
+          "distance": 0.39405735152788657
+        }
+      ],
+      "first_result_distance": 0.26588465971098074,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-003:1.0:3",
+          "document_id": "ES-003",
+          "found": true,
+          "rank": 0,
+          "distance": 0.26588465971098074
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Un empleado con un puesto elegible puede teletrabajar, como régimen ordinario, hasta tres días por semana, manteniendo al menos dos días de presencia en su centro de trabajo asignado. Se trata de un máximo ordinario y no de un derecho automático a elegir tres días todas las semanas; los días concretos se coordinan con el responsable directo y el calendario puede variar según necesidades justificadas de organización. Además, en circunstancias puntuales puede estudiarse la autorización de un cuarto día de teletrabajo u otra adaptación temporal, pero esto depende de las circunstancias y de las aprobaciones necesarias, y una excepción concedida para una semana no modifica automáticamente el régimen habitual.",
+        "citations": [
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "3. Régimen ordinario de teletrabajo"
+            ],
+            "chunk_id": "ES-003:1.0:3",
+            "text": "Las personas con puestos elegibles pueden teletrabajar **hasta tres días por semana**, manteniendo **al menos dos días de presencia** en su centro de trabajo asignado. Se trata de un máximo ordinario, no de un derecho automático a elegir tres días todas las semanas.\n\nLos días concretos se coordinan con el responsable directo, teniendo en cuenta reuniones presenciales, atención a clientes, actividades compartidas y cobertura del equipo. El calendario acordado puede variar de una semana a otra por necesidades justificadas de organización.\n\nLa distribución de días no altera la jornada de trabajo ni los descansos aplicables."
+          },
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "6. Teletrabajo adicional y excepciones"
+            ],
+            "chunk_id": "ES-003:1.0:7",
+            "text": "En circunstancias puntuales puede estudiarse la autorización de **un cuarto día de teletrabajo u otra adaptación temporal**. La persona interesada debe plantearlo con antelación razonable a su responsable y seguir el procedimiento de excepción aplicable.\n\nLa concesión depende de las circunstancias y de las aprobaciones necesarias. Una excepción concedida para una semana no modifica automáticamente el régimen habitual ni crea una autorización permanente.\n\nLos responsables no deben comunicar una excepción como aprobada antes de que se haya completado el proceso correspondiente."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Combina correctamente la regla ordinaria (ES-003 §3) con la excepción del cuarto día (ES-003 §7) sin presentar la excepción como automática."
+      }
+    },
+    {
+      "id": "eval-05",
+      "question": "¿Cuál es el presupuesto anual de formación por empleado en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "1.200 € de referencia por año natural, no acumulable de un año a otro.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-004:1.0:3",
+          "document_id": "ES-004",
+          "distance": 0.299035948572399
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-004:1.0:5",
+          "document_id": "ES-004",
+          "distance": 0.35143569997336155
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-004:1.0:14",
+          "document_id": "ES-004",
+          "distance": 0.4703186189748503
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-004:1.0:0",
+          "document_id": "ES-004",
+          "distance": 0.4711230712459632
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-004:1.0:6",
+          "document_id": "ES-004",
+          "distance": 0.4753156021049251
+        }
+      ],
+      "first_result_distance": 0.299035948572399,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-004:1.0:3",
+          "document_id": "ES-004",
+          "found": true,
+          "rank": 0,
+          "distance": 0.299035948572399
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Según la política ES-004, cada empleado en España dispone de una asignación de referencia de 1.200 € por año natural para actividades de formación relacionadas con su puesto actual o su desarrollo profesional. Este presupuesto es individual, no se acumula de un año a otro, y disponer del mismo no equivale a una aprobación automática de cualquier gasto.",
+        "citations": [
+          {
+            "document_id": "ES-004",
+            "version": "1.0",
+            "section_path": [
+              "3. Presupuesto anual de formación"
+            ],
+            "chunk_id": "ES-004:1.0:3",
+            "text": "Cada empleado dispone de una **asignación de referencia de 1.200 € por año natural** para actividades de formación relacionadas con su puesto actual o su desarrollo profesional dentro de la compañía.\n\nPueden incluirse cursos, talleres, programas técnicos y materiales formativos, siempre que su contenido sea relevante y la participación haya sido autorizada por los canales internos antes de asumir el gasto. La existencia de presupuesto disponible no equivale a una aprobación automática de cualquier compra.\n\nEl presupuesto es individual y **no se acumula de un año a otro**. El importe no utilizado al finalizar el año natural no incrementa la asignación del siguiente ejercicio. Para incorporaciones durante el año, Recursos Humanos comunicará la asignación individual registrada; esta política no permite deducir por sí sola un saldo concreto."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "1.200 €/año, no acumulable, sin aprobación automática: coincide con ES-004 §3."
+      }
+    },
+    {
+      "id": "eval-06",
+      "question": "¿A partir de qué antigüedad puede un empleado en España acceder al seguro médico privado voluntario?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "A partir de los seis meses de antigüedad, cumpliendo las condiciones administrativas del programa.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-004:1.0:8",
+          "document_id": "ES-004",
+          "distance": 0.34107259863182193
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-004:1.0:11",
+          "document_id": "ES-004",
+          "distance": 0.37899867421396416
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-004:1.0:14",
+          "document_id": "ES-004",
+          "distance": 0.4859177180577675
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:0",
+          "document_id": "ES-001",
+          "distance": 0.4900694489479065
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.49565184116363525
+        }
+      ],
+      "first_result_distance": 0.34107259863182193,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-004:1.0:8",
+          "document_id": "ES-004",
+          "found": true,
+          "rank": 0,
+          "distance": 0.34107259863182193
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Un empleado en España puede acceder voluntariamente al programa corporativo de seguro médico privado a partir de los seis meses de antigüedad, calculados desde la fecha de incorporación que conste en el registro corporativo, siempre que se cumplan las condiciones administrativas del programa y se tramite el alta correspondiente.",
+        "citations": [
+          {
+            "document_id": "ES-004",
+            "version": "1.0",
+            "section_path": [
+              "7. Seguro médico privado"
+            ],
+            "chunk_id": "ES-004:1.0:8",
+            "text": "Northfern Technologies ofrece la posibilidad de acceder voluntariamente a su programa corporativo de seguro médico privado **a partir de los seis meses de antigüedad**, siempre que se cumplan las condiciones administrativas del programa.\n\nLa antigüedad necesaria se calcula a partir de la fecha de incorporación que conste en el registro corporativo. El acceso no es automático: requiere tramitar el alta por el canal habilitado y aceptar las condiciones que se comuniquen para la cobertura correspondiente.\n\nEsta política no contiene información clínica, detalles de pólizas individuales ni datos sobre familiares. Para confirmar la elegibilidad o el estado de adhesión de una persona se deberá consultar una fuente corporativa autorizada o a Recursos Humanos de España."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "6 meses de antigüedad y trámite de alta: coincide con ES-004 §7 (Seguro médico privado)."
+      }
+    },
+    {
+      "id": "eval-07",
+      "question": "¿Cuál es el límite máximo de reembolso por noche de alojamiento en un viaje de trabajo dentro de España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "120 € por noche dentro de España (180 € fuera de España), como límite máximo del gasto real justificado.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-005:1.0:5",
+          "document_id": "ES-005",
+          "distance": 0.1910914068763595
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-005:1.0:6",
+          "document_id": "ES-005",
+          "distance": 0.3046133932701699
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-005:1.0:4",
+          "document_id": "ES-005",
+          "distance": 0.44380221775730433
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-005:1.0:10",
+          "document_id": "ES-005",
+          "distance": 0.4629662081043472
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-005:1.0:9",
+          "document_id": "ES-005",
+          "distance": 0.4718691458936063
+        }
+      ],
+      "first_result_distance": 0.1910914068763595,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-005:1.0:5",
+          "document_id": "ES-005",
+          "found": true,
+          "rank": 0,
+          "distance": 0.1910914068763595
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "El límite máximo de reembolso por noche de alojamiento en un viaje de trabajo dentro de España es de 120 € por noche. Este importe es un límite máximo, no una cantidad fija, por lo que se reembolsa el gasto real profesional justificado hasta ese máximo.",
+        "citations": [
+          {
+            "document_id": "ES-005",
+            "version": "1.0",
+            "section_path": [
+              "5. Alojamiento"
+            ],
+            "chunk_id": "ES-005:1.0:5",
+            "text": "Los límites máximos de reembolso por alojamiento son los siguientes:\n\n| Destino del viaje | Límite por noche |\n|---|---:|\n| España | 120 € |\n| Fuera de España | 180 € |\n\nEstos importes son **límites máximos**, no cantidades fijas ni asignaciones automáticas. Se reembolsa el **gasto real profesional justificado**, hasta el máximo aplicable. Por ejemplo, una noche de hotel en Madrid con un coste justificado de 95 € permite solicitar 95 €, no 120 €.\n\nUna reserva que supere el límite correspondiente requiere autorización excepcional **antes de confirmarse**. La aprobación general del viaje no sustituye esta autorización."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "120 €/noche dentro de España, límite máximo no importe fijo: coincide con ES-005 §5."
+      }
+    },
+    {
+      "id": "eval-08",
+      "question": "Como manager en España, ¿qué debo hacer si un empleado solicita más de 15 días laborables consecutivos de vacaciones?",
+      "profile_id": "spain-manager",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "El manager no puede concederlo por sí solo; debe remitir la solicitud a RR. HH. España para su valoración excepcional.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.27564138174056496
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.2900005751848551
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.3143757769093368
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3259388998710442
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "distance": 0.35882190711366657
+        }
+      ],
+      "first_result_distance": 0.27564138174056496,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "found": true,
+          "rank": 0,
+          "distance": 0.27564138174056496
+        },
+        {
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "found": true,
+          "rank": 1,
+          "distance": 0.2900005751848551
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Si un empleado solicita más de 15 días laborables consecutivos de vacaciones, se supera el límite ordinario establecido (hasta 15 días laborables consecutivos como regla general). Esto requiere una autorización excepcional, por lo que usted, como manager, no puede aprobarla por sí solo: debe remitir la solicitud a Recursos Humanos de España para su valoración, ya que este tipo de casos está específicamente contemplado entre los que deben escalarse. La autorización de la excepción, si procede, debe quedar registrada en el sistema corporativo correspondiente.",
+        "citations": [
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "4. Gestión de vacaciones"
+            ],
+            "chunk_id": "ES-006:1.0:4",
+            "text": "Para las vacaciones, el manager debe aplicar los criterios de ES-001, incluidos el preaviso ordinario de **15 días naturales** y el límite ordinario de **15 días laborables consecutivos**, salvo excepción autorizada.\n\nAntes de aprobar, debe valorar los compromisos del equipo, las sustituciones disponibles y los periodos de mayor carga de trabajo. La planificación debe realizarse con criterios consistentes, evitando decisiones arbitrarias.\n\nSi una solicitud supera el límite ordinario de días consecutivos o requiere una excepción a la política, el manager debe remitirla a RR. HH. España para su valoración. No puede conceder por sí solo una excepción reservada a RR. HH.\n\nEl saldo individual de vacaciones se verifica en los registros corporativos autorizados, no se deduce de esta guía."
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "8. Excepciones y escalado"
+            ],
+            "chunk_id": "ES-006:1.0:8",
+            "text": "El manager debe escalar a RR. HH. España, entre otros, los siguientes casos:\n\n- Solicitudes de vacaciones que excedan los 15 días laborables consecutivos ordinarios.\n- Situaciones que requieran interpretar permisos familiares regulados o derechos legales específicos.\n- Conflictos entre políticas o circunstancias no contempladas expresamente.\n- Solicitudes de tratamiento excepcional de plazos o condiciones.\n- Incidencias de confidencialidad o acceso indebido a datos personales.\n\nLa autorización de una excepción debe constar en el sistema corporativo correspondiente. **Policy Consultant no aprueba, registra ni modifica solicitudes.**"
+          },
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "6. Periodos consecutivos"
+            ],
+            "chunk_id": "ES-001:1.0:6",
+            "text": "Como regla ordinaria, pueden solicitarse **hasta 15 días laborables consecutivos** de vacaciones.\n\nLos periodos superiores requieren una autorización excepcional conforme a la sección 8. El límite ordinario no significa que todas las solicitudes de 15 días deban aprobarse: también se aplican las condiciones de planificación y cobertura de la sección 5."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 3,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Combina ES-006 §4 y §8 (escalado obligatorio a RR. HH., el manager no puede aprobar la excepción) y ES-001 §6 (límite de 15 días); sin afirmaciones no respaldadas."
+      }
+    },
+    {
+      "id": "eval-09",
+      "question": "¿Qué debe recoger el expediente interno de RR. HH. al revisar una excepción de vacaciones de más de 15 días laborables consecutivos en España?",
+      "profile_id": "spain-hr",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Periodo solicitado y saldo verificado, motivo de la excepcionalidad, valoración del responsable sobre cobertura, y propuesta de resolución con la autoridad que debe decidir.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-007:1.0:4",
+          "document_id": "ES-007",
+          "distance": 0.2755440145082456
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.301277440710219
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3141894749290052
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.317895493758262
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:11",
+          "document_id": "ES-002",
+          "distance": 0.3441968159616916
+        }
+      ],
+      "first_result_distance": 0.2755440145082456,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-007:1.0:4",
+          "document_id": "ES-007",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2755440145082456
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Según el procedimiento interno de RR. HH. España (ES-007), al revisar una solicitud de vacaciones que supere el límite ordinario de 15 días laborables consecutivos, el expediente debe recoger: el periodo solicitado y el saldo disponible, verificado en el sistema de personal; el motivo de la excepcionalidad, descrito con el mínimo detalle necesario; la valoración del responsable sobre la cobertura del equipo y la continuidad operativa; y una propuesta de resolución junto con la autoridad que debe decidir. RR. HH. comprobará que se ha seguido el procedimiento y coordinará la autorización correspondiente, aunque la remisión a RR. HH. no implica aprobación automática, respetándose en todo caso los derechos legales y acuerdos individuales aplicables.",
+        "citations": [
+          {
+            "document_id": "ES-007",
+            "version": "1.0",
+            "section_path": [
+              "4. Excepciones de vacaciones"
+            ],
+            "chunk_id": "ES-007:1.0:4",
+            "text": "**Políticas relacionadas:** ES-001 y ES-006.\n\nLas solicitudes que superen el límite ordinario de **15 días laborables consecutivos** se remiten a RR. HH. España para revisión excepcional. El expediente debe recoger:\n\n- Periodo solicitado y saldo disponible, verificado en el sistema de personal.\n- Motivo de la excepcionalidad, descrito con el mínimo detalle necesario.\n- Valoración del responsable sobre cobertura del equipo y continuidad operativa.\n- Propuesta de resolución y autoridad que debe decidir.\n\nRR. HH. comprobará que se ha seguido el procedimiento y coordinará la autorización que corresponda. La remisión a RR. HH. **no implica aprobación automática**. Los derechos legales y acuerdos individuales aplicables se respetarán en todo caso.\n\nLos conflictos de fechas que el responsable no pueda resolver se revisarán atendiendo a criterios consistentes, necesidades operativas acreditadas y circunstancias relevantes debidamente documentadas, evitando preferencias arbitrarias."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Reproduce los cuatro elementos del expediente (periodo/saldo, motivo, valoración de cobertura, propuesta+autoridad) tal como figuran en ES-007 §4, bajo el perfil spain-hr que sí tiene acceso. Ver comparación con eval-16."
+      }
+    },
+    {
+      "id": "eval-10",
+      "question": "Para un empleado con 3 años de antigüedad cumplida en México, ¿cuántos días laborables de vacaciones le corresponden según la escala interna?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "18 días laborables, según la fila de 3 años de la escala de antigüedad.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:5",
+          "document_id": "MX-001",
+          "distance": 0.35826166619429867
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-001:1.1:3",
+          "document_id": "MX-001",
+          "distance": 0.3846102494465964
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:4",
+          "document_id": "MX-001",
+          "distance": 0.4046471473784944
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-001:1.1:10",
+          "document_id": "MX-001",
+          "distance": 0.40672767162323
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-001:1.1:9",
+          "document_id": "MX-001",
+          "distance": 0.4264604536938086
+        }
+      ],
+      "first_result_distance": 0.35826166619429867,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "MX-001:1.1:3",
+          "document_id": "MX-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.3846102494465964
+        },
+        {
+          "chunk_id": "MX-001:1.1:4",
+          "document_id": "MX-001",
+          "found": true,
+          "rank": 2,
+          "distance": 0.4046471473784944
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Según la escala interna de Northfern para México, un empleado con 3 años de antigüedad cumplida tiene derecho a 18 días laborables anuales de vacaciones.",
+        "citations": [
+          {
+            "document_id": "MX-001",
+            "version": "1.1",
+            "section_path": [
+              "3. Vacaciones anuales y antigüedad"
+            ],
+            "chunk_id": "MX-001:1.1:4",
+            "text": "| Antigüedad cumplida | Días laborables anuales |\n|---|---:|\n| 1 año | 15 |\n| 2 años | 16 |\n| 3 años | 18 |\n| 4 años | 20 |\n| 5 años | 22 |\n| De 6 a 10 años | 22 |\n| De 11 a 15 años | 24 |"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "18 días para 3 años de antigüedad: coincide exactamente con la fila de la tabla de MX-001 §3 (v1.1)."
+      }
+    },
+    {
+      "id": "eval-11",
+      "question": "¿Existe en México un límite corporativo ordinario de días laborables consecutivos de vacaciones, como el de 15 días de España?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No; a diferencia de la política española (ES-001), MX-001 no establece ese límite corporativo ordinario.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:9",
+          "document_id": "MX-001",
+          "distance": 0.3183563784703306
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-001:1.1:10",
+          "document_id": "MX-001",
+          "distance": 0.39401496720135176
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "distance": 0.41188596274507605
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-001:1.1:0",
+          "document_id": "MX-001",
+          "distance": 0.4528045114511795
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-001:1.1:2",
+          "document_id": "MX-001",
+          "distance": 0.45471812374159726
+        }
+      ],
+      "first_result_distance": 0.3183563784703306,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "MX-001:1.1:9",
+          "document_id": "MX-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.3183563784703306
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "No. Según la política MX-001, a diferencia de la política española ES-001, la política de México no establece un límite corporativo ordinario de 15 días laborables consecutivos de vacaciones. La coordinación con el responsable buscará asegurar la continuidad del servicio, pero respetando siempre los periodos mínimos de disfrute continuo y demás derechos que establezca la normativa aplicable.",
+        "citations": [
+          {
+            "document_id": "MX-001",
+            "version": "1.1",
+            "section_path": [
+              "6. Periodos continuos y coordinación"
+            ],
+            "chunk_id": "MX-001:1.1:9",
+            "text": "Los empleados pueden solicitar periodos continuos de vacaciones. La coordinación con el responsable buscará asegurar la continuidad del servicio, respetando en todo caso los periodos mínimos de disfrute continuo y demás derechos que establezca la normativa aplicable.\n\nA diferencia de la política española ES-001, esta política **no establece un límite corporativo ordinario de 15 días laborables consecutivos**. Las necesidades de cobertura deben gestionarse sin restringir indebidamente los derechos de vacaciones."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Confirma la ausencia de límite ordinario de 15 días consecutivos en México, tal como lo señala explícitamente MX-001 §6 en contraste con ES-001."
+      }
+    },
+    {
+      "id": "eval-12",
+      "question": "¿Cuántos días de teletrabajo a la semana puede hacer un empleado elegible en México?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Hasta 2 días de teletrabajo por semana, manteniendo al menos 3 días de presencia.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-002:1.0:3",
+          "document_id": "MX-002",
+          "distance": 0.287445068359375
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-002:1.0:2",
+          "document_id": "MX-002",
+          "distance": 0.37244453265932287
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-002:1.0:7",
+          "document_id": "MX-002",
+          "distance": 0.3803109341952481
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-002:1.0:8",
+          "document_id": "MX-002",
+          "distance": 0.4060462471219143
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-002:1.0:0",
+          "document_id": "MX-002",
+          "distance": 0.41323641459724714
+        }
+      ],
+      "first_result_distance": 0.287445068359375,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "MX-002:1.0:3",
+          "document_id": "MX-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.287445068359375
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Los puestos elegibles en México pueden realizar hasta dos días de teletrabajo por semana, manteniendo al menos tres días de presencia en el centro de trabajo asignado, como régimen interno habitual. Sin embargo, la elegibilidad de un puesto no equivale a una autorización automática para cualquier distribución semanal, ya que los días de teletrabajo deben coordinarse previamente con el responsable directo.",
+        "citations": [
+          {
+            "document_id": "MX-002",
+            "version": "1.0",
+            "section_path": [
+              "3. Modalidad habitual de teletrabajo"
+            ],
+            "chunk_id": "MX-002:1.0:3",
+            "text": "Los puestos elegibles podrán realizar **hasta dos días de teletrabajo por semana**, con **al menos tres días de presencia** en el centro de trabajo asignado, como régimen interno habitual.\n\nLos días de teletrabajo se coordinarán previamente con el responsable directo, teniendo en cuenta reuniones presenciales, atención a clientes, entregas y cobertura del equipo. La elegibilidad de un puesto no equivale a una autorización automática para cualquier distribución semanal."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "2 días/semana, mínimo 3 de presencia: coincide con MX-002 §3."
+      }
+    },
+    {
+      "id": "eval-13",
+      "question": "What is the annual leave entitlement for a full-time employee in England, and what else is it entitled to on top of it?",
+      "profile_id": "england-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "25 working days of paid annual leave per complete holiday year, plus the applicable bank/public holidays (not deducted from the 25 days).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "distance": 0.3146353176453508
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "distance": 0.32550183978665714
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:1",
+          "document_id": "EN-001",
+          "distance": 0.32973583582212496
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.34343636035918723
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:9",
+          "document_id": "EN-001",
+          "distance": 0.37550897890222323
+        }
+      ],
+      "first_result_distance": 0.3146353176453508,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.32550183978665714
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "A full-time employee in England working a standard five-day week receives 25 working days of paid annual leave per complete holiday year (which runs from 1 January to 31 December). On top of this, they are also entitled to the bank/public holidays applicable to their England work location, which are separate from the 25-day entitlement and must not be deducted from it. Additionally, eligible full-time employees receive 2 paid personal days per full holiday year, which are a separate company benefit from both annual leave and bank/public holidays.",
+        "citations": [
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "2. Holiday year and annual entitlement"
+            ],
+            "chunk_id": "EN-001:1.0:2",
+            "text": "The holiday year runs from **1 January to 31 December**.\n\nFull-time employees working a standard five-day week receive **25 working days of paid annual leave per complete holiday year**, **plus the bank/public holidays applicable to their England work location**. These bank/public holidays are separate from the 25-day entitlement and must not be deducted from it.\n\nThe number and dates of bank/public holidays can vary by year. Employees should consult the published company holiday calendar rather than assume that exactly eight bank holidays will fall in every holiday year. Part-time and non-standard working patterns are handled on an appropriate pro-rata or equivalent basis so that statutory entitlements are respected."
+          },
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "7. Company-paid personal days"
+            ],
+            "chunk_id": "EN-001:1.0:7",
+            "text": "In addition to annual leave, Northfern Technologies provides **2 paid personal days per full holiday year** to eligible full-time employees in England. These days are a company benefit and are separate from annual leave and bank/public holidays.\n\nPersonal days should normally be requested through the HR system and coordinated with the line manager. For urgent circumstances, employees should notify their manager as soon as reasonably practicable. Personal days are not automatically carried into the following year. Entitlement for part-year employment or non-standard working patterns is administered by HR in accordance with applicable terms."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "25 días + bank holidays (EN-001 §2) y 2 personal days adicionales (EN-001 §7); responde también a la parte \"on top of it\" de la pregunta sin inventar nada."
+      }
+    },
+    {
+      "id": "eval-14",
+      "question": "How many company-paid personal days per holiday year does Northfern provide to eligible employees in England?",
+      "profile_id": "england-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "2 paid personal days per full holiday year, separate from annual leave and bank/public holidays.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.2521421463574245
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:0",
+          "document_id": "EN-001",
+          "distance": 0.3647252917289734
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "distance": 0.4444813132286072
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-001:1.0:5",
+          "document_id": "GLB-001",
+          "distance": 0.4498911559711469
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "distance": 0.467342706481056
+        }
+      ],
+      "first_result_distance": 0.2521421463574245,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2521421463574245
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Northfern Technologies provides 2 paid personal days per full holiday year to eligible full-time employees in England, in addition to annual leave. These are separate from annual leave and bank/public holidays.",
+        "citations": [
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "7. Company-paid personal days"
+            ],
+            "chunk_id": "EN-001:1.0:7",
+            "text": "In addition to annual leave, Northfern Technologies provides **2 paid personal days per full holiday year** to eligible full-time employees in England. These days are a company benefit and are separate from annual leave and bank/public holidays.\n\nPersonal days should normally be requested through the HR system and coordinated with the line manager. For urgent circumstances, employees should notify their manager as soon as reasonably practicable. Personal days are not automatically carried into the following year. Entitlement for part-year employment or non-standard working patterns is administered by HR in accordance with applicable terms."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "2 personal days, separados de vacaciones y festivos: coincide con EN-001 §7."
+      }
+    },
+    {
+      "id": "eval-15",
+      "question": "¿Cuántos días de vacaciones me quedan a mí este año?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "personal_data_unavailable",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.349332332611084
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:7",
+          "document_id": "ES-001",
+          "distance": 0.35928098206037273
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "distance": 0.3677106657373067
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:3",
+          "document_id": "ES-001",
+          "distance": 0.3680631737746689
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.43254637718200684
+        }
+      ],
+      "first_result_distance": 0.349332332611084,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "No puedo responder a esta pregunta con la información disponible. La política indica que no contiene saldos personales de vacaciones: cada persona debe consultar su saldo actualizado en su registro individual dentro del sistema de gestión de personal.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "not_applicable",
+        "citation_support": "not_applicable",
+        "notes": "Abstención justificada: ES-001 §3/§6 indican explícitamente que el saldo personal no está en la política; la explicación generada es fiel al contenido recuperado aunque, al abstenerse, no lleva citas formales (comportamiento esperado de generation.py)."
+      }
+    },
+    {
+      "id": "eval-16",
+      "question": "¿Qué debe recoger el expediente interno de RR. HH. al revisar una excepción de vacaciones de más de 15 días laborables consecutivos en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "access_restricted",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3141894749290052
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-002:1.0:11",
+          "document_id": "ES-002",
+          "distance": 0.3441968159616916
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.3716962711992091
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.394794261765821
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:7",
+          "document_id": "ES-002",
+          "distance": 0.4003622650668305
+        }
+      ],
+      "first_result_distance": 0.3141894749290052,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "Los fragmentos disponibles no especifican qué debe recoger exactamente el expediente interno de RR. HH. al revisar una excepción de vacaciones superior a 15 días laborables consecutivos. Solo indican que estas solicitudes requieren autorización excepcional conforme a la sección 8, que la persona empleada debe comunicar la circunstancia a su responsable directo, que este revisará el impacto sobre el equipo y, cuando corresponda, trasladará el caso a Recursos Humanos de España para su valoración, y que ninguna excepción se entiende aprobada por el mero hecho de solicitarla. Los criterios y pasos internos de evaluación se recogen en procedimientos de acceso restringido (como ES-006 y ES-007) que esta política no otorga acceso a consultar, por lo que no puedo precisar el contenido detallado del expediente.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "not_applicable",
+        "citation_support": "not_applicable",
+        "notes": "Abstención correcta y RLS verificado: los 5 fragmentos recuperados para este perfil (ES-001:1.0:8, ES-002:1.0:11, ES-001:1.0:6, ES-002:1.0:4, ES-002:1.0:7) no incluyen ningún chunk de ES-006/ES-007, a diferencia de eval-09 (perfil spain-hr) que sí recupera ES-007:1.0:4. La respuesta menciona 'ES-006 y ES-007' por nombre; verificado contra el corpus fuente (data/corpus/spain/ES-002-permisos-y-ausencias.md §11) que ES-002:1.0:11 — uno de los fragmentos efectivamente recuperados y accesible para este perfil — nombra explícitamente ES-006 y ES-007 y los describe como de acceso restringido, sin revelar su contenido. No hay filtración: el modelo usó un fragmento accesible y no citado, no contenido restringido."
+      }
+    },
+    {
+      "id": "eval-17",
+      "question": "¿Tengo autorizada la modalidad de teletrabajo desde otro país?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "personal_data_unavailable",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-002:1.0:8",
+          "document_id": "MX-002",
+          "distance": 0.2912605231249008
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-002:1.0:7",
+          "document_id": "GLB-002",
+          "distance": 0.337541401386261
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-002:1.0:7",
+          "document_id": "MX-002",
+          "distance": 0.34774927341190764
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-002:1.0:2",
+          "document_id": "MX-002",
+          "distance": 0.38961883721463797
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-002:1.0:3",
+          "document_id": "MX-002",
+          "distance": 0.40658140182495117
+        }
+      ],
+      "first_result_distance": 0.2912605231249008,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": false,
+        "answer": "No. Trabajar temporalmente desde fuera de México requiere una autorización específica previa, incluso si se usa un dispositivo corporativo y una conexión segura. La revisión puede involucrar a Recursos Humanos, Seguridad u otras áreas competentes, y una autorización para viajar o asistir a un evento no implica autorización para teletrabajar desde el país de destino. Por lo tanto, no se cuenta con autorización automática para teletrabajar desde otro país; debe solicitarse y obtenerse esa autorización específica antes de hacerlo.",
+        "citations": [
+          {
+            "document_id": "MX-002",
+            "version": "1.0",
+            "section_path": [
+              "8. Trabajo desde otro país"
+            ],
+            "chunk_id": "MX-002:1.0:8",
+            "text": "Trabajar temporalmente desde fuera de México **requiere autorización específica previa**, incluso si el empleado utiliza un dispositivo corporativo y una conexión segura.\n\nLa revisión puede involucrar a Recursos Humanos, Seguridad y otras áreas competentes, según las circunstancias. Una autorización para viajar o asistir a un evento no implica autorización para teletrabajar desde el país de destino."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": false,
+        "matches_expected": false
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "incorrect",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "unsupported",
+        "notes": "FALLO DOCUMENTADO: el sistema no debió responder. MX-002:1.0:8 solo establece la regla general ('requiere autorización específica previa'), pero no contiene el estado de autorización personal de este empleado. El modelo respondió 'No' como si la regla general implicara que el usuario no tiene autorización, confundiendo una regla de procedimiento con un hecho individual que la política no puede verificar. Único caso de abstención incorrecta de las 20 preguntas (abstain_correct_rate=5/6). Debería haberse abstenido citando personal_data_unavailable, igual que eval-15."
+      }
+    },
+    {
+      "id": "eval-18",
+      "question": "¿La empresa paga una suscripción a Netflix como parte de los beneficios en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "insufficient_evidence",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-004:1.0:0",
+          "document_id": "ES-004",
+          "distance": 0.48426443338394165
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-004:1.0:1",
+          "document_id": "ES-004",
+          "distance": 0.5074849426746368
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-004:1.0:2",
+          "document_id": "ES-004",
+          "distance": 0.5092081877353245
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.5107760429382324
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:0",
+          "document_id": "ES-001",
+          "distance": 0.5107991695404053
+        }
+      ],
+      "first_result_distance": 0.48426443338394165,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "Los fragmentos disponibles no mencionan ninguna suscripción a Netflix ni beneficio similar entre los programas de formación, desarrollo profesional o beneficios complementarios descritos para España. No hay información suficiente para responder con confianza, por lo que prefiero abstenerme.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "not_applicable",
+        "citation_support": "not_applicable",
+        "notes": "Abstención correcta por falta de evidencia; el texto generado confirma explícitamente que ningún fragmento recuperado (todos de ES-004/ES-002/ES-001) menciona Netflix ni beneficio equivalente."
+      }
+    },
+    {
+      "id": "eval-19",
+      "question": "What is the vacation entitlement table based on seniority for employees in Mexico?",
+      "profile_id": "england-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "access_restricted",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:3",
+          "document_id": "EN-001",
+          "distance": 0.49458603544789637
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-002:1.0:11",
+          "document_id": "GLB-002",
+          "distance": 0.49747170515442574
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-002:1.0:7",
+          "document_id": "GLB-002",
+          "distance": 0.5285518326923795
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:6",
+          "document_id": "EN-001",
+          "distance": 0.5431029660434412
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:11",
+          "document_id": "EN-001",
+          "distance": 0.5512133076425383
+        }
+      ],
+      "first_result_distance": 0.49458603544789637,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "The retrieved context does not contain a vacation entitlement table based on seniority for employees in Mexico, nor any Mexico-specific leave policy. I cannot answer this question based on the available material.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "not_applicable",
+        "citation_support": "not_applicable",
+        "notes": "Abstención correcta: RLS por país confirmado — ninguno de los 5 fragmentos recuperados para el perfil england-employee pertenece a MX-001 u otro documento de México."
+      }
+    },
+    {
+      "id": "eval-20",
+      "question": "Does Northfern offer stock options or equity compensation to employees?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "no_information",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "distance": 0.43294055069201576
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-001:1.1:0",
+          "document_id": "MX-001",
+          "distance": 0.4402562713470287
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-001:1.0:8",
+          "document_id": "GLB-001",
+          "distance": 0.44691143389139665
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-002:1.0:1",
+          "document_id": "MX-002",
+          "distance": 0.44967761935725004
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-002:1.0:0",
+          "document_id": "MX-002",
+          "distance": 0.45029140111310473
+        }
+      ],
+      "first_result_distance": 0.43294055069201576,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "The retrieved policy fragments do not contain any information about stock options or equity compensation at Northfern Technologies. I cannot answer this question based on the available documents.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "not_applicable",
+        "citation_support": "not_applicable",
+        "notes": "Abstención correcta: ningún fragmento recuperado (MX-001, GLB-001, MX-002) trata compensación en acciones; no_information verificado."
+      }
+    }
+  ]
+}

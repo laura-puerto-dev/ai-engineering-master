@@ -1,0 +1,372 @@
+{
+  "generated_at": "2026-11-16T16:58:42.595627+00:00",
+  "embedding_model": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dimensions": 1024
+  },
+  "top_k": 5,
+  "questions_file": "docs\\evaluation\\calibration-questions.yaml",
+  "results": [
+    {
+      "id": "cal-01",
+      "question": "¿Cuántos días retribuidos por asuntos personales tengo al año en España, además de las vacaciones?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.3001044988632202
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:3",
+          "document_id": "ES-001",
+          "distance": 0.3784507738620493
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3803972005844116
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-005:1.0:6",
+          "document_id": "ES-005",
+          "distance": 0.39162778854370117
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.3961051106452942
+        }
+      ],
+      "first_result_distance": 0.3001044988632202,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.3001044988632202
+        }
+      ]
+    },
+    {
+      "id": "cal-02",
+      "question": "¿A cuánto se compensa el kilometraje cuando se autoriza el uso del vehículo propio en un viaje de trabajo en España?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-005:1.0:6",
+          "document_id": "ES-005",
+          "distance": 0.36487058610495304
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-005:1.0:4",
+          "document_id": "ES-005",
+          "distance": 0.38455211200378214
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-005:1.0:5",
+          "document_id": "ES-005",
+          "distance": 0.4405852889665779
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-004:1.0:9",
+          "document_id": "ES-004",
+          "distance": 0.45905879871985844
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-005:1.0:10",
+          "document_id": "ES-005",
+          "distance": 0.4638210578178098
+        }
+      ],
+      "first_result_distance": 0.36487058610495304,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-005:1.0:4",
+          "document_id": "ES-005",
+          "found": true,
+          "rank": 1,
+          "distance": 0.38455211200378214
+        }
+      ]
+    },
+    {
+      "id": "cal-03",
+      "question": "¿Es obligatorio el uso de autenticación multifactor (MFA) para acceder a los sistemas corporativos?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "GLB-002:1.0:3",
+          "document_id": "GLB-002",
+          "distance": 0.25836441690815704
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-002:1.0:5",
+          "document_id": "GLB-002",
+          "distance": 0.4091752943642326
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-002:1.0:4",
+          "document_id": "GLB-002",
+          "distance": 0.4632002551317289
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-002:1.0:9",
+          "document_id": "MX-002",
+          "distance": 0.4668888012501934
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-002:1.0:6",
+          "document_id": "GLB-002",
+          "distance": 0.5032116620775542
+        }
+      ],
+      "first_result_distance": 0.25836441690815704,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "GLB-002:1.0:3",
+          "document_id": "GLB-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.25836441690815704
+        }
+      ]
+    },
+    {
+      "id": "cal-04",
+      "question": "In England, how many unused annual leave days can be carried over into the next holiday year, and by when must they be used?",
+      "profile_id": "england-employee",
+      "expected_outcome": "answerable",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "distance": 0.29967812897693213
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:6",
+          "document_id": "EN-001",
+          "distance": 0.3113382273114772
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "distance": 0.3215740727440063
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "distance": 0.365797595286656
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.36957299709319624
+        }
+      ],
+      "first_result_distance": 0.29967812897693213,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:6",
+          "document_id": "EN-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.3113382273114772
+        }
+      ]
+    },
+    {
+      "id": "cal-05",
+      "question": "¿Cuánto presupuesto de formación me queda a mí este año?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "abstain_reason": "personal_data_unavailable",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-004:1.0:3",
+          "document_id": "ES-004",
+          "distance": 0.31986389637804524
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-004:1.0:5",
+          "document_id": "ES-004",
+          "distance": 0.33107916527514547
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-004:1.0:13",
+          "document_id": "ES-004",
+          "distance": 0.39931455854686637
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-004:1.0:6",
+          "document_id": "ES-004",
+          "distance": 0.4093846434721553
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-004:1.0:9",
+          "document_id": "ES-004",
+          "distance": 0.469160472900782
+        }
+      ],
+      "first_result_distance": 0.31986389637804524,
+      "expected_evidence_matches": []
+    },
+    {
+      "id": "cal-06",
+      "question": "¿Ofrece Northfern algún bono económico por recomendar a un candidato que termine siendo contratado?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "abstain",
+      "abstain_reason": "no_information",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "distance": 0.4340521771845607
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-002:1.0:6",
+          "document_id": "GLB-002",
+          "distance": 0.4969186786510136
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-002:1.0:5",
+          "document_id": "GLB-002",
+          "distance": 0.5005459784810569
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-001:1.0:5",
+          "document_id": "GLB-001",
+          "distance": 0.5010074375258489
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-001:1.0:8",
+          "document_id": "GLB-001",
+          "distance": 0.5039693408067204
+        }
+      ],
+      "first_result_distance": 0.4340521771845607,
+      "expected_evidence_matches": []
+    },
+    {
+      "id": "cal-07",
+      "question": "Si varias solicitudes de vacaciones coinciden y afectan a la cobertura del equipo en España, ¿cómo debe resolverlo el responsable?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "abstain_reason": "access_restricted",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:5",
+          "document_id": "ES-001",
+          "distance": 0.34158273439613174
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.37659237524316347
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:9",
+          "document_id": "ES-001",
+          "distance": 0.3978714827528914
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:7",
+          "document_id": "ES-002",
+          "distance": 0.4148010713099156
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:1",
+          "document_id": "ES-002",
+          "distance": 0.42006582974602824
+        }
+      ],
+      "first_result_distance": 0.34158273439613174,
+      "expected_evidence_matches": []
+    },
+    {
+      "id": "cal-08",
+      "question": "What is Northfern's dress code policy?",
+      "profile_id": "england-employee",
+      "expected_outcome": "abstain",
+      "abstain_reason": "insufficient_evidence",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "GLB-001:1.0:1",
+          "document_id": "GLB-001",
+          "distance": 0.42309430699978323
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-001:1.0:5",
+          "document_id": "GLB-001",
+          "distance": 0.44012991664470635
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-002:1.0:1",
+          "document_id": "GLB-002",
+          "distance": 0.4542250687807716
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-001:1.0:8",
+          "document_id": "GLB-001",
+          "distance": 0.458335734903382
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-001:1.0:0",
+          "document_id": "GLB-001",
+          "distance": 0.4739411504338801
+        }
+      ],
+      "first_result_distance": 0.42309430699978323,
+      "expected_evidence_matches": []
+    }
+  ]
+}

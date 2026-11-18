@@ -8,7 +8,7 @@ All company information, policies, and employee data used in this project are fi
 
 ## Current Status
 
-A full, working RAG pipeline is implemented, tested, and manually validated against the real corpus with real embeddings and a real LLM call:
+A full RAG pipeline is implemented, tested, manually validated, **and evaluated** against a held-out question set, with real embeddings and real LLM calls throughout:
 
 - **Corpus**: 12 current fictional policy documents plus one superseded version, in Spanish and English, with country/role scoping ([corpus inventory](docs/corpus-inventory.md)).
 - **PostgreSQL + pgvector**: schema, roles, and Row-Level Security policies that enforce country/role authorization at the database level.
@@ -17,9 +17,10 @@ A full, working RAG pipeline is implemented, tested, and manually validated agai
 - **Retrieval**: pgvector cosine-distance search over an RLS-bound connection — authorization is never a Python-side filter.
 - **Generation**: Claude Sonnet 5, with structured outputs and index-based citation resolution so the model can never cite a document it wasn't given.
 - **Web demo**: a FastAPI app (`web/app.py`) exposing `GET /api/profiles` and `POST /api/ask` over the exact same `answer_question()` pipeline, with a small HTML/CSS/JS interface (`web/static/`) served from the same app — no separate frontend process, no build step, no CORS configuration. See [Running the Web Demo](#running-the-web-demo).
-- **245 automated tests** (98 of them integration tests against a real PostgreSQL instance), plus a manual smoke test against the real corpus and a real Anthropic call (see [Manual validation](#manual-validation--first-real-run) below), and a manual end-to-end run through the web demo itself.
+- **Calibration and evaluation are complete**: retrieval distances were calibrated against 8 validation questions, and the RAG pipeline was run and manually reviewed against a 20-question held-out set. See [Calibration & Evaluation](#calibration--evaluation) below.
+- **284 automated tests** (98 of them integration tests against a real PostgreSQL instance), plus a manual smoke test against the real corpus and a real Anthropic call (see [Manual validation](#manual-validation--first-real-run) below), and a manual end-to-end run through the web demo itself.
 
-**Not yet implemented**: Corrective RAG (CRAG), and automated evaluation of retrieval/groundedness quality. See [Pending work](#pending-work).
+**Not yet implemented**: Corrective RAG (CRAG), a RAG-vs-CRAG comparison, and a deterministic relevance control applied *before* generation (see [Calibration & Evaluation](#calibration--evaluation) for why, and [Pending work](#pending-work)).
 
 ## Architecture
 
@@ -112,9 +113,11 @@ data/archive/             Superseded document versions (versioning test cases)
 docs/                     Company background and corpus design documentation
 migrations/               Ordered SQL migrations (schema, roles, RLS, grants)
 scripts/                  Runnable entry points (see "Running the Project")
+scripts/evaluation/       Calibration and evaluation scripts (see "Calibration & Evaluation")
 src/policy_consultant/    Application code (see "Core modules" above)
 web/                      FastAPI demo app + static HTML/CSS/JS frontend (see "Web demo" above)
 tests/                    Unit tests + integration tests (pytest, marker "integration")
+tests/evaluation/         Tests for the calibration/evaluation scripts' own pure logic
 compose.yaml              PostgreSQL + pgvector service
 .env.example              All environment variables this project reads
 ```
@@ -199,6 +202,18 @@ uv run python scripts/sync_corpus.py
 # Manual smoke tests (real BGE-M3 / real Anthropic calls — never part of the automated suite)
 uv run python scripts/smoke_test_embedding.py
 uv run python scripts/smoke_test_rag.py
+
+# Calibration: measures real retrieval distances for the 8 validation
+# questions (real BGE-M3 + PostgreSQL only — no Claude calls, no cost)
+uv run python scripts/evaluation/calibrate_threshold.py
+
+# Evaluation dry run: loads/validates the 20 held-out questions only —
+# no embeddings, no database connection, no Claude calls
+uv run python scripts/evaluation/run_evaluation.py
+
+# Evaluation, real run: real BGE-M3 + PostgreSQL retrieval and one
+# billed Claude Sonnet 5 call per question (20 calls for the full set)
+uv run python scripts/evaluation/run_evaluation.py --run
 ```
 
 ### Tests
@@ -214,7 +229,7 @@ uv run pytest -m integration
 uv run pytest
 ```
 
-As of this writing: **245 tests pass**, **98** of them integration tests against a real PostgreSQL instance — no skipped tests when PostgreSQL is reachable. The web demo's own tests (`tests/web/`) use a fake embedding model and a fake generator — never real BGE-M3 or a real Anthropic call — so the automated suite never depends on either.
+As of this writing: **284 tests pass**, **98** of them integration tests against a real PostgreSQL instance — no skipped tests when PostgreSQL is reachable. The web demo's own tests (`tests/web/`) use a fake embedding model and a fake generator — never real BGE-M3 or a real Anthropic call — so the automated suite never depends on either.
 
 ## Running the Web Demo
 
@@ -252,12 +267,37 @@ Two results are worth recording explicitly, since they look like failures but ar
 
 The web demo itself (`web/app.py` + `web/static/`) was also run and exercised manually end-to-end in a real browser, through a real BGE-M3 embedding, PostgreSQL/RLS retrieval, and a real Claude call: a question was submitted through the UI, and the grounded answer and its cited sources were displayed correctly.
 
+## Calibration & Evaluation
+
+Two question sets support this stage, both verified against the real indexed corpus rather than invented — see [`docs/evaluation/`](docs/evaluation/):
+
+- **Calibration set** (8 questions: 4 answerable + 4 abstain, [`calibration-questions.yaml`](docs/evaluation/calibration-questions.yaml)) — used only to study real retrieval distances, never reused in the evaluation numbers below.
+- **Held-out evaluation set** (20 questions: 14 answerable + 6 abstain, [`eval-questions.yaml`](docs/evaluation/eval-questions.yaml)) — expected evidence (or abstention reason) fixed before anything was run.
+
+### Calibration result: no fixed relevance threshold
+
+`scripts/evaluation/calibrate_threshold.py` measured real cosine distances (pgvector's `<=>`: `0` = identical, `2` = opposite, lower = more relevant) for the 8 calibration questions. **The answerable and abstain distance distributions overlap**: two abstain questions had a closer first result (`0.320` and `0.342`) than the correct evidence for an answerable question (`0.385`) — so no single distance threshold can admit that answerable question without also admitting those abstentions. Full numbers: [`calibration-results.json`](docs/evaluation/calibration-results.json).
+
+**Decision: no fixed threshold was introduced**, from this 8-question sample. `retrieval.retrieve_relevant_chunks()` still always returns its `top_k` nearest chunks regardless of distance, exactly as before. **There is currently no deterministic relevance filter applied before generation.** Abstention here depends entirely on `ClaudeAnswerGenerator` recognizing, from the retrieved context itself, that it cannot answer, plus the citation-resolution step that forces an abstention if zero citations survive validation (see [RAG Flow](#rag-flow-generation-citations-and-abstention) above). This remains open — see [Pending Work](#pending-work).
+
+### Evaluation result (20 held-out questions)
+
+`scripts/evaluation/run_evaluation.py --run` ran the real pipeline (real BGE-M3, real PostgreSQL/RLS retrieval, one real Claude Sonnet 5 call per question) against the 20 held-out questions; every answer was then manually checked against its cited fragments and expected result. Full per-question results and manual-review notes: [`rag-eval-results.json`](docs/evaluation/rag-eval-results.json) and [`rag-eval-report.md`](docs/evaluation/rag-eval-report.md).
+
+- **Evidence Recall@5: 100%** — every expected supporting chunk was retrieved, across all 14 answerable questions.
+- **Answerable questions answered correctly: 14/14**, manually verified against their cited fragments.
+- **Abstain questions correctly abstained: 5/6.**
+- **Manual review overall: 19/20 correct.**
+- **Citations structurally valid** (each one actually references a retrieved chunk): **19/19.**
+- **The one failure (`eval-17`)**: the system answered instead of abstaining on a question about an employee's *personal* remote-work authorization. The cited fragment only states the general procedural rule ("prior authorization is required") — it says nothing about this specific employee's authorization status. This is a generation/reasoning failure (conflating a policy rule with an individual fact the corpus cannot contain), not a retrieval failure: the most relevant fragment was correctly retrieved and cited.
+- **Access control check (`eval-09` vs `eval-16`)**: the identical question, asked under `spain-hr` and `spain-employee`, about an HR-only exception procedure. The `hr` profile retrieved the restricted fragment and answered correctly; under `employee`, retrieval never returned any chunk from either role-restricted document, and the system correctly abstained — Row-Level Security filtered before the generator ever saw restricted content, for the exact same query.
+
+**This is a 20-question sample, not a statistically powered benchmark.** A 5/6 abstention rate and a single generation failure are a documented starting point for comparing against a future CRAG implementation, not a general reliability claim.
+
 ## Pending Work
 
-- Calibrating a similarity-score threshold for retrieval, using validation data, instead of always returning the top-`k` nearest chunks regardless of distance.
-- A held-out evaluation set of 20 questions (14 answerable, 6 deliberately unanswerable), with their expected supporting evidence and retrieval/groundedness metrics — not yet built or run.
-- Corrective RAG (CRAG): grading retrieved evidence before generation, rather than relying solely on the generator's own abstention judgment.
-- A RAG-vs-CRAG comparison once CRAG exists, using the evaluation set above.
+- Corrective RAG (CRAG): grading retrieved evidence before generation, rather than relying solely on the generator's own abstention judgment. A deterministic relevance control before generation (see [Calibration & Evaluation](#calibration--evaluation) above) is part of this same evolution — an 8-question calibration sample showed overlapping distance distributions between answerable and abstain questions, so a fixed scalar threshold would either reject valid answers or admit abstentions; CRAG's evidence-grading step is the intended way to address this structurally, rather than a single cutoff.
+- A RAG-vs-CRAG comparison once CRAG exists, using the same 20-question held-out set.
 
 ## Disclaimer
 

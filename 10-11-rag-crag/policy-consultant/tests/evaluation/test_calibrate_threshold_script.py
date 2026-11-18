@@ -1,8 +1,8 @@
-"""Tests for the pure parts of scripts/calibrate_threshold.py: evidence
-matching and loading the real calibration question file. Real BGE-M3
-retrieval and PostgreSQL access (main(), _run_calibration) are exercised
-manually when the script is actually run — the same category as
-scripts/smoke_test_rag.py — and are not covered here.
+"""Tests for the pure parts of scripts/evaluation/calibrate_threshold.py:
+evidence matching and loading the real calibration question file. Real
+BGE-M3 retrieval and PostgreSQL access (main(), _run_calibration) are
+exercised manually when the script is actually run — the same category
+as scripts/smoke_test_rag.py — and are not covered here.
 
 scripts/ is deliberately not an importable package (see
 test_sync_corpus_script.py's own docstring) — the module is loaded
@@ -20,7 +20,12 @@ import pytest
 
 from policy_consultant.models import RetrievedChunk
 
-SCRIPT_PATH = Path(__file__).resolve().parent.parent / "scripts" / "calibrate_threshold.py"
+SCRIPT_PATH = (
+    Path(__file__).resolve().parent.parent.parent
+    / "scripts"
+    / "evaluation"
+    / "calibrate_threshold.py"
+)
 
 
 def _load_script() -> types.ModuleType:

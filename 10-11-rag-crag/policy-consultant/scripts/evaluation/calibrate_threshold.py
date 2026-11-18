@@ -17,7 +17,7 @@ of the automated pytest suite, since it loads the real BGE-M3 model.
 
 Run with:
 
-    uv run python scripts/calibrate_threshold.py
+    uv run python scripts/evaluation/calibrate_threshold.py
 
 Writes a single, overwritten results file at
 docs/evaluation/calibration-results.json for later reference/comparison.
@@ -35,13 +35,16 @@ from typing import Any, cast
 import yaml
 from dotenv import load_dotenv
 
-# `uv run python scripts/calibrate_threshold.py` only puts this file's own
-# directory on sys.path, not the project root — unlike pytest (pythonpath
-# = ["."] in pyproject.toml) or `uvicorn web.app:app` (which inserts the
-# cwd itself). web/ is deliberately not an installed package (see
-# web/app.py's own docstring), so reusing DEMO_PROFILES/TOP_K from it
-# instead of duplicating them here requires this one-line bootstrap.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# `uv run python scripts/evaluation/calibrate_threshold.py` only puts this
+# file's own directory on sys.path, not the project root — unlike pytest
+# (pythonpath = ["."] in pyproject.toml) or `uvicorn web.app:app` (which
+# inserts the cwd itself). web/ is deliberately not an installed package
+# (see web/app.py's own docstring), so reusing DEMO_PROFILES/TOP_K from it
+# instead of duplicating them here requires this bootstrap. This script
+# lives two levels below the project root (scripts/evaluation/), hence
+# parent.parent.parent rather than calibrate_threshold.py's former
+# scripts/-level parent.parent.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from policy_consultant.corpus_manifest import load_access_model  # noqa: E402
 from policy_consultant.db import admin_connection, app_connection  # noqa: E402
@@ -51,7 +54,7 @@ from policy_consultant.persistence import verify_embedding_model_compatibility  
 from policy_consultant.retrieval import retrieve_relevant_chunks  # noqa: E402
 from web.app import DEMO_PROFILES, TOP_K  # noqa: E402
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 ACCESS_MODEL_PATH = PROJECT_ROOT / "config" / "access-model.yaml"
 CALIBRATION_QUESTIONS_PATH = PROJECT_ROOT / "docs" / "evaluation" / "calibration-questions.yaml"
 RESULTS_PATH = PROJECT_ROOT / "docs" / "evaluation" / "calibration-results.json"

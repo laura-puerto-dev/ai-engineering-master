@@ -1,6 +1,6 @@
-"""Tests for the pure parts of scripts/run_evaluation.py: evidence
-matching/recall, abstention-outcome metrics, citation structural
-validation, dataset loading, and the --run safety guard.
+"""Tests for the pure parts of scripts/evaluation/run_evaluation.py:
+evidence matching/recall, abstention-outcome metrics, citation
+structural validation, dataset loading, and the --run safety guard.
 
 Real embeddings, PostgreSQL retrieval, and Claude generation
 (_run_question, main() called with --run) are exercised manually when
@@ -26,7 +26,9 @@ import pytest
 
 from policy_consultant.models import Citation, RetrievedChunk
 
-SCRIPT_PATH = Path(__file__).resolve().parent.parent / "scripts" / "run_evaluation.py"
+SCRIPT_PATH = (
+    Path(__file__).resolve().parent.parent.parent / "scripts" / "evaluation" / "run_evaluation.py"
+)
 
 
 def _load_script() -> types.ModuleType:

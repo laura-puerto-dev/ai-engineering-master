@@ -14,7 +14,7 @@ are guaranteed to see the same rows.
 
 Never touches docs/evaluation/calibration-questions.yaml (the
 calibration set) and duplicates a couple of small pure helpers
-(_find_expected_evidence, the YAML loader) from scripts/
+(_find_expected_evidence, the YAML loader) from scripts/evaluation/
 calibrate_threshold.py rather than importing them from it — scripts/ is
 deliberately not an importable package (see
 tests/test_sync_corpus_script.py's own docstring), and coupling two
@@ -23,10 +23,11 @@ lines.
 
 Run with:
 
-    uv run python scripts/run_evaluation.py           # dry run: loads and
-                                                        # validates the
-                                                        # dataset only
-    uv run python scripts/run_evaluation.py --run      # the real thing
+    uv run python scripts/evaluation/run_evaluation.py        # dry run: loads
+                                                                # and validates
+                                                                # the dataset
+                                                                # only
+    uv run python scripts/evaluation/run_evaluation.py --run  # the real thing
 
 Without --run, this script never embeds a question, never opens a
 database connection, and never calls Claude. --run is required because
@@ -74,14 +75,16 @@ from typing import Any, cast
 import yaml
 from dotenv import load_dotenv
 
-# `uv run python scripts/run_evaluation.py` only puts this file's own
-# directory on sys.path, not the project root — unlike pytest (pythonpath
-# = ["."] in pyproject.toml) or `uvicorn web.app:app` (which inserts the
-# cwd itself). web/ is deliberately not an installed package (see
-# web/app.py's own docstring), so reusing DEMO_PROFILES/TOP_K from it
-# instead of duplicating them here requires this one-line bootstrap (same
-# fix already applied in scripts/calibrate_threshold.py).
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# `uv run python scripts/evaluation/run_evaluation.py` only puts this
+# file's own directory on sys.path, not the project root — unlike pytest
+# (pythonpath = ["."] in pyproject.toml) or `uvicorn web.app:app` (which
+# inserts the cwd itself). web/ is deliberately not an installed package
+# (see web/app.py's own docstring), so reusing DEMO_PROFILES/TOP_K from it
+# instead of duplicating them here requires this bootstrap (same fix
+# already applied in scripts/evaluation/calibrate_threshold.py). This
+# script lives two levels below the project root (scripts/evaluation/),
+# hence parent.parent.parent.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from policy_consultant.corpus_manifest import load_access_model  # noqa: E402
 from policy_consultant.db import admin_connection, app_connection  # noqa: E402
@@ -93,7 +96,7 @@ from policy_consultant.rag import answer_question  # noqa: E402
 from policy_consultant.retrieval import retrieve_relevant_chunks  # noqa: E402
 from web.app import DEMO_PROFILES, TOP_K  # noqa: E402
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 ACCESS_MODEL_PATH = PROJECT_ROOT / "config" / "access-model.yaml"
 EVAL_QUESTIONS_PATH = PROJECT_ROOT / "docs" / "evaluation" / "eval-questions.yaml"
 RESULTS_JSON_PATH = PROJECT_ROOT / "docs" / "evaluation" / "rag-eval-results.json"

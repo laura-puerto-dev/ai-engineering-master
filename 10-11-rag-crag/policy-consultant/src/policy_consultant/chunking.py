@@ -29,15 +29,15 @@ def structured_recursive(
       produces no chunk, but its title still appears in its children's
       section_path.
     - Content before the first heading of level 2 or deeper (if any) is
-      yielded as its own chunk with section_path=[]. This chunker does not
-      discard it: a general-purpose structural chunker has no way to know
-      such content is administrative metadata for this corpus. Callers
-      that do know that (the Policy Consultant indexing pipeline) are
-      responsible for filtering those chunks out — and, if they do, for
-      renumbering the ordinals and rebuilding chunk_id for the chunks they
-      keep, so indexed ordinals stay 0-based and consecutive. This
-      function itself always numbers ordinals in document reading order,
-      including any such leading chunk.
+      yielded as its own chunk with section_path=[], exactly like any
+      other chunk: it is kept, indexed, and retrievable, never discarded
+      or special-cased. This is deliberate, not an oversight — a general-
+      purpose structural chunker has no way to know whether that content
+      is front matter or substantive, and a future document's structure
+      might put real content there. The Policy Consultant indexing
+      pipeline (indexing_prep.py) does not filter by section_path either,
+      for the same reason. This function always numbers ordinals in
+      document reading order, including any such leading chunk.
     - max_chars is a target for divisible content, not a hard ceiling. If
       a section's own text already fits within max_chars, it is kept as a
       single chunk exactly as written — including a table alongside other

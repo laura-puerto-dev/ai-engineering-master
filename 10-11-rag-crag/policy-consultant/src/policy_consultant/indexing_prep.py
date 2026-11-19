@@ -10,10 +10,12 @@ per-document persistence transaction) without this module choosing one
 grouping over the other.
 
 This module does not filter by section_path: a document with no headings
-at all legitimately produces a chunk with section_path=[] that carries
-real content, so emptiness of that list is not a signal of anything. The
-only discard rule here is empty/whitespace-only text, which is
-corpus-agnostic.
+at all, and the leading chunk before a document's first heading of level
+2 or deeper (see chunking.structured_recursive), both legitimately
+produce a chunk with section_path=[] that carries real content — kept
+and indexed like any other chunk, deliberately, since emptiness of that
+list is not a signal of anything. The only discard rule here is
+empty/whitespace-only text, which is corpus-agnostic.
 """
 
 from collections.abc import Iterator

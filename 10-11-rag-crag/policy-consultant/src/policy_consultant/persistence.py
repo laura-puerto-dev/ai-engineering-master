@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import psycopg
 
-from policy_consultant.db import _require_env
+from policy_consultant.db import require_env
 from policy_consultant.models import EmbeddedChunk, PolicyDocument
 
 
@@ -65,7 +65,7 @@ def persist_document(
     if not conn.autocommit:
         raise ValueError("persist_document requires a connection in autocommit mode")
 
-    expected_user = _require_env("POSTGRES_USER")
+    expected_user = require_env("POSTGRES_USER")
     if conn.info.user != expected_user:
         raise ValueError(
             "persist_document requires the admin connection "

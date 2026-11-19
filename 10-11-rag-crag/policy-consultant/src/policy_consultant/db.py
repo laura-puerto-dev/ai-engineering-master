@@ -20,7 +20,7 @@ from policy_consultant.models import AccessModel
 _GLOBAL_SCOPE = "global"
 
 
-def _require_env(name: str) -> str:
+def require_env(name: str) -> str:
     value = os.environ.get(name, "")
     if not value:
         raise ValueError(f"{name} must be set to a non-empty value")
@@ -36,8 +36,8 @@ def _connect(
     connect_timeout: int | None = None,
 ) -> psycopg.Connection:
     return psycopg.connect(
-        host=_require_env("DATABASE_HOST"),
-        port=int(_require_env("DATABASE_PORT")),
+        host=require_env("DATABASE_HOST"),
+        port=int(require_env("DATABASE_PORT")),
         dbname=dbname,
         user=user,
         password=password,
@@ -64,9 +64,9 @@ def admin_connection(
     database explicitly instead.
     """
     conn = _connect(
-        dbname if dbname is not None else _require_env("POSTGRES_DB"),
-        user=_require_env("POSTGRES_USER"),
-        password=_require_env("POSTGRES_PASSWORD"),
+        dbname if dbname is not None else require_env("POSTGRES_DB"),
+        user=require_env("POSTGRES_USER"),
+        password=require_env("POSTGRES_PASSWORD"),
         autocommit=True,
         connect_timeout=connect_timeout,
     )
@@ -125,9 +125,9 @@ def app_connection(
     _validate_app_context(country, role, access_model)
 
     conn = _connect(
-        dbname if dbname is not None else _require_env("POSTGRES_DB"),
+        dbname if dbname is not None else require_env("POSTGRES_DB"),
         user="policy_app",
-        password=_require_env("POLICY_APP_PASSWORD"),
+        password=require_env("POLICY_APP_PASSWORD"),
         autocommit=True,
     )
     try:

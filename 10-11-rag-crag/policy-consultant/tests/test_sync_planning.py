@@ -158,6 +158,35 @@ def test_metadata_conflict_takes_priority_over_a_concurrent_safe_change() -> Non
     assert plan["to_update_metadata"] == []
 
 
+@pytest.mark.parametrize("overrides", [{"country": "mexico"}, {"language": "en"}])
+def test_flags_metadata_conflict_even_when_version_also_advances(
+    overrides: dict[str, object],
+) -> None:
+    document = _make_document(
+        version="1.1", effective_from=date(2026, 6, 1), **overrides  # type: ignore[arg-type]
+    )
+    stored = {"ES-001": _make_stored(version="1.0", effective_from=date(2026, 1, 1))}
+
+    plan = _plan_sync([document], stored)
+
+    assert plan["metadata_conflict"] == ["ES-001"]
+    assert plan["to_update"] == []
+    assert plan["rejected_stale"] == []
+
+
+def test_flags_metadata_conflict_even_when_a_version_bump_would_otherwise_be_rejected_stale() -> (
+    None
+):
+    document = _make_document(version="1.1", country="mexico", effective_from=date(2025, 1, 1))
+    stored = {"ES-001": _make_stored(version="1.0", effective_from=date(2026, 1, 1))}
+
+    plan = _plan_sync([document], stored)
+
+    assert plan["metadata_conflict"] == ["ES-001"]
+    assert plan["rejected_stale"] == []
+    assert plan["to_update"] == []
+
+
 def test_flags_a_stored_document_missing_from_the_current_manifest() -> None:
     plan = _plan_sync([], {"ES-999": _make_stored()})
 

@@ -388,6 +388,48 @@ def test_persist_document_preserves_previous_version_when_update_is_rejected(
     ]
 
 
+# --- connection-type guard ------------------------------------------------
+
+
+def test_persist_document_rejects_a_non_autocommit_connection(
+    non_autocommit_pg_connection: psycopg.Connection,
+) -> None:
+    document = _make_document()
+    with pytest.raises(ValueError, match="autocommit"):
+        persist_document(
+            non_autocommit_pg_connection,
+            document,
+            _make_chunks(document, 1),
+            embedding_model_revision="rev-1",
+            embeddings_normalized=True,
+        )
+
+
+def test_persist_document_rejects_an_app_connection(
+    policy_app_ready: psycopg.Connection, access_model: AccessModel
+) -> None:
+    """autocommit alone can't tell db.admin_connection() and
+    db.app_connection() apart — both open in autocommit mode (see
+    db.py) — so persist_document must also reject a correctly-shaped,
+    autocommit app_connection, because it's authenticated as policy_app,
+    not the admin user.
+    """
+    document = _make_document()
+    with (
+        app_connection(
+            country="spain", role="employee", access_model=access_model, dbname=TEST_DATABASE_NAME
+        ) as conn,
+        pytest.raises(ValueError, match="admin connection"),
+    ):
+        persist_document(
+            conn,
+            document,
+            _make_chunks(document, 1),
+            embedding_model_revision="rev-1",
+            embeddings_normalized=True,
+        )
+
+
 # --- verify_embedding_model_compatibility --------------------------------
 
 

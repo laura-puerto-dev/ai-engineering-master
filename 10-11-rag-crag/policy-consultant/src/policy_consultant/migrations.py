@@ -1,7 +1,8 @@
 """Simple SQL migration runner: applies numbered .sql files from a
-directory in filename order, recording each one in schema_migrations.
-No ORM, no migration framework — just ordered files and a ledger table
-that is itself the first migration.
+directory in numeric-prefix order (not filename string order — "4_x.sql"
+and "039_y.sql" would otherwise misorder), recording each one in
+schema_migrations. No ORM, no migration framework — just ordered files
+and a ledger table that is itself the first migration.
 
 Requires a connection in autocommit mode. With autocommit=False, running
 a plain query (e.g. the ledger lookup below) before entering
@@ -21,8 +22,19 @@ from pathlib import Path
 import psycopg
 
 
+def _migration_sort_key(path: Path) -> tuple[int, str]:
+    prefix, _, _ = path.name.partition("_")
+    if not prefix.isdigit():
+        raise ValueError(
+            f"Migration filename {path.name!r} must start with a numeric prefix "
+            "followed by '_' (e.g. '004_description.sql')"
+        )
+    return (int(prefix), path.name)
+
+
 def apply_migrations(migrations_dir: Path, conn: psycopg.Connection) -> list[str]:
-    """Apply every pending .sql file in migrations_dir, in filename order.
+    """Apply every pending .sql file in migrations_dir, in numeric-prefix
+    order.
 
     Each file's SQL and its ledger entry commit together in one
     transaction; a failing file is never recorded, and no later file is
@@ -34,7 +46,8 @@ def apply_migrations(migrations_dir: Path, conn: psycopg.Connection) -> list[str
 
     applied = _load_applied_filenames(conn)
     pending = sorted(
-        path for path in migrations_dir.glob("*.sql") if path.name not in applied
+        (path for path in migrations_dir.glob("*.sql") if path.name not in applied),
+        key=_migration_sort_key,
     )
 
     newly_applied = []

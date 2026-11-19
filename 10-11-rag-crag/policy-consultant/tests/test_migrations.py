@@ -71,6 +71,35 @@ def test_applies_pending_migrations_in_filename_order(
     assert applied == ["000_migration_ledger.sql", "001_create_a.sql", "002_create_b.sql"]
 
 
+def test_applies_pending_migrations_in_numeric_order_despite_different_prefix_widths(
+    pg_connection: psycopg.Connection, tmp_path: Path
+) -> None:
+    _write_ledger(tmp_path)
+    # Lexicographically "100_..." sorts before "39_...", which would apply
+    # the foreign-key-dependent table before the one it references.
+    (tmp_path / "39_create_a.sql").write_text(
+        "CREATE TABLE a (id INT PRIMARY KEY);", encoding="utf-8"
+    )
+    (tmp_path / "100_create_b.sql").write_text(
+        "CREATE TABLE b (id INT REFERENCES a(id));", encoding="utf-8"
+    )
+
+    applied = apply_migrations(tmp_path, pg_connection)
+
+    assert applied == ["000_migration_ledger.sql", "39_create_a.sql", "100_create_b.sql"]
+
+
+@pytest.mark.parametrize("filename", ["add_feature.sql", "4x_create_a.sql"])
+def test_rejects_a_migration_filename_without_a_valid_numeric_prefix(
+    pg_connection: psycopg.Connection, tmp_path: Path, filename: str
+) -> None:
+    _write_ledger(tmp_path)
+    (tmp_path / filename).write_text("CREATE TABLE a (id INT);", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="numeric prefix"):
+        apply_migrations(tmp_path, pg_connection)
+
+
 def test_second_run_is_idempotent(pg_connection: psycopg.Connection, tmp_path: Path) -> None:
     _write_ledger(tmp_path)
     (tmp_path / "001_create_a.sql").write_text("CREATE TABLE a (id INT);", encoding="utf-8")

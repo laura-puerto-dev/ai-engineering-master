@@ -197,6 +197,17 @@ def _plan_sync(
             plan["to_insert"].append(document)
             continue
 
+        # Checked before the version comparison below, and independently
+        # of it: country/language are RLS-relevant (see
+        # migrations/002_security.sql), so a change to either always needs
+        # human review via metadata_conflict — including when it arrives
+        # bundled with a version bump, which would otherwise route
+        # straight to to_update/rejected_stale based on effective_from
+        # alone and never reach this check at all.
+        if document["country"] != stored.country or document["language"] != stored.language:
+            plan["metadata_conflict"].append(document_id)
+            continue
+
         if document["version"] != stored.version:
             if document["effective_from"] > stored.effective_from:
                 plan["to_update"].append(document)
@@ -204,12 +215,7 @@ def _plan_sync(
                 plan["rejected_stale"].append(document_id)
             continue
 
-        unsafe_changed = (
-            document["country"] != stored.country
-            or document["language"] != stored.language
-            or document["effective_from"] != stored.effective_from
-        )
-        if unsafe_changed:
+        if document["effective_from"] != stored.effective_from:
             plan["metadata_conflict"].append(document_id)
             continue
 

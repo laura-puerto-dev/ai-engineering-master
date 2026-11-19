@@ -17,9 +17,12 @@ from pathlib import Path
 import psycopg
 import pytest
 
+from policy_consultant.corpus_manifest import load_access_model
+
 pytestmark = pytest.mark.integration
 
 REAL_MIGRATIONS_DIR = Path(__file__).resolve().parent.parent / "migrations"
+REAL_ACCESS_MODEL_PATH = Path(__file__).resolve().parent.parent / "config" / "access-model.yaml"
 
 _DOCUMENTS = [
     # (document_id, country, allowed_roles)
@@ -335,6 +338,54 @@ def test_refuses_a_preexisting_policy_app_role_with_dangerous_attributes(
         "SELECT rolsuper, rolbypassrls FROM pg_roles WHERE rolname = 'policy_app'"
     ).fetchone()
     assert row == (False, False)
+
+
+# --- access_context_is_set() must stay in sync with access-model.yaml ------
+#
+# migrations/002_security.sql hardcodes its own copy of the valid user
+# country/role vocabulary (see that file's comment above
+# access_context_is_set()) instead of reading config/access-model.yaml —
+# a deliberate, narrow exception, not a bug. Nothing else enforces that
+# the two stay in sync, so these tests are that enforcement: they load
+# the real YAML and check every value it declares against the real SQL
+# function, instead of hardcoding a second, independent copy of the same
+# vocabulary in Python.
+
+
+def _access_context_is_set(conn: psycopg.Connection, *, country: str, role: str) -> bool:
+    with conn.transaction():
+        conn.execute("SELECT set_config('app.country', %s, true)", (country,))
+        conn.execute("SELECT set_config('app.role', %s, true)", (role,))
+        row = conn.execute("SELECT access_context_is_set()").fetchone()
+    assert row is not None
+    return bool(row[0])
+
+
+def test_access_context_is_set_accepts_every_real_country_and_role(
+    policy_app_ready: psycopg.Connection, policy_app_connection: psycopg.Connection
+) -> None:
+    """A country or role added to access-model.yaml without a matching
+    update to access_context_is_set() would deny every request for it —
+    silently, since that looks identical to 'no evidence found'. This
+    fails loudly instead, the moment the two drift apart.
+    """
+    access_model = load_access_model(REAL_ACCESS_MODEL_PATH)
+    user_countries = access_model["countries"] - {"global"}
+
+    for country in user_countries:
+        for role in access_model["roles"]:
+            assert _access_context_is_set(policy_app_connection, country=country, role=role), (
+                f"access_context_is_set() rejected (country={country!r}, role={role!r}), "
+                "a pair declared valid by config/access-model.yaml"
+            )
+
+
+def test_access_context_is_set_still_rejects_global_as_a_user_country(
+    policy_app_ready: psycopg.Connection, policy_app_connection: psycopg.Connection
+) -> None:
+    access_model = load_access_model(REAL_ACCESS_MODEL_PATH)
+    for role in access_model["roles"]:
+        assert not _access_context_is_set(policy_app_connection, country="global", role=role)
 
 
 def test_refuses_when_policy_app_already_owns_a_protected_table(

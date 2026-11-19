@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import psycopg
 
+from policy_consultant.db import _require_env
 from policy_consultant.models import EmbeddedChunk, PolicyDocument
 
 
@@ -33,10 +34,14 @@ def persist_document(
 ) -> None:
     """Persist one document's row and its full set of chunks atomically.
 
-    `conn` must already be open in autocommit mode (db.admin_connection
-    satisfies this; see migrations.apply_migrations for the same
-    contract). `chunks` must all belong to `document` and already carry
-    their embeddings — this function never calls an EmbeddingModel.
+    `conn` must already be the admin connection, open in autocommit mode
+    (db.admin_connection satisfies both; see migrations.apply_migrations
+    for the same autocommit contract). Autocommit alone cannot tell
+    db.admin_connection() and db.app_connection() apart — both open in
+    autocommit mode — so the user psycopg authenticated as is checked
+    too, against the same POSTGRES_USER db.admin_connection() itself
+    connects with. `chunks` must all belong to `document` and already
+    carry their embeddings — this function never calls an EmbeddingModel.
 
     model_id is read from chunks[0]["model_id"] only after validation has
     confirmed every chunk shares that same value — there is no separate
@@ -59,6 +64,13 @@ def persist_document(
     """
     if not conn.autocommit:
         raise ValueError("persist_document requires a connection in autocommit mode")
+
+    expected_user = _require_env("POSTGRES_USER")
+    if conn.info.user != expected_user:
+        raise ValueError(
+            "persist_document requires the admin connection "
+            f"(expected user={expected_user!r}, got {conn.info.user!r})"
+        )
 
     _validate_document_and_chunks(document, chunks, embedding_model_revision)
 

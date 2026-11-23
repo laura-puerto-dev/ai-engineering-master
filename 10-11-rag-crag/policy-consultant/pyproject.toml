@@ -28,6 +28,19 @@ embeddings = [
     "torch>=2.6",
 ]
 
+# Local reranking for CRAG (reranking.py, Qwen3-Reranker-0.6B). Depends
+# on this package's own `embeddings` extra for torch — already required
+# to run any local model on CPU/GPU — and declares transformers
+# explicitly: until now it was only ever a transitive dependency of
+# sentence-transformers, but reranking.py imports
+# AutoModelForCausalLM/AutoTokenizer from it directly. Pinned to the
+# version verified directly against the real model on 2026-11-19 (Fase 0
+# of the CRAG plan's reranker feasibility check).
+reranking = [
+    "policy-consultant[embeddings]",
+    "transformers>=5.22",
+]
+
 # PostgreSQL + pgvector persistence (see migrations/ and compose.yaml).
 persistence = [
     "psycopg[binary]>=3.2",
@@ -86,7 +99,7 @@ strict = true
 # [project.optional-dependencies]), not always installed in the
 # environment running mypy. Treat them as untyped rather than erroring
 # on missing stubs/source.
-module = ["sentence_transformers.*", "torch.*"]
+module = ["sentence_transformers.*", "torch.*", "transformers.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

@@ -145,6 +145,20 @@ class RetrievedChunk(TypedDict):
     distance: float
 
 
+class RerankedChunk(RetrievedChunk):
+    """A RetrievedChunk after local reranking (see reranking.Reranker).
+
+    rerank_score is a separate signal from the inherited `distance`
+    (pgvector's cosine distance) on purpose — the two measure different
+    things and can disagree (see reranking.py's module docstring): a
+    caller must never conflate them. Higher rerank_score means more
+    relevant, the opposite direction from distance, where lower means
+    closer.
+    """
+
+    rerank_score: float
+
+
 class Citation(TypedDict):
     """One chunk the answer generator actually used, resolved from the
     caller's own chunk list by index — never built from free text the

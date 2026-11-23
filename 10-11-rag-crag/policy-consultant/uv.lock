@@ -1151,6 +1151,11 @@ persistence = [
     { name = "psycopg", extra = ["binary"] },
     { name = "python-dotenv" },
 ]
+reranking = [
+    { name = "sentence-transformers" },
+    { name = "torch" },
+    { name = "transformers" },
+]
 web = [
     { name = "anthropic" },
     { name = "fastapi" },
@@ -1174,15 +1179,17 @@ dev = [
 requires-dist = [
     { name = "anthropic", marker = "extra == 'generation'", specifier = ">=2.8.0" },
     { name = "fastapi", marker = "extra == 'web'", specifier = ">=0.162.5" },
+    { name = "policy-consultant", extras = ["embeddings"], marker = "extra == 'reranking'" },
     { name = "policy-consultant", extras = ["persistence", "embeddings", "generation"], marker = "extra == 'web'" },
     { name = "psycopg", extras = ["binary"], marker = "extra == 'persistence'", specifier = ">=3.2" },
     { name = "python-dotenv", marker = "extra == 'persistence'", specifier = ">=1.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "sentence-transformers", marker = "extra == 'embeddings'", specifier = ">=3.0" },
     { name = "torch", marker = "extra == 'embeddings'", specifier = ">=2.6", index = "https://download.pytorch.org/whl/cu126" },
+    { name = "transformers", marker = "extra == 'reranking'", specifier = ">=5.22" },
     { name = "uvicorn", marker = "extra == 'web'", specifier = ">=0.54.0" },
 ]
-provides-extras = ["embeddings", "persistence", "generation", "web"]
+provides-extras = ["embeddings", "reranking", "persistence", "generation", "web"]
 
 [package.metadata.requires-dev]
 dev = [

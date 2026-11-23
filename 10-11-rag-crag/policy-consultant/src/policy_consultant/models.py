@@ -1,5 +1,5 @@
 from datetime import date
-from typing import TypedDict
+from typing import Literal, TypedDict
 
 
 class PolicyDocument(TypedDict):
@@ -186,3 +186,74 @@ class GeneratedAnswer(TypedDict):
     answer: str
     citations: list[Citation]
     abstained: bool
+
+
+CragRoute = Literal["sufficient", "ambiguous", "insufficient"]
+"""The three outcomes of grade_evidence.EvidenceGrader.grade, shared by
+EvidenceGrade and crag.py's routing logic so both sides of that contract
+are checked against the same three literal strings — never a bare str.
+"""
+
+
+class EvidenceGrade(TypedDict):
+    """The result of grade_evidence.EvidenceGrader.grade: a judgment
+    about whether a pool of (already RLS-authorized) chunks is enough to
+    answer `question`, not just whether they are topically related to it
+    (see reranking.RerankedChunk's rerank_score, a different signal this
+    is deliberately not derived from).
+
+    useful_chunk_ids is already resolved and validated against the exact
+    chunk pool the grader was given — see grade_evidence._resolve_useful_chunk_ids
+    for how an out-of-range or hallucinated index is dropped before this
+    TypedDict is ever built. A caller (crag.py) must still never trust a
+    chunk_id here that isn't also present in its own authorized pool; it
+    never looks one up by id without that check (see the grade step
+    inside crag._build_graph, which filters its own pool by membership
+    rather than looking anything up by id).
+    """
+
+    route: CragRoute
+    covered_aspects: list[str]
+    missing_aspects: list[str]
+    useful_chunk_ids: list[str]
+    rationale: str
+
+
+class CragCandidate(TypedDict):
+    """One reranked candidate as recorded in a CragAttemptTrace entry —
+    just enough to audit a retrieval/rerank attempt after the fact
+    without duplicating the full chunk text already visible via
+    CragAttemptTrace's kept_chunk_ids/discarded_chunk_ids.
+    """
+
+    chunk_id: str
+    distance: float
+    rerank_score: float
+
+
+class CragAttemptTrace(TypedDict):
+    """One retrieve→rerank→grade attempt inside crag.answer_question_crag,
+    in the order attempts actually happened. attempt is 1-indexed (the
+    first retrieval is attempt 1), matching crag.py's own retrieval
+    counter and the CRAG plan's "up to 3 internal retrievals" limit.
+    """
+
+    attempt: int
+    query: str
+    candidates: list[CragCandidate]
+    kept_chunk_ids: list[str]
+    discarded_chunk_ids: list[str]
+    coverage: EvidenceGrade
+    route: CragRoute
+
+
+class CragResult(TypedDict):
+    """The result of crag.answer_question_crag: the final answer plus a
+    full, structured trace of every retrieve→rerank→grade attempt that
+    led to it (see CragAttemptTrace) — never Langfuse or another external
+    service, per the CRAG plan's local-tracing decision.
+    """
+
+    answer: GeneratedAnswer
+    attempts: list[CragAttemptTrace]
+    retrieval_count: int

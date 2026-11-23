@@ -47,6 +47,17 @@ persistence = [
     "python-dotenv>=1.0",
 ]
 
+# LangGraph-based CRAG orchestration (crag.py, grade_evidence.py,
+# reformulate.py). Depends on this package's own persistence (real
+# retrieval through a PostgreSQL connection), reranking (Qwen3 + torch),
+# and generation (Claude, also used by grade_evidence.py/reformulate.py)
+# extras, since the graph composes all three. Pinned to the latest
+# published version verified directly on PyPI on 2026-11-23.
+crag = [
+    "policy-consultant[persistence,reranking,generation]",
+    "langgraph>=1.2",
+]
+
 # Claude-based answer generation (generation.py). Pinned to the version
 # verified directly against the real SDK on 2026-11-11: output_config
 # (effort/format), messages.parse(output_format=<pydantic model>), and

@@ -1,0 +1,25 @@
+-- Adds an HNSW approximate-nearest-neighbor index on chunks.embedding,
+-- using vector_cosine_ops — the operator class pgvector backs the <=>
+-- operator with, the same operator retrieval.retrieve_relevant_chunks()
+-- already orders by. This does not change what that function returns in
+-- principle (chunks_select's RLS policy, and the ORDER BY/LIMIT
+-- themselves, are unchanged by this migration) — only how PostgreSQL may
+-- choose to execute the search.
+--
+-- HNSW is an approximate nearest-neighbor structure, not exact: for a tie
+-- or near-tie in distance, a sequential scan and an HNSW-assisted scan
+-- are not guaranteed to return rows in exactly the same order. At this
+-- corpus's current scale (163 chunks, see docs/corpus-inventory.md), the
+-- planner may well prefer a sequential scan over this index anyway —
+-- that was checked manually with EXPLAIN alongside this migration, not
+-- asserted here in SQL (see crag-implementation-plan.md's HNSW task).
+--
+-- Default build parameters (pgvector's own m=16, ef_construction=64) are
+-- used deliberately: no parameter tuning is justified by any measured
+-- problem at this scale. CREATE INDEX CONCURRENTLY is not used either —
+-- migrations.apply_migrations() always runs each file inside one
+-- transaction, and PostgreSQL rejects CONCURRENTLY inside a transaction
+-- block; a brief lock is irrelevant here, since nothing else writes to
+-- this table while migrations are applied.
+CREATE INDEX chunks_embedding_hnsw_idx ON chunks
+USING hnsw (embedding vector_cosine_ops);

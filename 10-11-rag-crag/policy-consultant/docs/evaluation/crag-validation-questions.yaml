@@ -1,0 +1,250 @@
+# CRAG validation set (Fase 3A): 12 questions, used only to observe CRAG's
+# behavior and later calibrate grade_evidence/reformulate (Fase 3B/3C).
+#
+# NOT the final RAG-vs-CRAG evaluation set (Fase 4, still 14+6, not written
+# yet) and NOT the module-10 RAG evaluation set. Independent from both
+# docs/evaluation/eval-questions.yaml and docs/evaluation/calibration-questions.yaml:
+# no question here tests the same concrete fact as a question in either of
+# those files, and none of these 12 is a paraphrase of a scripts/smoke_test_crag.py
+# scenario. These 12 questions must NOT be reused as the Fase 4 test set.
+#
+# profile_id values are the exact keys of web.app.DEMO_PROFILES: spain-employee,
+# spain-manager, spain-hr, mexico-employee, england-employee. Mexico and
+# England have no manager/hr demo profile, so every Mexico/England question
+# below necessarily uses the employee profile.
+#
+# Every document_id/version/chunk_id/section_path below was read directly
+# from the real indexed corpus (verified via a read-only SQL query against
+# the real `chunks`/`documents` tables, 2026-11-24) and from the actual
+# policy text in data/corpus/ — none of it is invented.
+#
+# category (one of the five required by the Fase 3A brief):
+#   direct_evidence      : answerable from a single chunk
+#   multi_fragment        : answerable only by combining two chunks (often
+#                           from two different documents)
+#   partially_answerable  : the general rule is answerable, but the question
+#                           also asks for a personal instance (a balance, a
+#                           remaining amount) that is not in the corpus — per
+#                           CRAG's contract, the graph must abstain rather
+#                           than answer only the general part
+#   no_information        : the topic is not covered anywhere in the corpus
+#   access_restricted     : the real answer exists in the corpus, but is not
+#                           visible to this profile under RLS (by role or by
+#                           country)
+#
+# expected_outcome: "answerable" or "abstain".
+# abstain_reason (only set when expected_outcome is "abstain"), same
+# vocabulary as the module-10 historical sets:
+#   - no_information          : the topic is not covered anywhere in the corpus
+#   - personal_data_unavailable: the policy explicitly says this depends on a
+#                                personal record it does not contain
+#   - insufficient_evidence   : retrieval may return topically related chunks,
+#                                but none of them actually support an answer
+#   - access_restricted       : an authorized document would answer this, but
+#                                it is not visible under this profile's RLS context
+#
+# expected_evidence is always [] for an "abstain" case, even when the real
+# answer (or the closest-but-insufficient chunk) is identifiable — see
+# "justification" for exactly where it lives and why it does not count.
+#
+# No route (sufficient/ambiguous/insufficient) is pre-assigned to any
+# question: CRAG's actual route depends on real retrieval/reranking/grading,
+# not on this file. This file only records the expected final outcome.
+
+questions:
+  # --- direct_evidence (3): answerable from a single chunk ---
+
+  - id: val-01
+    category: direct_evidence
+    question: "¿Entre qué horas puede iniciar su jornada un empleado en España que tenga flexibilidad horaria, y qué franja horaria común de colaboración se aplica a todo el equipo?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "La entrada puede realizarse entre las 08:00 y las 10:00; existe una franja común de colaboración de 10:00 a 14:00 para facilitar reuniones y coordinación."
+    expected_aspects:
+      - "Ventana de entrada flexible (08:00-10:00)"
+      - "Franja común de colaboración (10:00-14:00)"
+    expected_evidence:
+      - document_id: ES-003
+        version: "1.0"
+        chunk_id: "ES-003:1.0:4"
+        section_path: ["4. Flexibilidad horaria"]
+    abstain_reason: null
+    justification: "ES-003 §4 declara textualmente ambas franjas horarias como reglas generales aplicables a cualquier puesto elegible, sin depender de ningún dato personal. Hecho distinto del usado en eval-04/eval-questions.yaml (que cita ES-003 §3, régimen de teletrabajo, no de horario)."
+
+  - id: val-02
+    category: direct_evidence
+    question: "¿Cuántos días retribuidos por asuntos personales por año natural concede Northfern a los empleados elegibles de México, al margen de las vacaciones?"
+    profile_id: mexico-employee
+    expected_outcome: answerable
+    expected_answer_summary: "1 día retribuido por año natural, independiente de las vacaciones y no acumulable al año siguiente."
+    expected_aspects:
+      - "Cantidad: 1 día por año natural"
+      - "Independencia respecto al saldo de vacaciones"
+    expected_evidence:
+      - document_id: MX-001
+        version: "1.1"
+        chunk_id: "MX-001:1.1:11"
+        section_path: ["8. Día de asuntos personales"]
+    abstain_reason: null
+    justification: "MX-001 §8 (versión vigente 1.1) establece la cifra como beneficio corporativo general, sin referencia a ningún registro personal. No usado en eval-questions.yaml (que cita MX-001 §3 y §9) ni en calibration-questions.yaml."
+
+  - id: val-03
+    category: direct_evidence
+    question: "Roughly how many bank/public holidays does Northfern's typical annual calendar include for employees in England, in addition to the 25 days of annual leave?"
+    profile_id: england-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Around 8 bank/public holidays in a typical year, on top of and never deducted from the 25-day annual leave entitlement — though the exact number and dates must be checked against the published calendar for the relevant year."
+    expected_aspects:
+      - "Approximate count (around 8) with the caveat that the exact number varies by year"
+      - "Bank holidays are additional to, never deducted from, the 25-day entitlement"
+    expected_evidence:
+      - document_id: EN-001
+        version: "1.0"
+        chunk_id: "EN-001:1.0:10"
+        section_path: ["10. Bank holidays and operational requirements"]
+    abstain_reason: null
+    justification: "EN-001 §10 states this explicitly as a general, year-independent fact. Distinct from eval-13/eval-14 (§2 entitlement, §7 personal days) and from cal-04 (§6 carry-over) in eval-questions.yaml/calibration-questions.yaml."
+
+  # --- multi_fragment (3): answerable only by combining two chunks ---
+
+  - id: val-04
+    category: multi_fragment
+    question: "¿Qué tipo de funciones hacen que un puesto sea elegible para el régimen ordinario de teletrabajo en España, y qué importe máximo de ayuda de equipamiento de teletrabajo puede solicitar un empleado con un puesto elegible?"
+    profile_id: spain-employee
+    expected_outcome: answerable
+    expected_answer_summary: "Son elegibles los puestos cuyas funciones pueden desarrollarse a distancia sin afectar a requisitos operativos, de atención presencial o de seguridad (ES-003 §2) — no por pertenecer a un departamento concreto, y pudiendo matizarse por condiciones individuales formalizadas; un empleado con un puesto elegible puede solicitar hasta 300 € de ayuda de equipamiento por periodo de tres años (ES-004 §8)."
+    expected_aspects:
+      - "Criterio positivo de elegibilidad: funciones que pueden desarrollarse a distancia sin afectar a requisitos operativos, de atención presencial o de seguridad"
+      - "Pueden aplicar condiciones individuales formalizadas adicionales"
+      - "Importe máximo de la ayuda de equipamiento: 300 € por periodo de 3 años"
+    expected_evidence:
+      - document_id: ES-003
+        version: "1.0"
+        chunk_id: "ES-003:1.0:2"
+        section_path: ["2. Ámbito y elegibilidad"]
+      - document_id: ES-004
+        version: "1.0"
+        chunk_id: "ES-004:1.0:9"
+        section_path: ["8. Ayuda para equipamiento de teletrabajo"]
+    abstain_reason: null
+    justification: "Revisado contra el texto original: el criterio POSITIVO de elegibilidad (funciones que pueden desarrollarse a distancia sin afectar a requisitos operativos/presenciales/de seguridad) solo está en ES-003 §2 — ES-004 §8 únicamente remite a ES-003 sin repetir ese criterio, y el importe de 300 €/3 años solo está en ES-004 §8 — ES-003 no lo menciona. (La versión anterior de esta pregunta solo pedía la referencia cruzada 'se determina conforme a ES-003', que ES-004 §8 ya contiene literalmente, haciendo la pregunta respondible con un solo fragmento; esta reformulación exige el criterio real, exclusivo de ES-003.) 'Condiciones individuales formalizadas' se incluye en la respuesta esperada porque ambos fragmentos la mencionan como matiz general de la política, no como un dato personal irresoluble — no cambia el resultado esperado (respondible). Ninguna de las dos políticas se usa para este hecho concreto en eval-questions.yaml/calibration-questions.yaml."
+
+  - id: val-05
+    category: multi_fragment
+    question: "Como manager en España, si apruebo que uno de mis colaboradores se inscriba en un congreso profesional, ¿eso implica que también he aprobado su viaje y sus gastos de desplazamiento?"
+    profile_id: spain-manager
+    expected_outcome: answerable
+    expected_answer_summary: "No. La aprobación de la inscripción a un evento no implica por sí sola la aprobación de un viaje ni la cobertura ilimitada de sus gastos (ES-004 §6); el viaje profesional requiere su propia aprobación previa del responsable directo, indicando motivo de negocio, destino, fechas previstas y una estimación razonable del coste (ES-005 §3), y los desplazamientos, alojamientos y dietas se rigen por ES-005."
+    expected_aspects:
+      - "La aprobación de la inscripción a un evento no equivale a aprobar el viaje ni sus gastos"
+      - "El viaje profesional requiere su propia aprobación previa, con motivo de negocio, destino, fechas y estimación de coste"
+    expected_evidence:
+      - document_id: ES-004
+        version: "1.0"
+        chunk_id: "ES-004:1.0:7"
+        section_path: ["6. Conferencias, congresos y eventos profesionales"]
+      - document_id: ES-005
+        version: "1.0"
+        chunk_id: "ES-005:1.0:3"
+        section_path: ["3. Autorización y planificación del viaje"]
+    abstain_reason: null
+    justification: "Sustituye a la versión anterior de val-05 (GLB-002 §7 + ES-003 §5.2, trabajo desde otro país), que solapaba factualmente con el escenario 2 del smoke test (scripts/smoke_test_crag.py) — el resultado real de ese escenario conservó exactamente GLB-002:1.0:7 y ES-003:1.0:6 como evidencia. Este hecho es distinto: ES-004 §6 dice textualmente que la aprobación de la inscripción 'no implica por sí sola la aprobación de un viaje ni la cobertura ilimitada de sus gastos' y remite a ES-005; ES-005 §3 exige la aprobación previa del viaje con motivo/destino/fechas/coste. Ningún fragmento por sí solo da la respuesta completa. No usado en eval-questions.yaml/calibration-questions.yaml ni en el smoke test. Perfil spain-manager mantenido."
+
+  - id: val-06
+    category: multi_fragment
+    question: "Como manager en España, ¿qué tipo de información sobre las ausencias de mis colaboradores directos puedo consultar, y qué tengo explícitamente prohibido consultar?"
+    profile_id: spain-manager
+    expected_outcome: answerable
+    expected_answer_summary: "Puedo consultar los datos administrativos necesarios de mis subordinados directos (fechas de ausencias aprobadas, tipo administrativo, estado de la solicitud). Tengo prohibido acceder a registros de otros equipos por el mero hecho de ser manager, y no puedo consultar diagnósticos médicos, informes clínicos ni justificantes sensibles."
+    expected_aspects:
+      - "Alcance permitido: datos administrativos de subordinados directos (fechas, tipo, estado)"
+      - "Límite explícito: no otros equipos, no información médica/clínica confidencial"
+    expected_evidence:
+      - document_id: ES-006
+        version: "1.0"
+        chunk_id: "ES-006:1.0:9"
+        section_path: ["9. Acceso a información del equipo y confidencialidad"]
+      - document_id: ES-002
+        version: "1.0"
+        chunk_id: "ES-002:1.0:10"
+        section_path: ["10. Privacidad y justificantes"]
+    abstain_reason: null
+    justification: "ES-006 §9 (restringido a manager/hr) y ES-002 §10 (visible para employee también) describen la misma restricción desde dos documentos distintos, con matices complementarios (ES-006 añade 'otros equipos'; ES-002 añade 'información médica confidencial' explícitamente). Ninguno de los dos chunks se usa para este hecho en eval-questions.yaml/calibration-questions.yaml (que usan ES-006 §4/§7/§8, no §9)."
+
+  # --- partially_answerable (2): general rule answerable, personal instance is not -> abstain ---
+
+  - id: val-07
+    category: partially_answerable
+    question: "Llevo tres años y medio trabajando en Northfern México. ¿Cuántos días de asuntos personales me corresponden por año natural, y cuántos me quedan disponibles este año en concreto?"
+    profile_id: mexico-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects:
+      - "Cubierto en el corpus: cuantía anual general del beneficio (1 día por año natural, independiente de vacaciones)"
+      - "No cubierto: disponibilidad/saldo personal restante de esta persona en este momento"
+    expected_evidence: []
+    abstain_reason: personal_data_unavailable
+    justification: "La pregunta pide explícitamente dos cosas: la cifra general anual (MX-001:1.1:11, mismo chunk que val-02, 1 día/año natural — respondible) y el saldo personal restante de esta persona concreta. El propio texto del chunk dice que 'la disponibilidad individual se consulta en el sistema de personal, no en esta política', así que la segunda parte no es respondible. Al combinar explícitamente una parte respondible con una que no lo es, la pregunta es una prueba genuina de 'parcialmente respondible': según el contrato de CRAG, no debe darse una respuesta completa solo con la parte general."
+
+  - id: val-08
+    category: partially_answerable
+    question: "Estoy revisando el expediente de una excepción de vacaciones de más de 15 días laborables consecutivos para Marta, una empleada de España. ¿Qué información debe recoger el expediente sobre el periodo solicitado y el saldo disponible, y cuál es el saldo de vacaciones disponible actualmente para Marta?"
+    profile_id: spain-hr
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects:
+      - "Cubierto en el corpus: qué debe recoger el expediente (periodo solicitado y saldo disponible, verificado en el sistema de personal)"
+      - "No cubierto: el saldo de vacaciones real de Marta en este momento"
+    expected_evidence: []
+    abstain_reason: personal_data_unavailable
+    justification: "La pregunta pide explícitamente dos cosas: qué debe recoger el expediente (ES-007:1.0:4 dice textualmente 'periodo solicitado y saldo disponible, verificado en el sistema de personal' — regla procedimental respondible y visible para un perfil hr) y el saldo numérico real de una empleada concreta (Marta), que no está en el corpus — se consulta en el sistema de personal, fuera de Policy Consultant. La versión anterior de esta pregunta solo pedía la parte procedimental (ya respondible por sí sola, inconsistente con la categoría 'parcialmente respondible'); esta reformulación añade explícitamente la parte no respondible. Distinto del hecho usado en eval-09/eval-16 (que tratan la sección 'qué debe recoger el expediente' en términos generales, sin pedir el saldo de un empleado concreto)."
+
+  # --- no_information (2): the topic is not covered anywhere in the corpus ---
+
+  - id: val-09
+    category: no_information
+    question: "¿Northfern Technologies ofrece algún programa de coche de empresa o ayuda de leasing de vehículo a sus empleados en España?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects: []
+    expected_evidence: []
+    abstain_reason: no_information
+    justification: "Revisados ES-004 (formación, certificaciones, seguro médico, equipamiento de teletrabajo, bienestar) y ES-005 (viajes y gastos, incluido el kilometraje por uso autorizado de vehículo propio en un viaje puntual): ningún documento del corpus menciona un coche de empresa ni un programa de leasing de vehículo como beneficio. El kilometraje de ES-005 §4 es un reembolso por desplazamiento de trabajo, no un beneficio de vehículo — distinto en naturaleza, y no usado aquí como evidencia."
+
+  - id: val-10
+    category: no_information
+    question: "Does Northfern Technologies provide any relocation assistance package for employees moving internationally between its England, Spain, or Mexico offices?"
+    profile_id: england-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects: []
+    expected_evidence: []
+    abstain_reason: no_information
+    justification: "Checked against the full corpus, not only the documents visible to an england-employee profile: EN-001 (annual leave), GLB-001 (Code of Conduct), GLB-002 (Information Security Policy), ES-001 through ES-007 (vacation, leave, remote work, benefits/training, travel/expenses, manager absence guide, HR-only exceptions), and MX-001/MX-002 (Mexico vacation/personal day, remote work). None of the 12 documents addresses relocation, international transfers between country entities, or moving-expense assistance at all — this is genuine absence from the corpus (no_information), not a case where the information exists elsewhere but is merely invisible to this profile (which would instead be access_restricted)."
+
+  # --- access_restricted (2): the real answer exists, but RLS hides it from this profile ---
+
+  - id: val-11
+    category: access_restricted
+    question: "¿Qué procedimiento sigue RR. HH. para revisar una solicitud de formación que supere el presupuesto ordinario de 1.200 € anuales en España?"
+    profile_id: spain-employee
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects:
+      - "Existe un procedimiento real descrito en ES-007 §7 (verificación de elegibilidad, finalidad profesional, presupuesto disponible y aprobaciones), pero no es accesible para este perfil"
+    expected_evidence: []
+    abstain_reason: access_restricted
+    justification: "El procedimiento real está en ES-007 §7 ('Beneficios y formación fuera de condiciones ordinarias'), pero ES-007 tiene allowed_roles=[hr] — invisible por RLS para un perfil employee. El documento visible para employee (ES-004 §10) solo dice que las solicitudes excepcionales 'se valorarán individualmente conforme al procedimiento interno aplicable', sin describir ese procedimiento. Hecho distinto del usado en eval-09/eval-16 (que tratan excepciones de vacaciones, ES-007 §4, no excepciones de formación, ES-007 §7) y de cal-07 (que trata ES-006 §7, conflictos de cobertura, un documento distinto)."
+
+  - id: val-12
+    category: access_restricted
+    question: "Como responsable de RR. HH. de España, ¿puede un empleado de México teletrabajar temporalmente desde otro estado de México, y qué condiciones se aplican?"
+    profile_id: spain-hr
+    expected_outcome: abstain
+    expected_answer_summary: null
+    expected_aspects:
+      - "Existe una regla real en MX-002 §7 sobre teletrabajo desde otro estado de México, pero no es accesible para este perfil"
+    expected_evidence: []
+    abstain_reason: access_restricted
+    justification: "La regla real está en MX-002:1.0:7 ('Trabajo desde otro estado de México': permitido cuando sea compatible con el puesto, la coordinación y la seguridad, sin alterar la adscripción laboral). MX-002 tiene country='mexico'; un perfil autenticado como spain-hr tiene country='spain', y la aislación de RLS es por país, no por rol — el rol de RR. HH. no otorga acceso a documentos de otro país (ver docs/corpus-inventory.md: 'HR access is scoped to its own country; there is no default global HR administrator'). Hecho distinto del usado en eval-19 (que cita MX-001 §3, la tabla de antigüedad, no MX-002 §7)."

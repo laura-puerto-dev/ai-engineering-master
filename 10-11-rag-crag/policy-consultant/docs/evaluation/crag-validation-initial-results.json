@@ -1,0 +1,2901 @@
+{
+  "generated_at": "2026-11-25T15:46:05.852495+00:00",
+  "variant": "crag",
+  "embedding_model": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dimensions": 1024
+  },
+  "reranker_model_id": "Qwen/Qwen3-Reranker-0.6B",
+  "grader_model": {
+    "model": "claude-sonnet-5"
+  },
+  "reformulator_model": {
+    "model": "claude-sonnet-5"
+  },
+  "generator_model": {
+    "model": "claude-sonnet-5",
+    "disable_thinking": true
+  },
+  "top_k": 10,
+  "max_retrievals": 3,
+  "questions_file": "docs\\evaluation\\crag-validation-questions.yaml",
+  "completed_count": 12,
+  "total_count": 12,
+  "metrics": {
+    "total_questions": 12,
+    "technical_errors": {
+      "count": 0,
+      "ids": []
+    },
+    "executed_successfully": {
+      "count": 12,
+      "ids": [
+        "val-01",
+        "val-02",
+        "val-03",
+        "val-04",
+        "val-05",
+        "val-06",
+        "val-07",
+        "val-08",
+        "val-09",
+        "val-10",
+        "val-11",
+        "val-12"
+      ]
+    },
+    "outcome": {
+      "answerable_total": 6,
+      "answerable_executed": 6,
+      "answerable_technical_errors": 0,
+      "answerable_answered": 6,
+      "answerable_answered_rate": 1.0,
+      "false_abstentions": 0,
+      "false_abstention_ids": [],
+      "abstain_total": 6,
+      "abstain_executed": 6,
+      "abstain_technical_errors": 0,
+      "abstain_correct": 5,
+      "abstain_correct_rate": 0.8333333333333334,
+      "false_answers": 1,
+      "false_answer_ids": [
+        "val-07"
+      ]
+    },
+    "routes": {
+      "grader_route_counts": {
+        "sufficient": 7,
+        "ambiguous": 8,
+        "insufficient": 9
+      },
+      "effective_route_counts": {
+        "sufficient": 7,
+        "ambiguous": 8,
+        "insufficient": 9
+      },
+      "route_divergences": []
+    },
+    "retrievals": {
+      "distribution": {
+        "1": 6,
+        "3": 6
+      },
+      "mean": 2,
+      "questions_needing_reformulation": 6
+    },
+    "latency_seconds": {
+      "mean": 32.00094242500685,
+      "median": 28.35895264998544,
+      "max": 53.126897499896586,
+      "count": 12
+    },
+    "citations": {
+      "total_citations_checked": 13,
+      "citations_structurally_valid_rate": 1.0
+    },
+    "evidence_coverage": {
+      "answerable_with_evidence": 6,
+      "coverage_in_final_context_at_k": 1.0,
+      "coverage_ever_retrieved_at_k": 1.0,
+      "pct_all_found_in_final_context": 1.0
+    }
+  },
+  "results": [
+    {
+      "id": "val-01",
+      "category": "direct_evidence",
+      "profile_id": "spain-employee",
+      "question": "¿Entre qué horas puede iniciar su jornada un empleado en España que tenga flexibilidad horaria, y qué franja horaria común de colaboración se aplica a todo el equipo?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "La entrada puede realizarse entre las 08:00 y las 10:00; existe una franja común de colaboración de 10:00 a 14:00 para facilitar reuniones y coordinación.",
+      "expected_aspects": [
+        "Ventana de entrada flexible (08:00-10:00)",
+        "Franja común de colaboración (10:00-14:00)"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "ES-003",
+          "version": "1.0",
+          "chunk_id": "ES-003:1.0:4",
+          "section_path": [
+            "4. Flexibilidad horaria"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 19.046584299998358,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Un empleado en España con flexibilidad horaria puede iniciar su jornada entre las 08:00 y las 10:00, siempre que sus funciones y su régimen individual lo permitan, respetando la duración de la jornada correspondiente. Además, se establece una franja común de colaboración de 10:00 a 14:00 para facilitar reuniones y coordinación entre los equipos.",
+        "citations": [
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "4. Flexibilidad horaria"
+            ],
+            "chunk_id": "ES-003:1.0:4"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "¿Entre qué horas puede iniciar su jornada un empleado en España que tenga flexibilidad horaria, y qué franja horaria común de colaboración se aplica a todo el equipo?",
+            "candidates": [
+              {
+                "chunk_id": "ES-003:1.0:4",
+                "distance": 0.25069489327982086,
+                "rerank_score": 0.9996535778045654
+              },
+              {
+                "chunk_id": "ES-003:1.0:0",
+                "distance": 0.42922017400144397,
+                "rerank_score": 0.9930062294006348
+              },
+              {
+                "chunk_id": "ES-004:1.0:14",
+                "distance": 0.4210664724032316,
+                "rerank_score": 0.9901427030563354
+              },
+              {
+                "chunk_id": "ES-003:1.0:1",
+                "distance": 0.42095185268499224,
+                "rerank_score": 0.9891335368156433
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.4485262365027516,
+                "rerank_score": 0.960480272769928
+              },
+              {
+                "chunk_id": "GLB-002:1.0:11",
+                "distance": 0.4357726054462665,
+                "rerank_score": 0.9026694297790527
+              },
+              {
+                "chunk_id": "ES-003:1.0:3",
+                "distance": 0.4678438344187934,
+                "rerank_score": 0.0894961729645729
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.4587761808900618,
+                "rerank_score": 0.08939007669687271
+              },
+              {
+                "chunk_id": "ES-004:1.0:11",
+                "distance": 0.42253042190904355,
+                "rerank_score": 0.01692694053053856
+              },
+              {
+                "chunk_id": "ES-004:1.0:5",
+                "distance": 0.41456673058469606,
+                "rerank_score": 0.014945289120078087
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-003:1.0:4"
+            ],
+            "discarded_chunk_ids": [
+              "ES-003:1.0:0",
+              "ES-004:1.0:14",
+              "ES-003:1.0:1",
+              "GLB-002:1.0:7",
+              "GLB-002:1.0:11",
+              "ES-003:1.0:3",
+              "ES-005:1.0:10",
+              "ES-004:1.0:11",
+              "ES-004:1.0:5"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "rango horario permitido para iniciar jornada (08:00-10:00)",
+                "franja horaria común de colaboración (10:00-14:00)",
+                "aclaración de que la franja no sustituye otras reglas de jornada"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "ES-003:1.0:4"
+              ],
+              "rationale": "El fragmento 0 responde directamente y por completo ambas partes de la pregunta: el rango de entrada flexible y la franja común de colaboración."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-003:1.0:4",
+          "document_id": "ES-003",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 1,
+        "found_in_final_context": 1,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 1,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-02",
+      "category": "direct_evidence",
+      "profile_id": "mexico-employee",
+      "question": "¿Cuántos días retribuidos por asuntos personales por año natural concede Northfern a los empleados elegibles de México, al margen de las vacaciones?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "1 día retribuido por año natural, independiente de las vacaciones y no acumulable al año siguiente.",
+      "expected_aspects": [
+        "Cantidad: 1 día por año natural",
+        "Independencia respecto al saldo de vacaciones"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "MX-001",
+          "version": "1.1",
+          "chunk_id": "MX-001:1.1:11",
+          "section_path": [
+            "8. Día de asuntos personales"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 13.905400200048462,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Northfern concede 1 día retribuido por asuntos personales por año natural a los empleados elegibles de México, independiente de las vacaciones.",
+        "citations": [
+          {
+            "document_id": "MX-001",
+            "version": "1.1",
+            "section_path": [
+              "8. Día de asuntos personales"
+            ],
+            "chunk_id": "MX-001:1.1:11"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "¿Cuántos días retribuidos por asuntos personales por año natural concede Northfern a los empleados elegibles de México, al margen de las vacaciones?",
+            "candidates": [
+              {
+                "chunk_id": "MX-001:1.1:11",
+                "distance": 0.20348906517028242,
+                "rerank_score": 0.9999632835388184
+              },
+              {
+                "chunk_id": "MX-001:1.1:3",
+                "distance": 0.37662199874984226,
+                "rerank_score": 0.9913583993911743
+              },
+              {
+                "chunk_id": "MX-001:1.1:0",
+                "distance": 0.3294001417994572,
+                "rerank_score": 0.9850120544433594
+              },
+              {
+                "chunk_id": "MX-001:1.1:1",
+                "distance": 0.34337558498614773,
+                "rerank_score": 0.9769243597984314
+              },
+              {
+                "chunk_id": "MX-002:1.0:0",
+                "distance": 0.38500523567199274,
+                "rerank_score": 0.9519563317298889
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.4463677736301469,
+                "rerank_score": 0.8523017764091492
+              },
+              {
+                "chunk_id": "GLB-001:1.0:8",
+                "distance": 0.44804355811812246,
+                "rerank_score": 0.8260900974273682
+              },
+              {
+                "chunk_id": "MX-002:1.0:1",
+                "distance": 0.397434556331309,
+                "rerank_score": 0.3503914177417755
+              },
+              {
+                "chunk_id": "GLB-001:1.0:12",
+                "distance": 0.4658375978469811,
+                "rerank_score": 0.20085756480693817
+              },
+              {
+                "chunk_id": "GLB-002:1.0:4",
+                "distance": 0.45506033033492055,
+                "rerank_score": 0.03602057695388794
+              }
+            ],
+            "kept_chunk_ids": [
+              "MX-001:1.1:11"
+            ],
+            "discarded_chunk_ids": [
+              "MX-001:1.1:3",
+              "MX-001:1.1:0",
+              "MX-001:1.1:1",
+              "MX-002:1.0:0",
+              "GLB-001:1.0:5",
+              "GLB-001:1.0:8",
+              "MX-002:1.0:1",
+              "GLB-001:1.0:12",
+              "GLB-002:1.0:4"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "Número de días retribuidos por asuntos personales (1 día) por año natural para empleados elegibles de México",
+                "Independencia respecto a vacaciones y permisos legales"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "MX-001:1.1:11"
+              ],
+              "rationale": "El fragmento 0 responde directamente y de forma completa a la pregunta, indicando 1 día retribuido por año natural, independiente de vacaciones."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 1,
+        "found_in_final_context": 1,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 1,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-03",
+      "category": "direct_evidence",
+      "profile_id": "england-employee",
+      "question": "Roughly how many bank/public holidays does Northfern's typical annual calendar include for employees in England, in addition to the 25 days of annual leave?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Around 8 bank/public holidays in a typical year, on top of and never deducted from the 25-day annual leave entitlement — though the exact number and dates must be checked against the published calendar for the relevant year.",
+      "expected_aspects": [
+        "Approximate count (around 8) with the caveat that the exact number varies by year",
+        "Bank holidays are additional to, never deducted from, the 25-day entitlement"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "EN-001",
+          "version": "1.0",
+          "chunk_id": "EN-001:1.0:10",
+          "section_path": [
+            "10. Bank holidays and operational requirements"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 12.396295299986377,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Northfern's typical annual calendar for England includes around 8 bank/public holidays, which are in addition to the 25 working days of paid annual leave and must not be deducted from that entitlement. However, the exact number and dates can vary by year, so employees should check the published company holiday calendar for the relevant year.",
+        "citations": [
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "10. Bank holidays and operational requirements"
+            ],
+            "chunk_id": "EN-001:1.0:10"
+          },
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "2. Holiday year and annual entitlement"
+            ],
+            "chunk_id": "EN-001:1.0:2"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Roughly how many bank/public holidays does Northfern's typical annual calendar include for employees in England, in addition to the 25 days of annual leave?",
+            "candidates": [
+              {
+                "chunk_id": "EN-001:1.0:10",
+                "distance": 0.38232807026338045,
+                "rerank_score": 0.9998202919960022
+              },
+              {
+                "chunk_id": "EN-001:1.0:2",
+                "distance": 0.3646588921546936,
+                "rerank_score": 0.9996880292892456
+              },
+              {
+                "chunk_id": "EN-001:1.0:7",
+                "distance": 0.31169958780405327,
+                "rerank_score": 0.9985061883926392
+              },
+              {
+                "chunk_id": "EN-001:1.0:1",
+                "distance": 0.5047680434722865,
+                "rerank_score": 0.9968947172164917
+              },
+              {
+                "chunk_id": "EN-001:1.0:5",
+                "distance": 0.4980509281158447,
+                "rerank_score": 0.9943742752075195
+              },
+              {
+                "chunk_id": "EN-001:1.0:0",
+                "distance": 0.3955475091934204,
+                "rerank_score": 0.9804390668869019
+              },
+              {
+                "chunk_id": "GLB-001:1.0:1",
+                "distance": 0.5191876292228699,
+                "rerank_score": 0.12385469675064087
+              },
+              {
+                "chunk_id": "GLB-001:1.0:8",
+                "distance": 0.5259349911290384,
+                "rerank_score": 0.011131548322737217
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.5054285519804261,
+                "rerank_score": 0.01064600981771946
+              },
+              {
+                "chunk_id": "GLB-002:1.0:4",
+                "distance": 0.5310127139091492,
+                "rerank_score": 0.005985722877085209
+              }
+            ],
+            "kept_chunk_ids": [
+              "EN-001:1.0:10",
+              "EN-001:1.0:2"
+            ],
+            "discarded_chunk_ids": [
+              "EN-001:1.0:7",
+              "EN-001:1.0:1",
+              "EN-001:1.0:5",
+              "EN-001:1.0:0",
+              "GLB-001:1.0:1",
+              "GLB-001:1.0:8",
+              "GLB-001:1.0:5",
+              "GLB-002:1.0:4"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "typical number of bank/public holidays (~8)",
+                "confirmation that bank holidays are separate from and additional to the 25-day annual leave entitlement"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "EN-001:1.0:10",
+                "EN-001:1.0:2"
+              ],
+              "rationale": "Fragments 0 and 1 both state the typical calendar includes around 8 bank holidays, separate from and additional to the 25-day annual leave entitlement, fully answering the question."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 1,
+        "found_in_final_context": 1,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 1,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-04",
+      "category": "multi_fragment",
+      "profile_id": "spain-employee",
+      "question": "¿Qué tipo de funciones hacen que un puesto sea elegible para el régimen ordinario de teletrabajo en España, y qué importe máximo de ayuda de equipamiento de teletrabajo puede solicitar un empleado con un puesto elegible?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Son elegibles los puestos cuyas funciones pueden desarrollarse a distancia sin afectar a requisitos operativos, de atención presencial o de seguridad (ES-003 §2) — no por pertenecer a un departamento concreto, y pudiendo matizarse por condiciones individuales formalizadas; un empleado con un puesto elegible puede solicitar hasta 300 € de ayuda de equipamiento por periodo de tres años (ES-004 §8).",
+      "expected_aspects": [
+        "Criterio positivo de elegibilidad: funciones que pueden desarrollarse a distancia sin afectar a requisitos operativos, de atención presencial o de seguridad",
+        "Pueden aplicar condiciones individuales formalizadas adicionales",
+        "Importe máximo de la ayuda de equipamiento: 300 € por periodo de 3 años"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "ES-003",
+          "version": "1.0",
+          "chunk_id": "ES-003:1.0:2",
+          "section_path": [
+            "2. Ámbito y elegibilidad"
+          ]
+        },
+        {
+          "document_id": "ES-004",
+          "version": "1.0",
+          "chunk_id": "ES-004:1.0:9",
+          "section_path": [
+            "8. Ayuda para equipamiento de teletrabajo"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 19.04967029998079,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Según ES-003, el régimen ordinario de teletrabajo se ofrece a los puestos cuyas funciones pueden desarrollarse a distancia sin afectar a requisitos operativos, de atención presencial o de seguridad; la elegibilidad se determina según las funciones del puesto y las condiciones individuales aplicables, y no se presume por pertenecer a un departamento concreto. En cuanto a la ayuda de equipamiento, según ES-004, las personas cuyos puestos sean elegibles para teletrabajo pueden solicitar una ayuda de hasta 300 € por periodo de tres años para equipamiento autorizado destinado al trabajo remoto, de acuerdo con las condiciones del programa. Cabe destacar que este límite de 300 € no se renueva cada año y los importes no utilizados no se acumulan de un periodo a otro.",
+        "citations": [
+          {
+            "document_id": "ES-004",
+            "version": "1.0",
+            "section_path": [
+              "8. Ayuda para equipamiento de teletrabajo"
+            ],
+            "chunk_id": "ES-004:1.0:9"
+          },
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "2. Ámbito y elegibilidad"
+            ],
+            "chunk_id": "ES-003:1.0:2"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "¿Qué tipo de funciones hacen que un puesto sea elegible para el régimen ordinario de teletrabajo en España, y qué importe máximo de ayuda de equipamiento de teletrabajo puede solicitar un empleado con un puesto elegible?",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:9",
+                "distance": 0.24658253829686838,
+                "rerank_score": 0.9999473094940186
+              },
+              {
+                "chunk_id": "ES-003:1.0:2",
+                "distance": 0.28775271323290397,
+                "rerank_score": 0.9994482398033142
+              },
+              {
+                "chunk_id": "ES-004:1.0:14",
+                "distance": 0.41915491705209407,
+                "rerank_score": 0.9990422129631042
+              },
+              {
+                "chunk_id": "ES-003:1.0:3",
+                "distance": 0.34753356292643656,
+                "rerank_score": 0.9979819059371948
+              },
+              {
+                "chunk_id": "ES-003:1.0:12",
+                "distance": 0.39959756138339164,
+                "rerank_score": 0.9872485995292664
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.42326098680496216,
+                "rerank_score": 0.8288750052452087
+              },
+              {
+                "chunk_id": "ES-003:1.0:5",
+                "distance": 0.41902211791144994,
+                "rerank_score": 0.30196794867515564
+              },
+              {
+                "chunk_id": "ES-005:1.0:12",
+                "distance": 0.4293316602706909,
+                "rerank_score": 0.23326072096824646
+              },
+              {
+                "chunk_id": "ES-003:1.0:7",
+                "distance": 0.4156374757181843,
+                "rerank_score": 0.10546345263719559
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.4100675338466435,
+                "rerank_score": 0.10051985830068588
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-003:1.0:2",
+              "ES-004:1.0:9"
+            ],
+            "discarded_chunk_ids": [
+              "ES-004:1.0:14",
+              "ES-003:1.0:3",
+              "ES-003:1.0:12",
+              "GLB-002:1.0:7",
+              "ES-003:1.0:5",
+              "ES-005:1.0:12",
+              "ES-003:1.0:7",
+              "ES-005:1.0:10"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "criterios de elegibilidad de funciones para teletrabajo ordinario",
+                "importe máximo de ayuda de equipamiento de teletrabajo"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "ES-004:1.0:9",
+                "ES-003:1.0:2"
+              ],
+              "rationale": "El fragmento [1] explica que la elegibilidad depende de que las funciones del puesto puedan realizarse a distancia sin afectar requisitos operativos, de atención presencial o de seguridad, y el fragmento [0] indica el importe máximo de 300€ por periodo de tres años para equipamiento, cubriendo ambas partes de la pregunta."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-003:1.0:2",
+          "document_id": "ES-003",
+          "ever_retrieved": true,
+          "in_final_context": true
+        },
+        {
+          "chunk_id": "ES-004:1.0:9",
+          "document_id": "ES-004",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 2,
+        "found_in_final_context": 2,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 2,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-05",
+      "category": "multi_fragment",
+      "profile_id": "spain-manager",
+      "question": "Como manager en España, si apruebo que uno de mis colaboradores se inscriba en un congreso profesional, ¿eso implica que también he aprobado su viaje y sus gastos de desplazamiento?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No. La aprobación de la inscripción a un evento no implica por sí sola la aprobación de un viaje ni la cobertura ilimitada de sus gastos (ES-004 §6); el viaje profesional requiere su propia aprobación previa del responsable directo, indicando motivo de negocio, destino, fechas previstas y una estimación razonable del coste (ES-005 §3), y los desplazamientos, alojamientos y dietas se rigen por ES-005.",
+      "expected_aspects": [
+        "La aprobación de la inscripción a un evento no equivale a aprobar el viaje ni sus gastos",
+        "El viaje profesional requiere su propia aprobación previa, con motivo de negocio, destino, fechas y estimación de coste"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "ES-004",
+          "version": "1.0",
+          "chunk_id": "ES-004:1.0:7",
+          "section_path": [
+            "6. Conferencias, congresos y eventos profesionales"
+          ]
+        },
+        {
+          "document_id": "ES-005",
+          "version": "1.0",
+          "chunk_id": "ES-005:1.0:3",
+          "section_path": [
+            "3. Autorización y planificación del viaje"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 16.616501100128517,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "No. Según la política, la aprobación de la inscripción a un evento no implica por sí sola la aprobación de un viaje ni la cobertura ilimitada de sus gastos. Además, los desplazamientos, alojamientos, dietas y reembolsos se rigen por la política de viajes y gastos (ES-005) y requieren las autorizaciones que esa política establece, incluyendo la aprobación previa del responsable directo para el viaje en sí, indicando motivo de negocio, destino, fechas y estimación de coste. Si se prevé superar los límites de dicha política, se necesita además una autorización excepcional previa.",
+        "citations": [
+          {
+            "document_id": "ES-005",
+            "version": "1.0",
+            "section_path": [
+              "3. Autorización y planificación del viaje"
+            ],
+            "chunk_id": "ES-005:1.0:3"
+          },
+          {
+            "document_id": "ES-004",
+            "version": "1.0",
+            "section_path": [
+              "6. Conferencias, congresos y eventos profesionales"
+            ],
+            "chunk_id": "ES-004:1.0:7"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Como manager en España, si apruebo que uno de mis colaboradores se inscriba en un congreso profesional, ¿eso implica que también he aprobado su viaje y sus gastos de desplazamiento?",
+            "candidates": [
+              {
+                "chunk_id": "ES-005:1.0:3",
+                "distance": 0.36760612226706124,
+                "rerank_score": 0.9997888207435608
+              },
+              {
+                "chunk_id": "ES-004:1.0:7",
+                "distance": 0.3381916477451744,
+                "rerank_score": 0.9997705817222595
+              },
+              {
+                "chunk_id": "ES-005:1.0:2",
+                "distance": 0.3818212292407478,
+                "rerank_score": 0.9994568228721619
+              },
+              {
+                "chunk_id": "ES-005:1.0:9",
+                "distance": 0.4246707395307877,
+                "rerank_score": 0.997897744178772
+              },
+              {
+                "chunk_id": "ES-005:1.0:6",
+                "distance": 0.39740917698090106,
+                "rerank_score": 0.9977912902832031
+              },
+              {
+                "chunk_id": "ES-005:1.0:1",
+                "distance": 0.41033468184860356,
+                "rerank_score": 0.9974944591522217
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.41419775316742025,
+                "rerank_score": 0.9973825812339783
+              },
+              {
+                "chunk_id": "ES-005:1.0:8",
+                "distance": 0.4264177171686033,
+                "rerank_score": 0.9905807375907898
+              },
+              {
+                "chunk_id": "ES-005:1.0:7",
+                "distance": 0.42085225333544574,
+                "rerank_score": 0.9695118069648743
+              },
+              {
+                "chunk_id": "ES-006:1.0:2",
+                "distance": 0.40272144062987214,
+                "rerank_score": 0.3887251913547516
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-004:1.0:7",
+              "ES-005:1.0:3"
+            ],
+            "discarded_chunk_ids": [
+              "ES-005:1.0:2",
+              "ES-005:1.0:9",
+              "ES-005:1.0:6",
+              "ES-005:1.0:1",
+              "ES-005:1.0:10",
+              "ES-005:1.0:8",
+              "ES-005:1.0:7",
+              "ES-006:1.0:2"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "aprobación de inscripción a evento no implica aprobación automática de viaje",
+                "viajes y gastos de desplazamiento se rigen por ES-005 y requieren sus propias autorizaciones",
+                "necesidad de aprobación previa del responsable directo para el viaje en sí"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "ES-004:1.0:7",
+                "ES-005:1.0:3"
+              ],
+              "rationale": "El fragmento [1] responde directamente que la aprobación de inscripción a un evento no implica aprobación del viaje ni de sus gastos, remitiendo a ES-005, y el fragmento [0] confirma que el viaje requiere su propia aprobación previa."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-004:1.0:7",
+          "document_id": "ES-004",
+          "ever_retrieved": true,
+          "in_final_context": true
+        },
+        {
+          "chunk_id": "ES-005:1.0:3",
+          "document_id": "ES-005",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 2,
+        "found_in_final_context": 2,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 2,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-06",
+      "category": "multi_fragment",
+      "profile_id": "spain-manager",
+      "question": "Como manager en España, ¿qué tipo de información sobre las ausencias de mis colaboradores directos puedo consultar, y qué tengo explícitamente prohibido consultar?",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Puedo consultar los datos administrativos necesarios de mis subordinados directos (fechas de ausencias aprobadas, tipo administrativo, estado de la solicitud). Tengo prohibido acceder a registros de otros equipos por el mero hecho de ser manager, y no puedo consultar diagnósticos médicos, informes clínicos ni justificantes sensibles.",
+      "expected_aspects": [
+        "Alcance permitido: datos administrativos de subordinados directos (fechas, tipo, estado)",
+        "Límite explícito: no otros equipos, no información médica/clínica confidencial"
+      ],
+      "expected_evidence": [
+        {
+          "document_id": "ES-006",
+          "version": "1.0",
+          "chunk_id": "ES-006:1.0:9",
+          "section_path": [
+            "9. Acceso a información del equipo y confidencialidad"
+          ]
+        },
+        {
+          "document_id": "ES-002",
+          "version": "1.0",
+          "chunk_id": "ES-002:1.0:10",
+          "section_path": [
+            "10. Privacidad y justificantes"
+          ]
+        }
+      ],
+      "abstain_reason": null,
+      "elapsed_seconds": 18.25903829978779,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Como manager en España, puedes consultar la información administrativa de ausencias de tus subordinados directos que sea necesaria para tu función, como las fechas de ausencias aprobadas, el tipo administrativo de ausencia y el estado de una solicitud. Este acceso solo aplica a tus colaboradores directos, no a empleados de otros equipos ni de otros países, por el simple hecho de ser manager.\n\nTienes explícitamente prohibido: acceder a registros de empleados de otros equipos; consultar diagnósticos médicos, documentación clínica o justificantes sensibles; pedir diagnósticos, informes clínicos o explicaciones médicas detalladas ante una ausencia imprevista o enfermedad; y compartir información personal en chats de equipo, documentos públicos u otros canales no autorizados. Además, los justificantes y documentos sensibles deben gestionarse exclusivamente mediante los canales autorizados de RR. HH., y no deben entregarse a través del chat de Policy Consultant.",
+        "citations": [
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "2. Alcance y acceso"
+            ],
+            "chunk_id": "ES-006:1.0:2"
+          },
+          {
+            "document_id": "ES-002",
+            "version": "1.0",
+            "section_path": [
+              "10. Privacidad y justificantes"
+            ],
+            "chunk_id": "ES-002:1.0:10"
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "9. Acceso a información del equipo y confidencialidad"
+            ],
+            "chunk_id": "ES-006:1.0:9"
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "6. Ausencias imprevistas y enfermedad"
+            ],
+            "chunk_id": "ES-006:1.0:6"
+          }
+        ],
+        "retrieval_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Como manager en España, ¿qué tipo de información sobre las ausencias de mis colaboradores directos puedo consultar, y qué tengo explícitamente prohibido consultar?",
+            "candidates": [
+              {
+                "chunk_id": "ES-006:1.0:2",
+                "distance": 0.23904410135219734,
+                "rerank_score": 0.9997853636741638
+              },
+              {
+                "chunk_id": "ES-002:1.0:10",
+                "distance": 0.3467489067615336,
+                "rerank_score": 0.9996082186698914
+              },
+              {
+                "chunk_id": "ES-006:1.0:9",
+                "distance": 0.30193107082103,
+                "rerank_score": 0.9995155334472656
+              },
+              {
+                "chunk_id": "ES-003:1.0:12",
+                "distance": 0.4143196795607176,
+                "rerank_score": 0.9987819790840149
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.3568764903953757,
+                "rerank_score": 0.9978504180908203
+              },
+              {
+                "chunk_id": "ES-006:1.0:6",
+                "distance": 0.36608494924485835,
+                "rerank_score": 0.9967898726463318
+              },
+              {
+                "chunk_id": "ES-006:1.0:3",
+                "distance": 0.41012097476470355,
+                "rerank_score": 0.9876261353492737
+              },
+              {
+                "chunk_id": "ES-006:1.0:8",
+                "distance": 0.40916414151618763,
+                "rerank_score": 0.9507430195808411
+              },
+              {
+                "chunk_id": "ES-001:1.0:9",
+                "distance": 0.41077353697454044,
+                "rerank_score": 0.865754246711731
+              },
+              {
+                "chunk_id": "ES-006:1.0:5",
+                "distance": 0.41522402581881757,
+                "rerank_score": 0.18578976392745972
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-002:1.0:10",
+              "ES-006:1.0:2",
+              "ES-006:1.0:6",
+              "ES-006:1.0:9"
+            ],
+            "discarded_chunk_ids": [
+              "ES-003:1.0:12",
+              "ES-002:1.0:11",
+              "ES-006:1.0:3",
+              "ES-006:1.0:8",
+              "ES-001:1.0:9",
+              "ES-006:1.0:5"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "qué información administrativa puede consultar un manager (fechas de ausencias aprobadas, tipo administrativo, estado de solicitud)",
+                "alcance limitado a subordinados directos",
+                "prohibición de acceder a datos médicos confidenciales, diagnósticos, justificantes sensibles",
+                "prohibición de acceder a otros equipos o países",
+                "principio de acceso mínimo necesario",
+                "prohibición de pedir diagnósticos o explicaciones médicas en ausencias imprevistas"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "ES-006:1.0:2",
+                "ES-002:1.0:10",
+                "ES-006:1.0:9",
+                "ES-006:1.0:6"
+              ],
+              "rationale": "Los fragmentos ES-006 y ES-002 detallan explícitamente qué puede y no puede consultar un manager respecto a las ausencias de sus subordinados directos, cubriendo tanto lo permitido como lo prohibido."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 4,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-006:1.0:9",
+          "document_id": "ES-006",
+          "ever_retrieved": true,
+          "in_final_context": true
+        },
+        {
+          "chunk_id": "ES-002:1.0:10",
+          "document_id": "ES-002",
+          "ever_retrieved": true,
+          "in_final_context": true
+        }
+      ],
+      "evidence_coverage_summary": {
+        "expected_count": 2,
+        "found_in_final_context": 2,
+        "all_found_in_final_context": true,
+        "found_ever_retrieved": 2,
+        "all_found_ever_retrieved": true
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-07",
+      "category": "partially_answerable",
+      "profile_id": "mexico-employee",
+      "question": "Llevo tres años y medio trabajando en Northfern México. ¿Cuántos días de asuntos personales me corresponden por año natural, y cuántos me quedan disponibles este año en concreto?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [
+        "Cubierto en el corpus: cuantía anual general del beneficio (1 día por año natural, independiente de vacaciones)",
+        "No cubierto: disponibilidad/saldo personal restante de esta persona en este momento"
+      ],
+      "expected_evidence": [],
+      "abstain_reason": "personal_data_unavailable",
+      "elapsed_seconds": 49.14275660016574,
+      "technical_error": null,
+      "crag": {
+        "abstained": false,
+        "answer": "Según la política, los empleados elegibles de México tienen derecho a 1 día retribuido por asuntos personales por año natural. No se acumula al año siguiente ni se convierte automáticamente en compensación económica, salvo que una disposición aplicable indique lo contrario. En cuanto a cuántos días te quedan disponibles este año en concreto, esa información no está en esta política: debes consultarla en el sistema de personal.",
+        "citations": [
+          {
+            "document_id": "MX-001",
+            "version": "1.1",
+            "section_path": [
+              "8. Día de asuntos personales"
+            ],
+            "chunk_id": "MX-001:1.1:11"
+          }
+        ],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Llevo tres años y medio trabajando en Northfern México. ¿Cuántos días de asuntos personales me corresponden por año natural, y cuántos me quedan disponibles este año en concreto?",
+            "candidates": [
+              {
+                "chunk_id": "MX-001:1.1:11",
+                "distance": 0.21806119572751403,
+                "rerank_score": 0.9997792840003967
+              },
+              {
+                "chunk_id": "MX-001:1.1:3",
+                "distance": 0.4044949526196733,
+                "rerank_score": 0.9931455850601196
+              },
+              {
+                "chunk_id": "MX-001:1.1:1",
+                "distance": 0.34333330482243973,
+                "rerank_score": 0.9834027290344238
+              },
+              {
+                "chunk_id": "MX-001:1.1:0",
+                "distance": 0.3418149948120117,
+                "rerank_score": 0.9825953245162964
+              },
+              {
+                "chunk_id": "MX-002:1.0:0",
+                "distance": 0.3892295724612719,
+                "rerank_score": 0.966654360294342
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.42443842596549264,
+                "rerank_score": 0.639661967754364
+              },
+              {
+                "chunk_id": "GLB-001:1.0:1",
+                "distance": 0.4450894594192505,
+                "rerank_score": 0.5954902172088623
+              },
+              {
+                "chunk_id": "GLB-001:1.0:8",
+                "distance": 0.443053967588663,
+                "rerank_score": 0.5939679145812988
+              },
+              {
+                "chunk_id": "GLB-002:1.0:4",
+                "distance": 0.4351520538330078,
+                "rerank_score": 0.3346624970436096
+              },
+              {
+                "chunk_id": "MX-002:1.0:1",
+                "distance": 0.3900166153907776,
+                "rerank_score": 0.06632445752620697
+              }
+            ],
+            "kept_chunk_ids": [
+              "MX-001:1.1:11"
+            ],
+            "discarded_chunk_ids": [
+              "MX-001:1.1:3",
+              "MX-001:1.1:1",
+              "MX-001:1.1:0",
+              "MX-002:1.0:0",
+              "GLB-001:1.0:5",
+              "GLB-001:1.0:1",
+              "GLB-001:1.0:8",
+              "GLB-002:1.0:4",
+              "MX-002:1.0:1"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "annual entitlement of 1 paid personal day per calendar year in Mexico"
+              ],
+              "missing_aspects": [
+                "individual remaining/available personal days for this specific year, which per the policy must be checked in the personnel system rather than in this document"
+              ],
+              "useful_chunk_ids": [
+                "MX-001:1.1:11"
+              ],
+              "rationale": "Fragment 0 clearly states the entitlement (1 day/year) but explicitly notes that individual availability must be checked in the HR system, which is not part of the retrieved documents."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 2,
+            "query": "Política de días de asuntos personales por año natural en Northfern México: cantidad anual según antigüedad y cómo consultar los días disponibles en el sistema de personal",
+            "candidates": [
+              {
+                "chunk_id": "MX-001:1.1:11",
+                "distance": 0.2348577240194233,
+                "rerank_score": 0.9998863935470581
+              },
+              {
+                "chunk_id": "MX-001:1.1:5",
+                "distance": 0.4237687840323905,
+                "rerank_score": 0.9970500469207764
+              },
+              {
+                "chunk_id": "MX-001:1.1:1",
+                "distance": 0.37201500284805666,
+                "rerank_score": 0.9940415024757385
+              },
+              {
+                "chunk_id": "MX-001:1.1:6",
+                "distance": 0.4270214183913805,
+                "rerank_score": 0.9931562542915344
+              },
+              {
+                "chunk_id": "MX-001:1.1:3",
+                "distance": 0.3617209956978519,
+                "rerank_score": 0.9924094676971436
+              },
+              {
+                "chunk_id": "MX-001:1.1:0",
+                "distance": 0.35950905084609985,
+                "rerank_score": 0.9691579937934875
+              },
+              {
+                "chunk_id": "MX-002:1.0:0",
+                "distance": 0.4187636125824672,
+                "rerank_score": 0.9388481378555298
+              },
+              {
+                "chunk_id": "MX-001:1.1:10",
+                "distance": 0.4598656892776489,
+                "rerank_score": 0.6968178749084473
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.4461956684356092,
+                "rerank_score": 0.5276925563812256
+              },
+              {
+                "chunk_id": "MX-002:1.0:1",
+                "distance": 0.43034082651138306,
+                "rerank_score": 0.504988968372345
+              }
+            ],
+            "kept_chunk_ids": [
+              "MX-001:1.1:11"
+            ],
+            "discarded_chunk_ids": [
+              "MX-001:1.1:5",
+              "MX-001:1.1:1",
+              "MX-001:1.1:6",
+              "MX-001:1.1:3",
+              "MX-001:1.1:0",
+              "MX-002:1.0:0",
+              "MX-001:1.1:10",
+              "GLB-001:1.0:5",
+              "MX-002:1.0:1"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Número de días de asuntos personales por año natural (1 día)",
+                "Que el saldo disponible se consulta en el sistema de personal, no en la política"
+              ],
+              "missing_aspects": [
+                "Saldo disponible específico del empleado en el año en curso (requiere consulta al sistema de personal individual)"
+              ],
+              "useful_chunk_ids": [
+                "MX-001:1.1:11"
+              ],
+              "rationale": "El fragmento 0 responde claramente cuántos días corresponden por año natural, pero el saldo disponible concreto no puede determinarse desde la política y requiere datos individuales del sistema de personal."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 3,
+            "query": "Procedimiento para consultar el saldo individual de días de asuntos personales disponibles en el año en curso en el sistema de personal de Northfern México",
+            "candidates": [
+              {
+                "chunk_id": "MX-001:1.1:11",
+                "distance": 0.28508911817734606,
+                "rerank_score": 0.9991598129272461
+              },
+              {
+                "chunk_id": "MX-001:1.1:6",
+                "distance": 0.37706128495566227,
+                "rerank_score": 0.9966620206832886
+              },
+              {
+                "chunk_id": "MX-001:1.1:0",
+                "distance": 0.4034436345100403,
+                "rerank_score": 0.7453670501708984
+              },
+              {
+                "chunk_id": "MX-001:1.1:1",
+                "distance": 0.3879962612387151,
+                "rerank_score": 0.7232857942581177
+              },
+              {
+                "chunk_id": "MX-002:1.0:0",
+                "distance": 0.40676788051319734,
+                "rerank_score": 0.6826148629188538
+              },
+              {
+                "chunk_id": "GLB-002:1.0:4",
+                "distance": 0.45868420600891113,
+                "rerank_score": 0.45760253071784973
+              },
+              {
+                "chunk_id": "MX-001:1.1:3",
+                "distance": 0.41114772425320634,
+                "rerank_score": 0.438433438539505
+              },
+              {
+                "chunk_id": "GLB-001:1.0:0",
+                "distance": 0.4399579501177092,
+                "rerank_score": 0.3795108497142792
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.4501549064928365,
+                "rerank_score": 0.26336970925331116
+              },
+              {
+                "chunk_id": "MX-002:1.0:1",
+                "distance": 0.4305342435836792,
+                "rerank_score": 0.03942108526825905
+              }
+            ],
+            "kept_chunk_ids": [
+              "MX-001:1.1:11"
+            ],
+            "discarded_chunk_ids": [
+              "MX-001:1.1:6",
+              "MX-001:1.1:0",
+              "MX-001:1.1:1",
+              "MX-002:1.0:0",
+              "GLB-002:1.0:4",
+              "MX-001:1.1:3",
+              "GLB-001:1.0:0",
+              "GLB-001:1.0:5",
+              "MX-002:1.0:1"
+            ],
+            "coverage": {
+              "route": "sufficient",
+              "covered_aspects": [
+                "number of personal day entitlement per calendar year (1 day)",
+                "clarification that remaining/available days must be checked in the personnel system, not in this policy"
+              ],
+              "missing_aspects": [],
+              "useful_chunk_ids": [
+                "MX-001:1.1:11"
+              ],
+              "rationale": "Fragment 0 directly states the entitlement (1 paid personal day per calendar year) and clarifies that individual availability is tracked in the personnel system rather than in this policy document, which fully answers both parts of the question."
+            },
+            "route": "sufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": false,
+        "matches_expected": false
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-08",
+      "category": "partially_answerable",
+      "profile_id": "spain-hr",
+      "question": "Estoy revisando el expediente de una excepción de vacaciones de más de 15 días laborables consecutivos para Marta, una empleada de España. ¿Qué información debe recoger el expediente sobre el periodo solicitado y el saldo disponible, y cuál es el saldo de vacaciones disponible actualmente para Marta?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [
+        "Cubierto en el corpus: qué debe recoger el expediente (periodo solicitado y saldo disponible, verificado en el sistema de personal)",
+        "No cubierto: el saldo de vacaciones real de Marta en este momento"
+      ],
+      "expected_evidence": [],
+      "abstain_reason": "personal_data_unavailable",
+      "elapsed_seconds": 51.87352530006319,
+      "technical_error": null,
+      "crag": {
+        "abstained": true,
+        "answer": "No se encontró evidencia suficiente para responder con garantías.",
+        "citations": [],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Estoy revisando el expediente de una excepción de vacaciones de más de 15 días laborables consecutivos para Marta, una empleada de España. ¿Qué información debe recoger el expediente sobre el periodo solicitado y el saldo disponible, y cuál es el saldo de vacaciones disponible actualmente para Marta?",
+            "candidates": [
+              {
+                "chunk_id": "ES-007:1.0:4",
+                "distance": 0.3550902605056717,
+                "rerank_score": 0.9981809854507446
+              },
+              {
+                "chunk_id": "ES-001:1.0:3",
+                "distance": 0.3353309435046844,
+                "rerank_score": 0.9975568056106567
+              },
+              {
+                "chunk_id": "ES-006:1.0:4",
+                "distance": 0.31411683559417236,
+                "rerank_score": 0.9921720027923584
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.3155040332975395,
+                "rerank_score": 0.9899625182151794
+              },
+              {
+                "chunk_id": "ES-001:1.0:4",
+                "distance": 0.3344458738299577,
+                "rerank_score": 0.984815239906311
+              },
+              {
+                "chunk_id": "ES-001:1.0:6",
+                "distance": 0.29134924956257513,
+                "rerank_score": 0.9840689301490784
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.37897831609651267,
+                "rerank_score": 0.9838117957115173
+              },
+              {
+                "chunk_id": "ES-001:1.0:9",
+                "distance": 0.3348521986691727,
+                "rerank_score": 0.9681156873703003
+              },
+              {
+                "chunk_id": "ES-001:1.0:7",
+                "distance": 0.3704600930213884,
+                "rerank_score": 0.9612196087837219
+              },
+              {
+                "chunk_id": "ES-006:1.0:8",
+                "distance": 0.36704041761400696,
+                "rerank_score": 0.6827551126480103
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-007:1.0:4"
+            ],
+            "discarded_chunk_ids": [
+              "ES-001:1.0:3",
+              "ES-006:1.0:4",
+              "ES-001:1.0:8",
+              "ES-001:1.0:4",
+              "ES-001:1.0:6",
+              "ES-002:1.0:11",
+              "ES-001:1.0:9",
+              "ES-001:1.0:7",
+              "ES-006:1.0:8"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Requisitos del expediente para excepciones de vacaciones superiores a 15 días laborables consecutivos, incluyendo periodo solicitado y saldo disponible verificado en el sistema de personal",
+                "Proceso general de revisión excepcional por RR.HH. España"
+              ],
+              "missing_aspects": [
+                "Saldo de vacaciones disponible actualmente para la empleada específica Marta, que debe consultarse en el sistema de gestión de personal individual"
+              ],
+              "useful_chunk_ids": [
+                "ES-007:1.0:4"
+              ],
+              "rationale": "El fragmento [0] detalla exactamente qué debe recoger el expediente sobre periodo y saldo, pero ninguna fragmento contiene datos personales de saldo de Marta, ya que las políticas indican explícitamente que no contienen saldos individuales."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 2,
+            "query": "requisitos del expediente para excepción de vacaciones de más de 15 días laborables consecutivos en España: periodo solicitado y documentación del saldo de vacaciones disponible",
+            "candidates": [
+              {
+                "chunk_id": "ES-007:1.0:4",
+                "distance": 0.34984282554132673,
+                "rerank_score": 0.9995143413543701
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.3191683292388916,
+                "rerank_score": 0.9994410872459412
+              },
+              {
+                "chunk_id": "ES-001:1.0:4",
+                "distance": 0.3194395518970975,
+                "rerank_score": 0.9984972476959229
+              },
+              {
+                "chunk_id": "ES-006:1.0:4",
+                "distance": 0.32255176767398186,
+                "rerank_score": 0.9979655742645264
+              },
+              {
+                "chunk_id": "ES-001:1.0:6",
+                "distance": 0.28630000352859497,
+                "rerank_score": 0.9950492978096008
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.39314303973743414,
+                "rerank_score": 0.9896619319915771
+              },
+              {
+                "chunk_id": "ES-001:1.0:7",
+                "distance": 0.39588782811833345,
+                "rerank_score": 0.9749032855033875
+              },
+              {
+                "chunk_id": "ES-006:1.0:8",
+                "distance": 0.3798893094062805,
+                "rerank_score": 0.9739280939102173
+              },
+              {
+                "chunk_id": "ES-002:1.0:4",
+                "distance": 0.4046662449836731,
+                "rerank_score": 0.9726597666740417
+              },
+              {
+                "chunk_id": "ES-005:1.0:8",
+                "distance": 0.4018068670149514,
+                "rerank_score": 0.13482697308063507
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-007:1.0:4"
+            ],
+            "discarded_chunk_ids": [
+              "ES-001:1.0:8",
+              "ES-001:1.0:4",
+              "ES-006:1.0:4",
+              "ES-001:1.0:6",
+              "ES-002:1.0:11",
+              "ES-001:1.0:7",
+              "ES-006:1.0:8",
+              "ES-002:1.0:4",
+              "ES-005:1.0:8"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Qué información debe recoger el expediente sobre el periodo solicitado y saldo disponible (ES-007)",
+                "Procedimiento de excepción y verificación en el sistema de personal"
+              ],
+              "missing_aspects": [
+                "Saldo de vacaciones actual disponible para Marta (dato individual, debe consultarse en los registros corporativos/sistema de personal, no está en esta documentación)"
+              ],
+              "useful_chunk_ids": [
+                "ES-007:1.0:4"
+              ],
+              "rationale": "El fragmento ES-007 explica claramente qué debe recoger el expediente, pero ninguno de los fragmentos contiene el saldo individual de vacaciones de Marta, que según varios documentos se verifica en los registros corporativos, no en esta política."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 3,
+            "query": "consulta de saldo de vacaciones disponible de un empleado en el sistema de personal o registros corporativos de España",
+            "candidates": [
+              {
+                "chunk_id": "ES-001:1.0:3",
+                "distance": 0.3430296983140515,
+                "rerank_score": 0.9990440011024475
+              },
+              {
+                "chunk_id": "ES-001:1.0:9",
+                "distance": 0.2982765676645506,
+                "rerank_score": 0.9987108707427979
+              },
+              {
+                "chunk_id": "ES-006:1.0:4",
+                "distance": 0.39287171406318355,
+                "rerank_score": 0.9923946857452393
+              },
+              {
+                "chunk_id": "ES-004:1.0:4",
+                "distance": 0.3920598030090332,
+                "rerank_score": 0.9902305006980896
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.39327595809924454,
+                "rerank_score": 0.980699896812439
+              },
+              {
+                "chunk_id": "ES-001:1.0:7",
+                "distance": 0.42357168057133565,
+                "rerank_score": 0.968532919883728
+              },
+              {
+                "chunk_id": "ES-003:1.0:12",
+                "distance": 0.4075901861435054,
+                "rerank_score": 0.966517448425293
+              },
+              {
+                "chunk_id": "ES-001:1.0:5",
+                "distance": 0.42399225091980286,
+                "rerank_score": 0.9650400876998901
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.4103149175643921,
+                "rerank_score": 0.7877816557884216
+              },
+              {
+                "chunk_id": "ES-006:1.0:3",
+                "distance": 0.4159637689590454,
+                "rerank_score": 0.452128142118454
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-007:1.0:4"
+            ],
+            "discarded_chunk_ids": [
+              "ES-001:1.0:3",
+              "ES-001:1.0:9",
+              "ES-006:1.0:4",
+              "ES-004:1.0:4",
+              "ES-002:1.0:11",
+              "ES-001:1.0:7",
+              "ES-003:1.0:12",
+              "ES-001:1.0:5",
+              "ES-001:1.0:8",
+              "ES-006:1.0:3"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "requirements for the exception file regarding requested period and available balance (must record period requested and balance verified in the personnel system, reason for exception, manager's assessment of coverage, proposed resolution)"
+              ],
+              "missing_aspects": [
+                "Marta's actual current vacation balance, which must be looked up in the personnel/corporate system and is not contained in any policy document"
+              ],
+              "useful_chunk_ids": [
+                "ES-007:1.0:4"
+              ],
+              "rationale": "Fragment [0] fully answers what the file must record about period and balance, but no fragment contains Marta's actual personal balance since policies explicitly state individual balances are not in these documents but in the personnel system."
+            },
+            "route": "ambiguous"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-09",
+      "category": "no_information",
+      "profile_id": "spain-employee",
+      "question": "¿Northfern Technologies ofrece algún programa de coche de empresa o ayuda de leasing de vehículo a sus empleados en España?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [],
+      "expected_evidence": [],
+      "abstain_reason": "no_information",
+      "elapsed_seconds": 44.45712579996325,
+      "technical_error": null,
+      "crag": {
+        "abstained": true,
+        "answer": "No se encontró evidencia suficiente para responder con garantías.",
+        "citations": [],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "¿Northfern Technologies ofrece algún programa de coche de empresa o ayuda de leasing de vehículo a sus empleados en España?",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:1",
+                "distance": 0.37696409225463867,
+                "rerank_score": 0.9955957531929016
+              },
+              {
+                "chunk_id": "ES-004:1.0:2",
+                "distance": 0.3818578535872056,
+                "rerank_score": 0.9833605289459229
+              },
+              {
+                "chunk_id": "ES-001:1.0:2",
+                "distance": 0.34076112508773804,
+                "rerank_score": 0.9468982815742493
+              },
+              {
+                "chunk_id": "ES-004:1.0:0",
+                "distance": 0.35624873638153076,
+                "rerank_score": 0.92906653881073
+              },
+              {
+                "chunk_id": "ES-001:1.0:1",
+                "distance": 0.3706420063972473,
+                "rerank_score": 0.9253009557723999
+              },
+              {
+                "chunk_id": "ES-002:1.0:0",
+                "distance": 0.37795907258987427,
+                "rerank_score": 0.9209683537483215
+              },
+              {
+                "chunk_id": "ES-001:1.0:0",
+                "distance": 0.34949183464050293,
+                "rerank_score": 0.8046773672103882
+              },
+              {
+                "chunk_id": "ES-005:1.0:2",
+                "distance": 0.3624215506063956,
+                "rerank_score": 0.7994515299797058
+              },
+              {
+                "chunk_id": "ES-002:1.0:1",
+                "distance": 0.38147935977701075,
+                "rerank_score": 0.7239975929260254
+              },
+              {
+                "chunk_id": "ES-005:1.0:0",
+                "distance": 0.3662745763741304,
+                "rerank_score": 0.696268618106842
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-004:1.0:1",
+              "ES-004:1.0:2",
+              "ES-001:1.0:2",
+              "ES-004:1.0:0",
+              "ES-001:1.0:1",
+              "ES-002:1.0:0",
+              "ES-001:1.0:0",
+              "ES-005:1.0:2",
+              "ES-002:1.0:1",
+              "ES-005:1.0:0"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "existencia de programa de coche de empresa o leasing de vehículo",
+                "condiciones de elegibilidad y requisitos para dicho beneficio",
+                "importes o límites asociados a ese beneficio si existe"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "Ninguno de los fragmentos menciona coches de empresa, leasing de vehículos ni beneficios relacionados con transporte; solo cubren vacaciones, permisos, formación y viajes de negocio, sin referencia específica a este tema."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 2,
+            "query": "Política de beneficios para empleados en España: coche de empresa, leasing de vehículo, requisitos de elegibilidad y límites de importe",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:1",
+                "distance": 0.40121740102767944,
+                "rerank_score": 0.9990360736846924
+              },
+              {
+                "chunk_id": "ES-004:1.0:2",
+                "distance": 0.39151356791000247,
+                "rerank_score": 0.9972240924835205
+              },
+              {
+                "chunk_id": "ES-004:1.0:11",
+                "distance": 0.42434421632622277,
+                "rerank_score": 0.9937353730201721
+              },
+              {
+                "chunk_id": "ES-004:1.0:14",
+                "distance": 0.38097206467556455,
+                "rerank_score": 0.9812934994697571
+              },
+              {
+                "chunk_id": "GLB-002:1.0:11",
+                "distance": 0.42414048766252366,
+                "rerank_score": 0.9473515748977661
+              },
+              {
+                "chunk_id": "ES-002:1.0:4",
+                "distance": 0.42868220806121826,
+                "rerank_score": 0.9374533295631409
+              },
+              {
+                "chunk_id": "ES-004:1.0:4",
+                "distance": 0.40902721881866455,
+                "rerank_score": 0.3771601915359497
+              },
+              {
+                "chunk_id": "ES-002:1.0:8",
+                "distance": 0.40219539403915405,
+                "rerank_score": 0.33974164724349976
+              },
+              {
+                "chunk_id": "ES-005:1.0:1",
+                "distance": 0.39508116245269775,
+                "rerank_score": 0.30520328879356384
+              },
+              {
+                "chunk_id": "ES-004:1.0:7",
+                "distance": 0.4376632906399186,
+                "rerank_score": 0.0008575325482524931
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-004:1.0:1",
+              "ES-004:1.0:2",
+              "ES-004:1.0:11",
+              "ES-004:1.0:14",
+              "GLB-002:1.0:11",
+              "ES-002:1.0:4",
+              "ES-004:1.0:4",
+              "ES-002:1.0:8",
+              "ES-005:1.0:1",
+              "ES-004:1.0:7"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "Existencia de programa de coche de empresa o leasing de vehículo en España",
+                "Condiciones de elegibilidad y requisitos para dicho beneficio, si existe"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "Ninguno de los fragmentos menciona coches de empresa, leasing de vehículos o beneficios similares; tratan de formación, bienestar, permisos personales, viajes/gastos y seguridad de la información, sin relación directa con la pregunta."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 3,
+            "query": "Beneficios de movilidad y transporte para empleados en España: coche de empresa, leasing de vehículo, requisitos de elegibilidad",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:14",
+                "distance": 0.41875795014155104,
+                "rerank_score": 0.9970222115516663
+              },
+              {
+                "chunk_id": "ES-005:1.0:1",
+                "distance": 0.41533154249191284,
+                "rerank_score": 0.9912017583847046
+              },
+              {
+                "chunk_id": "ES-004:1.0:2",
+                "distance": 0.44226418263507405,
+                "rerank_score": 0.9859123826026917
+              },
+              {
+                "chunk_id": "ES-004:1.0:11",
+                "distance": 0.4506019681333313,
+                "rerank_score": 0.9739120006561279
+              },
+              {
+                "chunk_id": "GLB-002:1.0:11",
+                "distance": 0.4515871136434597,
+                "rerank_score": 0.9704806804656982
+              },
+              {
+                "chunk_id": "ES-005:1.0:12",
+                "distance": 0.44358915090560913,
+                "rerank_score": 0.7908681035041809
+              },
+              {
+                "chunk_id": "ES-002:1.0:4",
+                "distance": 0.44507884979248047,
+                "rerank_score": 0.6094136238098145
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.4254570007324219,
+                "rerank_score": 0.422219842672348
+              },
+              {
+                "chunk_id": "ES-002:1.0:8",
+                "distance": 0.43014198541641235,
+                "rerank_score": 0.03707807511091232
+              },
+              {
+                "chunk_id": "ES-004:1.0:7",
+                "distance": 0.4424227808461906,
+                "rerank_score": 0.0020105033181607723
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-004:1.0:14",
+              "ES-005:1.0:1",
+              "ES-004:1.0:2",
+              "ES-004:1.0:11",
+              "GLB-002:1.0:11",
+              "ES-005:1.0:12",
+              "ES-002:1.0:4",
+              "GLB-002:1.0:7",
+              "ES-002:1.0:8",
+              "ES-004:1.0:7"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "existencia de programa de coche de empresa o leasing de vehículo",
+                "condiciones de elegibilidad para beneficio de vehículo"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "Ninguno de los fragmentos menciona coches de empresa, leasing de vehículos ni beneficios relacionados con transporte; tratan de formación, viajes/gastos, seguridad de la información y permisos, por lo que no aportan evidencia sobre la pregunta."
+            },
+            "route": "insufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-10",
+      "category": "no_information",
+      "profile_id": "england-employee",
+      "question": "Does Northfern Technologies provide any relocation assistance package for employees moving internationally between its England, Spain, or Mexico offices?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [],
+      "expected_evidence": [],
+      "abstain_reason": "no_information",
+      "elapsed_seconds": 37.66823499999009,
+      "technical_error": null,
+      "crag": {
+        "abstained": true,
+        "answer": "Not enough evidence was found to answer with confidence.",
+        "citations": [],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Does Northfern Technologies provide any relocation assistance package for employees moving internationally between its England, Spain, or Mexico offices?",
+            "candidates": [
+              {
+                "chunk_id": "GLB-001:1.0:1",
+                "distance": 0.3646028420565808,
+                "rerank_score": 0.8167154788970947
+              },
+              {
+                "chunk_id": "GLB-001:1.0:12",
+                "distance": 0.32970287445749347,
+                "rerank_score": 0.7520524263381958
+              },
+              {
+                "chunk_id": "GLB-001:1.0:0",
+                "distance": 0.46290636504812654,
+                "rerank_score": 0.6682272553443909
+              },
+              {
+                "chunk_id": "GLB-002:1.0:1",
+                "distance": 0.43933428057023516,
+                "rerank_score": 0.46290361881256104
+              },
+              {
+                "chunk_id": "EN-001:1.0:0",
+                "distance": 0.42415205096292086,
+                "rerank_score": 0.36091434955596924
+              },
+              {
+                "chunk_id": "GLB-002:1.0:0",
+                "distance": 0.4396262836901803,
+                "rerank_score": 0.265747606754303
+              },
+              {
+                "chunk_id": "GLB-002:1.0:5",
+                "distance": 0.47122949704772266,
+                "rerank_score": 0.09068546444177628
+              },
+              {
+                "chunk_id": "GLB-001:1.0:5",
+                "distance": 0.447175959257609,
+                "rerank_score": 0.04305519163608551
+              },
+              {
+                "chunk_id": "EN-001:1.0:7",
+                "distance": 0.40827614068984563,
+                "rerank_score": 0.018251577392220497
+              },
+              {
+                "chunk_id": "GLB-002:1.0:4",
+                "distance": 0.43735114113383544,
+                "rerank_score": 0.011116606183350086
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "GLB-001:1.0:1",
+              "GLB-001:1.0:12",
+              "GLB-001:1.0:0",
+              "GLB-002:1.0:1",
+              "EN-001:1.0:0",
+              "GLB-002:1.0:0",
+              "GLB-002:1.0:5",
+              "GLB-001:1.0:5",
+              "EN-001:1.0:7",
+              "GLB-002:1.0:4"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "relocation assistance policy or benefits",
+                "international transfer procedures between England, Spain, and Mexico offices"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "None of the retrieved fragments discuss relocation assistance, international transfers, or related benefits; they cover Code of Conduct, information security, and leave policies instead."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 2,
+            "query": "international employee transfer relocation benefits policy England Spain Mexico offices",
+            "candidates": [
+              {
+                "chunk_id": "EN-001:1.0:12",
+                "distance": 0.37451147296819465,
+                "rerank_score": 0.879570484161377
+              },
+              {
+                "chunk_id": "GLB-002:1.0:11",
+                "distance": 0.4445408979879194,
+                "rerank_score": 0.8262904286384583
+              },
+              {
+                "chunk_id": "GLB-001:1.0:1",
+                "distance": 0.470448378271054,
+                "rerank_score": 0.7501538395881653
+              },
+              {
+                "chunk_id": "GLB-001:1.0:12",
+                "distance": 0.3952671178697722,
+                "rerank_score": 0.5188828110694885
+              },
+              {
+                "chunk_id": "EN-001:1.0:1",
+                "distance": 0.3861293698317928,
+                "rerank_score": 0.27048155665397644
+              },
+              {
+                "chunk_id": "EN-001:1.0:0",
+                "distance": 0.46527058300130186,
+                "rerank_score": 0.13876548409461975
+              },
+              {
+                "chunk_id": "GLB-002:1.0:0",
+                "distance": 0.4802409147785449,
+                "rerank_score": 0.09813568741083145
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.40719593677568766,
+                "rerank_score": 0.06696160137653351
+              },
+              {
+                "chunk_id": "EN-001:1.0:9",
+                "distance": 0.48314389887859155,
+                "rerank_score": 0.015454469248652458
+              },
+              {
+                "chunk_id": "EN-001:1.0:7",
+                "distance": 0.4970876874275313,
+                "rerank_score": 0.002311085816472769
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "EN-001:1.0:12",
+              "GLB-002:1.0:11",
+              "GLB-001:1.0:1",
+              "GLB-001:1.0:12",
+              "EN-001:1.0:1",
+              "EN-001:1.0:0",
+              "GLB-002:1.0:0",
+              "GLB-002:1.0:7",
+              "EN-001:1.0:9",
+              "EN-001:1.0:7"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "existence of a relocation assistance policy or benefit",
+                "terms of international relocation support for England, Spain, or Mexico employees"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "None of the retrieved fragments discuss relocation assistance or international transfer benefits; they cover leave, code of conduct, and information security policies instead."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 3,
+            "query": "relocation assistance benefit policy for employees transferring between England, Spain, and Mexico offices",
+            "candidates": [
+              {
+                "chunk_id": "EN-001:1.0:12",
+                "distance": 0.41095814639579276,
+                "rerank_score": 0.9351239800453186
+              },
+              {
+                "chunk_id": "GLB-001:1.0:1",
+                "distance": 0.4668242931365967,
+                "rerank_score": 0.6628714799880981
+              },
+              {
+                "chunk_id": "GLB-001:1.0:12",
+                "distance": 0.41108850174614675,
+                "rerank_score": 0.2366226762533188
+              },
+              {
+                "chunk_id": "GLB-002:1.0:11",
+                "distance": 0.4391644335291117,
+                "rerank_score": 0.12367133796215057
+              },
+              {
+                "chunk_id": "EN-001:1.0:0",
+                "distance": 0.5047661364078522,
+                "rerank_score": 0.09099239856004715
+              },
+              {
+                "chunk_id": "EN-001:1.0:1",
+                "distance": 0.4406168198217847,
+                "rerank_score": 0.041162896901369095
+              },
+              {
+                "chunk_id": "GLB-002:1.0:0",
+                "distance": 0.5181324173133116,
+                "rerank_score": 0.021358996629714966
+              },
+              {
+                "chunk_id": "EN-001:1.0:9",
+                "distance": 0.5236666188438753,
+                "rerank_score": 0.007801458705216646
+              },
+              {
+                "chunk_id": "EN-001:1.0:5",
+                "distance": 0.5346404314041138,
+                "rerank_score": 0.006291880737990141
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.44200432300567627,
+                "rerank_score": 0.0040856022387743
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "EN-001:1.0:12",
+              "GLB-001:1.0:1",
+              "GLB-001:1.0:12",
+              "GLB-002:1.0:11",
+              "EN-001:1.0:0",
+              "EN-001:1.0:1",
+              "GLB-002:1.0:0",
+              "EN-001:1.0:9",
+              "EN-001:1.0:5",
+              "GLB-002:1.0:7"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "existence of a relocation assistance policy or package",
+                "eligibility criteria for international relocation support",
+                "financial or logistical benefits provided for relocating between countries"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "None of the retrieved fragments discuss relocation assistance or international transfer benefits; they cover leave, code of conduct, and information security policies instead."
+            },
+            "route": "insufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-11",
+      "category": "access_restricted",
+      "profile_id": "spain-employee",
+      "question": "¿Qué procedimiento sigue RR. HH. para revisar una solicitud de formación que supere el presupuesto ordinario de 1.200 € anuales en España?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [
+        "Existe un procedimiento real descrito en ES-007 §7 (verificación de elegibilidad, finalidad profesional, presupuesto disponible y aprobaciones), pero no es accesible para este perfil"
+      ],
+      "expected_evidence": [],
+      "abstain_reason": "access_restricted",
+      "elapsed_seconds": 53.126897499896586,
+      "technical_error": null,
+      "crag": {
+        "abstained": true,
+        "answer": "No se encontró evidencia suficiente para responder con garantías.",
+        "citations": [],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "¿Qué procedimiento sigue RR. HH. para revisar una solicitud de formación que supere el presupuesto ordinario de 1.200 € anuales en España?",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:12",
+                "distance": 0.4593956196668365,
+                "rerank_score": 0.9993904829025269
+              },
+              {
+                "chunk_id": "ES-004:1.0:6",
+                "distance": 0.43019739209428975,
+                "rerank_score": 0.9990283250808716
+              },
+              {
+                "chunk_id": "ES-004:1.0:5",
+                "distance": 0.3853035339532165,
+                "rerank_score": 0.9966686367988586
+              },
+              {
+                "chunk_id": "ES-004:1.0:3",
+                "distance": 0.3852188953626803,
+                "rerank_score": 0.990210771560669
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.49738243237838464,
+                "rerank_score": 0.9856101870536804
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.49524487569198183,
+                "rerank_score": 0.8881736993789673
+              },
+              {
+                "chunk_id": "ES-004:1.0:14",
+                "distance": 0.4804058098309266,
+                "rerank_score": 0.881894588470459
+              },
+              {
+                "chunk_id": "ES-002:1.0:12",
+                "distance": 0.4819142243964405,
+                "rerank_score": 0.877898097038269
+              },
+              {
+                "chunk_id": "ES-004:1.0:13",
+                "distance": 0.494748086050266,
+                "rerank_score": 0.3356514573097229
+              },
+              {
+                "chunk_id": "ES-005:1.0:6",
+                "distance": 0.5049293336314351,
+                "rerank_score": 0.0006721010431647301
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-004:1.0:12",
+              "ES-004:1.0:3",
+              "ES-004:1.0:6"
+            ],
+            "discarded_chunk_ids": [
+              "ES-004:1.0:5",
+              "ES-001:1.0:8",
+              "ES-002:1.0:11",
+              "ES-004:1.0:14",
+              "ES-002:1.0:12",
+              "ES-004:1.0:13",
+              "ES-005:1.0:6"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Confirma que gastos de formación por encima del presupuesto de 1.200€ requieren evaluación excepcional previa",
+                "Indica que la solicitud debe plantearse antes de inscribirse o gastar",
+                "Aclara que una excepción concedida no modifica los límites generales ni crea derecho para otros"
+              ],
+              "missing_aspects": [
+                "Detalle concreto del procedimiento interno de evaluación de excepciones (pasos, plazos, responsables específicos)",
+                "Quién dentro de RR.HH. o qué área administrativa interviene exactamente en la revisión",
+                "Criterios usados para decidir si se aprueba el exceso de presupuesto"
+              ],
+              "useful_chunk_ids": [
+                "ES-004:1.0:12",
+                "ES-004:1.0:6",
+                "ES-004:1.0:3"
+              ],
+              "rationale": "Los fragmentos confirman que existe un proceso de evaluación excepcional para gastos de formación que superan el presupuesto, pero remiten a un 'procedimiento interno aplicable' sin detallar los pasos concretos que sigue RR.HH."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 2,
+            "query": "Procedimiento interno de excepción presupuestaria en formación: pasos, plazos, responsables de RR. HH. y criterios de aprobación para solicitudes que superen 1.200 € anuales en España",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:12",
+                "distance": 0.3786061406135559,
+                "rerank_score": 0.998748779296875
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.3687474727630615,
+                "rerank_score": 0.9986006617546082
+              },
+              {
+                "chunk_id": "ES-004:1.0:6",
+                "distance": 0.4016675353050232,
+                "rerank_score": 0.9964786171913147
+              },
+              {
+                "chunk_id": "ES-004:1.0:5",
+                "distance": 0.3513915538787842,
+                "rerank_score": 0.9918665289878845
+              },
+              {
+                "chunk_id": "ES-005:1.0:8",
+                "distance": 0.42693689901012677,
+                "rerank_score": 0.9895413517951965
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.4149267499127013,
+                "rerank_score": 0.9884983897209167
+              },
+              {
+                "chunk_id": "ES-004:1.0:3",
+                "distance": 0.38032859563827515,
+                "rerank_score": 0.9825561046600342
+              },
+              {
+                "chunk_id": "ES-002:1.0:4",
+                "distance": 0.4255814552307129,
+                "rerank_score": 0.7127372026443481
+              },
+              {
+                "chunk_id": "ES-005:1.0:9",
+                "distance": 0.42455966179851345,
+                "rerank_score": 0.5510584712028503
+              },
+              {
+                "chunk_id": "ES-004:1.0:4",
+                "distance": 0.42634737491607666,
+                "rerank_score": 0.06391885131597519
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-004:1.0:12",
+              "ES-004:1.0:3",
+              "ES-004:1.0:6"
+            ],
+            "discarded_chunk_ids": [
+              "ES-001:1.0:8",
+              "ES-004:1.0:5",
+              "ES-005:1.0:8",
+              "ES-002:1.0:11",
+              "ES-002:1.0:4",
+              "ES-005:1.0:9",
+              "ES-004:1.0:4"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Budget limit of 1,200€ annually for training",
+                "Requirement to request exceptional evaluation before incurring expense exceeding budget",
+                "No automatic right to excess financing",
+                "General principle that exceptions don't modify general limits"
+              ],
+              "missing_aspects": [
+                "Specific internal procedure/steps HR follows to review an exceptional training budget request",
+                "Who specifically evaluates and approves the exception (roles, timeline, documentation required)"
+              ],
+              "useful_chunk_ids": [
+                "ES-004:1.0:12",
+                "ES-004:1.0:6",
+                "ES-004:1.0:3"
+              ],
+              "rationale": "Fragments confirm that exceeding the 1,200€ training budget requires a prior exceptional request/evaluation, but none detail the actual internal procedure HR follows to review such requests, only referencing it as 'procedimiento interno aplicable' without specifics."
+            },
+            "route": "ambiguous"
+          },
+          {
+            "attempt": 3,
+            "query": "Revisión de solicitudes de formación que exceden el presupuesto anual: roles responsables, documentación requerida y plazos de aprobación en RR. HH. España",
+            "candidates": [
+              {
+                "chunk_id": "ES-004:1.0:6",
+                "distance": 0.35085717732565425,
+                "rerank_score": 0.9989797472953796
+              },
+              {
+                "chunk_id": "ES-004:1.0:12",
+                "distance": 0.368536629167995,
+                "rerank_score": 0.9989179372787476
+              },
+              {
+                "chunk_id": "ES-002:1.0:12",
+                "distance": 0.40112395273161494,
+                "rerank_score": 0.9398998618125916
+              },
+              {
+                "chunk_id": "ES-004:1.0:13",
+                "distance": 0.40826264570577964,
+                "rerank_score": 0.91813063621521
+              },
+              {
+                "chunk_id": "ES-004:1.0:5",
+                "distance": 0.36535159555962005,
+                "rerank_score": 0.7921101450920105
+              },
+              {
+                "chunk_id": "ES-001:1.0:5",
+                "distance": 0.40922821650168695,
+                "rerank_score": 0.7866759300231934
+              },
+              {
+                "chunk_id": "ES-001:1.0:8",
+                "distance": 0.4124122612230612,
+                "rerank_score": 0.7480644583702087
+              },
+              {
+                "chunk_id": "ES-004:1.0:7",
+                "distance": 0.416068087092866,
+                "rerank_score": 0.5054000020027161
+              },
+              {
+                "chunk_id": "ES-002:1.0:11",
+                "distance": 0.38442899631175165,
+                "rerank_score": 0.41251903772354126
+              },
+              {
+                "chunk_id": "ES-002:1.0:8",
+                "distance": 0.3865991600394739,
+                "rerank_score": 0.06225576996803284
+              }
+            ],
+            "kept_chunk_ids": [
+              "ES-004:1.0:12",
+              "ES-004:1.0:3",
+              "ES-004:1.0:6"
+            ],
+            "discarded_chunk_ids": [
+              "ES-002:1.0:12",
+              "ES-004:1.0:13",
+              "ES-004:1.0:5",
+              "ES-001:1.0:5",
+              "ES-001:1.0:8",
+              "ES-004:1.0:7",
+              "ES-002:1.0:11",
+              "ES-002:1.0:8"
+            ],
+            "coverage": {
+              "route": "ambiguous",
+              "covered_aspects": [
+                "Presupuesto anual de 1.200€ y su carácter no acumulable",
+                "Requisito de aprobación previa para gastos que excedan el presupuesto",
+                "Necesidad de solicitar evaluación excepcional antes de comprometer el gasto",
+                "Principio general de que las excepciones se valoran individualmente y no generan derechos automáticos"
+              ],
+              "missing_aspects": [
+                "Procedimiento interno detallado que sigue RR. HH. para evaluar estas solicitudes excepcionales (pasos, criterios, plazos)",
+                "Documento o referencia específica que describa el proceso interno de excepciones (p.ej. ES-007 de procedimientos internos de RR. HH.)"
+              ],
+              "useful_chunk_ids": [
+                "ES-004:1.0:12",
+                "ES-004:1.0:6",
+                "ES-004:1.0:3"
+              ],
+              "rationale": "Los fragmentos confirman que existe un proceso de evaluación excepcional para gastos de formación que superan el presupuesto, pero no detallan el procedimiento interno específico que sigue RR. HH., que parece estar en un documento de acceso restringido no incluido."
+            },
+            "route": "ambiguous"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "val-12",
+      "category": "access_restricted",
+      "profile_id": "spain-hr",
+      "question": "Como responsable de RR. HH. de España, ¿puede un empleado de México teletrabajar temporalmente desde otro estado de México, y qué condiciones se aplican?",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "expected_aspects": [
+        "Existe una regla real en MX-002 §7 sobre teletrabajo desde otro estado de México, pero no es accesible para este perfil"
+      ],
+      "expected_evidence": [],
+      "abstain_reason": "access_restricted",
+      "elapsed_seconds": 48.46927940007299,
+      "technical_error": null,
+      "crag": {
+        "abstained": true,
+        "answer": "No se encontró evidencia suficiente para responder con garantías.",
+        "citations": [],
+        "retrieval_count": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "query": "Como responsable de RR. HH. de España, ¿puede un empleado de México teletrabajar temporalmente desde otro estado de México, y qué condiciones se aplican?",
+            "candidates": [
+              {
+                "chunk_id": "ES-007:1.0:6",
+                "distance": 0.33661961555480957,
+                "rerank_score": 0.9990416169166565
+              },
+              {
+                "chunk_id": "ES-003:1.0:5",
+                "distance": 0.344326415996168,
+                "rerank_score": 0.998177170753479
+              },
+              {
+                "chunk_id": "ES-003:1.0:6",
+                "distance": 0.3894657260497961,
+                "rerank_score": 0.9958121180534363
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.39597779512405396,
+                "rerank_score": 0.9949236512184143
+              },
+              {
+                "chunk_id": "ES-004:1.0:2",
+                "distance": 0.42302582928615273,
+                "rerank_score": 0.9926632642745972
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.42494681924898403,
+                "rerank_score": 0.9906603693962097
+              },
+              {
+                "chunk_id": "ES-003:1.0:7",
+                "distance": 0.4189151352320649,
+                "rerank_score": 0.9880736470222473
+              },
+              {
+                "chunk_id": "ES-003:1.0:3",
+                "distance": 0.427784655822237,
+                "rerank_score": 0.9780096411705017
+              },
+              {
+                "chunk_id": "GLB-001:1.0:12",
+                "distance": 0.42535612432026015,
+                "rerank_score": 0.9684383273124695
+              },
+              {
+                "chunk_id": "ES-006:1.0:8",
+                "distance": 0.4165235757827759,
+                "rerank_score": 0.11674179136753082
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-007:1.0:6",
+              "ES-003:1.0:5",
+              "ES-003:1.0:6",
+              "GLB-002:1.0:7",
+              "ES-004:1.0:2",
+              "ES-005:1.0:10",
+              "ES-003:1.0:7",
+              "ES-003:1.0:3",
+              "GLB-001:1.0:12",
+              "ES-006:1.0:8"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "Mexico-specific telework policy document",
+                "conditions for domestic relocation within Mexico for telework",
+                "applicable authorization or notification requirements under Mexico HR policy"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "All retrieved fragments concern Spain (ES-003, ES-004, ES-005, ES-006, ES-007) or global policies (GLB-001, GLB-002), with no document addressing Mexico's domestic telework rules, so none can answer this Mexico-specific question."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 2,
+            "query": "Política de teletrabajo México: requisitos y autorización para reubicación temporal dentro del país",
+            "candidates": [
+              {
+                "chunk_id": "ES-003:1.0:7",
+                "distance": 0.39479299752670516,
+                "rerank_score": 0.9840643405914307
+              },
+              {
+                "chunk_id": "ES-003:1.0:10",
+                "distance": 0.3890785988890705,
+                "rerank_score": 0.9805752038955688
+              },
+              {
+                "chunk_id": "ES-007:1.0:6",
+                "distance": 0.37702725461206577,
+                "rerank_score": 0.9271817207336426
+              },
+              {
+                "chunk_id": "ES-003:1.0:6",
+                "distance": 0.39038046031056217,
+                "rerank_score": 0.8888999819755554
+              },
+              {
+                "chunk_id": "ES-003:1.0:12",
+                "distance": 0.39931406380790047,
+                "rerank_score": 0.6190057992935181
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.39245440386371355,
+                "rerank_score": 0.5670457482337952
+              },
+              {
+                "chunk_id": "ES-004:1.0:2",
+                "distance": 0.4096467739133104,
+                "rerank_score": 0.5476190447807312
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.4120683494826657,
+                "rerank_score": 0.5394855737686157
+              },
+              {
+                "chunk_id": "ES-004:1.0:9",
+                "distance": 0.3951300327363514,
+                "rerank_score": 0.4920136332511902
+              },
+              {
+                "chunk_id": "ES-003:1.0:1",
+                "distance": 0.4054793296611485,
+                "rerank_score": 0.06057366728782654
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-003:1.0:7",
+              "ES-003:1.0:10",
+              "ES-007:1.0:6",
+              "ES-003:1.0:6",
+              "ES-003:1.0:12",
+              "ES-005:1.0:10",
+              "ES-004:1.0:2",
+              "GLB-002:1.0:7",
+              "ES-004:1.0:9",
+              "ES-003:1.0:1"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "México-specific telework policy (not ES-003, which only applies to Spain)",
+                "conditions for teleworking from a different state within Mexico",
+                "whether moving within the same country requires authorization"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "All retrieved fragments concern Spain's ES-003 policy and cross-border telework from Spain; one fragment explicitly notes Mexico's policy is distinct and not interchangeable, but no fragment actually provides Mexico's own rules for intra-country relocation, so nothing here answers the question."
+            },
+            "route": "insufficient"
+          },
+          {
+            "attempt": 3,
+            "query": "Normativa de teletrabajo para empleados de México: condiciones y autorización para trabajar desde un estado distinto dentro del mismo país",
+            "candidates": [
+              {
+                "chunk_id": "ES-003:1.0:10",
+                "distance": 0.4152957797050476,
+                "rerank_score": 0.9906257390975952
+              },
+              {
+                "chunk_id": "ES-007:1.0:6",
+                "distance": 0.3421781063079834,
+                "rerank_score": 0.9570941925048828
+              },
+              {
+                "chunk_id": "ES-003:1.0:6",
+                "distance": 0.34503761857523696,
+                "rerank_score": 0.8626495599746704
+              },
+              {
+                "chunk_id": "ES-003:1.0:7",
+                "distance": 0.3820788080119729,
+                "rerank_score": 0.8578861355781555
+              },
+              {
+                "chunk_id": "ES-004:1.0:9",
+                "distance": 0.4021066543928754,
+                "rerank_score": 0.7299489974975586
+              },
+              {
+                "chunk_id": "ES-003:1.0:2",
+                "distance": 0.38895733488114226,
+                "rerank_score": 0.6445629596710205
+              },
+              {
+                "chunk_id": "GLB-002:1.0:7",
+                "distance": 0.3509342670440674,
+                "rerank_score": 0.6060540676116943
+              },
+              {
+                "chunk_id": "ES-003:1.0:5",
+                "distance": 0.3331706921356492,
+                "rerank_score": 0.5381584763526917
+              },
+              {
+                "chunk_id": "ES-005:1.0:10",
+                "distance": 0.372774697972851,
+                "rerank_score": 0.41939619183540344
+              },
+              {
+                "chunk_id": "ES-003:1.0:1",
+                "distance": 0.4277512176185111,
+                "rerank_score": 0.26490527391433716
+              }
+            ],
+            "kept_chunk_ids": [],
+            "discarded_chunk_ids": [
+              "ES-003:1.0:10",
+              "ES-007:1.0:6",
+              "ES-003:1.0:6",
+              "ES-003:1.0:7",
+              "ES-004:1.0:9",
+              "ES-003:1.0:2",
+              "GLB-002:1.0:7",
+              "ES-003:1.0:5",
+              "ES-005:1.0:10",
+              "ES-003:1.0:1"
+            ],
+            "coverage": {
+              "route": "insufficient",
+              "covered_aspects": [],
+              "missing_aspects": [
+                "whether ES-003 applies to employees based in Mexico",
+                "local Mexico telework/flexibility policy for domestic interstate relocation",
+                "conditions for teleworking within Mexico (not from Mexico to another country)"
+              ],
+              "useful_chunk_ids": [],
+              "rationale": "All fragments pertain specifically to ES-003, which explicitly governs employees based in Spain, and to international (cross-country) telework scenarios; none address a Mexico-based employee's domestic interstate telework, so they don't help answer this question."
+            },
+            "route": "insufficient"
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "expected_evidence_matches": [],
+      "evidence_coverage_summary": null,
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    }
+  ]
+}

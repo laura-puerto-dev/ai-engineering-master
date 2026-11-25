@@ -126,7 +126,10 @@ def _executed_result(
     final_attempts = attempts if attempts is not None else [_attempt(1)]
     final_evidence = expected_evidence if expected_evidence is not None else []
     ever_seen = {c["chunk_id"] for attempt in final_attempts for c in attempt["candidates"]}
+    delivered = set() if abstained else set(final_attempts[-1]["kept_chunk_ids"])
     citations = citations if citations is not None else []
+    invalid_retrieved = [c["chunk_id"] for c in citations if c["chunk_id"] not in ever_seen]
+    invalid_final_context = [c["chunk_id"] for c in citations if c["chunk_id"] not in delivered]
     return {
         "id": question_id,
         "category": "direct_evidence",
@@ -153,10 +156,10 @@ def _executed_result(
         },
         "citation_structural_check": {
             "citations_checked": len(citations),
-            "citations_from_retrieved": all(c["chunk_id"] in ever_seen for c in citations),
-            "invalid_citation_chunk_ids": [
-                c["chunk_id"] for c in citations if c["chunk_id"] not in ever_seen
-            ],
+            "citations_from_retrieved": len(invalid_retrieved) == 0,
+            "invalid_citation_chunk_ids": invalid_retrieved,
+            "citations_from_final_context": len(invalid_final_context) == 0,
+            "invalid_citation_chunk_ids_not_in_final_context": invalid_final_context,
         },
         "expected_evidence_matches": None,
         "evidence_coverage_summary": None,
@@ -310,16 +313,18 @@ def test_check_outcome_abstain_fails_when_answered(script: types.ModuleType) -> 
 # --- _check_citation_structure -----------------------------------------------------
 
 
-def test_citation_structure_valid_when_citation_was_ever_retrieved(
+def test_citation_structure_valid_when_citation_was_ever_retrieved_and_in_final_context(
     script: types.ModuleType,
 ) -> None:
     citations = [{"chunk_id": "A:1.0:0"}]
-    result = script._check_citation_structure(citations, {"A:1.0:0"})
+    result = script._check_citation_structure(citations, {"A:1.0:0"}, {"A:1.0:0"})
 
     assert result == {
         "citations_checked": 1,
         "citations_from_retrieved": True,
         "invalid_citation_chunk_ids": [],
+        "citations_from_final_context": True,
+        "invalid_citation_chunk_ids_not_in_final_context": [],
     }
 
 
@@ -327,19 +332,38 @@ def test_citation_structure_invalid_when_citation_was_never_retrieved(
     script: types.ModuleType,
 ) -> None:
     citations = [{"chunk_id": "Z:1.0:0"}]
-    result = script._check_citation_structure(citations, {"A:1.0:0"})
+    result = script._check_citation_structure(citations, {"A:1.0:0"}, {"A:1.0:0"})
 
     assert result["citations_from_retrieved"] is False
     assert result["invalid_citation_chunk_ids"] == ["Z:1.0:0"]
 
 
+def test_citation_structure_invalid_when_citation_was_retrieved_but_not_in_final_context(
+    script: types.ModuleType,
+) -> None:
+    """A citation whose chunk_id was retrieved at some point but is not
+    part of the exact context actually delivered to the generator would
+    indicate a real wiring bug (generation._resolve_citations only ever
+    resolves an index into the list it was given) — this check exists to
+    catch that even though it should never happen in practice.
+    """
+    citations = [{"chunk_id": "A:1.0:0"}]
+    result = script._check_citation_structure(citations, {"A:1.0:0"}, set())
+
+    assert result["citations_from_retrieved"] is True
+    assert result["citations_from_final_context"] is False
+    assert result["invalid_citation_chunk_ids_not_in_final_context"] == ["A:1.0:0"]
+
+
 def test_citation_structure_with_no_citations_at_all(script: types.ModuleType) -> None:
-    result = script._check_citation_structure([], {"A:1.0:0"})
+    result = script._check_citation_structure([], {"A:1.0:0"}, {"A:1.0:0"})
 
     assert result == {
         "citations_checked": 0,
         "citations_from_retrieved": True,
         "invalid_citation_chunk_ids": [],
+        "citations_from_final_context": True,
+        "invalid_citation_chunk_ids_not_in_final_context": [],
     }
 
 
@@ -348,7 +372,7 @@ def test_citation_structure_with_no_citations_at_all(script: types.ModuleType) -
 
 def test_expected_evidence_found_in_final_context(script: types.ModuleType) -> None:
     attempts = [_attempt(1, candidates=[_candidate("A")], kept_chunk_ids=["A"])]
-    matches = script._check_expected_evidence(attempts, [_evidence("A")])
+    matches = script._check_expected_evidence(attempts, [_evidence("A")], {"A"})
 
     assert matches == [
         {"chunk_id": "A", "document_id": "A", "ever_retrieved": True, "in_final_context": True}
@@ -366,7 +390,7 @@ def test_expected_evidence_retrieved_but_lost_between_attempts(
         _attempt(1, candidates=[_candidate("A")], kept_chunk_ids=[], discarded_chunk_ids=["A"]),
         _attempt(2, candidates=[_candidate("B")], kept_chunk_ids=["B"]),
     ]
-    matches = script._check_expected_evidence(attempts, [_evidence("A")])
+    matches = script._check_expected_evidence(attempts, [_evidence("A")], {"B"})
 
     assert matches[0]["ever_retrieved"] is True
     assert matches[0]["in_final_context"] is False
@@ -374,16 +398,33 @@ def test_expected_evidence_retrieved_but_lost_between_attempts(
 
 def test_expected_evidence_never_retrieved_at_all(script: types.ModuleType) -> None:
     attempts = [_attempt(1, candidates=[_candidate("B")], kept_chunk_ids=["B"])]
-    matches = script._check_expected_evidence(attempts, [_evidence("A")])
+    matches = script._check_expected_evidence(attempts, [_evidence("A")], {"B"})
 
     assert matches[0]["ever_retrieved"] is False
     assert matches[0]["in_final_context"] is False
 
 
 def test_expected_evidence_with_no_attempts_at_all(script: types.ModuleType) -> None:
-    matches = script._check_expected_evidence([], [_evidence("A")])
+    matches = script._check_expected_evidence([], [_evidence("A")], set())
 
     assert matches[0]["ever_retrieved"] is False
+    assert matches[0]["in_final_context"] is False
+
+
+def test_expected_evidence_retrieved_and_kept_but_not_delivered_on_abstention(
+    script: types.ModuleType,
+) -> None:
+    """Even if the last attempt's kept_chunk_ids still contains the
+    expected chunk, the caller (_run_question) must pass an EMPTY
+    delivered_to_generator_chunk_ids when the question ended in
+    abstention — crag.abstain_node never touches kept_chunks, so nothing
+    actually reached the generator. This is exactly the Fase 3B.2 fix:
+    "si existe abstención, no se ha entregado contexto al generador".
+    """
+    attempts = [_attempt(1, candidates=[_candidate("A")], kept_chunk_ids=["A"])]
+    matches = script._check_expected_evidence(attempts, [_evidence("A")], set())
+
+    assert matches[0]["ever_retrieved"] is True
     assert matches[0]["in_final_context"] is False
 
 
@@ -584,12 +625,12 @@ def test_collect_citation_metrics_aggregates_across_questions(script: types.Modu
     results = [
         _executed_result(
             "val-01",
-            attempts=[_attempt(1, candidates=[_candidate("A")])],
+            attempts=[_attempt(1, candidates=[_candidate("A")], kept_chunk_ids=["A"])],
             citations=[{"chunk_id": "A"}],
         ),
         _executed_result(
             "val-02",
-            attempts=[_attempt(1, candidates=[_candidate("B")])],
+            attempts=[_attempt(1, candidates=[_candidate("B")], kept_chunk_ids=["B"])],
             citations=[{"chunk_id": "Z"}],  # invalid: never retrieved
         ),
     ]
@@ -598,6 +639,32 @@ def test_collect_citation_metrics_aggregates_across_questions(script: types.Modu
 
     assert metrics["total_citations_checked"] == 2
     assert metrics["citations_structurally_valid_rate"] == pytest.approx(0.5)
+    assert metrics["citations_from_final_context_rate"] == pytest.approx(0.5)
+
+
+def test_collect_citation_metrics_flags_a_citation_outside_the_final_context(
+    script: types.ModuleType,
+) -> None:
+    """A citation that was retrieved at some point but is not part of
+    the context actually delivered to the generator — e.g. the question
+    ended in abstention, so nothing was delivered at all — must lower
+    citations_from_final_context_rate without affecting
+    citations_structurally_valid_rate (that one only cares about
+    "ever retrieved").
+    """
+    results = [
+        _executed_result(
+            "val-01",
+            attempts=[_attempt(1, candidates=[_candidate("A")], kept_chunk_ids=[])],
+            citations=[{"chunk_id": "A"}],
+            abstained=False,
+        )
+    ]
+
+    metrics = script._collect_citation_metrics(results)
+
+    assert metrics["citations_structurally_valid_rate"] == pytest.approx(1.0)
+    assert metrics["citations_from_final_context_rate"] == pytest.approx(0.0)
 
 
 # --- _collect_evidence_coverage_metrics ------------------------------------------------

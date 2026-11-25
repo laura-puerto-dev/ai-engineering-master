@@ -218,50 +218,69 @@ def _check_outcome(expected_outcome: str, abstained: bool) -> dict[str, Any]:
 
 
 def _check_citation_structure(
-    citations: list[dict[str, Any]], ever_seen_chunk_ids: set[str]
+    citations: list[dict[str, Any]],
+    ever_seen_chunk_ids: set[str],
+    delivered_to_generator_chunk_ids: set[str],
 ) -> dict[str, Any]:
-    """A citation is structurally valid if its chunk_id was actually
-    retrieved by this question's run at some point (any attempt, not
-    just the last one) — i.e. a real, RLS-authorized fragment, never one
-    the model invented. Does not re-verify generation._resolve_citations'
-    own by-index resolution; it checks the real end-to-end output.
+    """Two independent structural checks. citations_from_retrieved: was
+    this citation's chunk_id retrieved by this question's run at some
+    point (any attempt, not just the last one) — i.e. a real,
+    RLS-authorized fragment, never one the model invented.
+    citations_from_final_context: was it actually part of the exact
+    context handed to the generator (see delivered_to_generator_chunk_ids
+    below) — generation._resolve_citations only ever resolves an index
+    into the list it was given, so a citation should satisfy this by
+    construction; failing it despite passing the first check would mean
+    a real wiring bug, not just a loose evidentiary chain. Neither check
+    re-verifies generation._resolve_citations' own by-index resolution;
+    both check the real end-to-end output.
     """
-    invalid = [
+    invalid_retrieved = [
         citation["chunk_id"]
         for citation in citations
         if citation["chunk_id"] not in ever_seen_chunk_ids
     ]
+    invalid_final_context = [
+        citation["chunk_id"]
+        for citation in citations
+        if citation["chunk_id"] not in delivered_to_generator_chunk_ids
+    ]
     return {
         "citations_checked": len(citations),
-        "citations_from_retrieved": len(invalid) == 0,
-        "invalid_citation_chunk_ids": invalid,
+        "citations_from_retrieved": len(invalid_retrieved) == 0,
+        "invalid_citation_chunk_ids": invalid_retrieved,
+        "citations_from_final_context": len(invalid_final_context) == 0,
+        "invalid_citation_chunk_ids_not_in_final_context": invalid_final_context,
     }
 
 
 def _check_expected_evidence(
-    attempts: list[dict[str, Any]], expected_evidence: list[dict[str, Any]]
+    attempts: list[dict[str, Any]],
+    expected_evidence: list[dict[str, Any]],
+    delivered_to_generator_chunk_ids: set[str],
 ) -> list[dict[str, Any]]:
     """For each expected-evidence entry, reports two independent facts:
     ever_retrieved (did ANY attempt's candidate list contain this
     chunk_id — pure retrieval recall, regardless of what happened to it
-    afterwards) and in_final_context (was it still present in the last
-    attempt's kept_chunk_ids — i.e. the exact set answer_question_crag
-    actually handed to the generator). A chunk retrieved but later
-    discarded is ever_retrieved=True, in_final_context=False — exactly
-    the "lost evidence between attempts" case the Fase 3B brief asks to
-    watch for.
+    afterwards) and in_final_context (was it part of
+    delivered_to_generator_chunk_ids — the exact context
+    answer_question_crag actually handed to the generator, which is
+    empty on abstention: crag.abstain_node never touches kept_chunks at
+    all — see _run_question for how that set is derived). A chunk
+    retrieved but later discarded is ever_retrieved=True,
+    in_final_context=False — exactly the "lost evidence between
+    attempts" case the Fase 3B brief asks to watch for.
     """
     ever_seen = {
         candidate["chunk_id"] for attempt in attempts for candidate in attempt["candidates"]
     }
-    final_kept = set(attempts[-1]["kept_chunk_ids"]) if attempts else set()
 
     return [
         {
             "chunk_id": evidence["chunk_id"],
             "document_id": evidence["document_id"],
             "ever_retrieved": evidence["chunk_id"] in ever_seen,
-            "in_final_context": evidence["chunk_id"] in final_kept,
+            "in_final_context": evidence["chunk_id"] in delivered_to_generator_chunk_ids,
         }
         for evidence in expected_evidence
     ]
@@ -367,8 +386,18 @@ def _run_question(
     ever_seen_chunk_ids = {
         candidate["chunk_id"] for attempt in attempts for candidate in attempt["candidates"]
     }
-    evidence_matches = _check_expected_evidence(attempts, question.get("expected_evidence") or [])
     answer = cast("dict[str, Any]", crag_result["answer"])
+
+    # The exact context answer_question_crag actually handed to the
+    # generator — never the generic "last attempt's kept_chunk_ids" on
+    # its own, since on abstention crag.abstain_node never touches
+    # kept_chunks and the generator is never called at all (see crag.py).
+    delivered_to_generator_chunk_ids: set[str] = (
+        set() if answer["abstained"] or not attempts else set(attempts[-1]["kept_chunk_ids"])
+    )
+    evidence_matches = _check_expected_evidence(
+        attempts, question.get("expected_evidence") or [], delivered_to_generator_chunk_ids
+    )
 
     record["crag"] = {
         "abstained": answer["abstained"],
@@ -379,7 +408,7 @@ def _run_question(
     }
     record["outcome_check"] = _check_outcome(question["expected_outcome"], answer["abstained"])
     record["citation_structural_check"] = _check_citation_structure(
-        answer["citations"], ever_seen_chunk_ids
+        answer["citations"], ever_seen_chunk_ids, delivered_to_generator_chunk_ids
     )
     record["expected_evidence_matches"] = evidence_matches
     record["evidence_coverage_summary"] = _evidence_coverage_summary(evidence_matches)
@@ -508,10 +537,18 @@ def _collect_latency_metrics(results: list[dict[str, Any]]) -> dict[str, Any]:
 def _collect_citation_metrics(results: list[dict[str, Any]]) -> dict[str, Any]:
     checks = [r["citation_structural_check"] for r in results if r["citation_structural_check"]]
     total = sum(check["citations_checked"] for check in checks)
-    invalid = sum(len(check["invalid_citation_chunk_ids"]) for check in checks)
+    invalid_retrieved = sum(len(check["invalid_citation_chunk_ids"]) for check in checks)
+    invalid_final_context = sum(
+        len(check["invalid_citation_chunk_ids_not_in_final_context"]) for check in checks
+    )
     return {
         "total_citations_checked": total,
-        "citations_structurally_valid_rate": ((total - invalid) / total if total else None),
+        "citations_structurally_valid_rate": (
+            (total - invalid_retrieved) / total if total else None
+        ),
+        "citations_from_final_context_rate": (
+            (total - invalid_final_context) / total if total else None
+        ),
     }
 
 
@@ -579,8 +616,11 @@ def _incidents(result: dict[str, Any]) -> str:
         return "; ".join(notes)
     if not result["outcome_check"]["matches_expected"]:
         notes.append("outcome mismatch")
-    if not result["citation_structural_check"]["citations_from_retrieved"]:
-        notes.append("invalid citation")
+    citation_check = result["citation_structural_check"]
+    if not citation_check["citations_from_retrieved"]:
+        notes.append("invalid citation (never retrieved)")
+    if not citation_check["citations_from_final_context"]:
+        notes.append("invalid citation (not in final context)")
     coverage = result["evidence_coverage_summary"]
     if coverage is not None and not coverage["all_found_in_final_context"]:
         notes.append("expected evidence missing from final context")

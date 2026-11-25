@@ -47,10 +47,18 @@ question and still fail to answer it, or vice versa. Judge sufficiency only from
 whether the fragment's own text actually answers part of the question.
 
 Decide one of three routes:
-- "sufficient": the fragments, taken together, cover every aspect of the question \
-well enough to answer it without guessing.
+- "sufficient": the fragments, taken together, cover every single aspect of the \
+original question well enough to answer it without guessing. If even one necessary \
+aspect is not covered, this is not "sufficient" — see "ambiguous" below.
 - "ambiguous": at least one fragment is genuinely useful, but something needed to \
-fully answer the question is still missing, or there is a real ambiguity to resolve.
+fully answer the question is still missing, or there is a real ambiguity to resolve. \
+A fragment that says *where* a piece of information can be found (a different \
+system or record) does not make that information available here — the aspect it \
+points to is still missing, not resolved. Likewise, a fragment stating a general \
+rule does not by itself establish how that rule applies to the specific individual \
+or instance the question asks about; if the question asks for that specific \
+application, that aspect is still missing. Any aspect left missing keeps the route \
+"ambiguous", never "sufficient", even when other aspects are already well covered.
 - "insufficient": none of the fragments actually help answer this question.
 
 Also report:

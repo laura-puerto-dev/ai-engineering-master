@@ -29,6 +29,19 @@ Run with:
                                                                 # only
     uv run python scripts/evaluation/run_evaluation.py --run  # the real thing
 
+--questions/--results-json/--results-md are optional CLI arguments
+(default to the module-10 held-out set and its historical
+rag-eval-results.json/rag-eval-report.md), so a bare invocation behaves
+exactly as before. Pass them explicitly to run this same script against
+a different question file (e.g. the Fase 4 docs/evaluation/
+crag-evaluation-questions.yaml) without overwriting the historical
+module-10 results:
+
+    uv run python scripts/evaluation/run_evaluation.py --run \\
+        --questions docs/evaluation/crag-evaluation-questions.yaml \\
+        --results-json docs/evaluation/rag-final-results.json \\
+        --results-md docs/evaluation/rag-final-report.md
+
 Without --run, this script never embeds a question, never opens a
 database connection, and never calls Claude. --run is required because
 the full run makes one real, billed Claude API call per question (20
@@ -36,17 +49,18 @@ calls for the full set) — a stricter default than
 scripts/smoke_test_rag.py's, since this is the first script in this
 project whose bare invocation (no arguments at all) must be inert.
 
-Writes two files to docs/evaluation/: rag-eval-results.json (full
-structured data — retrieved chunks, distances, evidence matches,
-generated answers, citations, automatic metrics, and blank fields for
-later manual review) and rag-eval-report.md (a human-readable
-per-question view for that manual review, deliberately omitting the raw
-distance/chunk detail that only the JSON carries, to avoid duplicating
-the same data twice). The Markdown report is only (re)written once, at
-the end of a --run; the JSON results file is saved after *every*
-individual question — see "Resuming" below.
+Writes two files (--results-json/--results-md, defaulting to
+docs/evaluation/rag-eval-results.json/rag-eval-report.md): the JSON
+file holds the full structured data — retrieved chunks, distances,
+evidence matches, generated answers, citations, automatic metrics, and
+blank fields for later manual review — and the Markdown report is a
+human-readable per-question view for that manual review, deliberately
+omitting the raw distance/chunk detail that only the JSON carries, to
+avoid duplicating the same data twice. The Markdown report is only
+(re)written once, at the end of a --run; the JSON results file is saved
+after *every* individual question — see "Resuming" below.
 
-Resuming: if rag-eval-results.json already exists when --run starts,
+Resuming: if --results-json's file already exists when --run starts,
 this script loads it, skips whatever question ids it already contains
 (their manual_review fields are kept exactly as found — never rebuilt),
 and only runs the remaining ones, appending to the same file. If all
@@ -281,12 +295,18 @@ def _check_compatible(
     embedding_model: dict[str, Any],
     generation_model: dict[str, Any],
     top_k: int,
+    results_json_path: Path = RESULTS_JSON_PATH,
 ) -> None:
     """Refuse to extend an existing results file produced under different
     settings. Mixing distances from one embedding model/revision (or
     answers from a different generation model or top_k) into the same
     results list would silently produce a meaningless aggregate — this
     is the one thing resuming must never do.
+
+    results_json_path defaults to the historical module-10 path so
+    existing callers (and tests) that don't pass it keep working
+    unchanged; main() always passes the actual --results-json path, so
+    the error message below names the file that was really found.
     """
     mismatched = [
         name
@@ -301,7 +321,7 @@ def _check_compatible(
     ]
     if mismatched:
         raise ValueError(
-            f"{RESULTS_JSON_PATH.name} already exists but was generated under "
+            f"{results_json_path.name} already exists but was generated under "
             f"different settings ({', '.join(mismatched)}); refusing to overwrite or "
             "extend it. Move or delete the file first if you intend to start a fresh "
             "evaluation run."
@@ -469,7 +489,7 @@ def _write_results_json(
         "embedding_model": {"model_id": model_id, "revision": revision, "dimensions": dimensions},
         "generation_model": {"model": GENERATION_MODEL, "disable_thinking": True},
         "top_k": top_k,
-        "questions_file": str(questions_path.relative_to(PROJECT_ROOT)),
+        "questions_file": str(questions_path.resolve().relative_to(PROJECT_ROOT)),
         "questions_hash": questions_hash,
         "completed_count": len(results),
         "total_count": total_count,
@@ -494,7 +514,7 @@ def _write_markdown_report(
         "",
         f"- Generated: {datetime.now(UTC).isoformat()}",
         "- Variant: rag",
-        f"- Dataset: {questions_path.relative_to(PROJECT_ROOT)}",
+        f"- Dataset: {questions_path.resolve().relative_to(PROJECT_ROOT)}",
         f"- top_k: {top_k}",
         "",
         "## Automatic metrics",
@@ -576,6 +596,24 @@ def _write_markdown_report(
 def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--questions",
+        type=Path,
+        default=EVAL_QUESTIONS_PATH,
+        help="Path to the YAML question file (default: the module-10 held-out set).",
+    )
+    parser.add_argument(
+        "--results-json",
+        type=Path,
+        default=RESULTS_JSON_PATH,
+        help="Output path for the structured JSON results (default: rag-eval-results.json).",
+    )
+    parser.add_argument(
+        "--results-md",
+        type=Path,
+        default=RESULTS_MD_PATH,
+        help="Output path for the human-readable Markdown report (default: rag-eval-report.md).",
+    )
+    parser.add_argument(
         "--run",
         action="store_true",
         help=(
@@ -591,11 +629,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> None:
     args = _parse_args(argv)
 
-    questions = _load_eval_questions(EVAL_QUESTIONS_PATH)
+    questions = _load_eval_questions(args.questions)
     answerable_count = sum(question["expected_outcome"] == "answerable" for question in questions)
     abstain_count = sum(question["expected_outcome"] == "abstain" for question in questions)
     print(
-        f"Loaded {len(questions)} evaluation questions "
+        f"Loaded {len(questions)} evaluation questions from {args.questions} "
         f"({answerable_count} answerable, {abstain_count} abstain)"
     )
 
@@ -631,7 +669,7 @@ def main(argv: list[str] | None = None) -> None:
     generator = ClaudeAnswerGenerator(model=GENERATION_MODEL, disable_thinking=True)
     print(f"Generator: {GENERATION_MODEL}, thinking disabled, effort not sent\n")
 
-    questions_hash = _sha256_hex(EVAL_QUESTIONS_PATH)
+    questions_hash = _sha256_hex(args.questions)
     embedding_model_info = {
         "model_id": embedding_model.model_id,
         "revision": embedding_model.revision,
@@ -639,7 +677,7 @@ def main(argv: list[str] | None = None) -> None:
     }
     generation_model_info = {"model": GENERATION_MODEL, "disable_thinking": True}
 
-    existing = _load_existing_results(RESULTS_JSON_PATH)
+    existing = _load_existing_results(args.results_json)
     if existing is not None:
         _check_compatible(
             existing,
@@ -647,6 +685,7 @@ def main(argv: list[str] | None = None) -> None:
             embedding_model=embedding_model_info,
             generation_model=generation_model_info,
             top_k=TOP_K,
+            results_json_path=args.results_json,
         )
 
     results, pending = _resume_state(questions, existing)
@@ -665,7 +704,7 @@ def main(argv: list[str] | None = None) -> None:
             print(f"\nQuestion {question['id']} failed: {exc}")
             print(
                 f"Preserved {len(results)}/{len(questions)} previously completed "
-                f"results in {RESULTS_JSON_PATH}"
+                f"results in {args.results_json}"
             )
             raise
 
@@ -673,12 +712,12 @@ def main(argv: list[str] | None = None) -> None:
         _write_results_json(
             results,
             _compute_metrics(results),
-            path=RESULTS_JSON_PATH,
+            path=args.results_json,
             model_id=embedding_model.model_id,
             revision=embedding_model.revision,
             dimensions=embedding_model.dimensions,
             top_k=TOP_K,
-            questions_path=EVAL_QUESTIONS_PATH,
+            questions_path=args.questions,
             questions_hash=questions_hash,
             total_count=len(questions),
         )
@@ -687,9 +726,9 @@ def main(argv: list[str] | None = None) -> None:
     metrics = _compute_metrics(results)
     _print_report(results, metrics)
     _write_markdown_report(
-        results, metrics, path=RESULTS_MD_PATH, questions_path=EVAL_QUESTIONS_PATH, top_k=TOP_K
+        results, metrics, path=args.results_md, questions_path=args.questions, top_k=TOP_K
     )
-    print(f"\nWrote {RESULTS_JSON_PATH} and {RESULTS_MD_PATH}")
+    print(f"\nWrote {args.results_json} and {args.results_md}")
 
 
 if __name__ == "__main__":

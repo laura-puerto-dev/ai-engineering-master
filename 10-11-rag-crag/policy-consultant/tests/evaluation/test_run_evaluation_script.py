@@ -264,6 +264,37 @@ def test_parse_args_run_flag_enables_run(script: types.ModuleType) -> None:
     assert script._parse_args(["--run"]).run is True
 
 
+def test_parse_args_defaults_preserve_historical_paths(script: types.ModuleType) -> None:
+    """A bare invocation (no --questions/--results-json/--results-md) must
+    keep pointing at the module-10 held-out set and its historical output
+    files, so existing usage is unaffected by this script's new CLI args.
+    """
+    args = script._parse_args([])
+
+    assert args.questions == script.EVAL_QUESTIONS_PATH
+    assert args.results_json == script.RESULTS_JSON_PATH
+    assert args.results_md == script.RESULTS_MD_PATH
+
+
+def test_parse_args_accepts_a_different_question_file_and_output_paths(
+    script: types.ModuleType,
+) -> None:
+    args = script._parse_args(
+        [
+            "--questions",
+            "docs/evaluation/crag-evaluation-questions.yaml",
+            "--results-json",
+            "docs/evaluation/rag-final-results.json",
+            "--results-md",
+            "docs/evaluation/rag-final-report.md",
+        ]
+    )
+
+    assert args.questions == Path("docs/evaluation/crag-evaluation-questions.yaml")
+    assert args.results_json == Path("docs/evaluation/rag-final-results.json")
+    assert args.results_md == Path("docs/evaluation/rag-final-report.md")
+
+
 def test_main_without_run_flag_never_touches_the_real_pipeline(
     script: types.ModuleType, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -361,6 +392,24 @@ def test_check_compatible_rejects_a_different_top_k(script: types.ModuleType) ->
             embedding_model={"model_id": "BAAI/bge-m3", "revision": "rev1", "dimensions": 1024},
             generation_model={"model": "claude-sonnet-5", "disable_thinking": True},
             top_k=5,
+        )
+
+
+def test_check_compatible_error_names_the_custom_results_json_path(
+    script: types.ModuleType,
+) -> None:
+    """When --results-json points somewhere other than the historical
+    default, the refusal message must name that actual file, not the
+    hardcoded module-10 default.
+    """
+    with pytest.raises(ValueError, match="rag-final-results.json"):
+        script._check_compatible(
+            _settings(top_k=10),
+            questions_hash="abc123",
+            embedding_model={"model_id": "BAAI/bge-m3", "revision": "rev1", "dimensions": 1024},
+            generation_model={"model": "claude-sonnet-5", "disable_thinking": True},
+            top_k=5,
+            results_json_path=Path("docs/evaluation/rag-final-results.json"),
         )
 
 

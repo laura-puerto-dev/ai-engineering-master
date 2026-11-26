@@ -1,0 +1,1796 @@
+{
+  "generated_at": "2026-11-26T15:52:15.462610+00:00",
+  "variant": "rag",
+  "embedding_model": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dimensions": 1024
+  },
+  "generation_model": {
+    "model": "claude-sonnet-5",
+    "disable_thinking": true
+  },
+  "top_k": 5,
+  "questions_file": "docs\\evaluation\\crag-evaluation-questions.yaml",
+  "questions_hash": "25bfc8e6d90fe86054e3479f848d5593385edd9db1e4578a3d06688b5814f574",
+  "completed_count": 20,
+  "total_count": 20,
+  "metrics": {
+    "retrieval": {
+      "answerable_with_evidence": 14,
+      "evidence_recall_at_k": 0.8571428571428571,
+      "pct_all_evidence_found": 0.8571428571428571,
+      "pct_any_evidence_found": 0.9285714285714286
+    },
+    "abstention": {
+      "answerable_questions": 14,
+      "answerable_answered_rate": 0.9285714285714286,
+      "abstain_questions": 6,
+      "abstain_correct_rate": 1.0
+    },
+    "citations": {
+      "total_citations_checked": 26,
+      "citations_from_retrieved_rate": 1.0
+    }
+  },
+  "results": [
+    {
+      "id": "eval-crag-01",
+      "question": "¿Con cuánta antelación debo solicitar mis vacaciones en España antes del primer día que quiero disfrutar?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Con al menos 15 días naturales de antelación respecto al primer día previsto de disfrute, salvo que se aplique una excepción justificada.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "distance": 0.2453025883075436
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.34811556339263916
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:6",
+          "document_id": "ES-001",
+          "distance": 0.3779788017272949
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:7",
+          "document_id": "ES-001",
+          "distance": 0.3789033067880079
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:7",
+          "document_id": "ES-002",
+          "distance": 0.3920084600443555
+        }
+      ],
+      "first_result_distance": 0.2453025883075436,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2453025883075436
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Con carácter ordinario, las vacaciones deben solicitarse con al menos 15 días naturales de antelación respecto al primer día previsto de disfrute. Este plazo puede exceptuarse únicamente ante circunstancias justificadas, siguiendo el procedimiento de excepciones: en ese caso, la persona empleada debe comunicarlo a su responsable directo, quien revisará el impacto y, si corresponde, trasladará el caso a Recursos Humanos de España para su valoración. En cualquier caso, ni una solicitud fuera de plazo ni una excepción se consideran aprobadas automáticamente; la decisión debe quedar confirmada por los canales internos establecidos.",
+        "citations": [
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "4. Solicitud de vacaciones"
+            ],
+            "chunk_id": "ES-001:1.0:4",
+            "text": "Las vacaciones deben solicitarse con **al menos 15 días naturales de antelación** respecto al primer día previsto de disfrute.\n\nLa solicitud debe indicar las fechas de inicio y fin. Antes de enviarla, la persona empleada debe comprobar que dispone de saldo suficiente y coordinar, cuando sea necesario, la continuidad de las tareas con su equipo.\n\nEl plazo ordinario de 15 días puede exceptuarse ante circunstancias justificadas, siguiendo el procedimiento descrito en la sección 8. Una solicitud fuera de plazo no se considera aprobada automáticamente."
+          },
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "8. Excepciones"
+            ],
+            "chunk_id": "ES-001:1.0:8",
+            "text": "Pueden plantearse excepciones justificadas a las condiciones ordinarias, especialmente cuando se soliciten vacaciones con menos de 15 días naturales de antelación o periodos superiores a 15 días laborables consecutivos.\n\nLa persona empleada debe comunicar la circunstancia a su responsable directo. El responsable revisará el impacto sobre el equipo y, cuando corresponda, trasladará el caso a **Recursos Humanos de España** para su valoración.\n\n**Ninguna excepción se entiende aprobada por el mero hecho de solicitarla.** La decisión debe quedar confirmada por los canales internos establecidos.\n\nLos criterios y pasos internos de evaluación se recogen en los procedimientos correspondientes, que pueden tener un acceso restringido. Esta política no otorga acceso a dichos procedimientos."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-02",
+      "question": "Como manager en España, si uno de mis colaboradores disfruta sus dos días anuales retribuidos por asuntos personales, ¿puedo descontarlos de su saldo de vacaciones?",
+      "profile_id": "spain-manager",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No. Debo distinguir los dos días anuales retribuidos por asuntos personales de ES-002 de las vacaciones de ES-001, y no debo descontar automáticamente ese tipo de ausencia del saldo de vacaciones.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-002:1.0:4",
+          "document_id": "ES-002",
+          "distance": 0.3210137891165131
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:9",
+          "document_id": "ES-001",
+          "distance": 0.3282278785298076
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.3373054459922974
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-006:1.0:5",
+          "document_id": "ES-006",
+          "distance": 0.34106008165716517
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.35265366121210573
+        }
+      ],
+      "first_result_distance": 0.3210137891165131,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-006:1.0:5",
+          "document_id": "ES-006",
+          "found": true,
+          "rank": 3,
+          "distance": 0.34106008165716517
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "No. Según la política, los dos días anuales retribuidos por asuntos personales (regulados en ES-002) deben distinguirse de las vacaciones reguladas en ES-001. Como manager, no debe descontar automáticamente una ausencia del saldo de vacaciones; la clasificación y el registro deben corresponder al tipo de ausencia reconocido por la política y, cuando proceda, ser validado por RR. HH. Además, ES-002 establece expresamente que estos días no se descuentan del saldo de vacaciones regulado en ES-001.",
+        "citations": [
+          {
+            "document_id": "ES-002",
+            "version": "1.0",
+            "section_path": [
+              "4. Permiso interno por asuntos personales"
+            ],
+            "chunk_id": "ES-002:1.0:4",
+            "text": "Northfern Technologies concede, como **beneficio interno adicional**, **dos días retribuidos por año natural** para asuntos personales a las personas empleadas en España.\n\nEstos días:\n\n- Deben solicitarse con antelación siempre que las circunstancias lo permitan.\n- Están sujetos a la coordinación de la cobertura del equipo y a la validación correspondiente.\n- Pueden disfrutarse por separado; su utilización no requiere explicar detalles íntimos del motivo personal.\n- No son acumulables ni se trasladan al año siguiente.\n- No se descuentan del saldo de vacaciones regulado en ES-001.\n\nLa disponibilidad individual de días por asuntos personales se consulta en los registros personales autorizados de la compañía, no en esta política. Si existe alguna circunstancia excepcional, Recursos Humanos de España revisará el caso conforme al procedimiento aplicable."
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "5. Ausencias planificadas"
+            ],
+            "chunk_id": "ES-006:1.0:5",
+            "text": "En permisos o ausencias planificadas, el manager coordina la redistribución de tareas y la continuidad del servicio. Debe distinguir los **dos días anuales retribuidos por asuntos personales** previstos en ES-002 de las vacaciones reguladas en ES-001.\n\nEl manager no debe descontar automáticamente una ausencia del saldo de vacaciones. La clasificación y el registro deben corresponder al tipo de ausencia reconocido por la política y, cuando proceda, validado por RR. HH."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-03",
+      "question": "Si necesito ausentarme de mi puesto en España por una cita médica, ¿durante cuánto tiempo puedo comunicar la ausencia y debo avisar con antelación?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Puede comunicarse una ausencia por el tiempo indispensable que requiera la cita; siempre que sea posible, debe avisarse con antelación al responsable directo para coordinar el trabajo pendiente.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-002:1.0:5",
+          "document_id": "ES-002",
+          "distance": 0.2800845169920305
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-002:1.0:3",
+          "document_id": "ES-002",
+          "distance": 0.34775380207575435
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-002:1.0:6",
+          "document_id": "ES-002",
+          "distance": 0.3681438157515555
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.38783220125244744
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-002:1.0:11",
+          "document_id": "ES-002",
+          "distance": 0.3932962002367889
+        }
+      ],
+      "first_result_distance": 0.2800845169920305,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-002:1.0:5",
+          "document_id": "ES-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2800845169920305
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Puede comunicar la ausencia por el tiempo indispensable para acudir a la cita médica. Además, siempre que sea posible, debe avisar con antelación a su responsable directo para coordinar el trabajo pendiente. Tenga en cuenta que estas ausencias no se convierten automáticamente en vacaciones, y su clasificación administrativa y tratamiento retributivo dependerán de las condiciones aplicables al caso.",
+        "citations": [
+          {
+            "document_id": "ES-002",
+            "version": "1.0",
+            "section_path": [
+              "5. Citas médicas"
+            ],
+            "chunk_id": "ES-002:1.0:5",
+            "text": "Cuando una persona necesite ausentarse por una cita médica, podrá comunicar una ausencia por el **tiempo indispensable**. Siempre que sea posible, deberá avisar con antelación a su responsable para coordinar el trabajo pendiente.\n\nRecursos Humanos podrá indicar si se necesita una acreditación administrativa de la asistencia, de acuerdo con la normativa y los procedimientos aplicables. No se solicitará que la persona comparta diagnósticos ni detalles clínicos mediante el chat corporativo o con compañeros de equipo.\n\nEstas ausencias no se convertirán automáticamente en días de vacaciones. Su clasificación administrativa y, cuando proceda, su tratamiento retributivo dependerán de las condiciones aplicables al caso."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-04",
+      "question": "Como responsable de RR. HH. en España, ¿en qué plazo debe presentar un empleado los gastos de un viaje de trabajo después de finalizarlo?",
+      "profile_id": "spain-hr",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Dentro de los 15 días naturales posteriores a la finalización del viaje, a través del canal corporativo autorizado, y con un justificante válido para cada gasto.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-005:1.0:8",
+          "document_id": "ES-005",
+          "distance": 0.3339013655303281
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-007:1.0:4",
+          "document_id": "ES-007",
+          "distance": 0.34327932080276957
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.3638655922492974
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.36785371686771906
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3752940073434099
+        }
+      ],
+      "first_result_distance": 0.3339013655303281,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-005:1.0:8",
+          "document_id": "ES-005",
+          "found": true,
+          "rank": 0,
+          "distance": 0.3339013655303281
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Los gastos de un viaje de trabajo deben presentarse a través del canal corporativo autorizado dentro de los 15 días naturales posteriores a la finalización del viaje.",
+        "citations": [
+          {
+            "document_id": "ES-005",
+            "version": "1.0",
+            "section_path": [
+              "8. Justificantes y presentación de gastos"
+            ],
+            "chunk_id": "ES-005:1.0:8",
+            "text": "Los gastos deben presentarse a través del canal corporativo autorizado **dentro de los 15 días naturales posteriores a la finalización del viaje**.\n\nComo regla general, cada gasto requiere un justificante válido que permita identificar el concepto, el importe y la fecha. Las excepciones documentadas a esta exigencia se gestionan mediante el procedimiento interno correspondiente; el empleado no debe asumir que un gasto sin justificante será aprobado.\n\nLa presentación de una solicitud no equivale a su aceptación. Los importes se revisan conforme a esta política y a las autorizaciones concedidas."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-05",
+      "question": "¿Con cuántos días naturales de antelación debo presentar, como regla interna, una solicitud ordinaria de vacaciones en México?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Con al menos 10 días naturales de antelación, como regla de planificación interna, siempre que sea compatible con los derechos y plazos legales aplicables.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:8",
+          "document_id": "MX-001",
+          "distance": 0.33273470401763916
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-001:1.1:10",
+          "document_id": "MX-001",
+          "distance": 0.342274010181427
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:1",
+          "document_id": "MX-001",
+          "distance": 0.4066210454661565
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "distance": 0.4123242847726165
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-001:1.1:9",
+          "document_id": "MX-001",
+          "distance": 0.4189000822424749
+        }
+      ],
+      "first_result_distance": 0.33273470401763916,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "MX-001:1.1:8",
+          "document_id": "MX-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.33273470401763916
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Como regla de planificación interna, las solicitudes ordinarias de vacaciones en México deben presentarse con al menos 10 días naturales de antelación, siempre que esto sea compatible con los derechos y plazos legales aplicables. Esta recomendación de antelación no elimina los derechos de disfrute del empleado ni habilita denegaciones contrarias a la legislación aplicable.",
+        "citations": [
+          {
+            "document_id": "MX-001",
+            "version": "1.1",
+            "section_path": [
+              "5. Solicitud ordinaria de vacaciones"
+            ],
+            "chunk_id": "MX-001:1.1:8",
+            "text": "Como regla de planificación interna, las solicitudes ordinarias se presentan **con al menos 10 días naturales de antelación**, siempre que ello sea compatible con los derechos y plazos legales aplicables.\n\nLa solicitud debe indicar las fechas previstas y tramitarse por el canal corporativo establecido. El responsable directo revisa la cobertura operativa y coordina las fechas con el equipo. La aprobación y el registro formal se realizan en el sistema autorizado.\n\nLa recomendación de antelación no elimina los derechos de disfrute que correspondan al empleado ni habilita denegaciones contrarias a la legislación aplicable."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-06",
+      "question": "In England, what is the maximum number of consecutive working days of annual leave I can ordinarily request without needing special approval?",
+      "profile_id": "england-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Up to 10 consecutive working days ordinarily; longer periods require advance discussion and special approval from the line manager in coordination with England HR.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "distance": 0.250856444188567
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "distance": 0.361224629806003
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.3690820932388261
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "distance": 0.4029665108959066
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:1",
+          "document_id": "EN-001",
+          "distance": 0.4081323852381247
+        }
+      ],
+      "first_result_distance": 0.250856444188567,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "found": true,
+          "rank": 0,
+          "distance": 0.250856444188567
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "In England, employees may ordinarily request up to 10 consecutive working days of annual leave without needing special approval. Longer periods require advance discussion and special approval from the line manager in coordination with England HR.",
+        "citations": [
+          {
+            "document_id": "EN-001",
+            "version": "1.0",
+            "section_path": [
+              "5. Consecutive leave and team coverage"
+            ],
+            "chunk_id": "EN-001:1.0:5",
+            "text": "Employees may ordinarily request **up to 10 consecutive working days** of annual leave. Longer periods require advance discussion and special approval from the line manager in coordination with England HR.\n\nManagers should apply approval criteria consistently and should not unreasonably prevent employees from taking their leave. Any operational limits must be applied consistently with applicable law, including employees' ability to take their statutory entitlement."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-07",
+      "question": "¿Puedo usar brevemente el ordenador de la empresa para un asunto personal mientras trabajo en México?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Sí, el uso personal incidental puede permitirse cuando sea razonable, lícito y no interfiera con el trabajo ni infrinja otras normas de la empresa.",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-002:1.0:8",
+          "document_id": "MX-002",
+          "distance": 0.3353717723267202
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-001:1.0:6",
+          "document_id": "GLB-001",
+          "distance": 0.36623294756019287
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:2",
+          "document_id": "MX-001",
+          "distance": 0.3721645030779194
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-002:1.0:7",
+          "document_id": "GLB-002",
+          "distance": 0.37750422954559326
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-002:1.0:7",
+          "document_id": "MX-002",
+          "distance": 0.37957058488042883
+        }
+      ],
+      "first_result_distance": 0.3353717723267202,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "GLB-001:1.0:6",
+          "document_id": "GLB-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.36623294756019287
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 1,
+        "found_count": 1,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Sí. El uso incidental para fines personales de los dispositivos de la empresa puede estar permitido siempre que sea razonable, lícito y no interfiera con el trabajo ni infrinja otras normas de la empresa. En cualquier duda sobre el uso aceptable, se debe consultar al contacto correspondiente de IT o RRHH.",
+        "citations": [
+          {
+            "document_id": "GLB-001",
+            "version": "1.0",
+            "section_path": [
+              "6. Responsible use of company resources"
+            ],
+            "chunk_id": "GLB-001:1.0:6",
+            "text": "Company devices, systems, software, and communication channels must be used responsibly and in accordance with company policies. Employees must not bypass security controls, share accounts, or install unapproved tools for business use.\n\nIncidental personal use may be permitted where it is reasonable, lawful, and does not interfere with work or violate other company rules. Questions about acceptable use should be directed to the relevant IT or HR contact."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-08",
+      "question": "Como manager en España, uno de mis colaboradores solicita un periodo de vacaciones y tiene saldo suficiente. ¿Eso implica que debo aprobarlo automáticamente, y qué pasos concretos tengo que seguir antes de decidir?",
+      "profile_id": "spain-manager",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No. Tener saldo suficiente no implica aprobación automática: debo valorar el calendario del equipo, los periodos de actividad crítica y la cobertura de funciones esenciales (ES-001 §5). En concreto, debo comprobar las fechas solicitadas y la cobertura operativa, identificar posibles coincidencias con otras ausencias ya aprobadas, revisar las condiciones aplicables de ES-001/ES-002, y registrar mi decisión y su justificación en el sistema corporativo (ES-006 §3).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.27958707335072186
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:5",
+          "document_id": "ES-001",
+          "distance": 0.29509155183484714
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.31200850009918213
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.32025039196014404
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-006:1.0:3",
+          "document_id": "ES-006",
+          "distance": 0.32241493463516235
+        }
+      ],
+      "first_result_distance": 0.27958707335072186,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-001:1.0:5",
+          "document_id": "ES-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.29509155183484714
+        },
+        {
+          "chunk_id": "ES-006:1.0:3",
+          "document_id": "ES-006",
+          "found": true,
+          "rank": 4,
+          "distance": 0.32241493463516235
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "No, tener saldo suficiente de vacaciones no implica la aprobación automática de las fechas solicitadas. La existencia de saldo suficiente no implica aprobación automática; hasta recibir confirmación, las vacaciones se consideran pendientes.\n\nAntes de decidir, como manager debe seguir estos pasos:\n1. Comprobar las fechas solicitadas y la cobertura operativa del equipo.\n2. Identificar posibles coincidencias con otras ausencias ya aprobadas.\n3. Revisar las condiciones aplicables en ES-001 o ES-002, según corresponda.\n4. Registrar la decisión y su justificación operativa en el sistema corporativo.\n5. Escalar a RR. HH. los casos que excedan su ámbito de decisión.\n\nAdemás, debe tener en cuenta el calendario del equipo, los periodos de actividad crítica y la cobertura de funciones esenciales al evaluar la solicitud, así como valorar los compromisos del equipo, las sustituciones disponibles y los periodos de mayor carga de trabajo, aplicando criterios consistentes y evitando decisiones arbitrarias. Si varias solicitudes coinciden y no es posible mantener la cobertura del servicio, debe estudiar alternativas con las personas afectadas.\n\nSi la solicitud supera el límite ordinario de 15 días laborables consecutivos, se solicita con menos de 15 días naturales de antelación, o requiere cualquier otra excepción a la política, no puede aprobarla por sí solo: debe remitirla a RR. HH. de España para su valoración, y la autorización de la excepción debe constar en el sistema corporativo correspondiente.",
+        "citations": [
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "4. Gestión de vacaciones"
+            ],
+            "chunk_id": "ES-006:1.0:4",
+            "text": "Para las vacaciones, el manager debe aplicar los criterios de ES-001, incluidos el preaviso ordinario de **15 días naturales** y el límite ordinario de **15 días laborables consecutivos**, salvo excepción autorizada.\n\nAntes de aprobar, debe valorar los compromisos del equipo, las sustituciones disponibles y los periodos de mayor carga de trabajo. La planificación debe realizarse con criterios consistentes, evitando decisiones arbitrarias.\n\nSi una solicitud supera el límite ordinario de días consecutivos o requiere una excepción a la política, el manager debe remitirla a RR. HH. España para su valoración. No puede conceder por sí solo una excepción reservada a RR. HH.\n\nEl saldo individual de vacaciones se verifica en los registros corporativos autorizados, no se deduce de esta guía."
+          },
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "5. Aprobación y planificación del equipo"
+            ],
+            "chunk_id": "ES-001:1.0:5",
+            "text": "La aprobación ordinaria corresponde al **responsable directo** de la persona solicitante. Al evaluar la solicitud, el responsable tendrá en cuenta el calendario del equipo, los periodos de actividad crítica y la cobertura de funciones esenciales.\n\nLa existencia de saldo suficiente **no implica la aprobación automática** de las fechas solicitadas. Hasta recibir confirmación, las vacaciones se consideran pendientes.\n\nSi varias solicitudes coinciden y no es posible mantener la cobertura del servicio, el responsable debe estudiar alternativas con las personas afectadas. Los criterios internos de tramitación por parte de los responsables se desarrollan en **ES-006 — Guía de gestión de ausencias para responsables**."
+          },
+          {
+            "document_id": "ES-001",
+            "version": "1.0",
+            "section_path": [
+              "8. Excepciones"
+            ],
+            "chunk_id": "ES-001:1.0:8",
+            "text": "Pueden plantearse excepciones justificadas a las condiciones ordinarias, especialmente cuando se soliciten vacaciones con menos de 15 días naturales de antelación o periodos superiores a 15 días laborables consecutivos.\n\nLa persona empleada debe comunicar la circunstancia a su responsable directo. El responsable revisará el impacto sobre el equipo y, cuando corresponda, trasladará el caso a **Recursos Humanos de España** para su valoración.\n\n**Ninguna excepción se entiende aprobada por el mero hecho de solicitarla.** La decisión debe quedar confirmada por los canales internos establecidos.\n\nLos criterios y pasos internos de evaluación se recogen en los procedimientos correspondientes, que pueden tener un acceso restringido. Esta política no otorga acceso a dichos procedimientos."
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "8. Excepciones y escalado"
+            ],
+            "chunk_id": "ES-006:1.0:8",
+            "text": "El manager debe escalar a RR. HH. España, entre otros, los siguientes casos:\n\n- Solicitudes de vacaciones que excedan los 15 días laborables consecutivos ordinarios.\n- Situaciones que requieran interpretar permisos familiares regulados o derechos legales específicos.\n- Conflictos entre políticas o circunstancias no contempladas expresamente.\n- Solicitudes de tratamiento excepcional de plazos o condiciones.\n- Incidencias de confidencialidad o acceso indebido a datos personales.\n\nLa autorización de una excepción debe constar en el sistema corporativo correspondiente. **Policy Consultant no aprueba, registra ni modifica solicitudes.**"
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "3. Recepción y revisión de solicitudes"
+            ],
+            "chunk_id": "ES-006:1.0:3",
+            "text": "Las solicitudes de vacaciones y ausencias planificadas se reciben y tramitan a través del sistema corporativo establecido. El manager debe:\n\n1. Comprobar las fechas solicitadas y la cobertura operativa del equipo.\n2. Identificar posibles coincidencias con otras ausencias ya aprobadas.\n3. Revisar las condiciones aplicables en ES-001 o ES-002, según corresponda.\n4. Registrar la decisión y su justificación operativa en el sistema corporativo.\n5. Escalar a RR. HH. los casos que excedan su ámbito de decisión.\n\nLa mera presentación de una solicitud no implica su aprobación. El manager no debe solicitar al empleado información personal que no sea necesaria para la gestión administrativa."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 5,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-09",
+      "question": "Como responsable de RR. HH. en España, si un gasto de viaje va a superar los límites ordinarios de la política, ¿qué tiene que haber ocurrido antes de que se considere autorizado, y qué debo comprobar yo al revisar el caso?",
+      "profile_id": "spain-hr",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Debe existir una autorización excepcional previa, documentada en los canales corporativos correspondientes; no se presume concedida por el hecho de que el viaje ya esté aprobado o el gasto ya se haya realizado (ES-005 §9). Al revisar el caso, debo identificar el concepto, el importe, el motivo de la excepción, la autorización y los justificantes pertinentes, colaborando con Finanzas cuando afecte a condiciones de personal (ES-007 §8).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-007:1.0:8",
+          "document_id": "ES-007",
+          "distance": 0.2512391059852166
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-005:1.0:9",
+          "document_id": "ES-005",
+          "distance": 0.2991579832152146
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-005:1.0:3",
+          "document_id": "ES-005",
+          "distance": 0.32588924986453827
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-007:1.0:3",
+          "document_id": "ES-007",
+          "distance": 0.32933441821727527
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.33071247752234356
+        }
+      ],
+      "first_result_distance": 0.2512391059852166,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-005:1.0:9",
+          "document_id": "ES-005",
+          "found": true,
+          "rank": 1,
+          "distance": 0.2991579832152146
+        },
+        {
+          "chunk_id": "ES-007:1.0:8",
+          "document_id": "ES-007",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2512391059852166
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Para que un gasto que supere los límites ordinarios de la política de viajes (ES-005) se considere autorizado, debe haberse obtenido una **autorización excepcional previa**. Esto no se presume concedida por el mero hecho de que el viaje haya sido aprobado o de que el gasto ya se haya realizado; la excepción debe quedar documentada en los canales corporativos correspondientes. Además, la aprobación previa del responsable directo para el viaje (que requiere motivo de negocio, destino, fechas y estimación de coste) no implica autorización automática de gastos que superen los límites.\n\nComo responsable de RR. HH. al revisar el caso, según los principios de revisión aplicables (ES-007), debes:\n1. Identificar la política vigente y la regla ordinaria afectada.\n2. Confirmar que la solicitud pertenece al ámbito de España.\n3. Revisar únicamente los antecedentes administrativos necesarios.\n4. Verificar la justificación y los efectos operativos aportados, sin solicitar información sensible innecesaria.\n5. Comprobar si existe un requisito legal o contractual que deba prevalecer sobre la política interna.\n6. Determinar el nivel de autorización aplicable y documentar el resultado.\n\nAdemás, al tratarse de gastos excepcionales, la revisión debe identificar el concepto, importe, motivo de la excepción, autorización y justificantes pertinentes, teniendo en cuenta que RR. HH. colabora con Finanzas en lo relativo a condiciones de personal, pero la validación económica se tramita por el circuito corporativo correspondiente. Los límites máximos de la política no se interpretan como importes garantizados. Las decisiones deben basarse en criterios objetivos y comparables, sin utilizar características personales protegidas ni información médica como criterios de conveniencia empresarial.",
+        "citations": [
+          {
+            "document_id": "ES-007",
+            "version": "1.0",
+            "section_path": [
+              "8. Gastos y desplazamientos excepcionales"
+            ],
+            "chunk_id": "ES-007:1.0:8",
+            "text": "**Política relacionada:** ES-005.\n\nLos gastos que superen los límites ordinarios de alojamiento, manutención o transporte deben contar con la autorización excepcional previa exigida por ES-005. RR. HH. colaborará con Finanzas cuando el caso afecte a condiciones de personal, pero la validación económica se tramitará por el circuito corporativo correspondiente.\n\nLa revisión debe identificar el concepto, importe, motivo de la excepción, autorización y justificantes pertinentes. Los límites máximos de la política no se interpretarán como importes garantizados."
+          },
+          {
+            "document_id": "ES-005",
+            "version": "1.0",
+            "section_path": [
+              "9. Excepciones y superación de límites"
+            ],
+            "chunk_id": "ES-005:1.0:9",
+            "text": "Cuando existan circunstancias profesionales que hagan necesario superar un límite de transporte, alojamiento, manutención u otro concepto regulado, deberá obtenerse **autorización excepcional previa**.\n\nLa excepción debe quedar documentada en los canales corporativos correspondientes. No se presume concedida por el hecho de que el viaje haya sido aprobado o de que el gasto ya se haya realizado."
+          },
+          {
+            "document_id": "ES-005",
+            "version": "1.0",
+            "section_path": [
+              "3. Autorización y planificación del viaje"
+            ],
+            "chunk_id": "ES-005:1.0:3",
+            "text": "Todo viaje profesional requiere **aprobación previa del responsable directo**. La solicitud debe indicar el motivo de negocio, el destino, las fechas previstas y una estimación razonable del coste.\n\nLa aprobación del viaje no implica la autorización automática de gastos que superen los límites de esta política. Cuando se prevea superar alguno de ellos, debe obtenerse **autorización excepcional previa**, de acuerdo con el procedimiento interno correspondiente.\n\nSiempre que sea posible, las reservas se realizarán con antelación suficiente y mediante los canales corporativos habilitados."
+          },
+          {
+            "document_id": "ES-007",
+            "version": "1.0",
+            "section_path": [
+              "3. Principios de revisión"
+            ],
+            "chunk_id": "ES-007:1.0:3",
+            "text": "Antes de resolver una excepción, RR. HH. debe:\n\n1. Identificar la política vigente y la regla ordinaria afectada.\n2. Confirmar que la solicitud pertenece al ámbito de España.\n3. Revisar únicamente los antecedentes administrativos necesarios.\n4. Verificar la justificación y los efectos operativos aportados, sin solicitar información sensible innecesaria.\n5. Comprobar si existe un requisito legal o contractual que deba prevalecer sobre la política interna.\n6. Determinar el nivel de autorización aplicable y documentar el resultado.\n\nLas decisiones deben basarse en criterios objetivos y comparables. No se utilizarán características personales protegidas ni información médica como criterios de conveniencia empresarial."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 4,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-10",
+      "question": "Como responsable de RR. HH. en España, si un empleado solicita de forma recurrente teletrabajar un cuarto día cada semana además del régimen habitual de tres días, ¿qué tengo que comprobar antes de decidir, y una concesión puntual cambiaría su régimen habitual de forma permanente?",
+      "profile_id": "spain-hr",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No, una excepción concedida para una semana no modifica automáticamente el régimen habitual ni crea una autorización permanente (ES-003 §6). Antes de decidir sobre una solicitud que supere el régimen ordinario de tres días semanales, debo comprobar la elegibilidad del puesto, las condiciones individuales aplicables, la valoración del responsable directo y las necesidades de coordinación del equipo (ES-007 §6).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-003:1.0:7",
+          "document_id": "ES-003",
+          "distance": 0.2081931469382866
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-007:1.0:6",
+          "document_id": "ES-007",
+          "distance": 0.24848990151346184
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3133850506910639
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-007:1.0:4",
+          "document_id": "ES-007",
+          "distance": 0.31710716282043905
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.32140360347010943
+        }
+      ],
+      "first_result_distance": 0.2081931469382866,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-003:1.0:7",
+          "document_id": "ES-003",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2081931469382866
+        },
+        {
+          "chunk_id": "ES-007:1.0:6",
+          "document_id": "ES-007",
+          "found": true,
+          "rank": 1,
+          "distance": 0.24848990151346184
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Antes de decidir sobre una solicitud de un cuarto día de teletrabajo (por encima del régimen ordinario de 3 días semanales), debe tenerse en cuenta lo siguiente:\n\n- La persona interesada debe plantearlo con antelación razonable a su responsable y seguirse el procedimiento de excepción aplicable [0].\n- Al tratarse de una solicitud superior al régimen ordinario de 3 días semanales, requiere revisión excepcional: RR. HH. debe comprobar la elegibilidad del puesto, las condiciones individuales aplicables, la valoración del responsable y las necesidades de coordinación [1].\n- La concesión depende de las circunstancias y de las aprobaciones necesarias; no debe comunicarse como aprobada antes de completar el proceso correspondiente [0].\n\nEn cuanto a si una concesión puntual cambia el régimen habitual de forma permanente: no. Una excepción concedida para una semana no modifica automáticamente el régimen habitual ni crea una autorización permanente [0]. Si la solicitud es de carácter recurrente (todas las semanas), los fragmentos disponibles no especifican el procedimiento concreto para ese caso continuado más allá del tratamiento de la excepción puntual, por lo que no puedo precisar con certeza cómo se gestionaría esa recurrencia específica.",
+        "citations": [
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "6. Teletrabajo adicional y excepciones"
+            ],
+            "chunk_id": "ES-003:1.0:7",
+            "text": "En circunstancias puntuales puede estudiarse la autorización de **un cuarto día de teletrabajo u otra adaptación temporal**. La persona interesada debe plantearlo con antelación razonable a su responsable y seguir el procedimiento de excepción aplicable.\n\nLa concesión depende de las circunstancias y de las aprobaciones necesarias. Una excepción concedida para una semana no modifica automáticamente el régimen habitual ni crea una autorización permanente.\n\nLos responsables no deben comunicar una excepción como aprobada antes de que se haya completado el proceso correspondiente."
+          },
+          {
+            "document_id": "ES-007",
+            "version": "1.0",
+            "section_path": [
+              "6. Excepciones de teletrabajo y flexibilidad"
+            ],
+            "chunk_id": "ES-007:1.0:6",
+            "text": "**Políticas relacionadas:** ES-003 y GLB-002.\n\nLas solicitudes de teletrabajo superiores al régimen ordinario de **3 días semanales** requieren revisión excepcional. RR. HH. debe comprobar la elegibilidad del puesto, las condiciones individuales aplicables, la valoración del responsable y las necesidades de coordinación.\n\nPara trabajar temporalmente desde **otro país**, RR. HH. no podrá considerar suficiente la autorización del responsable. Deberá coordinar una revisión previa con las funciones competentes —por ejemplo, Legal, Seguridad de la Información y las áreas responsables de obligaciones laborales o fiscales— antes de comunicar una decisión.\n\nLa posesión de un equipo corporativo o la posibilidad técnica de conectarse remotamente no constituye autorización para trabajar desde el extranjero."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-11",
+      "question": "Si teletrabajo en España, ¿con qué tipo de equipo debo hacerlo, y puedo usar mi propio ordenador personal si tengo activada la autenticación en dos pasos?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Debo usar dispositivos corporativos y herramientas autorizadas; usar un portátil o una conexión segura no sustituye esa exigencia (ES-003 §7). Un dispositivo personal no está permitido para acceder a aplicaciones o datos corporativos, salvo que exista una excepción específica documentada y aprobada previamente por Seguridad de la Información — tener activada la autenticación en dos pasos no sustituye esa aprobación (GLB-002 §4).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "GLB-002:1.0:7",
+          "document_id": "GLB-002",
+          "distance": 0.3338498274177404
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-005:1.0:10",
+          "document_id": "ES-005",
+          "distance": 0.38793249274104924
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-003:1.0:8",
+          "document_id": "ES-003",
+          "distance": 0.38863892690671364
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-004:1.0:9",
+          "document_id": "ES-004",
+          "distance": 0.40818004461883595
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-003:1.0:11",
+          "document_id": "ES-003",
+          "distance": 0.41133941276795716
+        }
+      ],
+      "first_result_distance": 0.3338498274177404,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-003:1.0:8",
+          "document_id": "ES-003",
+          "found": true,
+          "rank": 2,
+          "distance": 0.38863892690671364
+        },
+        {
+          "chunk_id": "GLB-002:1.0:4",
+          "document_id": "GLB-002",
+          "found": false,
+          "rank": null,
+          "distance": null
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 1,
+        "all_found": false,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Según ES-003, el trabajo remoto debe realizarse con dispositivos corporativos y herramientas autorizadas, de acuerdo con GLB-002 (Information Security Policy) [2]. En cuanto a usar un ordenador personal propio con autenticación en dos pasos activada: los fragmentos no lo permiten, ya que especifican que debe usarse equipamiento corporativo y herramientas autorizadas, y además aclaran que el uso de un portátil corporativo o una conexión segura no sustituye las autorizaciones organizativas o geográficas exigidas por la política [2]. No hay información que indique que un ordenador personal con autenticación en dos pasos sea una alternativa aceptada.",
+        "citations": [
+          {
+            "document_id": "ES-003",
+            "version": "1.0",
+            "section_path": [
+              "7. Equipamiento y seguridad de la información"
+            ],
+            "chunk_id": "ES-003:1.0:8",
+            "text": "El trabajo remoto debe realizarse con dispositivos corporativos y herramientas autorizadas, de acuerdo con **GLB-002 — Information Security Policy**.\n\nEn particular, el personal debe proteger el acceso a los sistemas, evitar que terceros vean información confidencial, utilizar los mecanismos corporativos de autenticación y comunicar los incidentes por los canales establecidos.\n\nEl uso de un portátil corporativo o de una conexión segura **no sustituye** las autorizaciones organizativas o geográficas exigidas por esta política."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 1,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-12",
+      "question": "Como manager en España, un colaborador me comunica, sin haber avisado con antelación, que tiene que ausentarse por una emergencia familiar imprevista. ¿Estaba obligado a avisar con antelación en este caso, puedo exigirle que me explique el motivo médico o clínico, y qué debo hacer yo en ese momento?",
+      "profile_id": "spain-manager",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "No estaba obligado a avisar con antelación: no se exige una solicitud anticipada cuando la naturaleza de la emergencia lo impide (ES-002 §7). Tampoco puedo exigirle que explique el motivo médico o clínico: no debo pedir diagnósticos, informes clínicos ni explicaciones médicas detalladas. Como manager, debo confirmar la recepción de la comunicación y organizar la cobertura operativa razonable, informando a RR. HH. si resulta necesario para la tramitación administrativa (ES-006 §6).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-002:1.0:7",
+          "document_id": "ES-002",
+          "distance": 0.2918740759045987
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-002:1.0:3",
+          "document_id": "ES-002",
+          "distance": 0.2970968903841429
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-006:1.0:6",
+          "document_id": "ES-006",
+          "distance": 0.3032416520570712
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:5",
+          "document_id": "ES-002",
+          "distance": 0.3038714761887221
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.3554299857956168
+        }
+      ],
+      "first_result_distance": 0.2918740759045987,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "ES-002:1.0:7",
+          "document_id": "ES-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.2918740759045987
+        },
+        {
+          "chunk_id": "ES-006:1.0:6",
+          "document_id": "ES-006",
+          "found": true,
+          "rank": 2,
+          "distance": 0.3032416520570712
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "No, no estaba obligado a avisar con antelación: ante una emergencia familiar imprevista, la prioridad es que la persona comunique la situación tan pronto como sea razonablemente posible, y no se exige solicitud anticipada cuando la naturaleza de la emergencia lo impida [0]. Esto es coherente con el principio general de que, si la ausencia es imprevista, basta con informar al responsable directo tan pronto como resulte razonablemente posible [1].\n\nEn cuanto a exigir explicaciones médicas o clínicas: no debe pedir diagnósticos, informes clínicos ni explicaciones médicas detalladas; los justificantes y documentos sensibles se gestionan exclusivamente mediante los canales autorizados de RR. HH. [2].\n\nEn ese momento, como responsable directo, debe organizar la cobertura operativa sin solicitar información privada innecesaria [0], confirmar la recepción de la comunicación y organizar la cobertura operativa razonable, informando a RR. HH. si resulta necesario para la tramitación administrativa correspondiente [2]. Además, la información que comparta con el resto del equipo debe limitarse a lo necesario para organizar el trabajo, sin revelar motivos privados de la ausencia [2]. Tenga en cuenta que la existencia de la emergencia no implica automáticamente descuento de vacaciones, y su duración o condición retributiva dependerá del supuesto aplicable, lo que evaluará RR. HH. [0].",
+        "citations": [
+          {
+            "document_id": "ES-002",
+            "version": "1.0",
+            "section_path": [
+              "7. Emergencias familiares"
+            ],
+            "chunk_id": "ES-002:1.0:7",
+            "text": "Ante una emergencia familiar imprevista, la prioridad es que la persona pueda comunicar la situación tan pronto como sea razonablemente posible. No se exige una solicitud anticipada cuando la naturaleza de la emergencia lo impida.\n\nRecursos Humanos de España evaluará el tipo de permiso o ausencia aplicable y comunicará los requisitos administrativos pertinentes. El responsable directo organizará la cobertura operativa sin solicitar información privada innecesaria.\n\nLa existencia de una emergencia no implica que se descuenten días de vacaciones. Tampoco determina por sí sola una duración o condición retributiva específica, que dependerá del supuesto aplicable."
+          },
+          {
+            "document_id": "ES-002",
+            "version": "1.0",
+            "section_path": [
+              "3. Principios generales de comunicación"
+            ],
+            "chunk_id": "ES-002:1.0:3",
+            "text": "Las ausencias previsibles deben comunicarse con antelación suficiente para facilitar la organización del trabajo. Si la ausencia es imprevista, la persona empleada informará a su responsable directo tan pronto como resulte razonablemente posible, utilizando los canales corporativos establecidos.\n\nLa comunicación inicial no implica necesariamente que el permiso haya quedado autorizado ni determina por sí sola su tratamiento retributivo. Cuando sea necesario, Recursos Humanos indicará los pasos administrativos adicionales."
+          },
+          {
+            "document_id": "ES-006",
+            "version": "1.0",
+            "section_path": [
+              "6. Ausencias imprevistas y enfermedad"
+            ],
+            "chunk_id": "ES-006:1.0:6",
+            "text": "Cuando se comunique una ausencia imprevista, el manager debe confirmar la recepción de la comunicación y organizar la cobertura operativa razonable. Si resulta necesario, informará a RR. HH. para la tramitación administrativa correspondiente.\n\nNo debe pedir diagnósticos, informes clínicos ni explicaciones médicas detalladas. Los justificantes y documentos sensibles se gestionan exclusivamente mediante los canales autorizados de RR. HH.\n\nLa información compartida con el resto del equipo debe limitarse a lo necesario para organizar el trabajo, sin revelar motivos privados de la ausencia."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 3,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-13",
+      "question": "In England, if I need to request annual leave with less notice than the ordinary 14 calendar days because of a specific personal circumstance, could that still be considered, and who is responsible for deciding on an exception like that?",
+      "profile_id": "england-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Short-notice requests may be considered where circumstances justify them, although the ordinary notice period is an internal planning expectation and does not override statutory rights (EN-001 §4). England HR is responsible for interpreting the policy and assessing exceptions, together with the relevant line manager where appropriate, and any exception must be documented (EN-001 §12).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "distance": 0.2808382511138916
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.3091790860402027
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:1",
+          "document_id": "EN-001",
+          "distance": 0.32098631137690947
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:9",
+          "document_id": "EN-001",
+          "distance": 0.33479575307394427
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "distance": 0.3589867735512976
+        }
+      ],
+      "first_result_distance": 0.2808382511138916,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "EN-001:1.0:4",
+          "document_id": "EN-001",
+          "found": false,
+          "rank": null,
+          "distance": null
+        },
+        {
+          "chunk_id": "EN-001:1.0:12",
+          "document_id": "EN-001",
+          "found": false,
+          "rank": null,
+          "distance": null
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 0,
+        "all_found": false,
+        "any_found": false
+      },
+      "generated": {
+        "abstained": true,
+        "answer": "The retrieved policy fragments don't mention a standard 14 calendar days' notice requirement for annual leave, nor do they describe a process for granting exceptions to such a notice period. I don't have enough information in the provided material to answer this confidently.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": true,
+        "matches_expected": false
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-14",
+      "question": "Antes de usar una herramienta de IA ya aprobada por la empresa para generar un primer borrador de un informe que incluye datos internos de rendimiento de mi equipo en México, ¿qué debo comprobar sobre ese tipo de información, y qué debo hacer con el contenido que genere la herramienta antes de compartirlo?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "answerable",
+      "expected_answer_summary": "Debo comprobar que la información interna puede introducirse en esa herramienta concreta: no debe introducirse información interna en servicios no aprobados para ese uso, salvo que Seguridad de la Información haya autorizado expresamente esa categoría (GLB-002 §6). Antes de compartir el contenido generado, debo revisarlo en cuanto a exactitud, adecuación, confidencialidad y posible sesgo, ya que sigo siendo responsable de mis decisiones profesionales y de los resultados de mi trabajo (GLB-001 §7).",
+      "abstain_reason": null,
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "GLB-002:1.0:6",
+          "document_id": "GLB-002",
+          "distance": 0.36210616086647973
+        },
+        {
+          "rank": 1,
+          "chunk_id": "GLB-001:1.0:7",
+          "document_id": "GLB-001",
+          "distance": 0.370914355407434
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-002:1.0:8",
+          "document_id": "MX-002",
+          "distance": 0.41433287688101805
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-002:1.0:5",
+          "document_id": "GLB-002",
+          "distance": 0.43758029489752115
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-001:1.0:6",
+          "document_id": "GLB-001",
+          "distance": 0.44287965723043754
+        }
+      ],
+      "first_result_distance": 0.36210616086647973,
+      "expected_evidence_matches": [
+        {
+          "chunk_id": "GLB-001:1.0:7",
+          "document_id": "GLB-001",
+          "found": true,
+          "rank": 1,
+          "distance": 0.370914355407434
+        },
+        {
+          "chunk_id": "GLB-002:1.0:6",
+          "document_id": "GLB-002",
+          "found": true,
+          "rank": 0,
+          "distance": 0.36210616086647973
+        }
+      ],
+      "evidence_recall": {
+        "expected_count": 2,
+        "found_count": 2,
+        "all_found": true,
+        "any_found": true
+      },
+      "generated": {
+        "abstained": false,
+        "answer": "Aunque la herramienta de IA esté aprobada por la empresa, la aprobación de la herramienta no implica automáticamente la autorización para usar todas las categorías de información con ella. Debe comprobar la clasificación de los datos internos de rendimiento de su equipo: en general, la información Confidencial o Restringida no debe introducirse en servicios de IA no aprobados, y la información Interna debe evitarse en servicios no aprobados salvo autorización expresa de Seguridad de la Información; por lo tanto, debe verificar si existe un flujo de trabajo aprobado para ese tipo concreto de información antes de introducirla en la herramienta. Antes de compartir el contenido generado, debe revisarlo para verificar su exactitud, confidencialidad y el manejo adecuado del material fuente, ya que usted sigue siendo responsable de esa verificación y de sus decisiones profesionales respecto al resultado producido por la IA.",
+        "citations": [
+          {
+            "document_id": "GLB-002",
+            "version": "1.0",
+            "section_path": [
+              "6. Use of artificial intelligence tools"
+            ],
+            "chunk_id": "GLB-002:1.0:6",
+            "text": "Only AI tools and services explicitly approved by Northfern may be used for company work. Approval of one tool does not imply approval of other tools from the same provider.\n\nEmployees must not enter Confidential or Restricted information into an unapproved AI service. They must also avoid entering Internal information into unapproved services unless Information Security has expressly authorized that use. Public information may be used only in a manner consistent with the tool's approved business purpose and other applicable company policies.\n\nAI-generated output must be reviewed before use or distribution. Employees remain responsible for verifying accuracy, confidentiality and appropriate handling of any source material.\n\nFor example, an employee must not paste a customer contract into a public AI chatbot merely to obtain a summary. They must first verify the contract's classification and whether an approved tool and workflow exist."
+          },
+          {
+            "document_id": "GLB-001",
+            "version": "1.0",
+            "section_path": [
+              "7. Artificial intelligence and automated tools"
+            ],
+            "chunk_id": "GLB-001:1.0:7",
+            "text": "Employees may use AI-assisted tools for business tasks only when those tools and their intended uses have been authorized by the company.\n\nCustomer data, personal information, confidential documents, source code, and other restricted material must not be entered into public or unapproved AI services. Approval to use an AI tool does not by itself authorize the disclosure of every category of information to that tool.\n\nAI-generated outputs must be reviewed for accuracy, appropriateness, confidentiality, and potential bias before they are relied upon or shared. Employees remain responsible for their professional decisions and work products.\n\nRefer to **GLB-002 — Information Security Policy** for the applicable technical and information-handling requirements."
+          }
+        ]
+      },
+      "outcome_check": {
+        "expected_outcome": "answerable",
+        "actual_abstained": false,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 2,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-15",
+      "question": "Hace dos semanas tuve una comida de representación con un cliente en Madrid dentro de un viaje de trabajo. ¿Qué necesito para que ese gasto sea reembolsable, y ha sido ya aprobado y reembolsado mi gasto concreto?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "personal_data_unavailable",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-005:1.0:7",
+          "document_id": "ES-005",
+          "distance": 0.22469882817871267
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-005:1.0:6",
+          "document_id": "ES-005",
+          "distance": 0.3479349613189697
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-005:1.0:5",
+          "document_id": "ES-005",
+          "distance": 0.3547402024269104
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-005:1.0:8",
+          "document_id": "ES-005",
+          "distance": 0.3554326680044718
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-005:1.0:3",
+          "document_id": "ES-005",
+          "distance": 0.36492929950145747
+        }
+      ],
+      "first_result_distance": 0.22469882817871267,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "Para que el gasto de la comida de representación con el cliente sea reembolsable necesitas: (1) autorización previa específica para ese gasto de representación, (2) poder identificar su finalidad profesional, y (3) aportar la documentación justificativa correspondiente. Además, debes presentar el gasto a través del canal corporativo autorizado dentro de los 15 días naturales posteriores a la finalización del viaje, acompañado del justificante que permita identificar el concepto, importe y fecha. En cuanto a tu caso concreto, los fragmentos disponibles no indican si tu gasto en particular ha sido autorizado, revisado o reembolsado; la presentación de una solicitud no equivale a su aceptación, ya que los importes se revisan conforme a la política y a las autorizaciones concedidas. No tengo información para confirmar si tu gasto específico ya ha sido aprobado o reembolsado.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-16",
+      "question": "I'm expecting a child and will need to be away from my role in England for a while. What family-related leave categories might apply to me, and exactly how long would I personally be entitled to be off in my case?",
+      "profile_id": "england-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "personal_data_unavailable",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:9",
+          "document_id": "EN-001",
+          "distance": 0.3613568925048761
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:1",
+          "document_id": "EN-001",
+          "distance": 0.3633802316558211
+        },
+        {
+          "rank": 2,
+          "chunk_id": "EN-001:1.0:5",
+          "document_id": "EN-001",
+          "distance": 0.3662879467010498
+        },
+        {
+          "rank": 3,
+          "chunk_id": "EN-001:1.0:2",
+          "document_id": "EN-001",
+          "distance": 0.42441868782043457
+        },
+        {
+          "rank": 4,
+          "chunk_id": "EN-001:1.0:10",
+          "document_id": "EN-001",
+          "distance": 0.43357280292672995
+        }
+      ],
+      "first_result_distance": 0.3613568925048761,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "According to the policy, employees in England may have statutory rights to maternity, paternity, adoption, shared parental, parental bereavement, dependants' emergency leave, and other forms of protected time off, depending on their individual circumstances and current law. However, the fragments do not specify exact durations of entitlement for any of these leave types, as HR determines eligibility, documentation, and pay arrangements under the applicable rules on a case-by-case basis. I cannot tell you exactly how long you personally would be entitled to be off, since that depends on individual circumstances and legal rules not detailed in the available material — you should contact England HR to get your specific entitlement.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-17",
+      "question": "Does Northfern Technologies provide any life insurance benefit for employees in England?",
+      "profile_id": "england-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "no_information",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "EN-001:1.0:7",
+          "document_id": "EN-001",
+          "distance": 0.3631392337762841
+        },
+        {
+          "rank": 1,
+          "chunk_id": "EN-001:1.0:0",
+          "document_id": "EN-001",
+          "distance": 0.39720797538757324
+        },
+        {
+          "rank": 2,
+          "chunk_id": "GLB-002:1.0:1",
+          "document_id": "GLB-002",
+          "distance": 0.41256860419698826
+        },
+        {
+          "rank": 3,
+          "chunk_id": "GLB-001:1.0:5",
+          "document_id": "GLB-001",
+          "distance": 0.4192534185345824
+        },
+        {
+          "rank": 4,
+          "chunk_id": "GLB-001:1.0:12",
+          "document_id": "GLB-001",
+          "distance": 0.4336305002194335
+        }
+      ],
+      "first_result_distance": 0.3631392337762841,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "The retrieved policy fragments do not mention any life insurance benefit for employees in England. I can't confirm whether such a benefit exists based on the available material.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-18",
+      "question": "¿Northfern ofrece algún programa de préstamos personales sin intereses para empleados de México en dificultades económicas?",
+      "profile_id": "mexico-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "no_information",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "MX-001:1.1:11",
+          "document_id": "MX-001",
+          "distance": 0.3700710314469904
+        },
+        {
+          "rank": 1,
+          "chunk_id": "MX-002:1.0:0",
+          "document_id": "MX-002",
+          "distance": 0.4005723356859473
+        },
+        {
+          "rank": 2,
+          "chunk_id": "MX-001:1.1:0",
+          "document_id": "MX-001",
+          "distance": 0.40506720542907715
+        },
+        {
+          "rank": 3,
+          "chunk_id": "MX-002:1.0:1",
+          "document_id": "MX-002",
+          "distance": 0.42059701681137085
+        },
+        {
+          "rank": 4,
+          "chunk_id": "MX-001:1.1:1",
+          "document_id": "MX-001",
+          "distance": 0.42587835424050646
+        }
+      ],
+      "first_result_distance": 0.3700710314469904,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "No encuentro información en los documentos proporcionados sobre un programa de préstamos personales sin intereses para empleados de México en dificultades económicas. Las políticas disponibles tratan sobre vacaciones y permisos (incluyendo un día de asuntos personales) y sobre teletrabajo y flexibilidad, pero no mencionan ningún beneficio de préstamo. No puedo responder con confianza a esta pregunta con la información disponible.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-19",
+      "question": "Si tengo una ausencia que no encaja claramente en ninguna categoría administrativa habitual en España, ¿qué procedimiento sigue RR. HH. para decidir cómo se tramita, y cuándo consulta al área Legal?",
+      "profile_id": "spain-employee",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "access_restricted",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-002:1.0:11",
+          "document_id": "ES-002",
+          "distance": 0.31263426877958356
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-002:1.0:5",
+          "document_id": "ES-002",
+          "distance": 0.3928227190480985
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-002:1.0:9",
+          "document_id": "ES-002",
+          "distance": 0.3984068394656862
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-002:1.0:6",
+          "document_id": "ES-002",
+          "distance": 0.4042169870202833
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-001:1.0:10",
+          "document_id": "ES-001",
+          "distance": 0.40666335821151733
+        }
+      ],
+      "first_result_distance": 0.31263426877958356,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "Los fragmentos disponibles no incluyen esa información. Indican que las dudas sobre la clasificación de una ausencia y las circunstancias excepcionales deben dirigirse a Recursos Humanos de España, y que los procedimientos y decisiones internos (como los descritos en ES-006 y ES-007) son de acceso restringido y no forman parte de esta política de acceso general. No se detalla el procedimiento interno exacto que sigue RR. HH. para clasificar ausencias atípicas ni cuándo consulta al área Legal, por lo que no puedo responder con confianza a esa parte de la pregunta.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "eval-crag-20",
+      "question": "Como manager en España, si un colaborador de México me pregunta si debe usar sus vacaciones pendientes antes de una fecha límite como el 31 de marzo, igual que en España, ¿qué le respondo sobre la regla aplicable en México?",
+      "profile_id": "spain-manager",
+      "expected_outcome": "abstain",
+      "expected_answer_summary": null,
+      "abstain_reason": "access_restricted",
+      "retrieved": [
+        {
+          "rank": 0,
+          "chunk_id": "ES-006:1.0:4",
+          "document_id": "ES-006",
+          "distance": 0.3390822208474731
+        },
+        {
+          "rank": 1,
+          "chunk_id": "ES-001:1.0:7",
+          "document_id": "ES-001",
+          "distance": 0.35337517539410623
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ES-001:1.0:4",
+          "document_id": "ES-001",
+          "distance": 0.37097133744104205
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ES-001:1.0:8",
+          "document_id": "ES-001",
+          "distance": 0.37490952014923096
+        },
+        {
+          "rank": 4,
+          "chunk_id": "ES-006:1.0:8",
+          "document_id": "ES-006",
+          "distance": 0.3783494234085083
+        }
+      ],
+      "first_result_distance": 0.3390822208474731,
+      "expected_evidence_matches": [],
+      "evidence_recall": null,
+      "generated": {
+        "abstained": true,
+        "answer": "No puedo responder con certeza. Los fragmentos disponibles (ES-001 y ES-006) solo describen la política de vacaciones aplicable en España, incluido el límite del 31 de marzo del año siguiente para días pendientes, pero no contienen información sobre la normativa o política de vacaciones aplicable en México. No debe asumirse que la regla española se aplica automáticamente a México; habría que consultar la política local correspondiente o a Recursos Humanos de México.",
+        "citations": []
+      },
+      "outcome_check": {
+        "expected_outcome": "abstain",
+        "actual_abstained": true,
+        "matches_expected": true
+      },
+      "citation_structural_check": {
+        "citations_checked": 0,
+        "citations_from_retrieved": true,
+        "invalid_citation_chunk_ids": []
+      },
+      "manual_review": {
+        "factual_correctness": null,
+        "evidence_sufficiency": null,
+        "citation_support": null,
+        "notes": ""
+      }
+    }
+  ]
+}

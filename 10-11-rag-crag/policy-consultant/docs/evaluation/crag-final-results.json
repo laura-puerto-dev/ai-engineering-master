@@ -269,10 +269,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Equivalent in substance to RAG's answer for this question; both citations real and supportive."
       }
     },
     {
@@ -437,10 +437,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Equivalent in substance to RAG's answer; both citations real and supportive."
       }
     },
     {
@@ -595,10 +595,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Matches the expected answer; the single citation supports the text."
       }
     },
     {
@@ -751,10 +751,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Matches the expected answer; the single citation supports the text."
       }
     },
     {
@@ -907,10 +907,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Matches the expected answer; the single citation supports the text."
       }
     },
     {
@@ -1064,10 +1064,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Matches the expected answer almost verbatim; the single citation supports the text."
       }
     },
     {
@@ -1222,10 +1222,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Covers the expected aspect; the single citation supports the text."
       }
     },
     {
@@ -1434,10 +1434,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Both expected aspects covered thoroughly; citations all real and supportive."
       }
     },
     {
@@ -1638,10 +1638,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Both expected aspects covered; every citation is a real chunk that supports the specific claim it is attached to."
       }
     },
     {
@@ -1830,10 +1830,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Both required aspects covered confidently. The confident 'no' (a one-week grant never modifies the regular regime) is consistent with ES-003 S7's generalized wording, so this is not an overclaim, just a more confident framing than RAG's hedge for the same question."
       }
     },
     {
@@ -2012,10 +2012,10 @@
         "all_found_ever_retrieved": false
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "incomplete",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "supported",
+        "notes": "Same gap as RAG: GLB-002:1.0:4 was never among the top-10 reranked candidates for this query either, so the documented-Information-Security-exception aspect is missing from the answer. The grader marked route=sufficient with missing_aspects=[] on attempt 1, based only on the (incomplete) pool it actually had - a case of premature sufficiency driven by a retrieval-coverage gap, not a reasoning error given that input. Because 'sufficient' was reached on the first attempt, the correction loop never triggered a reformulation that might have surfaced GLB-002:1.0:4. The cited ES-004:1.0:10 is real and does support the 'no personal devices' conclusion via a different, also-legitimate chunk than the one the dataset anticipated."
       }
     },
     {
@@ -2204,10 +2204,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "All three expected aspects covered accurately; citations all real and each supports the claim it backs."
       }
     },
     {
@@ -2560,10 +2560,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Both expected aspects covered fully and accurately after reformulation. EN-001:1.0:12 (the chunk that answers 'who decides') was only retrieved on attempt 2, following attempt 1's reformulation driven by the grader's identified missing aspect - a genuine, unforced case of the correction loop recovering evidence that RAG's top_k=5 retrieval never found for the same question."
       }
     },
     {
@@ -2742,10 +2742,10 @@
         "all_found_ever_retrieved": true
       },
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "supported",
+        "notes": "Both expected aspects covered fully, including 'potential bias' and 'appropriateness' (idoneidad/sesgos) from GLB-001 S7 - more complete than RAG's answer to the identical question, despite both systems citing the same two chunks."
       }
     },
     {
@@ -3051,10 +3051,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains (route stayed ambiguous across all 3 attempts, matching the partially_answerable contract). The response is crag.abstain_node's fixed fallback string - by design the generator is never called on abstention, so no explanation of the general reimbursement rule is given even though the right evidence (ES-005:1.0:7/:1.0:11) had already been kept at the point of abstaining. Correct outcome, markedly less informative than RAG's abstention for the same question."
       }
     },
     {
@@ -3357,10 +3357,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains (ambiguous across all 3 attempts). Same fixed fallback-string limitation as eval-crag-15: EN-001:1.0:9 (the general-rule chunk) was already kept when the graph abstained, but abstain_node never explains it. Correct outcome, less informative than RAG's abstention for the same question."
       }
     },
     {
@@ -3637,10 +3637,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains (insufficient x3, nothing kept). The fallback message is appropriate here since there is no general rule to explain for a genuine no_information case - no practical informativeness gap versus RAG for this category."
       }
     },
     {
@@ -3919,10 +3919,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "insufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains (insufficient x3, nothing kept). The fallback message is appropriate here since there is no general rule to explain for a genuine no_information case - no practical informativeness gap versus RAG for this category."
       }
     },
     {
@@ -4227,10 +4227,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains. The fixed fallback message gives no explanation of why, unlike RAG's answer, which safely names the access-restricted documents using only already-visible text. Correct outcome, less transparent to the user."
       }
     },
     {
@@ -4527,10 +4527,10 @@
       "expected_evidence_matches": [],
       "evidence_coverage_summary": null,
       "manual_review": {
-        "factual_correctness": null,
-        "evidence_sufficiency": null,
-        "citation_support": null,
-        "notes": ""
+        "factual_correctness": "correct",
+        "evidence_sufficiency": "sufficient",
+        "citation_support": "not_applicable",
+        "notes": "Correctly abstains, safely avoiding the Spain-rule-by-analogy trap simply by not answering. The fixed fallback message gives no explanation, unlike RAG's answer, which explicitly warns against assuming the Spanish rule applies to Mexico."
       }
     }
   ]

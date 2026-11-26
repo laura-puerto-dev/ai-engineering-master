@@ -33,7 +33,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Covers the only expected aspect (15 calendar days' notice) accurately; both citations (ES-001:1.0:4, ES-001:1.0:8) are real and support the text.
 
 ---
 
@@ -52,7 +52,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered accurately; citations match the evidence actually used.
 
 ---
 
@@ -70,7 +70,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer summary closely; the single citation supports the text.
 
 ---
 
@@ -88,7 +88,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer; the single citation supports the text.
 
 ---
 
@@ -106,7 +106,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer; the single citation supports the text.
 
 ---
 
@@ -124,7 +124,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer almost verbatim; the single citation supports the text.
 
 ---
 
@@ -142,7 +142,7 @@ These automatic metrics describe retrieval coverage, abstention behavior, and ci
 **Evidence recall:** 1/1 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Covers the expected aspect; the single citation supports the text.
 
 ---
 
@@ -175,7 +175,7 @@ Si la solicitud supera el límite ordinario de 15 días laborables consecutivos,
 **Evidence recall:** 2/2 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered thoroughly; the extra procedural detail (escalation criteria) is consistent with the cited ES-001/ES-006 chunks, not fabricated.
 
 ---
 
@@ -206,7 +206,7 @@ Además, al tratarse de gastos excepcionales, la revisión debe identificar el c
 **Evidence recall:** 2/2 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered; every citation is a real chunk that supports the specific claim it is attached to.
 
 ---
 
@@ -231,7 +231,7 @@ En cuanto a si una concesión puntual cambia el régimen habitual de forma perma
 **Evidence recall:** 2/2 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both required aspects covered. The extra hedge about a weekly-recurring request is an honest acknowledgment that the retrieved text does not literally address recurrence, not a missing required aspect - does not affect correctness.
 
 ---
 
@@ -249,7 +249,7 @@ En cuanto a si una concesión puntual cambia el régimen habitual de forma perma
 **Evidence recall:** 1/2 (all_found=False)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[incomplete] evidence_sufficiency=[insufficient] citation_support=[supported] notes: Covers 'teletrabajo requires corporate devices' but omits the documented, Information-Security-approved exception for personal devices (GLB-002 S4, chunk GLB-002:1.0:4) that the expected answer requires. That chunk never appeared among RAG's top-5 retrieved candidates for this query, so the generator never had access to it. The cited ES-003:1.0:8 text does support the conclusion stated ('not allowed'), it just does not contain the exception nuance - incomplete, not incorrect.
 
 ---
 
@@ -273,7 +273,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** 2/2 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: All three expected aspects covered accurately; citations (ES-002:1.0:7, ES-002:1.0:3, ES-006:1.0:6) are all real and each supports the claim it backs.
 
 ---
 
@@ -290,7 +290,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** 0/2 (all_found=False)
 **Outcome check:** matches_expected=False
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[incorrect] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: False abstention. top_k=5 never retrieved EN-001:1.0:4 or EN-001:1.0:12 - the two chunks that answer this question - so the generator had nothing to answer from. Given what it actually saw, declining was the honest choice, but the expected_outcome is answerable: this is a retrieval-coverage failure of the RAG baseline, not a sound abstention.
 
 ---
 
@@ -309,7 +309,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** 2/2 (all_found=True)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[incomplete] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Covers the 'Internal information' aspect fully. For the second aspect it cites the right chunk (GLB-001:1.0:7) but the generated text only reproduces GLB-002 S6's narrower review criteria (accuracy, confidentiality, appropriate handling of source material) and drops 'potential bias' and 'appropriateness', which are only in GLB-001 S7 - incomplete despite citing the chunk that contains them.
 
 ---
 
@@ -326,7 +326,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains on the personal reimbursement status while still explaining the general reimbursement requirements (prior authorization, professional purpose, documentation) - a genuinely informative abstention, matching the partially_answerable contract. No citations attached to a free-text explanation of already-public rules.
 
 ---
 
@@ -343,7 +343,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains on the employee's personal entitlement/duration while explaining which general statutory leave categories exist and that HR determines eligibility case by case - informative and accurate.
 
 ---
 
@@ -360,7 +360,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly reports the topic is absent from the retrieved material; nothing to cite for a genuine no_information case.
 
 ---
 
@@ -377,7 +377,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly reports the topic is absent from the retrieved material; nothing to cite for a genuine no_information case.
 
 ---
 
@@ -394,7 +394,7 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains and explains, grounded in the visible ES-001 S8 / ES-002 S11 text, that the internal procedure lives in access-restricted documents (ES-006/ES-007) without disclosing their content - informative and safe, no leak.
 
 ---
 
@@ -411,6 +411,6 @@ En ese momento, como responsable directo, debe organizar la cobertura operativa 
 **Evidence recall:** n/a (no expected evidence for this question)
 **Outcome check:** matches_expected=True
 
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains and explicitly warns against applying Spain's 31-March rule to Mexico by analogy, recommending Mexico's own policy/HR instead - exactly the failure mode this question was designed to catch, and the answer avoids it.
 
 ---

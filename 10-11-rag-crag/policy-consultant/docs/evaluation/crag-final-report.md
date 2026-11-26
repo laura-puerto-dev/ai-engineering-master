@@ -165,7 +165,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - ES-001:1.0:4: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Equivalent in substance to RAG's answer for this question; both citations real and supportive.
 
 ---
 
@@ -209,7 +209,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - ES-006:1.0:5: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Equivalent in substance to RAG's answer; both citations real and supportive.
 
 ---
 
@@ -252,7 +252,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - ES-002:1.0:5: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer; the single citation supports the text.
 
 ---
 
@@ -295,7 +295,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - ES-005:1.0:8: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer; the single citation supports the text.
 
 ---
 
@@ -338,7 +338,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - MX-001:1.1:8: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer; the single citation supports the text.
 
 ---
 
@@ -381,7 +381,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - EN-001:1.0:5: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Matches the expected answer almost verbatim; the single citation supports the text.
 
 ---
 
@@ -424,7 +424,7 @@ These automatic metrics describe technical execution, outcome (answered vs. abst
 - GLB-001:1.0:6: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Covers the expected aspect; the single citation supports the text.
 
 ---
 
@@ -483,7 +483,7 @@ Si la solicitud supera el límite ordinario de días consecutivos o requiere una
 - ES-006:1.0:3: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered thoroughly; citations all real and supportive.
 
 ---
 
@@ -537,7 +537,7 @@ Como responsable de RR. HH. al revisar el caso, debes:
 - ES-007:1.0:8: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered; every citation is a real chunk that supports the specific claim it is attached to.
 
 ---
 
@@ -583,7 +583,7 @@ Como responsable de RR. HH. al revisar el caso, debes:
 - ES-007:1.0:6: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both required aspects covered confidently. The confident 'no' (a one-week grant never modifies the regular regime) is consistent with ES-003 S7's generalized wording, so this is not an overclaim, just a more confident framing than RAG's hedge for the same question.
 
 ---
 
@@ -628,7 +628,7 @@ Como responsable de RR. HH. al revisar el caso, debes:
 - GLB-002:1.0:4: ever_retrieved=False in_final_context=False
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[incomplete] evidence_sufficiency=[insufficient] citation_support=[supported] notes: Same gap as RAG: GLB-002:1.0:4 was never among the top-10 reranked candidates for this query either, so the documented-Information-Security-exception aspect is missing from the answer. The grader marked route=sufficient with missing_aspects=[] on attempt 1, based only on the (incomplete) pool it actually had - a case of premature sufficiency driven by a retrieval-coverage gap, not a reasoning error given that input. Because 'sufficient' was reached on the first attempt, the correction loop never triggered a reformulation that might have surfaced GLB-002:1.0:4. The cited ES-004:1.0:10 is real and does support the 'no personal devices' conclusion via a different, also-legitimate chunk than the one the dataset anticipated.
 
 ---
 
@@ -678,7 +678,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - ES-006:1.0:6: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: All three expected aspects covered accurately; citations all real and each supports the claim it backs.
 
 ---
 
@@ -765,7 +765,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - EN-001:1.0:12: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered fully and accurately after reformulation. EN-001:1.0:12 (the chunk that answers 'who decides') was only retrieved on attempt 2, following attempt 1's reformulation driven by the grader's identified missing aspect - a genuine, unforced case of the correction loop recovering evidence that RAG's top_k=5 retrieval never found for the same question.
 
 ---
 
@@ -810,7 +810,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - GLB-002:1.0:6: ever_retrieved=True in_final_context=True
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[supported] notes: Both expected aspects covered fully, including 'potential bias' and 'appropriateness' (idoneidad/sesgos) from GLB-001 S7 - more complete than RAG's answer to the identical question, despite both systems citing the same two chunks.
 
 ---
 
@@ -891,7 +891,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: ambiguous  ·  effective route: ambiguous  ·  rationale: 'Los fragmentos cubren bien los requisitos generales para que un gasto de representación sea reembolsable, pero no proporcionan ni pueden proporcionar el estado real de aprobación/reembolso del gasto personal concreto, que la política indica que debe consultarse en otro sistema.'
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly abstains (route stayed ambiguous across all 3 attempts, matching the partially_answerable contract). The response is crag.abstain_node's fixed fallback string - by design the generator is never called on abstention, so no explanation of the general reimbursement rule is given even though the right evidence (ES-005:1.0:7/:1.0:11) had already been kept at the point of abstaining. Correct outcome, markedly less informative than RAG's abstention for the same question.
 
 ---
 
@@ -972,7 +972,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: ambiguous  ·  effective route: ambiguous  ·  rationale: "Fragment 0 identifies the applicable leave categories and notes HR determines eligibility and duration, but it does not state the actual length of entitlement, leaving the key 'how long' aspect unanswered."
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly abstains (ambiguous across all 3 attempts). Same fixed fallback-string limitation as eval-crag-15: EN-001:1.0:9 (the general-rule chunk) was already kept when the graph abstained, but abstain_node never explains it. Correct outcome, less informative than RAG's abstention for the same question.
 
 ---
 
@@ -1053,7 +1053,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: insufficient  ·  effective route: insufficient  ·  rationale: 'The retrieved fragments cover annual leave, personal days, code of conduct, and information security policies, none of which mention life insurance benefits.'
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly abstains (insufficient x3, nothing kept). The fallback message is appropriate here since there is no general rule to explain for a genuine no_information case - no practical informativeness gap versus RAG for this category.
 
 ---
 
@@ -1134,7 +1134,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: insufficient  ·  effective route: insufficient  ·  rationale: 'Ninguno de los fragmentos recuperados trata sobre préstamos personales o asistencia financiera; tratan de teletrabajo, vacaciones, días de asuntos personales y protección de datos, sin relación con la pregunta.'
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[insufficient] citation_support=[not_applicable] notes: Correctly abstains (insufficient x3, nothing kept). The fallback message is appropriate here since there is no general rule to explain for a genuine no_information case - no practical informativeness gap versus RAG for this category.
 
 ---
 
@@ -1215,7 +1215,7 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: ambiguous  ·  effective route: ambiguous  ·  rationale: 'Los fragmentos indican que las dudas de clasificación se dirigen a RR.HH. y que el procedimiento detallado está en documentos restringidos (ES-007), pero no describen el procedimiento interno real ni mencionan en ningún momento la intervención del área Legal, por lo que falta información clave.'
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains. The fixed fallback message gives no explanation of why, unlike RAG's answer, which safely names the access-restricted documents using only already-visible text. Correct outcome, less transparent to the user.
 
 ---
 
@@ -1296,6 +1296,6 @@ Como manager, en ese momento debe: confirmar la recepción de la comunicación y
 - grader route: insufficient  ·  effective route: insufficient  ·  rationale: 'Los fragmentos solo confirman la regla española y que México tiene una política distinta, pero ninguno expone el contenido real de la política mexicana sobre fecha límite de vacaciones pendientes.'
 
 **Outcome check:** matches_expected=True
-**Manual review:** factual_correctness=[ ] evidence_sufficiency=[ ] citation_support=[ ] notes: ___
+**Manual review:** factual_correctness=[correct] evidence_sufficiency=[sufficient] citation_support=[not_applicable] notes: Correctly abstains, safely avoiding the Spain-rule-by-analogy trap simply by not answering. The fixed fallback message gives no explanation, unlike RAG's answer, which explicitly warns against assuming the Spanish rule applies to Mexico.
 
 ---

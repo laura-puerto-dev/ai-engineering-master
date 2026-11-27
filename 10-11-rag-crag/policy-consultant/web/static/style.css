@@ -50,14 +50,35 @@ body {
   margin: 0 auto 0.75rem;
 }
 
-.mode-badge {
-  display: inline-block;
-  font-size: 0.8rem;
-  color: var(--color-muted);
+.mode-fieldset {
+  margin: 0.9rem 0 0;
+  padding: 0.65rem 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.mode-fieldset legend {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0 0.3rem;
+}
+
+.mode-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 400;
+  margin: 0 1.25rem 0 0;
+}
+
+.mode-option input[type="radio"] {
   margin: 0;
+}
+
+.mode-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
 }
 
 .page-main {
@@ -194,6 +215,45 @@ button:focus-visible {
 }
 
 .citation-text {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.crag-trace {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.4rem;
+}
+
+.crag-trace summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.crag-trace-result {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0;
+}
+
+.crag-attempt {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.crag-attempt-meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+}
+
+.crag-attempt-query {
   font-size: 0.85rem;
   color: var(--color-muted);
   white-space: pre-wrap;

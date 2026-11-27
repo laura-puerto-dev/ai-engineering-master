@@ -4,11 +4,15 @@ Run locally with:
 
     uv run uvicorn web.app:app --reload
 
-Exposes the existing RAG pipeline (policy_consultant.rag.answer_question)
-over HTTP:
+Exposes both pipelines this project implements over the same endpoint:
 
 - GET /api/profiles lists the fixed demo profiles.
-- POST /api/ask answers a question under a profile's country/role.
+- POST /api/ask answers a question under a profile's country/role,
+  through either policy_consultant.rag.answer_question ("rag", the
+  default) or policy_consultant.crag.answer_question_crag ("crag"),
+  selected by the request's `mode` field (Fase 5A). Neither pipeline's
+  own logic, prompts, models, or thresholds are touched here — this
+  module only wires the existing, frozen implementations to HTTP.
 
 There are no sessions, cookies, or authentication: profile_id is
 resolved to (country, role) entirely server-side, from the fixed
@@ -24,10 +28,11 @@ from __future__ import annotations
 
 import logging
 import os
+import threading
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import TypedDict
+from typing import Any, Literal, TypedDict, cast
 
 import psycopg
 from dotenv import load_dotenv
@@ -37,12 +42,16 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 from policy_consultant.corpus_manifest import load_access_model
+from policy_consultant.crag import answer_question_crag
 from policy_consultant.db import admin_connection, app_connection
 from policy_consultant.embedding import EmbeddingModel, LocalBgeM3EmbeddingModel
 from policy_consultant.generation import AnswerGenerator, ClaudeAnswerGenerator
-from policy_consultant.models import AccessModel, Citation
+from policy_consultant.grade_evidence import ClaudeEvidenceGrader, EvidenceGrader
+from policy_consultant.models import AccessModel, Citation, CragRoute
 from policy_consultant.persistence import verify_embedding_model_compatibility
 from policy_consultant.rag import answer_question
+from policy_consultant.reformulate import ClaudeQueryReformulator, QueryReformulator
+from policy_consultant.reranking import LocalQwen3RerankerModel, Reranker
 
 # admin_connection/app_connection read DATABASE_HOST/POSTGRES_DB/etc.
 # straight from os.environ and never load .env themselves (see
@@ -93,6 +102,11 @@ class AskRequest(BaseModel):
 
     profile_id: str = Field(min_length=1)
     question: str = Field(min_length=1)
+    # Optional and defaulting to "rag" so a client that never sends this
+    # field (every client before Fase 5A) gets exactly today's behavior.
+    # An unrecognized value is rejected by pydantic's Literal validation
+    # as a 422, before this module's own code ever runs.
+    mode: Literal["rag", "crag"] = "rag"
 
 
 class CitationOut(BaseModel):
@@ -103,10 +117,89 @@ class CitationOut(BaseModel):
     text: str
 
 
+class CragAttemptSummaryOut(BaseModel):
+    """One retrieve→rerank→grade attempt, reduced to exactly what the
+    demo UI shows (attempt number, the query actually searched for, and
+    the *effective* route already resolved by crag._build_graph's grade
+    step — never the raw grader route if those ever diverged).
+    Deliberately omits candidates/coverage/kept_chunk_ids:
+    CragAttemptTrace's richer detail (policy_consultant.models) is for
+    evaluation tracing, not a public demo response.
+    """
+
+    attempt: int
+    query: str
+    route: CragRoute
+
+
+class CragTraceOut(BaseModel):
+    retrieval_count: int
+    attempts: list[CragAttemptSummaryOut]
+
+
 class AskResponse(BaseModel):
     answer: str
     abstained: bool
     citations: list[CitationOut]
+    mode: Literal["rag", "crag"]
+    # None for mode="rag"; always set for mode="crag".
+    crag_trace: CragTraceOut | None = None
+
+
+class CragComponents(TypedDict):
+    """The three pieces CRAG needs beyond what RAG already loads at
+    startup (embedding_model and generator are shared, unmodified, from
+    app.state — see ask() below). Bundled as one TypedDict so
+    _get_crag_components either stores all three together or none at
+    all; there is no state in which only some of them are cached.
+    """
+
+    reranker: Reranker
+    grader: EvidenceGrader
+    reformulator: QueryReformulator
+
+
+_crag_components_lock = threading.Lock()
+
+
+def _get_crag_components(state: Any) -> CragComponents:
+    """Builds and caches the Reranker/EvidenceGrader/QueryReformulator
+    bundle on first use, never at startup — a process that only ever
+    serves mode="rag" requests never loads the local reranker's weights
+    or constructs a grader/reformulator at all.
+
+    The lock only guards construction itself: once `state.crag_components`
+    is set, every later call returns it from the fast, lock-free path
+    above, so concurrent CRAG requests are never serialized against each
+    other after the first successful build. If construction raises
+    partway through (e.g. the reranker loads but the Anthropic client
+    construction fails), `state.crag_components` is never assigned — the
+    next call retries from scratch rather than reusing a partially-built
+    bundle.
+
+    All three constructors are called with their defaults, which *are*
+    the frozen CRAG configuration verified in Fase 3C/4B (model=
+    "claude-sonnet-5", effort="medium" for the grader/reformulator) —
+    the exact same defaults scripts/evaluation/run_crag_evaluation.py
+    relies on. device for the reranker follows the same RERANKER_DEVICE
+    convention already used by every other script in this project.
+    """
+    existing: CragComponents | None = getattr(state, "crag_components", None)
+    if existing is not None:
+        return existing
+
+    with _crag_components_lock:
+        existing = cast("CragComponents | None", getattr(state, "crag_components", None))
+        if existing is not None:
+            return existing
+
+        components = CragComponents(
+            reranker=LocalQwen3RerankerModel(device=os.environ.get("RERANKER_DEVICE", "cpu")),
+            grader=ClaudeEvidenceGrader(),
+            reformulator=ClaudeQueryReformulator(),
+        )
+        state.crag_components = components
+        return components
 
 
 @asynccontextmanager
@@ -165,30 +258,73 @@ def ask(body: AskRequest, request: Request) -> AskResponse:
     generator: AnswerGenerator = request.app.state.generator
 
     try:
-        query_embedding = embedding_model.embed_batch([body.question])[0]
+        crag_trace: CragTraceOut | None = None
 
-        with app_connection(
-            country=profile["country"], role=profile["role"], access_model=access_model
-        ) as conn:
-            result = answer_question(
-                conn,
-                body.question,
-                query_embedding=query_embedding,
-                generator=generator,
-                top_k=TOP_K,
+        if body.mode == "crag":
+            components = _get_crag_components(request.app.state)
+
+            with app_connection(
+                country=profile["country"], role=profile["role"], access_model=access_model
+            ) as conn:
+                crag_result = answer_question_crag(
+                    conn,
+                    body.question,
+                    embedding_model=embedding_model,
+                    reranker=components["reranker"],
+                    grader=components["grader"],
+                    reformulator=components["reformulator"],
+                    generator=generator,
+                )
+                citations = _load_citation_text(conn, crag_result["answer"]["citations"])
+
+            answer_text: str = crag_result["answer"]["answer"]
+            abstained: bool = crag_result["answer"]["abstained"]
+            crag_trace = CragTraceOut(
+                retrieval_count=crag_result["retrieval_count"],
+                attempts=[
+                    CragAttemptSummaryOut(
+                        attempt=attempt["attempt"], query=attempt["query"], route=attempt["route"]
+                    )
+                    for attempt in crag_result["attempts"]
+                ],
             )
-            citations = _load_citation_text(conn, result["citations"])
+        else:
+            query_embedding = embedding_model.embed_batch([body.question])[0]
+
+            with app_connection(
+                country=profile["country"], role=profile["role"], access_model=access_model
+            ) as conn:
+                result = answer_question(
+                    conn,
+                    body.question,
+                    query_embedding=query_embedding,
+                    generator=generator,
+                    top_k=TOP_K,
+                )
+                citations = _load_citation_text(conn, result["citations"])
+
+            answer_text = result["answer"]
+            abstained = result["abstained"]
     except Exception as exc:
-        # A genuine lack of evidence never reaches this branch:
-        # answer_question() returns a normal abstained=True result for
-        # that, handled below like any other answer. Only an actual
-        # failure (provider error, database error, ...) lands here —
-        # the real exception is logged for debugging, but the client
-        # only ever sees a generic message.
-        logger.exception("Failed to answer question for profile_id=%r", body.profile_id)
+        # A genuine lack of evidence never reaches this branch: both
+        # answer_question() and answer_question_crag() return a normal
+        # abstained=True result for that, handled below like any other
+        # answer. Only an actual failure (provider error, database
+        # error, evidence-grading/reformulation error, ...) lands
+        # here — the real exception is logged for debugging, but the
+        # client only ever sees a generic message, regardless of mode.
+        logger.exception(
+            "Failed to answer question for profile_id=%r mode=%r", body.profile_id, body.mode
+        )
         raise HTTPException(status_code=502, detail="Failed to generate an answer") from exc
 
-    return AskResponse(answer=result["answer"], abstained=result["abstained"], citations=citations)
+    return AskResponse(
+        answer=answer_text,
+        abstained=abstained,
+        citations=citations,
+        mode=body.mode,
+        crag_trace=crag_trace,
+    )
 
 
 def _load_citation_text(conn: psycopg.Connection, citations: list[Citation]) -> list[CitationOut]:

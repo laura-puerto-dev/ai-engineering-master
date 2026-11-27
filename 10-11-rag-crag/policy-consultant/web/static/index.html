@@ -16,7 +16,6 @@
           questions with grounded, citable answers from its internal policy
           documents.
         </p>
-        <p class="mode-badge">Mode: RAG (Corrective RAG not implemented yet)</p>
       </header>
 
       <main class="page-main">
@@ -30,6 +29,21 @@
           <select id="profile-select" disabled>
             <option value="">Loading profiles…</option>
           </select>
+
+          <fieldset class="mode-fieldset">
+            <legend>Answering mode</legend>
+            <label class="mode-option">
+              <input type="radio" name="mode" value="rag" id="mode-rag" checked />
+              RAG
+            </label>
+            <label class="mode-option">
+              <input type="radio" name="mode" value="crag" id="mode-crag" />
+              CRAG (corrective)
+            </label>
+            <p id="mode-hint" class="mode-hint" hidden>
+              Corrective retrieval may take longer, especially on the first request.
+            </p>
+          </fieldset>
         </section>
 
         <section class="chat-panel" aria-labelledby="chat-heading">

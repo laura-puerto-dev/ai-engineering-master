@@ -12,6 +12,8 @@
  */
 
 const profileSelect = document.getElementById("profile-select");
+const modeRadios = document.querySelectorAll('input[name="mode"]');
+const modeHint = document.getElementById("mode-hint");
 const chatLog = document.getElementById("chat-log");
 const statusMessage = document.getElementById("status-message");
 const askForm = document.getElementById("ask-form");
@@ -20,11 +22,11 @@ const sendButton = document.getElementById("send-button");
 
 let isSubmitting = false;
 
-// Bumped every time the profile changes, so an answer from a request
-// that was still in flight under the previous profile can be told
-// apart from the current one and silently dropped instead of being
-// appended to a chat log that has already moved on to a different RLS
-// context.
+// Bumped every time the profile or the answering mode changes, so an
+// answer from a request that was still in flight under the previous
+// profile/mode can be told apart from the current one and silently
+// dropped instead of being appended to a chat log that has already
+// moved on to a different RLS context or pipeline.
 let activeGeneration = 0;
 
 function setStatus(text, isError) {
@@ -82,7 +84,60 @@ function appendCitations(container, citations) {
   container.appendChild(details);
 }
 
-function appendAssistantMessage(answer, modifierClass, label, citations) {
+/** cragTrace is null for mode="rag" responses — nothing is appended in
+ * that case. All text (the reformulated queries in particular) is set
+ * via createElement/textContent, same as every other piece of
+ * model-or-document-sourced text in this file: never innerHTML. */
+function appendCragTrace(container, cragTrace, abstained) {
+  if (!cragTrace) {
+    return;
+  }
+
+  const details = createElement("details", "crag-trace");
+  const retrievalWord = cragTrace.retrieval_count === 1 ? "retrieval" : "retrievals";
+  details.appendChild(
+    createElement(
+      "summary",
+      null,
+      "Corrective RAG trace (" + cragTrace.retrieval_count + " " + retrievalWord + ")"
+    )
+  );
+  details.appendChild(
+    createElement(
+      "p",
+      "crag-trace-result",
+      "Final result: " + (abstained ? "abstained" : "answered")
+    )
+  );
+
+  cragTrace.attempts.forEach((attempt) => {
+    const item = createElement("div", "crag-attempt");
+    item.appendChild(
+      createElement(
+        "p",
+        "crag-attempt-meta",
+        "Attempt " + attempt.attempt + " — route: " + attempt.route
+      )
+    );
+    item.appendChild(createElement("p", "crag-attempt-query", attempt.query));
+    details.appendChild(item);
+  });
+
+  container.appendChild(details);
+}
+
+/** Identifies which pipeline actually produced this answer (from the
+ * API's own `mode`, never re-derived from the UI's current radio
+ * selection, which may have already moved on to the other mode by the
+ * time the response arrives) alongside whether it abstained. */
+function assistantLabel(mode, abstained) {
+  const modeLabel = mode === "crag" ? "CRAG" : "RAG";
+  return abstained
+    ? "Policy Consultant — " + modeLabel + " — no answer found"
+    : "Policy Consultant — " + modeLabel;
+}
+
+function appendAssistantMessage(answer, modifierClass, label, citations, cragTrace, abstained) {
   const bubble = createElement("div", "message message-assistant");
   if (modifierClass) {
     bubble.classList.add(modifierClass);
@@ -90,6 +145,7 @@ function appendAssistantMessage(answer, modifierClass, label, citations) {
   bubble.appendChild(createElement("p", "message-label", label));
   bubble.appendChild(createElement("p", "message-text", answer));
   appendCitations(bubble, citations);
+  appendCragTrace(bubble, cragTrace, abstained);
   chatLog.appendChild(bubble);
   chatLog.scrollTop = chatLog.scrollHeight;
 }
@@ -133,11 +189,20 @@ async function extractErrorMessage(response) {
   return "Something went wrong while generating an answer. Please try again.";
 }
 
-async function askQuestion(profileId, question) {
+function getSelectedMode() {
+  const checked = document.querySelector('input[name="mode"]:checked');
+  return checked ? checked.value : "rag";
+}
+
+function updateModeHint() {
+  modeHint.hidden = getSelectedMode() !== "crag";
+}
+
+async function askQuestion(profileId, question, mode) {
   const response = await fetch("/api/ask", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ profile_id: profileId, question: question }),
+    body: JSON.stringify({ profile_id: profileId, question: question, mode: mode }),
   });
 
   if (!response.ok) {
@@ -159,6 +224,7 @@ async function handleSubmit(event) {
 
   const profileId = profileSelect.value;
   const question = questionInput.value.trim();
+  const mode = getSelectedMode();
   if (!profileId || !question) {
     setStatus("Choose a profile and enter a question.", true);
     return;
@@ -174,28 +240,31 @@ async function handleSubmit(event) {
   questionInput.value = "";
 
   try {
-    const result = await askQuestion(profileId, question);
+    const result = await askQuestion(profileId, question, mode);
     if (generationAtSubmit !== activeGeneration) {
-      // The profile changed while this request was in flight; the
-      // chat has already been cleared for the new profile, so this
-      // now-stale answer must never appear in it.
+      // The profile or mode changed while this request was in flight
+      // (see handleProfileChange/handleModeChange); this now-stale
+      // answer must never appear in a chat that has moved on.
       return;
     }
-    if (result.abstained) {
-      appendAssistantMessage(result.answer, "abstained", "Policy Consultant — no answer found", result.citations);
-    } else {
-      appendAssistantMessage(result.answer, null, "Policy Consultant", result.citations);
-    }
+    appendAssistantMessage(
+      result.answer,
+      result.abstained ? "abstained" : null,
+      assistantLabel(result.mode, result.abstained),
+      result.citations,
+      result.crag_trace,
+      result.abstained
+    );
     setStatus("", false);
   } catch (error) {
     if (generationAtSubmit !== activeGeneration) {
       return;
     }
-    appendAssistantMessage(error.message, "error", "Policy Consultant — error", null);
+    appendAssistantMessage(error.message, "error", "Policy Consultant — error", null, null, false);
     setStatus("The last question could not be answered.", true);
   } finally {
     // Only resets the UI if nothing has reset it already (see
-    // handleProfileChange below) — otherwise a stale request finishing
+    // resetInFlightRequest below) — otherwise a stale request finishing
     // late could re-enable a button or clear a status message that no
     // longer belongs to it.
     if (generationAtSubmit === activeGeneration) {
@@ -207,13 +276,29 @@ async function handleSubmit(event) {
   }
 }
 
-function handleProfileChange() {
+// Shared by profile and mode changes: bumping activeGeneration makes
+// handleSubmit's own check drop any answer that was still in flight
+// under the previous profile/mode, and resetting the button/status
+// here covers the case where that in-flight request hasn't resolved
+// yet — otherwise the UI would stay stuck on "Thinking…" forever since
+// its own `finally` block no longer matches the (now bumped) generation.
+function resetInFlightRequest() {
   activeGeneration++;
-  chatLog.textContent = "";
-  setStatus("", false);
   isSubmitting = false;
   sendButton.disabled = false;
   sendButton.textContent = "Send";
+}
+
+function handleProfileChange() {
+  resetInFlightRequest();
+  chatLog.textContent = "";
+  setStatus("", false);
+}
+
+function handleModeChange() {
+  resetInFlightRequest();
+  setStatus("", false);
+  updateModeHint();
 }
 
 function setupExampleQuestions() {
@@ -227,5 +312,7 @@ function setupExampleQuestions() {
 
 askForm.addEventListener("submit", handleSubmit);
 profileSelect.addEventListener("change", handleProfileChange);
+modeRadios.forEach((radio) => radio.addEventListener("change", handleModeChange));
 setupExampleQuestions();
+updateModeHint();
 loadProfiles();

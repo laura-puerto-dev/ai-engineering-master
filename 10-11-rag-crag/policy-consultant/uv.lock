@@ -1543,10 +1543,12 @@ reranking = [
 web = [
     { name = "anthropic" },
     { name = "fastapi" },
+    { name = "langgraph" },
     { name = "psycopg", extra = ["binary"] },
     { name = "python-dotenv" },
     { name = "sentence-transformers" },
     { name = "torch" },
+    { name = "transformers" },
     { name = "uvicorn" },
 ]
 
@@ -1564,8 +1566,8 @@ requires-dist = [
     { name = "anthropic", marker = "extra == 'generation'", specifier = ">=2.8.0" },
     { name = "fastapi", marker = "extra == 'web'", specifier = ">=0.162.5" },
     { name = "langgraph", marker = "extra == 'crag'", specifier = ">=1.2" },
+    { name = "policy-consultant", extras = ["crag", "embeddings"], marker = "extra == 'web'" },
     { name = "policy-consultant", extras = ["embeddings"], marker = "extra == 'reranking'" },
-    { name = "policy-consultant", extras = ["persistence", "embeddings", "generation"], marker = "extra == 'web'" },
     { name = "policy-consultant", extras = ["persistence", "reranking", "generation"], marker = "extra == 'crag'" },
     { name = "psycopg", extras = ["binary"], marker = "extra == 'persistence'", specifier = ">=3.2" },
     { name = "python-dotenv", marker = "extra == 'persistence'", specifier = ">=1.0" },
